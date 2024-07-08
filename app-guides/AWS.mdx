@@ -40,54 +40,54 @@ Follow these instructions in order to add AWS to ShiftControl and configure Sing
 
 ### Configure Single-Sign On
 <Steps>
-  <Step title="Log ƒin to your AWS Root account as admin">
+  <Step title="Log in to your AWS Root account as admin">
     Log in to Amazon Web Services with an account that has Administrator Access or your root account. If your organization has multiple accounts, log in to the main account, not a sub-account.
   </Step>
   <Step title="Go to Identity Center">
     In your Amazon Console, search for “Identity Center” and click on IAM Identity Center.
     <img
-      src="images/App-Guides/AWS/AWS-Identity-Center.png"
+      src="/images/App-Guides/AWS/AWS-Identity-Center.png"
       alt="Access Identity Center"
     />
   </Step>
   <Step title="Enable Identity Center in your preferred region">
     Choose your region, and then click Enable in the Enable IAM Identity Center panel. Please see this doc for help choosing your region: https://docs.aws.amazon.com/singlesignon/latest/userguide/get-started-prereqs-considerations.html?icmpid=docs_sso_console
     <img
-      src="images/App-Guides/AWS/AWS - Enable identity center.png"
+      src="/images/App-Guides/AWS/AWS - Enable identity center.png"
       alt="Access Identity Center"
     />
   </Step><Step title="Enable Identity Center with AWS Organization">
      Choose Enable with AWS Organization and continue.
      <img
-       src="images/App-Guides/AWS/AWS  - Enable with organization.png"
+       src="/images/App-Guides/AWS/AWS  - Enable with organization.png"
        alt="Enable Identity Center"
      />
    </Step>
    <Step title="Confirm the Identity Source">
      Click on Confirm Identity Source in IAM Identity Center Setup area.
      <img
-       src="images/App-Guides/AWS/AWS - Confirm identity source.png"
+       src="/images/App-Guides/AWS/AWS - Confirm identity source.png"
        alt="Confirm Identity Source"
      />
    </Step>
    <Step title="Change Identity Source">
     Click on the Actions drop down and choose Change identity source.
     <img
-      src="images/App-Guides/AWS/AWS - Change identity source.png"
+      src="/images/App-Guides/AWS/AWS - Change identity source.png"
       alt="Change Identity Source"
     />
   </Step>
   <Step title="Choose External Identity Provider">
    Choose External identity provider and click next.
    <img
-    src="images/App-Guides/AWS/AWS - Choose external identity provider.png"
+    src="/images/App-Guides/AWS/AWS - Choose external identity provider.png"
     alt="Change Identity Source"
    />
   </Step>
   <Step title="Choose External Identity Provider">
     You’ll see a set of configuration items you’ll need to enter on the ShiftControl portal, we’ll create the app in ShiftControl next.
     <img
-     src="images/App-Guides/AWS/AWS - Configure external identity provider.png"
+     src="/images/App-Guides/AWS/AWS - Configure external identity provider.png"
      alt="Choose External Identity Source"
     />
     <Note>The items in this image are for example only.</Note>
@@ -101,7 +101,7 @@ Follow these instructions in order to add AWS to ShiftControl and configure Sing
   <Step title="Add the AWS IAM Identity Center App">
     Search for “IAM” and click on Add SSO App for “AWS IAM Identity Center”.
     <img
-     src="images/App-Guides/AWS/AWS - Add AWS SSO app.png"
+     src="/images/App-Guides/AWS/AWS - Add AWS SSO app.png"
      alt="Add AWS IAM Identity Center App"
     />
   </Step>
@@ -118,7 +118,7 @@ Follow these instructions in order to add AWS to ShiftControl and configure Sing
           3. Copy the IAM Identity Center Issuer URL, and paste it into the SP Entity ID field in ShiftControl
           4. Your ShiftControl SSO configuration should look similar to this:
              <img
-              src="images/App-Guides/AWS/AWS - AWS App SSO Screen.png"
+              src="/images/App-Guides/AWS/AWS - AWS App SSO Screen.png"
               alt="ShiftControl Config Example"
              />
   </Step>
@@ -129,7 +129,7 @@ Follow these instructions in order to add AWS to ShiftControl and configure Sing
           3. Click on Download IdP Public Certificate in ShiftControl, and then upload it by clicking the Choose File for the IdP certificate field in AWS.
           4. Your AWS configuration should look similar to this:
              <img
-              src="images/App-Guides/AWS/AWS - Configure SSO in AWS.png"
+              src="/images/App-Guides/AWS/AWS - Configure SSO in AWS.png"
               alt="AWS Config Example"
               />
           5. Click Next on the AWS screen.
@@ -140,7 +140,7 @@ Follow these instructions in order to add AWS to ShiftControl and configure Sing
   <Step title="Accept the notice">
     Review the accept screen for AWS so you understand the impact, type ACCEPT and hit the Change Identity Source button.
     <img
-     src="images/App-Guides/AWS/AWS - Accept the notice.png"
+     src="/images/App-Guides/AWS/AWS - Accept the notice.png"
      alt="Accept the notice"
     />
   </Step>
@@ -162,7 +162,7 @@ Automatic provisioning allows users to be provisioned and removed from AWS based
   <Step title="Enable automatic provisioning">
     In the settings for the identity provider in AWS click on the enable button in the Automatic provisioning callout box.
     <img
-      src="images/App-Guides/AWS/AWS - Enable automatic provisioning.png"
+      src="/images/App-Guides/AWS/AWS - Enable automatic provisioning.png"
       alt="Enable Automatic Provisioning"
     />
   </Step>
@@ -180,7 +180,7 @@ Automatic provisioning allows users to be provisioned and removed from AWS based
   <Step title="Access Identity Management">
     Click on the Identity Management tab and click on the Configure button next to Configuration Settings.
     <img
-      src="images/App-Guides/AWS/AWS - JumpCloud Identity Management.png"
+      src="/images/App-Guides/AWS/AWS - JumpCloud Identity Management.png"
       alt="Enable Automatic Provisioning"
     />
   </Step>
@@ -193,7 +193,7 @@ Automatic provisioning allows users to be provisioned and removed from AWS based
   <Step title="Activate identity management">
     Click Activate
     <img
-      src="images/App-Guides/AWS/AWS - Activate Identity Management.png"
+      src="/images/App-Guides/AWS/AWS - Activate Identity Management.png"
       alt="Activate identity management"
     />
   </Step>
@@ -206,7 +206,7 @@ Automatic provisioning allows users to be provisioned and removed from AWS based
   <Step title="Verify User Sync is enabled">
     Refresh the Apps screen in ShiftControl, you’ll now see User Sync enabled for the app.
     <img
-      src="images/App-Guides/AWS/AWS - User Sync enabled.png"
+      src="/images/App-Guides/AWS/AWS - User Sync enabled.png"
       alt="Check User Sync"
     />
   </Step>
@@ -227,18 +227,18 @@ For example, let’s say you wanted to have a group called All Software Develope
   <Step title="Assign the group to the app">
     Go to the app and assign the group to the app and click Save.
     <img
-      src="images/App-Guides/AWS/AWS - Assign the group.png"
+      src="/images/App-Guides/AWS/AWS - Assign the group.png"
       alt="Assign groups"
     />
   </Step>
   <Step title="Check that the group was synced in AWS">
     Now you’ll see that group and anyone assigned to that group in AWS.
     <img
-      src="images/App-Guides/AWS/AWS - Check group sync.png"
+      src="/images/App-Guides/AWS/AWS - Check group sync.png"
       alt="AWS Groups"
     />
     <img
-      src="images/App-Guides/AWS/AWS - Check user sync.png"
+      src="/images/App-Guides/AWS/AWS - Check user sync.png"
       alt="AWS Users"
     />
   </Step>
