@@ -53,6 +53,7 @@
     {
       "group": "App Guides",
       "pages": [
+        "app-guides/Atlassian",
         "app-guides/AWS",
         "app-guides/Google Workspace",
         "app-guides/Microsoft Azure"
