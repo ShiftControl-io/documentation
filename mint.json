@@ -40,14 +40,25 @@
       "name": "ShiftControl Website",
       "icon": "globe-pointer",
       "url": "https://shiftcontrol.io"
+    },
+    {
+      "name": "Changelog",
+      "icon": "list",
+      "url": "https://journey.shiftcontrol.io"
     }
   ],
   "navigation": [
     {
       "group": "Get Started",
       "pages": [
-        "introduction",
-        "quickstart"
+        "getting-started/introduction",
+        "getting-started/quickstart"
+      ]
+    },
+    {
+      "group": "Using ShiftControl",
+      "pages": [
+        "using-shiftcontrol/Adding an application"
       ]
     },
     {
@@ -56,7 +67,8 @@
         "app-guides/Atlassian",
         "app-guides/AWS",
         "app-guides/Google Workspace",
-        "app-guides/Microsoft Azure"
+        "app-guides/Microsoft Azure",
+        "app-guides/Slack"
       ]
     }
   ],
