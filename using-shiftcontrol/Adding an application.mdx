@@ -1,0 +1,213 @@
+---
+title: 'Adding an app'
+description: 'A quick guide on adding and managing apps.'
+icon: 'grid'
+---
+
+## Overview
+
+Apps are all the tools and services your organization uses to manage operations, serve your customers, and engage with your employees. ShiftControl helps to manage and organize SaaS applications for your organization.
+
+We recommend adding every SaaS app in your organization to ShiftControl, even if you aren't ready to integrate Single Sign-on authentication. That's because apps can be either SSO Apps or Bookmarks, allowing you full control and flexibility. 
+
+### Benefits of adding all your apps
+
+	1.	**Unified Access:** When you add all apps and assign users in ShiftControl, your users will see all their assigned apps in their App Dashboard. This centralizes access and makes it easier for new users to discover and access their apps without needing to remember each app’s website.
+	2.	**Streamlined Provisioning:** Setting up all apps early facilitates the enablement of automatic provisioning and deprovisioning via user sync. User sync is often a premium feature on many SaaS services. We’re working to integrate user sync into lower license tiers for many services. By setting up your apps, groups, and assignments in advance, turning on user sync will be seamless and effortless.
+	3.	**Improved Security:** Adding all apps allows for better visibility and management of app usage within your organization. This enhances security by ensuring that access to each app is controlled and monitored, reducing the risk of unauthorized access.
+	4.	**Enhanced Productivity:** With all apps centralized in ShiftControl, employees spend less time searching for the right tools and more time being productive. The App Dashboard becomes a single point of entry for all work-related applications.
+	5.	**Simplified Onboarding:** New hires can be onboarded more quickly as they will have immediate access to all necessary apps from day one. This reduces the time and effort required for IT to manually set up each user.
+	6.	**Centralized Management**: ShiftControl provides a single platform to manage all your SaaS applications, making it easier to track app usage, manage licenses, and monitor user access. This centralized management simplifies IT operations and reduces administrative overhead.
+	7.	**Scalability:** As your organization grows, having all apps already set up in ShiftControl allows you to scale seamlessly. Adding new users, groups, and apps becomes a straightforward process, supporting your organization’s expansion.
+	8.	**Compliance and Reporting:** With all apps managed in one place, it’s easier to ensure compliance with organizational policies and regulatory requirements. ShiftControl can provide detailed reports on app usage and access, aiding in audits and compliance checks.
+
+Integrating all your SaaS applications into ShiftControl not only enhances operational efficiency but also strengthens security and simplifies user management. Take advantage of ShiftControl’s capabilities to optimize your app management strategy.
+
+## Types of apps
+
+### SSO Apps
+
+SSO (Single Sign-On) apps are divided into two categories within ShiftControl:
+
+1.	**Catalog Apps:** ShiftControl offers an extensive catalog of pre-configured SSO apps that you can search for and integrate seamlessly. This catalog includes a wide range of popular SaaS applications, making it easy for you to find and set up SSO for the tools your organization uses most frequently.
+2.	**Custom SSO Integrations:** For apps that are not already included in our catalog, ShiftControl provides the flexibility to create custom SSO integrations. This means you can still benefit from the convenience and security of single sign-on, even for niche or proprietary applications. Custom integrations ensure that all your apps, regardless of their inclusion in our catalog, can be securely and efficiently managed through ShiftControl.
+
+By leveraging both catalog and custom SSO apps, your organization can streamline access management and enhance security, reducing the need for multiple login credentials and minimizing the risk of unauthorized access.
+
+### Bookmarks
+
+In addition to SSO apps, ShiftControl also supports bookmarks for each app in our catalog. Bookmarks serve as a convenient alternative for situations where you do not have a license that supports SSO but still want to ensure that your users can easily find and access the app.
+
+Bookmarks allow you to add apps to your users’ App Dashboard without configuring SSO. This is particularly useful when:
+
+- You are in the process of obtaining an SSO-compatible license but want to provide immediate access to the app.
+- You are using a free or basic version of an app that does not include SSO support.
+- You want to centralize access to frequently used tools and services for ease of navigation and user convenience.
+
+With bookmarks, you can maintain a comprehensive view of all the apps your organization uses, ensuring that employees have quick and easy access to the tools they need, all from one centralized location. This not only enhances productivity but also simplifies the user experience, making it easier for users to find and utilize the resources available to them.
+
+## Adding an app
+
+### Adding an SSO App from the catalog
+
+<Steps>
+  <Step title="Log in to ShiftControl and go to Application Management">
+    Log in to [ShiftControl](https://app.shiftcontrol.io) and navigate to the Application Management section.
+  </Step>
+  <Step title="Click 'Add new app'">
+    Click the "Add new app" button.
+    <img src="/images/ShiftControl/Apps/Apps - Add an app.png"
+      alt="Add new app" 
+     />
+  </Step>
+  <Step title="Search for the desired app in the catalog">
+    Enter the name of the app you want to add in the search bar.
+    <img 
+      src="images/ShiftControl/Apps/Apps - Search for app.png" 
+      alt="Search for app in catalog" 
+     />
+  </Step>
+  <Step title="Click 'Add SSO app'">
+    Click the "Add SSO app" button next to the app name.
+    <img src="/images/ShiftControl/Apps/Apps - Add SSO App.png" alt="Add SSO App" />
+  </Step>
+  <Step title="Configure the app's info">
+    Give the app a recognizable name and add a description. The description is visible to your employees in their app dashboard.
+    <Note>It is safe to navigate the different tabs and then click Save once you are finished configuring everything! You can always go back and edit the app whenever you need.</Note>
+    <img src="/images/ShiftControl/Apps/Apps - Name the SSO App.png" alt="Configure app info" />
+  </Step>
+  <Step title="Assign groups">
+    Assign groups to the app. 
+    <Info>We recommend using groups like departments, teams, tribes, or whatever other structure you have to make it much easier to assign apps to people. You should avoid manually assigning individuals to each app. If you find yourself repeating manual assignments, maybe it is time to create a group!</Info>
+    <img src="/images/ShiftControl/Apps/Apps - Assign groups.png" alt="Assign groups" />
+  </Step>
+  <Step title="Assign individual users">
+    Assign individual users to the app.
+    <img src="/images/ShiftControl/Apps/Apps - Assign users.png" alt="Assign users" />
+  </Step>
+  <Step title="Optionally, configure SSO settings">
+    If you know your SSO settings, you con configure them now. We recommend skipping this and following our app guides for each application for these settings, as they are different for every app.
+  </Step>
+  <Step title="Save the app configuration">
+    Once all required fields are completed, click "Save" to add the app to your organization.
+    <img src="/images/ShiftControl/Apps/Apps - Save.png" alt="Save app configuration" />
+  </Step>
+</Steps>
+
+### Adding a Custom SSO Integration
+
+<Steps>
+  <Step title="Log in to ShiftControl and go to Application Management">
+    Log in to [ShiftControl](https://app.shiftcontrol.io) and navigate to the Application Management section.
+  </Step>
+  <Step title="Click 'Add new app'">
+    Click the "Add new app" button.
+    <img src="/images/ShiftControl/Apps/Apps - Add an app.png" />
+  </Step>
+  <Step title="Click 'Custom SSO Integration'">
+    Click the "+ Custom SSO integration" button.
+    <img src="/images/ShiftControl/Apps/Apps - Custom SSO Integration.png" alt="Select Custom SSO Integration" />
+  </Step>
+  <Step title="Configure the app's info">
+    Give the app a recognizable name and add a description. The description is visible to your employees in their app dashboard.
+    <Note>It is safe to navigate the different tabs and then click Save once you are finished configuring everything! You can always go back and edit the app whenever you need.</Note>
+    <img src="/images/ShiftControl/Apps/Apps - Name the SSO App.png" alt="Configure app info" />
+  </Step>
+  <Step title="Assign groups">
+    Assign groups to the app. 
+    <Info>We recommend using groups like departments, teams, tribes, or whatever other structure you have to make it much easier to assign apps to people. You should avoid manually assigning individuals to each app. If you find yourself repeating manual assignments, maybe it is time to create a group!</Info>
+    <img src="/images/ShiftControl/Apps/Apps - Assign groups.png" alt="Assign groups" />
+  </Step>
+  <Step title="Assign individual users">
+    Assign individual users to the app.
+    <img src="/images/ShiftControl/Apps/Apps - Assign users.png" alt="Assign users" />
+  </Step>
+  <Step title="Optionally, configure SSO settings">
+    If you know your SSO settings, you con configure them now.
+  </Step>
+  <Step title="Save the app configuration">
+    Once all required fields are completed, click "Save" to add the app to your organization.
+    <img src="/images/ShiftControl/Apps/Apps - Save.png" alt="Save app configuration" />
+  </Step>
+</Steps>
+
+
+### Adding a Bookmark app from the catalog
+
+<Steps>
+  <Step title="Log in to ShiftControl and go to Application Management">
+    Log in to [ShiftControl](https://app.shiftcontrol.io) and navigate to the Application Management section.
+  </Step>
+  <Step title="Click 'Add new app'">
+    Click the "Add new app" button.
+    <img src="/images/ShiftControl/Apps/Apps - Add an app.png" />
+  </Step>
+  <Step title="Search for the desired app in the catalog">
+    Enter the name of the app you want to add in the search bar.
+    <img 
+      src="images/ShiftControl/Apps/Apps - Search for app.png" 
+      alt="Search for app in catalog" 
+     />
+  </Step>
+  <Step title="Click 'Add Bookmark'">
+    Click the "Add Bookmark" button next to the app name.
+    <img src="/images/ShiftControl/Apps/Apps - Add Bookmark.png" alt="Add Bookmark" />
+  </Step>
+  <Step title="Configure the app's info">
+    Give the app a recognizable name, add a description, and set a bookmark url. The description is visible to your employees in their app dashboard.
+    <Info>The bookmark url is often a unique url that you have for a SaaS application. It can be any url that you might use for that app. We recommend the login url if a vanity url is not available.</Info>
+    <Note>It is safe to navigate the different tabs and then click Save once you are finished configuring everything! You can always go back and edit the app whenever you need.</Note>
+    <img src="/images/ShiftControl/Apps/Apps - Name the Bookmark.png" alt="Configure app info" />
+  </Step>
+  <Step title="Assign groups">
+    Assign groups to the app. 
+    <Info>We recommend using groups like departments, teams, tribes, or whatever other structure you have to make it much easier to assign apps to people. You should avoid manually assigning individuals to each app. If you find yourself repeating manual assignments, maybe it is time to create a group!</Info>
+    <img src="/images/ShiftControl/Apps/Apps - Assign groups.png" alt="Assign groups" />
+  </Step>
+  <Step title="Assign individual users">
+    Assign individual users to the app.
+    <img src="/images/ShiftControl/Apps/Apps - Assign users.png" alt="Assign users" />
+  </Step>
+  <Step title="Save the bookmark">
+    Click "Save" to add the bookmark to your organization.
+    <img src="/images/ShiftControl/Apps/Apps - Save.png" alt="Save app configuration" />
+  </Step>
+</Steps>
+
+
+### Adding a Custom Bookmark
+
+<Steps>
+  <Step title="Log in to ShiftControl and go to Application Management">
+    Log in to [ShiftControl](https://app.shiftcontrol.io) and navigate to the Application Management section.
+  </Step>
+  <Step title="Click 'Add new app'">
+    Click the "Add new app" button.
+    <img src="/images/ShiftControl/Apps/Apps - Add an app.png" />
+  </Step>
+  <Step title="Click Custom Bookmark">
+    Click the "+ Custom bookmark" button.
+    <img src="/images/ShiftControl/Apps/Apps - Custom bookmark.png" />
+  </Step>
+  <Step title="Configure the app's info">
+    Give the app a recognizable name, add a description, and set a bookmark url. The description is visible to your employees in their app dashboard.
+    <Info>The bookmark url is often a unique url that you have for a SaaS application. It can be any url that you might use for that app. We recommend the login url if a vanity url is not available.</Info>
+    <Note>It is safe to navigate the different tabs and then click Save once you are finished configuring everything! You can always go back and edit the app whenever you need.</Note>
+    <img src="/images/ShiftControl/Apps/Apps - Name the Bookmark.png" alt="Configure app info" />
+  </Step>
+  <Step title="Assign groups">
+    Assign groups to the app. 
+    <Info>We recommend using groups like departments, teams, tribes, or whatever other structure you have to make it much easier to assign apps to people. You should avoid manually assigning individuals to each app. If you find yourself repeating manual assignments, maybe it is time to create a group!</Info>
+    <img src="/images/ShiftControl/Apps/Apps - Assign groups.png" alt="Assign groups" />
+  </Step>
+  <Step title="Assign individual users">
+    Assign individual users to the app.
+    <img src="/images/ShiftControl/Apps/Apps - Assign users.png" alt="Assign users" />
+  </Step>
+  <Step title="Save the bookmark">
+    Click "Save" to add the bookmark to your organization.
+    <img src="/images/ShiftControl/Apps/Apps - Save.png" alt="Save app configuration" />
+  </Step>
+</Steps>
+
+
