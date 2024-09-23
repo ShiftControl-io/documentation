@@ -17,40 +17,29 @@ Google Workspace supports SSO on all licenses!
 ### What you need to know
 
 <Accordion title="Google will only provision a user if licenses are available">
-    If you find that you have created a user but they don't have an account automatically created in Google Workspace,
-    please check to make sure that you have enough licenses to add more users.
-    If you don't, you'll need to first add/purchase licenses before the user will sync in.
-    <Note>In many cases, especially if you are on an annual plan, adding a licenses incurs costs. Be sure you are ready
-        to use the license before you add it, as you will not be able to reduce the license until your annual renewal on
-        annual plans.</Note>
+  If you find that you have created a user but they don't have an account automatically created in Google Workspace, please check to make sure that you have enough licenses to add more users.
+  If you don't, you'll need to first add/purchase licenses before the user will sync in.
+  <Note>In many cases, especially if you are on an annual plan, adding a licenses incurs costs. Be sure you are ready to use the license before you add it, as you will not be able to reduce the license until your annual renewal on annual plans.</Note>
 </Accordion>
 
 <Accordion title="Google does not enforce SSO for Admins">
-    If you are using a Google account that has an Administrator role then Google will not enforce SSO in order to make
-    sure that admins aren't locked out of Google.
+  If you are using a Google account that has an Administrator role then Google will not enforce SSO in order to make sure that admins aren't locked out of Google.
 
-    This is an odd choice by Google, but something you should be aware of. Depending on your SSO configuration, the
-    admin experience will differ.
+  This is an odd choice by Google, but something you should be aware of. Depending on your SSO configuration, the admin experience will differ.
 
-    First Experience
+  First Experience
 
-    Second Experience
+  Second Experience
 </Accordion>
 
 <Accordion title="We always recommend having a separate admin account to administer Google Workspace">
-    Google Workspace is likely one of your more sensitive SaaS services. It contains not only your entire user
-    directory, but also many sensitive emails, documents, and more.
+ Google Workspace is likely one of your more sensitive SaaS services. It contains not only your entire user directory, but also many sensitive emails, documents, and more.
 
-    We highly recommend avoiding using your normal "Daily Driver" Google account for administrating Google Workspace.
-    Keep a separate account with a very strong password in a password manager and use it as needed. You can forward the
-    emails from your admin account to your main account to keep up to date on notifications.
+ We highly recommend avoiding using your normal "Daily Driver" Google account for administrating Google Workspace. Keep a separate account with a very strong password in a password manager and use it as needed. You can forward the emails from your admin account to your main account to keep up to date on notifications.
 
-    This type of admin separation is recommended because your main account can get compromised and they won't be able to
-    completely compromise your environment. It also gives admins a better user experience because of the way SSO works
-    in Google Workspace.
+ This type of admin separation is recommended because your main account can get compromised and they won't be able to completely compromise your environment. It also gives admins a better user experience because of the way SSO works in Google Workspace.
 
-    <Info>Adding additional admins incurs regular user costs. We think this extra cost is worth is, and you should limit
-        the users who have admin anyways!</Info>
+ <Info>Adding additional admins incurs regular user costs. We think this extra cost is worth is, and you should limit the users who have admin anyways!</Info>
 </Accordion>
 
 ## Add a Google Application and Configure SSO
@@ -62,28 +51,27 @@ We recommend configuring SSO for your entire organization and excluding any Orga
 ### Create an OU to test authentication
 
 <Steps>
-    <Step title="Log in to the Google Workspace Admin Panel">
-        Go to https://admin.google.com, log in as an Admin.
-    </Step>
-    <Step title="Manage OUs">
-        Go to Directory→Organizational Units
+  <Step title="Log in to the Google Workspace Admin Panel">
+    Go to https://admin.google.com, log in as an Admin.
+  </Step>
+  <Step title="Manage OUs">
+    Go to Directory→Organizational Units
         <img
-            src="/images/App-Guides/Google/Google - Organizational Units.png"
-            alt="Access Organizational Units"
+          src="/images/App-Guides/Google/Google - Organizational Units.png"
+          alt="Access Organizational Units"
         />
-    </Step>
-    <Step title="Create an OU">
-        Click on Create organizational unit.
-    </Step>
-    <Step title="Create an OU">
-        Set the name as SSO-Test, give it a description, and add it to your parent organization
-        <Note>If you already have OUs setup, you may choose to put this somewhere that makes more sense for your
-            structure.</Note>
-        <img
-            src="/images/App-Guides/Google/Google - Create organizational unit.png"
-            alt="Create organizational unit"
-        />
-    </Step>
+  </Step>
+  <Step title="Create an OU">
+    Click on Create organizational unit.
+  </Step>
+  <Step title="Create an OU">
+    Set the name as SSO-Test, give it a description, and add it to your parent organization
+    <Note>If you already have OUs setup, you may choose to put this somewhere that makes more sense for your structure.</Note>
+    <img
+      src="/images/App-Guides/Google/Google - Create organizational unit.png"
+      alt="Create organizational unit"
+    />
+  </Step>
 </Steps>
 
 You've not created an Organization Unit that we can use to assign our SSO configuration. We'll use this to ensure we can test it before you deploy it for all users.
@@ -91,133 +79,127 @@ You've not created an Organization Unit that we can use to assign our SSO config
 ### (Optional) Configure a SAML Profile to configure SSO
 
 <Steps>
-    <Step title="Go to SSO with third-party IdP">
-        Go to Security→Authentication→SSO with third party IdP
-    </Step>
-    <Step title="Add SAML profile">
-        We’ll add a profile first so we can test SSO for a specific OU, click on ADD SAML PROFILE
-        <img
-            src="/images/App-Guides/Google/Google - Add SAML profile.png"
-            alt="Add SAML profile"
-        />
-    </Step>
-    <Step title="Configure the SAML profile">
-        Configure the SAML profile:
-        <ol>
-            <li>SSO profile name: SSO or any other unique name</li>
-            <li>IDP Entity ID: yourdomain.com</li>
-            <li>Sign-in Page URL: The “IDP URL” from the app’s SSO page in JumpCloud (Soon to be shown in
-                ShiftControl)
-            </li>
-            <li>Sign-out page URL: https://console.jumpcloud.com</li>
-            <li>Change password URL: https://console.jumpcloud.com</li>
-            <li>Upload the certificate: Found by clicking Download certificate on the left in the app’s SSO page in
-                JumpCloud (Soon to be available in ShiftControl)
-            </li>
-        </ol>
-        <img
-            src="/images/App-Guides/Google/Google - Download Certificate.png"
-            alt="Download certificate"
-        />
-    </Step>
-    <Step title="Save the profile">
-        Click Save
-        <img
-            src="/images/App-Guides/Google/Google - Save SAML profile.png"
-            alt="Save SAML profile"
-        />
-    </Step>
-    <Step title="Review the configuration page">
-        You’ll come to a page that shows the configuration, we’ll need the Entity ID and ACS URL.
-        <img
-            src="/images/App-Guides/Google/Google - Review configuration.png"
-            alt="Save SAML profile"
-        />
-    </Step>
+  <Step title="Go to SSO with third-party IdP">
+    Go to Security→Authentication→SSO with third party IdP
+  </Step>
+  <Step title="Add SAML profile">
+    We’ll add a profile first so we can test SSO for a specific OU, click on ADD SAML PROFILE
+    <img
+      src="/images/App-Guides/Google/Google - Add SAML profile.png"
+      alt="Add SAML profile"
+    />
+  </Step>
+  <Step title="Configure the SAML profile">
+    Configure the SAML profile:
+    <ol>
+      <li>SSO profile name: SSO or any other unique name</li>
+      <li>IDP Entity ID: yourdomain.com</li>
+      <li>Sign-in Page URL: The “IDP URL” from the app’s SSO page in JumpCloud (Soon to be shown in ShiftControl)</li>
+      <li>Sign-out page URL: https://console.jumpcloud.com</li>
+      <li>Change password URL: https://console.jumpcloud.com</li>
+      <li>Upload the certificate: Found by clicking Download certificate on the left in the app’s SSO page in JumpCloud (Soon to be available in ShiftControl)</li>
+    </ol>
+    <img
+      src="/images/App-Guides/Google/Google - Download Certificate.png"
+      alt="Download certificate"
+    />
+  </Step>
+  <Step title="Save the profile">
+    Click Save
+    <img
+      src="/images/App-Guides/Google/Google - Save SAML profile.png"
+      alt="Save SAML profile"
+    />
+  </Step>
+  <Step title="Review the configuration page">
+    You’ll come to a page that shows the configuration, we’ll need the Entity ID and ACS URL.
+    <img
+      src="/images/App-Guides/Google/Google - Review configuration.png"
+      alt="Save SAML profile"
+    />
+  </Step>
     <Step title="Copy the SP Entity ID">
-        Copy the Entity ID and paste it into JumpCloud’s App in the SSO area (Coming soon to the ShiftControl UI):
-        <img
-            src="/images/App-Guides/Google/Google - Copy SP Entity ID.png"
-            alt="Copy the SP Entity ID"
-        />
+      Copy the Entity ID and paste it into JumpCloud’s App in the SSO area (Coming soon to the ShiftControl UI):
+      <img
+        src="/images/App-Guides/Google/Google - Copy SP Entity ID.png"
+        alt="Copy the SP Entity ID"
+      />
     </Step>
-    <Step title="Copy the ACS Url">
-        Copy the ACS URL and paste it into JumpCloud’s App in the SSO area (Coming soon to the ShiftControl UI):
-        <img
-            src="/images/App-Guides/Google/Google - Copy ACS Url.png"
-            alt="Copy the ACS Url"
-        />
-    </Step>
-    <Step title="Save">
-        Click Save in JumpCloud and Click Back in Google Workspace. We’re now ready to assign the profile to your OU.
-    </Step>
+  <Step title="Copy the ACS Url">
+    Copy the ACS URL and paste it into JumpCloud’s App in the SSO area (Coming soon to the ShiftControl UI):
+    <img
+      src="/images/App-Guides/Google/Google - Copy ACS Url.png"
+      alt="Copy the ACS Url"
+    />
+  </Step>
+  <Step title="Save">
+    Click Save in JumpCloud and Click Back in Google Workspace. We’re now ready to assign the profile to your OU.
+  </Step>
 </Steps>
 
 ### Assign a SAML Profile to an Organizational Unit (OU)
 
 <Steps>
-    <Step title="Go to SSO with third-party IdP">
-        Go to Security→Authentication→SSO with third party IdP
-    </Step>
-    <Step title="Click on Get Started">
-        Click on Get Started (if you haven’t assigned any profiles in the past)
-        <img
-            src="/images/App-Guides/Google/Google - Get Started.png"
-            alt="Get Started"
-        />
-    </Step>
-    <Step title="Select SSO-Test in Organizational Unit area">
-        Click on SSO-Test on the left in the Organizational Unit area
-    </Step>
-    <Step title="Choose Another SSO Profile">
-        Choose Another SSO Profile, and select your SSO-SAML profile we built before.
-    </Step>
-    <Step title="Set Google prompt for username">
-        Keep the default of “Have Google prompt for their username, then redirect them to this profile's IDP sign-in
-        page”
-    </Step>
-    <Step title="Click Override">
-        Then click Override
-        <img
-            src="/images/App-Guides/Google/Google - Click Override.png"
-            alt="Click Override"
-        />
-    </Step>
-    <Step title="Assign a user into the OU for testing">
-        You are now ready to assign a user into that OU for testing.
-    </Step>
+  <Step title="Go to SSO with third-party IdP">
+    Go to Security→Authentication→SSO with third party IdP
+  </Step>
+  <Step title="Click on Get Started">
+    Click on Get Started (if you haven’t assigned any profiles in the past)
+    <img
+      src="/images/App-Guides/Google/Google - Get Started.png"
+      alt="Get Started"
+    />
+  </Step>
+  <Step title="Select SSO-Test in Organizational Unit area">
+    Click on SSO-Test on the left in the Organizational Unit area
+  </Step>
+  <Step title="Choose Another SSO Profile">
+    Choose Another SSO Profile, and select your SSO-SAML profile we built before.
+  </Step>
+  <Step title="Set Google prompt for username">
+    Keep the default of “Have Google prompt for their username, then redirect them to this profile's IDP sign-in page”
+  </Step>
+  <Step title="Click Override">
+    Then click Override
+    <img
+      src="/images/App-Guides/Google/Google - Click Override.png"
+      alt="Click Override"
+    />
+  </Step>
+  <Step title="Assign a user into the OU for testing">
+    You are now ready to assign a user into that OU for testing.
+  </Step>
 </Steps>
 
 ### Assign a user into the SSO Testing Organizational Unit
 
 <Steps>
-    <Step title="Go to the users directory">
-        Go to Directory→Users
-    </Step>
-    <Step title="Select the user from the list">
-        Select the user from the list
-    </Step>
-    <Step title="Change organizational unit">
-        Click on Change organizational unit in the More options menu
-        <img
-            src="/images/App-Guides/Google/Google - Change organizational unit.png"
-            alt="Change organizational unit"
-        />
-    </Step>
-    <Step title="Select SSO-Test and click Continue">
-        Select SSO-Test and click Continue
-    </Step>
-    <Step title="Review the warning and click Change">
-        Review the warning and click Change, there will be no impact other than SSO if you don’t currently use OUs as
-        all other rules are inherited from the main organization.
-        <img
-            src="/images/App-Guides/Google/Google - Review and Change.png"
-            alt="Review and Change"
-        />
-    </Step>
-    <Step title="Verify user in SSO Test OU">
-        The user is now in the SSO Test OU.
-    </Step>
+  <Step title="Go to the users directory">
+    Go to Directory→Users
+  </Step>
+  <Step title="Select the user from the list">
+    Select the user from the list
+  </Step>
+  <Step title="Change organizational unit">
+    Click on Change organizational unit in the More options menu
+    <img
+      src="/images/App-Guides/Google/Google - Change organizational unit.png"
+      alt="Change organizational unit"
+    />
+  </Step>
+  <Step title="Select SSO-Test and click Continue">
+    Select SSO-Test and click Continue
+  </Step>
+  <Step title="Review the warning and click Change">
+    Review the warning and click Change, there will be no impact other than SSO if you don’t currently use OUs as all other rules are inherited from the main organization.
+    <img
+      src="/images/App-Guides/Google/Google - Review and Change.png"
+      alt="Review and Change"
+    />
+  </Step>
+  <Step title="Verify user in SSO Test OU">
+    The user is now in the SSO Test OU.
+  </Step>
 </Steps>
 
 From here, you can open an incognito window and try authenticating to [google.com](http://google.com). Make sure the user you are using to test with is assigned the Application in the ShiftControl admin panel.

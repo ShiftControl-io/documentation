@@ -5,6 +5,9 @@
     "dark": "/logo/dark.svg",
     "light": "/logo/light.svg"
   },
+  "font": {
+    "family": "Inter"
+  },
   "favicon": "/favicon.png",
   "colors": {
     "primary": "#00C1BF",
@@ -58,7 +61,47 @@
     {
       "group": "Using ShiftControl",
       "pages": [
-        "using-shiftcontrol/Adding an application"
+        "using-shiftcontrol/ShiftControl Dashboard",
+        "using-shiftcontrol/Using the command bar",
+        "using-shiftcontrol/Task management",
+        {
+          "group": "Users",
+          "pages": [
+            "using-shiftcontrol/Users/User management",
+            "using-shiftcontrol/Users/Adding a user",
+            "using-shiftcontrol/Users/Editing a user"
+          ]
+        },
+        {
+          "group": "Groups",
+          "pages": [
+            "using-shiftcontrol/Groups/Group management",
+            "using-shiftcontrol/Groups/Adding a group",
+            "using-shiftcontrol/Groups/Editing a group"
+          ]
+        },
+        {
+          "group": "Apps",
+          "pages": [
+            "using-shiftcontrol/Apps/App management",
+            "using-shiftcontrol/Apps/Adding an app",
+            "using-shiftcontrol/Apps/Editing an app",
+            "using-shiftcontrol/Apps/App discovery"
+          ]
+        },
+        {
+          "group": "Integrations",
+          "pages": [
+            "using-shiftcontrol/Integrations/Integration management",
+            "using-shiftcontrol/Integrations/Managing integration authorization"
+          ]
+        },
+        {
+          "group": "Reports",
+          "pages": [
+            "using-shiftcontrol/Reports/App assignment reports"
+          ]
+        }
       ]
     },
     {
@@ -76,6 +119,9 @@
     "suggestEdit": true,
     "raiseIssue": true,
     "thumbsRating": true
+  },
+  "seo": {
+    "indexHiddenPages": true
   },
   "analytics": {
     "posthog": {
