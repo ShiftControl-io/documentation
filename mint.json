@@ -121,7 +121,7 @@
     {
       "group": "Onboarding",
       "pages": [
-        "onboarding/Onboarding Introduction",
+        "onboarding/Onboarding intro",
         "onboarding/Before onboarding",
         "onboarding/During onboarding",
         "onboarding/After onboarding"
