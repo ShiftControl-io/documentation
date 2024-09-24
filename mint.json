@@ -117,6 +117,14 @@
         "app-guides/Microsoft Azure",
         "app-guides/Slack"
       ]
+    },
+    {
+      "group": "Onboarding",
+      "pages": [
+        "onboarding/Before onboarding",
+        "onboarding/During onboarding",
+        "onboarding/After onboarding"
+      ]
     }
   ],
   "feedback": {
