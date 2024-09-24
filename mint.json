@@ -22,6 +22,10 @@
     {
       "name": "App Guides",
       "url": "app-guides"
+    },
+    {
+        "name": "Onboarding",
+        "url": "onboarding"
     }
   ],
   "modeToggle": {
