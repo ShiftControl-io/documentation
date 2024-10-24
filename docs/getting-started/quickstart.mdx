@@ -1,0 +1,110 @@
+---
+title: 'Quickstart'
+description: 'Start managing your organization quickly with ShiftControl'
+---
+
+import Admonition from '@theme/Admonition';
+import { Steps, Step } from "@site/src/components/Steps";
+
+<p style={{fontSize: "large"}}>Start managing your organization quickly with ShiftControl</p>
+
+## Trust JumpCloud in Google Workspace
+
+If you use Google Workspace, the first thing you'll need to do it trust the JumpCloud apps in your Google Workspace Admin interface.
+
+This process is only required if an organization has their API Controls for Google Workspace Admin set to restricted, but we recommend following the process no matter what to ensure the apps are authorized.
+
+<Admonition type="note">
+If the app doesn't have the right permissions, you'll receive a 400 error admin_policy_enforce ([Read
+more](https://jumpcloud.com/support/troubleshoot-google-workspace-integration#_error_400__admin_policy_enforced_))
+when trying to approve the JumpCloud app during initial setup.
+</Admonition>
+
+You can trust the JumpCloud apps in order to add them without having to lower the restrictions enforced.
+
+The following apps will need to be approved/trusted:
+
+| App Name | Purpose | Identifier |
+|-- |-- |-- |
+| JumpCloud | Directory Sync of users and groups from JumpCloud | 409100557052-up2bjo6c85fdvipudtkaqr7jqsesqnam.apps.googleusercontent.com |
+| JumpCloud | Single Sign-On | 629652647736-b7u1qe4oktmn7b6vnmdbabrd32lds4as.apps.googleusercontent.com |
+
+<Steps>
+    <Step title="Login to the Google Workspace Admin Panel">
+        Go to https://admin.google.com, log in as an Admin.
+    </Step>
+    <Step title="Access the API Controls">
+        Go to Security→Access and data control→API Controls.
+    </Step>
+    <Step title="Manage Google Services">
+        Click on Manage Google Services.
+        <img
+            src="/img/JumpCloud-Trust/JumpCloud-Trust-Manage-Google-Services.png"
+            alt="Manage Google Services"
+        />
+    </Step>
+    <Step title="View configured apps">
+        In the middle card (Configured Apps), click on View list.
+        <img
+            src="/img/JumpCloud-Trust/JumpCloud-Trust-Configured-Apps.png"
+            alt="Configured Apps"
+        />
+    </Step>
+    <Step title="Add an OAuth App">
+        Click on the Add App pulldown and select Oauth App Name or Client ID.
+        <img
+            src="/img/JumpCloud-Trust/JumpCloud-Trust-Add-Oauth-App.png"
+            alt="Add Oauth App"
+        />
+    </Step>
+    <Step title="Search for each app">
+        For each item in our list of apps to approve repeat steps 6 to 11. Enter the ID and hit search.
+        <img
+            src="/img/JumpCloud-Trust/JumpCloud-Trust-Search-Apps.png"
+            alt="Search Apps"
+        />
+    </Step>
+    <Step title="Select the app">
+        Click Select on the App Name.
+        <img
+            src="/img/JumpCloud-Trust/JumpCloud-Trust-Select-app-name.png"
+            alt="Select App"
+        />
+    </Step>
+    <Step title="Select OAuth ID">
+        Select the oAuth ID and hit Select.
+        <img
+            src="/img/JumpCloud-Trust/JumpCloud-Trust-Select-Oauth-ID.png"
+            alt="Select OAuth ID"
+        />
+    </Step>
+    <Step title="Continue with all users">
+        Choose “Your Org” (all users) and continue.
+        <img
+            src="/img/JumpCloud-Trust/JumpCloud-Trust-Continue-all-users.png"
+            alt="Continue with all users"
+        />
+    </Step>
+    <Step title="Trust the app">
+        Select Trusted and Continue.
+        <img
+            src="/img/JumpCloud-Trust/JumpCloud-Trust-Select-Trusted.png"
+            alt="Trust the app"
+        />
+    </Step>
+    <Step title="Finish">
+        Click Finish.
+        <img
+            src="/img/JumpCloud-Trust/JumpCloud-Trust-Finish.png"
+            alt="Click Finish"
+        />
+    </Step>
+</Steps>
+
+You have now trusted the apps that we'll authorize to sync Google Workspace with JumpCloud.
+
+## Add the Google Workspace Directory
+
+<Admonition type="info">
+This section is coming soon, we're updating the process to make this easier!
+</Admonition>
