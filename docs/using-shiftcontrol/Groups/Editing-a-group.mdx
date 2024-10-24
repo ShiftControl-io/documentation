@@ -1,0 +1,91 @@
+---
+title: 'Editing a Group'
+description: 'How to edit a group and understanding the different ways to assign users.'
+icon: 'users-gear'
+---
+
+import { Steps, Step } from "@site/src/components/Steps";
+
+<p style={{fontSize: "large"}}>How to edit a group and understanding the different ways to assign users.</p>
+
+## Overview
+When editing a group, you can configure all three tabs—dynamic assignments, nested assignments, and individual assignments. You can choose to assign users using one or any combination of these methods.
+
+<img
+    src="/img/ShiftControl/Groups/Edit-a-group.png"
+    alt="Edit a group"
+/>
+
+
+## Editing a group
+
+### Group Details
+
+<Steps>
+
+    <Step title="Navigate to the Group Management Pane">
+        From the dashboard, navigate to the **Group Management** pane where all groups are listed.
+    </Step>
+
+    <Step title="Select the Group to Edit">
+        Find the group you wish to edit and click the **Edit** button in the same row as the group name.
+    </Step>
+
+    <Step title="Edit Group Details">
+        In the edit view, you can modify fields like the group name, description, and other settings.
+    </Step>
+
+    <Step title="Configure Dynamic Assignments">
+        Dynamic assignments allow you to automatically populate a group's membership based on user profile attributes.
+
+        - You can create rules based on user profile attributes such as **Cost Center**, **Department**, or other
+        fields.
+        - For example, you can assign all users in the **Operations** or **Human Resources** departments to a group.
+        - You can combine multiple rules, such as adding an **AND** condition that specifies both the department and the
+        company.
+
+        Attributes available for dynamic assignment include:
+        1. **Cost Center**
+        2. **Department**
+        3. **Description**
+        4. **Primary Email**
+        5. **Employee Type**
+        6. **Job Title**
+        7. **Location**
+        8. **Manager**
+        9. **User State**
+
+        <img src="/img/ShiftControl/Groups/Group-dynamic-assignments.png" alt="Group dynamic assignments"/>
+    </Step>
+
+    <Step title="Configure Nested Assignments">
+        With nested assignments, you can include one group as part of another.
+
+        - Click on the **Nested** tab when editing the group.
+        - Select other groups you'd like to include as part of the current group.
+
+        <img src="/img/ShiftControl/Groups/Group-nested-assignments.png" alt="Group nested assignments"/>
+
+        **Only one level of nesting is supported!** If this group is already used as a nested group in another group,
+        you'll see the warning shown below.
+
+        <img src="/img/ShiftControl/Groups/Group-nested-warning.png" alt="Group nested assignments warning"/>
+    </Step>
+
+    <Step title="Configure Individual Assignments">
+        Individual assignments allow you to manually add specific users to the group.
+
+        - Click on the **Individual Assignments** tab.
+        - Search for a user by name and add them to the group.
+
+        This gives you flexibility to assign specific users manually if needed.
+
+        <img src="/img/ShiftControl/Groups/Group-individual-assignments.png" alt="Group individual assignments"/>
+    </Step>
+
+    <Step title="Save Changes">
+        Once you've configured the group assignments, click **Save All** to apply the changes. The group will now
+        reflect the updated membership based on the assignments you've made.
+    </Step>
+
+</Steps>

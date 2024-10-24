@@ -1,0 +1,440 @@
+---
+title: 'Microsoft Azure'
+description: 'Microsoft Azure Cloud Directory and SSO Configuration'
+icon: 'microsoft'
+---
+
+import { Steps, Step } from "@site/src/components/Steps";
+import Accordion from "@site/src/components/Accordion";
+import Admonition from '@theme/Admonition';
+
+## Overview
+
+ShiftControl supports both user sync and Single Sign-On (SSO) for Azure Entra ID. Once configured all users will need to sign in to Azure via JumpCloud.
+
+Microsoft calls their Active Directory Microsoft Entra ID.
+
+### Supported Licenses
+
+Entra ID supports Single Sign-On (SSO) for all licenses and accounts!
+
+### What you need to know
+
+<Accordion title="Email addresses for users in Entra ID should match those in ShiftControl">
+  Ideally, your email addresses in ShiftControl match those of Entra ID, this makes the configuration simpler.
+  If you use a different domain in Entra ID, then you can add a specific domain to the directory configuration which will transform your email domain to the domain you have in Entra iD.
+
+  For example, if your ShiftControl domain is example.com and your domain in EntraID is examplecloud.com, you can set examplecloud.com as the default domain in the Directory which will automatically convert any user using their first part of their email. That means user@example.com turns into user@examplecloud.com.
+</Accordion>
+
+<Accordion title="Schedule a maintenance window for this change">
+  Azure/Entra ID is a sensitive app as it handles production workloads. You know your systems best, but people do forget things. There's a possibility that enabling SSO could force an account you are using to also require SSO. We've seen this happen for service accounts that are used for API access for example.
+
+  We highly recommend scheduling this change during a maintenance window to avoid any impact to your operations.
+</Accordion>
+
+<Accordion title="Once you turn on SSO, all users will be required to use it, unless configured otherwise">
+  Enabling SSO enforces for all users in the federated domain.
+
+  Make sure you have communicated to your users about the change and they are away of the new process for logging on.
+</Accordion>
+
+<Accordion title="Don't use the built-in default domain for federation">
+  Federation of the built-in Microsoft domain (onmicrosoft.com) is not supported.
+</Accordion>
+
+## Configuration Options
+
+You have two options for configuring the Azure integration.
+
+1. [Complex] Fully integrate Azure AD with JumpCloud
+    1. Users will be able to sign into Azure using their JumpCloud account directly
+    2. Provides user provisioning and deprovisioning
+2. [Simpler] Integrate SSO & Cloud Directory Sync for Azure (Entra ID)
+    1. Provides user provisioning and deprovisioning
+    2. Users will be able to sign into Azure using their JumpCloud account directly
+    3. You will not be able to sign in to Azure without using JumpCloud
+
+You can see more about the differences here: https://jumpcloud.com/support/Entra ID-directory-integration-and-saml-connector
+
+This document focuses on option 2.
+
+## Integrating SSO & Cloud Directory for Azure (Entra ID)
+
+JumpCloud has a comprehensive (but slightly out of date) article here: https://jumpcloud.com/support/sso-with-Entra ID
+
+### Prerequisites
+
+There are some prerequisites that you’ll need to meet before you can complete this configuration.
+
+1. You’ll need to enable Azure AD Cloud Directory Integration/Sync and ensure any user that you want to sign in via SSO to Azure is bound to that directory, if they aren’t, they won’t have a special immutable Microsoft ID.
+2. PowerShell is required to modify Entra ID Federation configurations.
+3. You must be using an account with the Global Admin role to complete this change.
+    - Go to Entra ID > Users > select the user > Assigned Roles. Your account should have “Global administrator” listed
+4. If MFA is enforced on end users in both environments, they will be prompted for MFA twice during the login process – once in JumpCloud and again in Entra ID
+5. Confirm the following in Azure Active Directory > Custom Domain Names
+    - The domain you would like to federate (e.g., YOUR_DOMAIN.com) is listed, verified, and not the Primary/(Default)
+    - The onmicrosoft.com default domain or another domain you do not want to federate is the Primary/ (Default) domain. Set up a global admin account in your default domain (for example, admin@YOUR_DOMAIN.onmicrosoft.com) so that there is an admin account that can sign in outside of SSO as a failsafe
+
+### Important Considerations
+     
+1. In Entra ID, MFA is automatically turned on when security defaults are enabled, regardless of your other MFA settings. If JumpCloud MFA is enabled while also having Entra ID MFA enabled, end users will encounter two separate MFA prompts during the same login
+2. The default domain in Entra ID cannot be federated
+3. When SSO is enabled, all users in the email domain you’re configuring SSO for are affected. After SSO is enabled, users aren’t able to log in to Azure using password authentication
+
+### General Considerations
+
+1. We do not support the GoDaddy implementation of Microsoft 365.
+
+### Setting up Azure AD Cloud Directory Sync
+
+<Steps>
+  <Step title="Go to the JumpCloud Admin Portal">
+    Open the JumpCloud Admin Portal.
+  </Step>
+  <Step title="Click on Cloud Directories">
+    Select the Cloud Directories option.
+    <img
+      src="/img/App-Guides/Azure/Azure-Cloud-Directories.png"
+      alt="Click on Cloud Directories"
+    />
+  </Step>
+  <Step title="Click on the Plus (+) and choose Entra ID/Azure AD">
+    Select the Plus (+) icon and choose Entra ID/Azure AD.
+    <img
+      src="/img/App-Guides/Azure/Azure-Select-M365-Azure-AD.png"
+      alt="Choose Entra ID/Azure AD"
+    />
+  </Step>
+  <Step title="Name your directory">
+    Provide a name for your directory. For this example, we chose "Azure".
+    <img
+      src="/img/App-Guides/Azure/Azure-Name-Directory.png"
+      alt="Name your directory"
+    />
+  </Step>
+  <Step title="Click ‘authorize sync’">
+    Click the 'authorize sync' button.
+  </Step>
+  <Step title="Sign in to Microsoft">
+    You will be redirected to Microsoft to sign in.
+    <img
+      src="/img/App-Guides/Azure/Azure-Sign-In.png"
+      alt="Sign in to Microsoft"
+    />
+  </Step>
+  <Step title="Sign in with your admin account">
+    Use your admin account to sign in.
+  </Step>
+  <Step title="Accept the permission request">
+    Review the lengthy permission request and press Accept.
+    <img
+      src="/img/App-Guides/Azure/Azure-Permission-Request.png"
+      alt="Accept the permission request"
+    />
+  </Step>
+  <Step title="Review the list of users">
+    You will see a list of users you can import. At this time, you don’t need to import any, as they likely already exist in JumpCloud. Click cancel on the import screen.
+    <img
+      src="/img/App-Guides/Azure/Azure-User-List.png"
+      alt="Review the list of users"
+    />
+  </Step>
+  <Step title="Save and close">
+    Click save on the Azure screen and then hit the X to close.
+    <img
+      src="/img/App-Guides/Azure/Azure-Save-Close.png"
+      alt="Save and close"
+    />
+  </Step>
+</Steps>
+
+Your setup of Cloud Directory sync for Azure is now complete. If you have multiple domains and only want to sync one domain, you can configure additional options for domains in the Cloud Directory settings.
+
+At this point, any user group or individual user that you assign to this directory will be synced to Azure.
+
+<Admonition type="note">Groups are not synced over to Azure, only the users in the group are synced.</Admonition>
+
+### Create an Azure application in ShiftControl
+
+<Steps>
+  <Step title="Log in to ShiftControl and go to Application Management">
+    Log in to [ShiftControl](https://app.shiftcontrol.io) and go to Application Management.
+  </Step>
+  <Step title="Click Add new app">
+    Click the "Add new app" button.
+    <img
+      src="/img/App-Guides/Azure/Azure-Add-New-App.png"
+      alt="Click Add new app"
+    />
+  </Step>
+  <Step title="Search for Microsoft and add SSO app">
+    Search for "Microsoft" and click "Add SSO app for Microsoft 365".
+    <img
+      src="/img/App-Guides/Azure/Azure-Add-SSO-App.png"
+      alt="Search for Microsoft and add SSO app"
+    />
+  </Step>
+  <Step title="Name the app">
+    Name the app "Azure" or something appropriate so people can identify it properly in your organization.
+  </Step>
+  <Step title="Add a description and go to the SSO tab">
+    We can set up groups and users later. Add a description if you’d like and click on the SSO tab.
+  </Step>
+  <Step title="Enter your domain in the IDP Entity ID field">
+    Enter your domain in the IDP Entity ID field in the format https://YOUR_DOMAIN.com.
+  </Step>
+  <Step title="Replace YOUR_DOMAIN in the Login Url field">
+    Replace YOUR_DOMAIN with your domain in the Login Url field.
+    <Admonition type="note">
+      **Important:**
+
+      The **IdP Entity ID** and **Login URL** fields must match the Entra ID domain that’s to be SSO-enabled (federated) over to JumpCloud. **These fields should not be the default domain, (e.g., YOUR_DOMAIN.onmicrosoft.com**).
+    </Admonition>
+  </Step>
+  <Step title="Change the IdP Url">
+    Change the IdP Url to: https://sso.jumpcloud.com/saml2/EntraIDSSO.
+  </Step>
+  <Step title="Save the settings">
+    Leave the other fields as default and click Save.
+    <img
+      src="/img/App-Guides/Azure/Azure-Save-Settings.png"
+      alt="Save the settings"
+    />
+  </Step>
+  <Step title="Edit the app to download metadata">
+    Now that everything is set, let’s edit the app one more time so we can download the metadata. Click on "Edit" for the Azure app, then the SSO tab, and click the "Download SSO Config Metadata" button. This will download an XML file.
+    <img
+      src="/img/App-Guides/Azure/Azure-Download-Metadata.png"
+      alt="Edit the app to download metadata"
+    />
+  </Step>
+  <Step title="Close the app edit window">
+    You can close this app edit window.
+  </Step>
+</Steps>
+
+### Enable SSO in Azure
+
+<Admonition type="note">
+This section requires Powershell. The instructions were written using Powershell on a Mac, but will work on a Windows computer.
+</Admonition>
+
+#### Install required modules
+<Steps>
+  <Step title="Install required modules">
+    Install the following modules using the commands provided, and accept the install for each.
+    ```powershell
+    Install-Module PowershellGet
+    Install-Module Microsoft.Graph
+    Install-Module -Name JumpCloud.Office365.SSO
+    ```
+  </Step>
+  <Step title="Install ExchangeOnline module [Optional]">
+    If your Azure environment also has Exchange, then install the ExchangeOnline module as well.
+    ```powershell
+    Install-Module ExchangeOnlineManagement
+    ```
+  </Step>
+  <Step title="Set the Execution policy">
+    On a Windows computer, set the Execution policy. This is not required on a Mac.
+    ```powershell
+    Set-ExecutionPolicy RemoteSigned
+    ```
+  </Step>
+</Steps>
+
+#### Connect to the Azure Tenant & Configure SSO
+
+<Steps>
+  <Step title="Connect to the Azure Entra ID tenant">
+    Connect to the Azure Entra ID tenant using the Microsoft Graph module, so we can interact with the API.
+    ```powershell
+    Connect-MGGraph -Scopes "Domain.ReadWrite.All", "Directory.AccessAsUser.All", "Organization.ReadWrite.All", "Directory.ReadWrite.All"
+    ```
+  </Step>
+  <Step title="Log in to Microsoft">
+    You’ll receive a popup to log in to Microsoft. Make sure you log in with your Admin account.
+  </Step>
+  <Step title="Accept the permission request">
+    Accept the permission request.
+    <img
+      src="/img/App-Guides/Azure/Azure-Accept-Permission-Request.png"
+      alt="Accept the permission request"
+    />
+  </Step>
+  <Step title="Authentication complete notice">
+    You’ll receive a notice that authentication is complete. You can now close this window.
+    <img
+      src="/img/App-Guides/Azure/Azure-Authentication-Complete.png"
+      alt="Authentication complete notice"
+    />
+  </Step>
+  <Step title="Connect to Microsoft Exchange [Optional]">
+    If you have a Microsoft Exchange instance in this Azure domain, you’ll need to connect to it as well.
+    ```powershell
+    Connect-ExchangeOnline
+    ```
+    <Admonition type="note">
+    Our testing environment does not have Exchange, so we don’t have the screenshots for this piece. We’ll work to add it!
+    </Admonition>
+  </Step>
+  <Step title="Check SSO status">
+    Check to make sure SSO isn’t already enabled on your domain. When prompted for a domain, enter the domain you’d like to integrate for SSO.
+    ```powershell
+    Get-MgDomain | Select Id, AuthenticationType
+    ```
+    You should see “Managed” for the domains, which means SSO is disabled. Here’s an example:
+    ```powershell
+    Get-MgDomain | Select Id, AuthenticationType
+
+    Id                              AuthenticationType
+   -                             -----------------
+    danshiftcontrol.onmicrosoft.com Managed
+    syssec.biz                      Managed
+    ```
+  </Step>
+  <Step title="Show SSO configuration">
+    Run a command to show the SSO configuration.
+    ```powershell
+    Show-JumpCloud.Office365.SSO
+    ```
+    You’ll likely get another permission prompt. Accept it.
+    <img
+      src="/img/App-Guides/Azure/Azure-Accept-Permissions.png"
+      alt="Show SSO configuration"
+    />
+    The return information includes the error message (404) if there’s no config found. That’s normal! Check for “Federation is not configured for domain: YOUR_DOMAIN” at the bottom. We expect it not to be configured. Here’s an example:
+    ```powershell
+    Show-JumpCloud.Office365.SSO
+
+    cmdlet Show-JumpCloud.Office365.SSO at command pipeline position 1
+    Supply values for the following parameters:
+    Domain: syssec.biz
+    Welcome to Microsoft Graph!
+
+    Connected via delegated access using 14d82eec-204b-4c2f-b7e8-296a70dab67e
+    Readme: https://aka.ms/graph/sdk/powershell
+    SDK Docs: https://aka.ms/graph/sdk/powershell/docs
+    API Docs: https://aka.ms/graph/docs
+
+    NOTE: You can use the -NoWelcome parameter to suppress this message.
+
+    Get-MgDomainFederationConfiguration_List: /Users/user/.local/share/powershell/Modules/JumpCloud.Office365.SSO/0.11.0/Public/Show-JumpCloud.Office365.SSO.ps1:33
+    Line |
+      33 |  …             $Results = Get-MgDomainFederationConfiguration -DomainID  …
+         |                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+         | Resource 'federationConfiguration' does not exist or one of its queried reference-property objects are not present.  Status: 404 (NotFound) ErrorCode: Request_ResourceNotFound Date: 2024-06-27T02:13:36  Headers: Cache-Control
+         | : no-cache Vary                          : Accept-Encoding Strict-Transport-Security     : max-age=31536000 request-id                    : 1e56f17f-56ef-42c2-a689-8ea0a8fa7f9a client-request-id             :
+         | 9aaba976-b859-45e2-b85c-f20dd2780f26 x-ms-ags-diagnostic           : {"ServerInfo":{"DataCenter":"Southeast Asia","Slice":"E","Ring":"5","ScaleUnit":"001","RoleInstance":"SI2PEPF00000BCC"}} x-ms-resource-unit            : 1 Date
+         | : Thu, 27 Jun 2024 02:13:36 GM
+    Federation is not configured for domain: syssec.biz
+    ```
+  </Step>
+  <Step title="Enable SSO">
+    Run the command to enable SSO. Replace the XMLFilePath with the location of the downloaded metadata file from the previous section.
+    ```powershell
+    Enable-JumpCloud.Office365.SSO -XMLFilePath Azure_metadata.xml
+    ```
+    You’ll see a response with the information about your setup. Here’s an example:
+    ```powershell
+    Enable-JumpCloud.Office365.SSO -XMLFilePath ./Azure_metadata.xml
+
+    SSO Configured for domain: syssec.biz
+    WARNING: It can take up to 20 minutes for the Office 365 sign in process to update to SSO initiated. You may return sign in errors during this time.
+    DisplayName Id                                   IssuerUri          MetadataExchangeUri PassiveSignInUri                           PreferredAuthenticationProtocol SigningCertificate
+   -----------                                  --------         ---------------------------------                          -----------------------------------------------
+    syssec.biz  ac7c7c58-1172-43be-b588-22f955731755 https://syssec.biz                     https://sso.jumpcloud.com/saml2/EntraIDSSO saml                            MIIFizCCA3OgAwIBAgIVAOAJJdPl0FOVkVY/rorVvdYRWsXVMA0GCSqGSIb3DQEBCwUAMH8xCzA…
+    ```
+    <Admonition type="warning">
+    It may take up to 20 minutes for SSO to become active! In our test, it was at least 5 minutes.
+    </Admonition>
+  </Step>
+  <Step title="Verify the change">
+    Verify the change.
+    ```powershell
+    Show-JumpCloud.Office365.SSO
+    ```
+    You’ll see the same info you saw from the configuration command. Here’s an example:
+    ```powershell
+    Show-JumpCloud.Office365.SSO
+
+    cmdlet Show-JumpCloud.Office365.SSO at command pipeline position 1
+    Supply values for the following parameters:
+    Domain: syssec.biz
+
+    DisplayName Id                                   IssuerUri          MetadataExchangeUri PassiveSignInUri                           PreferredAuthenticationProtocol SigningCertificate
+   -----------                                  --------         ---------------------------------                          -----------------------------------------------
+    syssec.biz  ac7c7c58-1172-43be-b588-22f955731755 https://syssec.biz                     https://sso.jumpcloud.com/saml2/EntraIDSSO saml                            MIIFizCCA3OgAwIBAgIVAOAJJdPl0FOVkVY/rorVvdYRWsXVMA0GCSqGSIb3DQEBCwUAMH8xCzA…
+    ```
+  </Step>
+  <Step title="Disconnect from Microsoft Graph">
+    Disconnect from Microsoft Graph.
+    ```powershell
+    Disconnect-MGGraph
+    ```
+  </Step>
+</Steps>
+
+Congratulations, you are now configured for user synchronization and SSO for Azure!
+
+## Assigning access for your users
+
+You assign access to users just like you do for any other application. In ShiftControl, assign a group or individuals to the app and the app will be available for them in the console.
+
+Your users will be able to login either from JumpCloud directly, or will be redirected to JumpCloud to complete their sign-in if they are coming from Microsoft.
+<Admonition type="note">
+Each user that you assign in the application must also be assigned to the directory for synchronization. If this doesn’t happen, the process will be missing a key identifier to process the login! We are working on a feature to synchronize the application assignment and the Directory Sync assignment for Azure to make this easier. Right now, we suggest creating a group for Azure access and then assigning to the App and to the Cloud Directory, then any changes to the group remain in sync.
+</Admonition>
+
+When you add a user to the Cloud Directory they will receive an email that looks like this:
+<img
+  src="/img/App-Guides/Azure/Azure-User-Email.png"
+  alt="User receives an email"
+/>
+
+When you add a user to the Azure application in JumpCloud, the next time they log in to JumpCloud they’ll receive this notice:
+<img
+  src="/img/App-Guides/Azure/Azure-User-Notice.png"
+  alt="User receives a notice"
+/>
+
+
+Once they accept, they’ll be able to click on the Azure app, which redirects them to Microsoft and then logs them in once they choose their user. Here’s an example:
+<Steps>
+  <Step title="Console with Azure app">
+    A console with the Azure app.
+    <img
+      src="/img/App-Guides/Azure/Azure-Console-with-App.png"
+      alt="Console with Azure app"
+    />
+  </Step>
+  <Step title="Select the right user">
+    Select the right user if there’s more than one user that has logged in from this computer.
+    <img
+      src="/img/App-Guides/Azure/Azure-Select-User.png"
+      alt="Select the right user"
+    />
+  </Step>
+  <Step title="Redirect to JumpCloud login">
+    You’ll be redirected to JumpCloud login in the background.
+    <img
+      src="/img/App-Guides/Azure/Azure-JumpCloud-Login.png"
+      alt="Redirect to JumpCloud login"
+    />
+  </Step>
+  <Step title="Choose to remain signed in">
+    You’ll be asked if you want to remain signed in.
+    <img
+      src="/img/App-Guides/Azure/Azure-Remain-Signed-In.png"
+      alt="Choose to remain signed in"
+    />
+  </Step>
+  <Step title="Logged in via SSO">
+    Now you are logged in via SSO!
+    <img
+      src="/img/App-Guides/Azure/Azure-Logged-In-via-SSO.png"
+      alt="Logged in via SSO"
+    />
+  </Step>
+</Steps>

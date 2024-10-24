@@ -1,0 +1,184 @@
+/**
+ * Any CSS included here will be global. The classic template
+ * bundles Infima by default. Infima is a CSS framework designed to
+ * work well for content-centric websites.
+ */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
+
+body {
+  font-family: 'Inter', sans-serif;
+}
+
+/* You can override the default Infima variables here. */
+html[data-theme='light'] {
+  --ifm-color-primary: #2e8555;
+  --ifm-color-primary-dark: #29784c;
+  --ifm-color-primary-darker: #277148;
+  --ifm-color-primary-darkest: #205d3b;
+  --ifm-color-primary-light: #33925d;
+  --ifm-color-primary-lighter: #359962;
+  --ifm-color-primary-lightest: #3cad6e;
+  --ifm-code-font-size: 95%;
+  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
+  --ifm-background-color: #ffffff;
+  --ifm-navbar-background-color: #ffffff;
+  --step-line-bg: rgba(156, 163, 175, 0.7); /* Light mode */
+  --step-number-bg: #f3f4f6; /* Light mode */
+  --step-number-color: #1f2937; /* Light mode */
+  --step-title-color: #111827; /* Light mode */
+  --prose-color: #111827; /* Light mode */
+}
+
+/* For readability concerns, you should choose a lighter palette in dark mode. */
+html[data-theme='dark'] {
+  --ifm-color-primary: #f8fafc;
+  --ifm-color-primary-dark: #21af90;
+  --ifm-color-primary-darker: #1fa588;
+  --ifm-color-primary-darkest: #1a8870;
+  --ifm-color-primary-light: #29d5b0;
+  --ifm-color-primary-lighter: #32d8b4;
+  --ifm-color-primary-lightest: #4fddbf;
+  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
+  --ifm-background-color: #0a0a0b;
+  --ifm-footer-background-color: #0a0a0b;
+  --ifm-navbar-background-color: #0a0a0b;
+  --ifm-navbar-link-color: #f8fafc;
+  --ifm-navbar-link-active-color: #94a3b8;
+  --step-line-bg: rgba(255, 255, 255, 0.1); /* Dark mode */
+  --step-number-bg: #26292E; /* Dark mode */
+  --step-number-color: #ffffff; /* Dark mode */
+  --step-title-color: #f8fafc; /* Dark mode */
+  --prose-color: #f8fafc; /* Dark mode */
+}
+
+html[data-theme='dark'] p {
+  color: #9ea4a4; /* Replace with your desired color */
+}
+
+
+
+.step-container {
+  position: relative;
+  display: flex;
+  align-items: start;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  padding-left: 1rem;
+}
+
+.step-line {
+  position: absolute;
+  width: 1px;
+  height: calc(100% - 2.75rem);
+  top: 2.75rem;
+  background-color: var(--step-line-bg);
+}
+
+.step-number-container {
+  position: absolute;
+  margin-left: -14px;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+}
+
+.step-number {
+  width: 1.75rem;
+  height: 1.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--step-number-bg);
+  color: var(--step-number-color);
+  font-size: 0.875rem;
+  font-weight: 600;
+  border-radius: 0.375rem;
+}
+
+.step-content {
+  width: 100%;
+  overflow: hidden;
+  padding-left: 3rem;
+  padding-right: 1px;
+}
+
+.step-title {
+  margin-top: 0.5rem;
+  font-weight: 600;
+  color: var(--step-title-color);
+}
+
+.prose {
+  color: var(--prose-color);
+}
+
+.accordion-container {
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 1rem;
+  margin-bottom: 0.75rem;
+  overflow: hidden;
+  background-color: #f9f9f9;
+}
+
+html[data-theme='dark'] .accordion-container {
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background-color: #2d2d2d;
+}
+
+.accordion-button {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 1rem 1.25rem;
+  cursor: pointer;
+  background: none;
+  border: none;
+  outline: none;
+  transition: background-color 0.2s;
+}
+
+.accordion-button:hover {
+  background-color: #e2e2e2;
+}
+
+html[data-theme='dark'] .accordion-button:hover {
+  background-color: #3a3a3a;
+}
+
+.accordion-icon {
+  width: 1rem;
+  height: 1rem;
+  background-color: #4a4a4a;
+  mask: url('https://mintlify.b-cdn.net/v6.6.0/solid/caret-right.svg') no-repeat center center;
+  transition: transform 0.2s;
+}
+
+html[data-theme='dark'] .accordion-icon {
+  background-color: #b3b3b3;
+}
+
+.accordion-icon.rotate {
+  transform: rotate(90deg);
+}
+
+.accordion-title {
+  margin-left: 0.5rem;
+  text-align: left;
+  font-weight: 500;
+  font-size: 1rem;
+  color: #1a1a1a;
+  display: flex;
+  align-items: center;
+}
+
+html[data-theme='dark'] .accordion-title {
+  color: #e0e0e0;
+}
+
+.accordion-content {
+  margin: 0.5rem 1.5rem 1rem;
+  color: #1a1a1a;
+}
+
+html[data-theme='dark'] .accordion-content {
+  color: #e0e0e0;
+}
