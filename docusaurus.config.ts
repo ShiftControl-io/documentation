@@ -34,7 +34,7 @@ const config: Config = {
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
           editUrl:
-            'https://github.com/ShiftControl-io/documentation/edit/main/docs',
+            'https://github.com/ShiftControl-io/documentation/edit/main',
         },
         blog: false,
         theme: {
