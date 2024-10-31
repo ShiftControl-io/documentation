@@ -5,6 +5,7 @@ icon: 'user-gear'
 ---
 
 import { Steps, Step } from "@site/src/components/Steps";
+import Admonition from '@theme/Admonition';
 
 <p style={{fontSize: "large"}}>How to edit a user in your organization.</p>
 
@@ -40,11 +41,24 @@ Editing a user is straightforward and allows administrators to update user detai
 
 </Steps>
 
-## Group Information
+## User Info Sidebar
 
-In the **Edit User** section, there is also an area for **Group Information**. This feature provides a quick view of all the groups the user is part of, helping you see and understand the user's group assignments, which can come from dynamic membership rules based on profile information.
+In the **Edit User** section, there is also a collapsible sidebar that provides additional information about the user. The sidebar includes information about which groups and apps the user is assigned to and how they were assigned to them.
 
+<Admonition type="info">
+    You can hover over the icons in the sidebar to see more information about the user’s group and app assignments.
+</Admonition>
+
+### User Sidebar with Groups
 <img
-    src="/img/ShiftControl/Users/Edit-a-user-with-Groups.png"
-    alt="User actions"
+    src="/img/ShiftControl/Users/User-sidebar-groups.png"
+    alt="User Sidebar with Groups"
+    width={"400"}
+/>
+
+### User Sidebar with Apps
+<img
+    src="/img/ShiftControl/Users/User-sidebar-apps.png"
+    alt="User Sidebar with Apps"
+    width={"400"}
 />

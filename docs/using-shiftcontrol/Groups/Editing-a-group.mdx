@@ -5,17 +5,24 @@ icon: 'users-gear'
 ---
 
 import { Steps, Step } from "@site/src/components/Steps";
+import Admonition from '@theme/Admonition';
 
 <p style={{fontSize: "large"}}>How to edit a group and understanding the different ways to assign users.</p>
 
 ## Overview
 When editing a group, you can configure all three tabs—dynamic assignments, nested assignments, and individual assignments. You can choose to assign users using one or any combination of these methods.
 
+### Group Assignments
 <img
-    src="/img/ShiftControl/Groups/Edit-a-group.png"
-    alt="Edit a group"
+    src="/img/ShiftControl/Groups/Edit-a-group-assignments.png"
+    alt="Edit a group - assignments"
 />
 
+### Group Details
+<img
+    src="/img/ShiftControl/Groups/Edit-a-group-details.png"
+    alt="Edit a group - details"
+/>
 
 ## Editing a group
 
@@ -89,3 +96,33 @@ When editing a group, you can configure all three tabs—dynamic assignments, ne
     </Step>
 
 </Steps>
+
+## Grioup Info Sidebar
+
+In the **Edit Group** section, there is also a collapsible sidebar that provides additional information about the group. The sidebar includes information about the group rules, users assigned to the group, and apps that use the group for assignments.
+
+<Admonition type="info">
+    You can hover over the icons in the sidebar to see more information about how users are assigned to the group.
+</Admonition>
+
+### Group Sidebar with Rules
+<img
+    src="/img/ShiftControl/Groups/Group-sidebar-rules.png"
+    alt="Group Sidebar with Rules"
+    width={"400"}
+/>
+
+### Group Sidebar with Users
+<img
+    src="/img/ShiftControl/Groups/Group-sidebar-users.png"
+    alt="Group Sidebar with Users"
+    width={"400"}
+/>
+
+
+### Group Sidebar with Apps
+<img
+    src="/img/ShiftControl/Groups/Group-sidebar-apps.png"
+    alt="Group Sidebar with Apps"
+    width={"400"}
+/>
