@@ -1,0 +1,88 @@
+---
+title: 'Sync Groups with Google Workspace'
+description: 'Learn how to take advantage of Google Workspace integration to sync groups.'
+---
+
+import { Steps, Step } from "@site/src/components/Steps";
+
+<p style={{fontSize: "large"}}>Learn how to take advantage of Google Workspace integration to sync groups.</p>
+
+## Overview
+The Google Workspace Group Sync feature provides a powerful way to automatically keep group memberships updated across both ShiftControl and Google Workspace. Whether you are creating dynamic groups based on user locations or managing access for specific departments, Group Sync can save you time and reduce manual effort.
+
+For example, you could create a dynamic group based on user locations. This allows you to quickly email all users in a specific location, such as Singapore, or share files with a targeted group like the Hong Kong team. With automatic membership updates, any changes—such as adding a new team member—are instantly reflected, ensuring your teams are always up to date.
+
+<div style={{ position: "relative", paddingBottom: "56.25%", height: 0 }}>
+    <video
+        style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%" }}
+        controls
+    >
+        <source src="/img/ShiftControl/Groups/Google-Workspace-Group-Sync.mp4" type="video/mp4" />
+        Your browser does not support the video tag.
+    </video>
+</div>
+
+## Google Workspace Group Sync
+
+Google Workspace Group Sync  allows ShiftControl to manage your Google Groups seamlessly. Here’s a detailed overview of how this integration works.
+
+### Automatic Sync
+
+Once you enable Google Group Sync for a group in ShiftControl, any membership changes (such as additions or removals) you make in ShiftControl will be automatically reflected in Google Workspace. This ensures that both platforms stay synchronized and that group membership is always consistent between the two.
+
+### Group Matching
+
+When you enable Google Group Sync, ShiftControl will look for an existing Google Group that matches the group's email address. If a matching Google Group exists, it will sync membership directly with that group. If no such group is found, ShiftControl will create a new distribution group in Google Workspace with the matching email address, name, and description.
+
+### Duplicate Groups
+
+If a Google Group already exists with the same email address, ShiftControl will not create a duplicate. Instead, it will take control over updating the existing group’s membership. This process avoids redundancy and ensures the consistency of group memberships.
+
+### Sync Frequency
+
+Membership updates are generally instant in Google Workspace after changes are made in ShiftControl, though there may be occasional delays that cause updates to take a few minutes to propagate. This sync happens automatically without manual intervention.
+
+### Managing Email Addresses
+
+- If you change a group’s email address in ShiftControl, the existing Google Group will simply be updated to reflect the updated email address. This means that the group itself remains the same, and its membership is seamlessly transitioned without creating a new group or requiring manual adjustments in Google Workspace.
+- However, if you remove a distribution group’s email address in ShiftControl, the group and its memberships will no longer sync with Google Workspace.
+- Please note that only email addresses associated with domains registered under your Google Workspace can be used for syncing. Groups with email addresses from outside your domain will not sync.
+
+### Disabling Sync
+
+You can disable Google Group Sync for any group at any time. Disabling sync does not delete the group in Google Workspace; it simply stops managing the group membership. You can continue to manage the group manually in Google Workspace if needed.
+
+### Limitations
+
+It’s important to understand the limitations of Google Workspace Group Sync:
+- This feature only syncs group memberships. It does not sync other group settings, such as access controls, roles, or visibility. These settings must be managed directly in Google Workspace.
+
+## Enabling Google Group Sync for a Group
+
+<Steps>
+
+    <Step title="Navigate to the Group Management Pane">
+        From the dashboard, navigate to the **Group Management** pane where all groups are listed.
+    </Step>
+
+    <Step title="Select the Group to Edit">
+        Find the group you wish to edit and click the **Edit** button in the same row as the group name.
+    </Step>
+
+    <Step title="Edit Group Details">
+        In the edit view, you can modify fields like the group name, description, and other settings.
+    </Step>
+
+    <Step title="Enable Sync to Google">
+        Enable the Sync to Google option.
+    </Step>
+
+    <Step title="Set an email address">
+        Set the email address for the group. This email address will be used to sync the group with Google Workspace.
+    </Step>
+
+    <Step title="Save Changes">
+        Click **Save All** to apply the changes. The group will now be synced with Google Workspace including all membership changes.
+    </Step>
+
+</Steps>
