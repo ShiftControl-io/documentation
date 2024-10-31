@@ -65,6 +65,7 @@ const sidebars: SidebarsConfig = {
                         'using-shiftcontrol/Groups/Group-management',
                         'using-shiftcontrol/Groups/Adding-a-group',
                         'using-shiftcontrol/Groups/Editing-a-group',
+                        'using-shiftcontrol/Groups/Syncing-groups-with-google',
                     ],
                 },
                 {
