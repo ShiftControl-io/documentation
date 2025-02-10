@@ -93,6 +93,16 @@ const sidebars: SidebarsConfig = {
                         'using-shiftcontrol/Reports/App-assignment-reports',
                     ],
                 },
+                {
+                    type: 'category',
+                    label: 'API',
+                    items: [
+                        'using-shiftcontrol/API/ShiftControl-api',
+                        'using-shiftcontrol/API/API-key-management',
+                        'using-shiftcontrol/API/Adding-an-api-key',
+                        'using-shiftcontrol/API/Editing-an-api-key',
+                    ],
+                },
             ],
         },
     ],

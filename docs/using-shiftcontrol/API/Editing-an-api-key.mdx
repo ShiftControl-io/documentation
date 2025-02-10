@@ -1,0 +1,35 @@
+---
+title: 'Editing an API Key'
+description: 'How to edit an API key in ShiftControl'
+icon: 'code'
+---
+
+import Admonition from '@theme/Admonition';
+
+<p style={{fontSize: "large"}}>How to edit an API key in ShiftControl for Org and User API keys.</p>
+
+## Overview
+
+Quickly and easily edit API keys for your organization and individual users, enabling you to update their details, permissions, and expiry dates.
+
+## Editing an API Key
+
+<img
+    src="/img/ShiftControl/API/edit-api-key.png"
+    alt="Edit an API key"
+/>
+
+To edit an API key, follow these steps:
+
+1. **Navigate to API Key Management**: Click on the Cog at the top of the dashboard, go to the **API Keys** section under either the Org Settings or User Settings, depending on the type of API key you want to edit.
+2. **Select the API Key**: Find the API key you want to edit from the list and click the Edit button next to it.
+3. **Update the Details**: In the form that appears, update the details for the API key, including its name, purpose, permissions, and expiry date.
+4. **Save the Changes**: Click the **Save** button to apply the changes to the API key.
+
+<Admonition type="info">
+    You can't change the expiry date of a key that is set to expire to never expire, but you can change the expiry of a key that currently never expires to a a specific expiry time.
+</Admonition>
+
+<Admonition type="warning">
+    Be cautious when editing Org API keys as they have full administrative rights.
+</Admonition>

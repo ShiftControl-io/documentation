@@ -1,0 +1,47 @@
+---
+title: 'ShiftControl API Info'
+description: 'An overview of the ShiftControl API'
+icon: 'code'
+---
+
+<p style={{fontSize: "large"}}>An overview of the ShiftControl API, allowing you to integrate and automate various functions within ShiftControl.</p>
+
+## What is an API?
+
+An API (Application Programming Interface) allows different software applications to communicate with each other. It provides a set of rules and protocols for building and interacting with software applications.
+
+<img
+    src="/img/ShiftControl/API/shiftcontrol-api-docs.png"
+    alt="ShiftControl API Docs"
+/>
+
+## Common Use Cases
+
+Our customers use the ShiftControl API for various purposes, such as:
+
+- **Updating Redirect URIs**: When deploying a new test of their system, customers need to update the redirect URI of an OIDC app to manage the current active redirect URI endpoints. The API can automate this process.
+- **Integration with Other Apps**: You can integrate ShiftControl with other applications like Make, Zapier, or Workato to automate workflows and enhance functionality.
+- **Automating User Management**: You can automate user management tasks like creating, updating, or deleting users in ShiftControl using the API.
+
+## API Documentation
+
+You can find our API documentation at [ShiftControl API Docs](https://api.shiftcontrol.io/api-docs). The documentation is available in Scalar, Redoc, and Swagger formats, and you can execute and test APIs directly on our site.
+
+## API Tokens
+
+- **User API Tokens**: These tokens are associated with individual users and provide access to user-specific data and actions. These tokens have limited rights based on the user's role and permissions.
+- **Org API Tokens**: These tokens are associated with an organization and provide access to organization-wide data and actions. These are top-level admin tokens and have all rights.
+- **Access Tokens**: These tokens are used to authenticate API requests from our Frontend and ensure secure communication between applications.
+
+The ShiftControl API provides powerful tools to automate and integrate various functions, making it easier to manage your IT environment.
+
+## Using Postman with ShiftControl API
+
+Postman is a popular API client that allows you to test and automate API requests.
+
+To use Postman with our API:
+
+1. Download the [OpenAPI Spec](https://api.shiftcontrol.io/api-docs/openapi.json) from our site.
+2. Import the OpenAPI Spec into Postman.
+
+For detailed instructions, refer to [Postman OpenAPI Integration](https://learning.postman.com/docs/integrations/available-integrations/working-with-openAPI/).

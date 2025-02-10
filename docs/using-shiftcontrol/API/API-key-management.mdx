@@ -1,0 +1,49 @@
+---
+title: 'API Key Management'
+description: 'An overview of API Key Management in ShiftControl'
+icon: 'code'
+---
+
+import Admonition from '@theme/Admonition';
+
+<p style={{fontSize: "large"}}>An overview of API Key management for Org and User API keys.</p>
+
+## Overview
+
+**API Key Management** allows you to create and manage API keys for your organization and individual users. These keys are used to authenticate and authorize API requests to ShiftControl, enabling you to automate various functions and integrate with other applications.
+
+## Org API keys
+
+<img
+    src="/img/ShiftControl/API/org-api-key-management.png"
+    alt="User Management"
+/>
+
+Org API keys are associated with an organization and provide access to organization-wide data and actions. These keys operate at the highest permissions level since they are not tied to a specific user role.
+
+<Admonition type="warning">
+    Use these keys with caution as they have full administrative rights.
+</Admonition>
+
+## User API keys
+
+<img
+    src="/img/ShiftControl/API/user-api-key-management.png"
+    alt="User Management"
+/>
+
+User API keys are associated with individual users and provide access to user-specific data and actions. These keys have limited permissions based on the user's role and assigned permissions.
+
+## Adding an API Key
+
+Click the [Add API Key](/using-shiftcontrol/API/Adding-an-api-key) button located at the top of the screen to create a new API key. This opens a form where you can input the details for the new API key, including its name, purpose, and expiry.
+
+## Editing an API Key
+
+Clicking the [Edit](/using-shiftcontrol/API/Editing-an-api-key) button next to any API key in the list will take you to the API key details page, where you can modify its information.
+
+## API Key Actions
+
+You can take the following actions on individual API keys by using the dropdown menu next to each key:
+
+- **Delete**: Remove the API key from the system.
