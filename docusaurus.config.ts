@@ -79,7 +79,7 @@ const config: Config = {
                 },
                 {
                     label: 'Support',
-                    href: 'mailto://support@shiftcontrol.io',
+                    href: 'mailto:support@shiftcontrol.io',
                     position: 'right',
                 },
                 {
