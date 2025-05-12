@@ -1,0 +1,251 @@
+---
+title: 'Configure Google Workspace as an Identity Provider'
+description: 'Use Google Workspace credentials to authenticate users into JumpCloud-managed resources.'
+icon: 'google'
+---
+
+import { Steps, Step } from "@site/src/components/Steps";
+import Admonition from '@theme/Admonition';
+
+## Overview
+
+JumpCloud supports **Federated Authentication**, allowing your team to sign in with an external Identity Provider (IdP) instead of JumpCloud’s native login.
+This guide explains how to set up **Google Workspace** as an external IdP so your users can log in with their Google accounts while you continue managing devices and access policies in JumpCloud.
+
+<Admonition type="warning">
+    This setup is only required if you decide to host your own OIDC app for JumpCloud authentication. ShiftControl will handle this configuration for you using our own client and project in JumpCloud as part of the onboarding process.
+</Admonition>
+
+<Admonition type="note">
+    Federated login changes the flow for *all* users in the routing policy you apply. Test with a pilot group before rolling it out company-wide.
+</Admonition>
+
+## Prerequisites
+
+- Google super-admin rights and billing enabled in **Google Cloud Console**
+- JumpCloud **Admin** role
+- Ability to create projects and OAuth clients
+
+## Access Google Cloud Console
+
+<Steps>
+    <Step title="Go to Google Cloud">
+        Go to [cloud.google.com](https://cloud.google.com).
+    </Step>
+
+    <Step title="Open the Console">
+        Click on **Console** at the top right corner of the page.
+    </Step>
+
+    <Step title="Log In">
+        Log in with your Google account.
+    </Step>
+</Steps>
+
+## Create a Dedicated Project
+
+<Steps>
+    <Step title="Go to the Project Picker">
+        Once logged in, go to the project picker and select **New Project**.
+            <img
+                src="/img/ShiftControl/JumpCloud/Create-Google-Project-Button.png"
+                alt="New Project button"
+            />
+    </Step>
+
+    <Step title="Name and Create the Project">
+        Name the project something obvious like *JumpCloud OIDC* and click **Create**.
+            <img
+                src="/img/ShiftControl/JumpCloud/Create-Google-Project.png"
+                alt="Create Google Project"
+            />
+    </Step>
+</Steps>
+
+## Configure the Auth Platform
+
+<Steps>
+    <Step title="Select OAuth Consent Screen">
+        From the left navigation menu, select **APIs & Services → OAuth consent screen**.
+    </Step>
+
+    <Step title="Click Get Started">
+        Click on **Get Started**.
+            <img
+                src="/img/ShiftControl/JumpCloud/Configure-Google-Auth-Platform.png"
+                alt="Configure Auth Platform"
+            />
+    </Step>
+
+    <Step title="Fill App Information">
+        Fill in *App name* (e.g., JumpCloud OIDC) and the *User support email*. Click **Next**.
+            <img
+                src="/img/ShiftControl/JumpCloud/Configure-Google-Auth-Platform-App-Info.png"
+                alt="Configure Auth Platform App Info"
+            />
+    </Step>
+
+    <Step title="Select Internal">
+        Select **Internal** and click **Next**.
+            <img
+                src="/img/ShiftControl/JumpCloud/Configure-Google-Auth-Platform-Audience.png"
+                alt="Configure Auth Platform Audience"
+            />
+    </Step>
+
+    <Step title="Enter Contact Information">
+        Under Contact Information, enter a contact email address, then click **Next**.
+            <img
+                src="/img/ShiftControl/JumpCloud/Configure-Google-Auth-Platform-Contact.png"
+                alt="Configure Auth Platform Contact"
+            />
+    </Step>
+
+    <Step title="Agree and Create">
+        Under Finish, select to agree to the policy and click **Continue**, then **Create**.
+            <img
+                src="/img/ShiftControl/JumpCloud/Configure-Google-Auth-Platform-Finish.png"
+                alt="Configure Auth Platform Finish"
+            />
+    </Step>
+</Steps>
+
+## Configure Branding
+
+<Steps>
+    <Step title="Go to Branding">
+        In the left menu, go to **Branding**.
+    </Step>
+
+    <Step title="Enter Authorized Domain">
+        Scroll down to **Authorized domains**. Under **Authorized domain 1***, enter `jumpcloud.com`.
+    </Step>
+
+    <Step title="Enter Developer Contact Information">
+        Under **Developer contact information**, enter an **Email address***.
+    </Step>
+
+    <Step title="Save Changes">
+        Click **SAVE**.
+            <img
+                src="/img/ShiftControl/JumpCloud/Configure-Google-Auth-Platform-Branding-Domain.png"
+                alt="Configure Auth Platform Domain"
+            />
+    </Step>
+</Steps>
+
+## Configure Data Access
+
+<Steps>
+    <Step title="Go to Data Access">
+        In the left menu, go to **Data Access** to manage the scopes.
+    </Step>
+
+    <Step title="Add or Remove Scopes">
+        Click **ADD OR REMOVE SCOPES**.
+    </Step>
+
+    <Step title="Select Scopes">
+        Select the first three scopes: `email`, `openID`, and `profile`.
+    </Step>
+
+    <Step title="Update and Save">
+        Click **UPDATE** then **SAVE**.
+            <img
+                src="/img/ShiftControl/JumpCloud/Configure-Google-Auth-Platform-Data-Access.png"
+                alt="Configure Auth Platform Data Access"
+            />
+    </Step>
+</Steps>
+
+## Create OAuth Client Credentials
+
+<Steps>
+    <Step title="Go to Clients">
+        In the left menu, go to **Clients**.
+    </Step>
+
+    <Step title="Create a New Client">
+        In the top menu, click **+ CREATE CLIENT**.
+            <img
+                src="/img/ShiftControl/JumpCloud/Configure-Google-Auth-Platform-OAuth-Client.png"
+                alt="Configure Auth Platform Create Client"
+            />
+    </Step>
+
+    <Step title="Select Application Type">
+        On the next page, click the **Application type*** dropdown menu and select **Web application**.
+    </Step>
+
+    <Step title="Enter Client Name">
+        Enter a **Name***, such as `JumpCloud OIDC`, to associate it with JumpCloud.
+    </Step>
+
+    <Step title="Add Authorized Redirect URI">
+        Under **Authorized redirect URIs**, enter `https://login.jumpcloud.com/oauth/callback`.
+    </Step>
+
+    <Step title="Create the Client">
+        Click **CREATE**.
+            <img
+                src="/img/ShiftControl/JumpCloud/Configure-Google-Auth-Platform-OAuth-Client-Redirect.png"
+                alt="Configure Auth Platform Configure Client"
+            />
+    </Step>
+
+    <Step title="Copy Client Credentials">
+        You’ll get a successful OAuth client created modal with the **Client ID**, **Client secret**, **Creation date**, and **Status**.
+        Copy the **Client ID** and **Client secret** to your clipboard. You’ll need these to configure Google Cloud in JumpCloud. Then click **OK** to exit out of the modal.
+    </Step>
+</Steps>
+
+## Add Google as an IdP inside JumpCloud
+
+<Steps>
+    <Step title="Log in to JumpCloud Admin Portal">
+        Log in to the **JumpCloud Admin Portal**.
+    </Step>
+
+    <Step title="Navigate to Identity Providers">
+        Navigate to **Directory Integrations → Identity Providers**.
+    </Step>
+
+    <Step title="Add Google as an Identity Provider">
+        Click **Add Identity Provider → Google**.
+    </Step>
+
+    <Step title="Fill in Identity Provider Details">
+        Fill in the fields:
+        - **Identity Provider Name**: `Google OIDC` (or any label you prefer)
+        - **Google IdP URL**: `https://accounts.google.com`
+        - **Client ID** and **Client Secret**: Paste the values you copied from Google Cloud.
+    </Step>
+
+    <Step title="Save Changes">
+        Click **Save** to save your changes.
+    </Step>
+</Steps>
+
+## Apply (or skip) a routing policy
+
+JumpCloud lets you target federated login at specific groups. If you need that granularity, go to **Directory Integrations → Routing Policies** and attach your new IdP to a user group.
+If you skip this step, users will continue to authenticate with the native JumpCloud login until you apply the policy.
+
+## Managing the IdP
+
+- **Edit** — Update the display name, IdP URL, client ID, or client secret at any time from the IdP’s detail page.
+- **Disable/Delete** — Scroll to **Delete Identity Provider** at the bottom of the page. JumpCloud reverts impacted users to native authentication after deletion.
+
+## Troubleshooting tips
+
+| Symptom                        | Quick check                                                                 |
+|--------------------------------|-----------------------------------------------------------------------------|
+| Users loop back to Google login | Confirm the redirect URI matches *exactly* in both Google and JumpCloud     |
+| Error *“invalid client”*       | Regenerate and re-paste the Client Secret                                   |
+| Users still see JumpCloud login | Verify that a routing policy includes their user group                     |
+
+## Related resources
+
+- [Routing policies for Identity Providers](https://jumpcloud.com/support/routing-policies-for-identity-providers)
+- [Get started: Federated Authentication](https://jumpcloud.com/support/get-started-for-google-admins)
+- [Google: Turning off third-party SSO](https://support.google.com/a/answer/60224)
