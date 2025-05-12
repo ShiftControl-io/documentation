@@ -103,6 +103,13 @@ const sidebars: SidebarsConfig = {
                         'using-shiftcontrol/API/Editing-an-api-key',
                     ],
                 },
+                {
+                    type: 'category',
+                    label: 'JumpCloud',
+                    items: [
+                        'using-shiftcontrol/JumpCloud/Use-Google-Workspace-as-an-IdP',
+                    ],
+                },
             ],
         },
     ],
