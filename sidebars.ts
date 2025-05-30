@@ -112,6 +112,13 @@ const sidebars: SidebarsConfig = {
                 },
             ],
         },
+        {
+            type: 'category',
+            label: 'Partnerships',
+            items: [
+                'partnerships/Blackpanda-ir1',
+            ],
+        },
     ],
     onboardingSidebar: [
         ...standardLinks,
