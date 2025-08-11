@@ -1,0 +1,141 @@
+---
+title: 'OmniHR'
+description: 'Connect OmniHR to ShiftControl and make HR data your single source of truth for user management.'
+icon: 'users-gear'
+---
+
+import { Steps, Step } from "@site/src/components/Steps";
+import Admonition from '@theme/Admonition';
+
+<p style={{fontSize: "large"}}>Connect OmniHR to ShiftControl and make HR data your single source of truth for user management.</p>
+
+## Overview
+
+The OmniHR integration allows you to connect your OmniHR system to ShiftControl, enabling HR data to become the single source of truth for user management across your organization. This integration is particularly valuable for our Asia-based customers, as OmniHR ships no native IdP connectors.
+
+## Why It Matters
+
+- **Single Source of Truth**: Turn OmniHR into a single source of truth for identities—no more manual spreadsheet uploads
+- **First Seamless Path**: ShiftControl delivers the first seamless path from HR to downstream apps for OmniHR users
+- **Automated Lifecycle Management**: Automatically handle user provisioning, updates, and deprovisioning
+- **Streamlined Operations**: Eliminate manual data entry and reduce human error
+
+## Key Features
+
+- **Full-Field Synchronization**: Manager, department, start date, and every other key attribute flow straight into ShiftControl
+- **On-Demand Sync**: Don't want to wait for the hourly update? Simply go to the actions menu for the integration and click "Refresh data" to start a new sync
+- **Pre-Start Provisioning**: Five days before a new hire's start date, we silently enable the account so Gmail, Calendar, and Docs are ready without sending the welcome email
+- **Automatic Status Management**: Automatic disable/re-enable keeps your roster accurate and compliant
+
+## How It Works
+
+ShiftControl polls OmniHR hourly to spot new hires, role changes, and departures. The integration automatically detects and processes changes, ensuring your user data is always up-to-date across all connected systems.
+
+## Getting Started
+
+### Step 1: Create an OmniHR Report
+
+Before setting up the integration in ShiftControl, you need to create a report in OmniHR that exposes the employee fields required for the integration:
+
+<Steps>
+    <Step title="Prepare a user account for API access">
+        - You'll need a user account to access the OmniHR API
+        - The integration leverages OmniHR's access control system to retrieve data
+    </Step>
+
+    <Step title="Navigate to Reports in OmniHR">
+        Access the Reports section in your OmniHR dashboard
+        
+        <img
+            src="/img/ShiftControl/Integrations/OmniHR/OmniHR-reports-nav.png"
+            alt="Navigate to Reports"
+            height="500"
+        />
+    </Step>
+
+    <Step title="Create a custom report">
+        Click on the option to create a new report
+        
+        <img
+            src="/img/ShiftControl/Integrations/OmniHR/OmniHR-reports-create.png"
+            alt="Create custom report"
+        />
+    </Step>
+
+    <Step title="Set up the report">
+        - Click on `Add Report`
+        - Click on `master report`
+        - Use the interface to select the fields you need for the report
+        
+        <img
+            src="/img/ShiftControl/Integrations/OmniHR/OmniHR-reports-fields.png"
+            alt="Select report fields"
+        />
+        <Admonition type="important">
+            Do not choose custom fields as they are not supported at the moment.
+        </Admonition>
+    </Step>
+
+    <Step title="Include required fields">
+        Make sure to include the following required fields in your report:
+
+        | HRIS Field | ShiftControl Field |
+        |------------|-------------------|
+        | contact_emails_work | email |
+        | base_data_first_name | firstname |
+        | base_data_last_name | lastname |
+        | base_data_preferred_name or base_data_first_name | N/A |
+        | preferredName + base_data_last_name | displayname |
+        | base_data_employee_id | N/A |
+        | job_company | company |
+        | job_department | department |
+        | job_position | jobTitle |
+        | job_location | location |
+        | employment_info_hired_date | N/A |
+        | job_employee_type | N/A |
+        | base_data_system_id | N/A |
+        | team_info_manager_system_id | manager |
+        | employment_info_employment_status | N/A |
+        | employment_info_termination_date | N/A |
+    </Step>
+
+    <Step title="Create the report">
+        After selecting all required fields, create and save the report
+    </Step>
+
+    <Step title="Get the report ID">
+        Contact the support team or Ganesh to obtain the unique ID for your report
+    </Step>
+</Steps>
+
+### Step 2: Add Authorization in ShiftControl
+
+Once you have created the report in OmniHR and obtained the report ID, you can set up the integration in ShiftControl:
+
+<Steps>
+    <Step title="Add the OmniHR App">
+        Navigate to Integrations → OmniHR and select "Add Authorization"
+    </Step>
+
+    <Step title="Provide Credentials">
+        Enter the following lightweight credentials:
+        - Username & Password – an OmniHR account with read access
+        - OmniHR Domain – e.g., acme.omnihr.co
+        - Custom Report ID – the ID of the report you created in the previous step
+    </Step>
+
+    <Step title="Authorize the Integration">
+        Click "Authorize" to complete the setup
+    </Step>
+
+    <Step title="Monitor Synchronization">
+        ShiftControl will begin synchronizing with OmniHR automatically
+    </Step>
+</Steps>
+
+## Benefits
+
+- **Hands-Off User Management**: Eliminate manual user creation and management tasks
+- **Smoother Onboarding**: New employees have access to necessary systems before their start date
+- **Tighter Security**: Proper deprovisioning when employees leave
+- **Data Accuracy**: Ensure consistent user information across all systems

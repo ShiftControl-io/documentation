@@ -84,6 +84,17 @@ const sidebars: SidebarsConfig = {
                     items: [
                         'using-shiftcontrol/Integrations/Integration-management',
                         'using-shiftcontrol/Integrations/Managing-integration-authorization',
+                        {
+                            type: 'category',
+                            label: 'Integration List',
+                            items: [
+                                'using-shiftcontrol/Integrations/details/BambooHR-integration',
+                                'using-shiftcontrol/Integrations/details/Box-integration',
+                                'using-shiftcontrol/Integrations/details/Google-Workspace-integration',
+                                'using-shiftcontrol/Integrations/details/OmniHR-integration',
+                                'using-shiftcontrol/Integrations/details/Slack-integration',
+                            ],
+                        },
                     ],
                 },
                 {

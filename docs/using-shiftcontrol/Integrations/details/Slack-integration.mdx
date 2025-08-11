@@ -1,0 +1,62 @@
+---
+title: 'Slack'
+description: 'Connect ShiftControl to your Slack workspace to verify user information and manage accounts.'
+icon: 'slack'
+---
+
+import { Steps, Step } from "@site/src/components/Steps";
+
+<p style={{fontSize: "large"}}>Connect ShiftControl to your Slack workspace to verify user information and manage accounts.</p>
+
+## Overview
+
+The Slack integration allows ShiftControl to connect to your Slack workspace, providing visibility into your Slack users and helping you verify that your ShiftControl user data matches your actual Slack environment.
+
+## Why It Matters
+
+- **User Verification**: Confirm that the number of assigned Slack users matches what's in ShiftControl
+- **Metadata Collection**: Identify workspace owners and administrators
+- **License Management**: Ensure you're only paying for licenses you actually need
+- **Security Oversight**: Maintain visibility of who has elevated privileges in your Slack workspace
+
+## Key Features
+
+- **User Information Retrieval**: Pull comprehensive user information from your Slack workspace
+- **Admin Identification**: Easily identify which users have owner or admin privileges
+- **Data Comparison**: Compare Slack user data with ShiftControl records to ensure consistency
+- **Insights Dashboard**: View important Slack environment data directly in ShiftControl
+
+## How It Works
+
+ShiftControl connects to your Slack workspace using secure OAuth authentication. Once connected, it periodically retrieves user information and metadata, which is then processed and displayed in the ShiftControl platform.
+
+## Getting Started
+
+<Steps>
+    <Step title="Navigate to Integrations">
+        Go to the Integrations section in your ShiftControl dashboard
+    </Step>
+
+    <Step title="Find Slack Integration">
+        Locate the Slack integration in the list of available integrations
+    </Step>
+
+    <Step title="Add Authorization">
+        Click on "Add Authorization" to begin the connection process
+    </Step>
+
+    <Step title="Authorize ShiftControl">
+        You'll be redirected to Slack to authorize ShiftControl's access to your workspace
+    </Step>
+
+    <Step title="Complete Setup">
+        After authorization, you'll be returned to ShiftControl where the integration will be active
+    </Step>
+</Steps>
+
+## Benefits
+
+- **Accurate User Management**: Ensure your ShiftControl data accurately reflects your Slack environment
+- **Enhanced Security**: Quickly identify users with elevated privileges
+- **Cost Optimization**: Identify unused accounts to optimize license usage
+- **Simplified Administration**: Manage Slack users through a unified interface

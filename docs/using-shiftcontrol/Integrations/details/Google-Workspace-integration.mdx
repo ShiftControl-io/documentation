@@ -1,0 +1,73 @@
+---
+title: 'Google Workspace'
+description: 'Connect Google Workspace to ShiftControl for OAuth audit logs and App Discovery insights.'
+icon: 'google'
+---
+import { Steps, Step } from "@site/src/components/Steps";
+
+<p style={{fontSize: "large"}}>Connect Google Workspace to ShiftControl for OAuth audit logs and App Discovery insights.</p>
+
+## Overview
+
+The Google Workspace integration allows you to connect your Google Workspace account to ShiftControl, enabling the collection of OAuth audit logs. This integration helps you understand shadow IT within your organization and provides valuable insights through the App Discovery section of ShiftControl.
+
+## Why It Matters
+
+- **Shadow IT Visibility**: Gain insights into unauthorized applications being used within your organization
+- **Risk Assessment**: Identify potential security risks from unauthorized app usage
+- **App Discovery**: See which applications your users are connecting to Google Workspace
+- **Enhanced Security**: Make informed decisions about which applications to approve or block
+- **Compliance Monitoring**: Track OAuth authorizations to ensure adherence to company policies
+
+## Key Features
+
+- **OAuth Audit Logs**: Collect comprehensive logs of OAuth authorizations within your Google Workspace
+- **App Discovery Dashboard**: View and analyze all applications connected to your Google Workspace
+- **Risk Classification**: Identify high-risk applications that may pose security threats
+- **Usage Metrics**: Understand which applications are most commonly used in your organization
+- **Detailed Reporting**: Access comprehensive reports on OAuth authorizations and app usage
+
+## How It Works
+
+ShiftControl connects to Google Workspace using OAuth authentication, establishing a secure connection that allows for the collection of audit logs. Once connected, ShiftControl retrieves information about OAuth authorizations and third-party applications accessing your Google Workspace.
+
+The integration regularly collects this data to ensure that your App Discovery dashboard in ShiftControl accurately reflects the current state of application usage within your organization.
+
+## Getting Started
+
+<Steps>
+    <Step title="Navigate to Integrations">
+        Go to the Integrations section in your ShiftControl dashboard
+    </Step>
+
+    <Step title="Find Google Workspace Integration">
+        Locate the Google Workspace integration in the list of available integrations
+    </Step>
+
+    <Step title="Add Authorization">
+        Click on "Add Authorization" to begin the OAuth connection process
+    </Step>
+
+    <Step title="Authorize ShiftControl">
+        You'll be redirected to Google's authorization page where you'll need to:
+        - Sign in with a Google Workspace administrator account
+        - Review the requested permissions
+        - Grant access to ShiftControl
+    </Step>
+
+    <Step title="Complete Setup">
+        After authorization, you'll be redirected back to ShiftControl where you'll see a confirmation message
+    </Step>
+
+    <Step title="Access App Discovery">
+        Once the integration is set up, you can access the App Discovery section in ShiftControl to view insights about OAuth applications in your organization
+    </Step>
+</Steps>
+
+## Benefits
+
+- **Shadow IT Detection**: Discover unauthorized applications being used within your organization
+- **Risk Mitigation**: Identify and address potential security risks from unauthorized app usage
+- **Improved Visibility**: Gain insights into which applications have access to your Google Workspace data
+- **Enhanced Security Posture**: Make informed decisions about which applications to approve or block
+- **Compliance Support**: Ensure adherence to company policies regarding third-party application usage
