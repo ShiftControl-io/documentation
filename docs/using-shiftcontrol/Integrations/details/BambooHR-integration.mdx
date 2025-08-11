@@ -1,0 +1,117 @@
+---
+title: 'BambooHR'
+description: 'Connect BambooHR to ShiftControl and make HR data your single source of truth for user management.'
+icon: 'users'
+---
+import { Steps, Step } from "@site/src/components/Steps";
+
+<p style={{fontSize: "large"}}>Connect BambooHR to ShiftControl and make HR data your single source of truth for user management.</p>
+
+## Overview
+
+The BambooHR integration allows you to connect your BambooHR system to ShiftControl, enabling HR data to become the single source of truth for user management across your organization. This integration streamlines user provisioning, updates, and lifecycle management based on your HR records.
+
+## Why It Matters
+
+- **HR-Driven Identity**: Your HR data becomes the single source of truth for identity management
+- **Clean User Records**: Maintains accurate user information during organizational changes
+- **License Optimization**: Saves on JumpCloud licenses by creating users only when needed
+- **Automated Lifecycle Management**: Automatically handles user provisioning, updates, and deprovisioning
+
+## Advantages Over JumpCloud's Built-in Connector
+
+Our BambooHR integration offers several improvements over JumpCloud's native connector:
+
+- **Full Field Synchronization**: Manager and other key attributes now flow through completely
+- **Scoped Credentials**: Supply ShiftControl with a limited BambooHR API key (no need to share JumpCloud super-admin API key with BambooHR)
+- **Cost Savings**: Unlike JumpCloud's native integration that creates staged users before their start date (costing you license fees), ShiftControl creates users only when actually needed
+
+## How It Works
+
+1. **Regular Synchronization**: ShiftControl polls BambooHR hourly and compares records
+2. **Comprehensive Change Detection**: Automatically detects adds, updates, disables, and re-enables
+3. **Smart Pre-start Provisioning**: 5 days before a new hire's start date, we enable the account in silent mode so Gmail, Calendar, and Docs are ready without emailing the user
+
+## Creating a BambooHR API Key
+
+Before setting up the integration in ShiftControl, you need to create an API key in BambooHR:
+
+<Steps>
+    <Step title="Sign in to BambooHR">
+        Sign in to the BambooHR instance with administrator permissions
+    </Step>
+
+    <Step title="Navigate to API Keys">
+        On the Home page, click Account and select API Keys
+        
+        <img
+            src="/img/ShiftControl/Integrations/BambooHR/BambooHR-my-account.png"
+            alt="BambooHR Account Menu"
+            width="300"
+        />
+    </Step>
+
+    <Step title="Add New Key">
+        Click Add New Key
+        
+        <img
+            src="/img/ShiftControl/Integrations/BambooHR/BambooHR-add-key.png"
+            alt="BambooHR Add New Key"
+            width="300"
+        />
+    </Step>
+
+    <Step title="Name the API Key">
+       Enter `ShiftControl` as the name for the API key in the API Key Name field and click Generate Key
+        
+        <img
+            src="/img/ShiftControl/Integrations/BambooHR/BambooHR-name-key.png"
+            alt="BambooHR Name API Key"
+            width="500"
+        />
+    </Step>
+
+    <Step title="Copy the API Key">
+        Click COPY KEY to copy the key to the clipboard
+        
+        <img
+            src="/img/ShiftControl/Integrations/BambooHR/BambooHR-copy-key.png"
+            alt="BambooHR Copy API Key"
+            width="500"
+        />
+    </Step>
+
+    <Step title="Complete the Process">
+        Click Done to finish creating the API key
+    </Step>
+</Steps>
+
+## Getting Started
+
+<Steps>
+    <Step title="Add the BambooHR App">
+        Navigate to Integrations → BambooHR and select "Add Authorization"
+    </Step>
+
+    <Step title="Provide API Credentials">
+        - Paste your scoped BambooHR API key
+        - Enter your BambooHR domain
+    </Step>
+
+    <Step title="Authorize the Integration">
+        Click "Authorize" to complete the setup
+    </Step>
+
+    <Step title="Monitor Synchronization">
+        ShiftControl will begin synchronizing with BambooHR automatically
+    </Step>
+</Steps>
+
+## Benefits
+
+- **Cleaner User Data**: Maintain accurate and up-to-date user information
+- **Smoother Onboarding**: New employees have access to necessary systems before their start date
+- **Tighter Security**: Proper deprovisioning when employees leave
+- **Reduced Manual Work**: Eliminate the need for manual user management tasks
+
+For any questions or issues with the BambooHR integration, please contact our support team at [support@shiftcontrol.io](mailto:support@shiftcontrol.io).
