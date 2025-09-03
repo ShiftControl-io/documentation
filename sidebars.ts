@@ -91,6 +91,7 @@ const sidebars: SidebarsConfig = {
                                 'using-shiftcontrol/Integrations/guides/BambooHR',
                                 'using-shiftcontrol/Integrations/guides/Box',
                                 'using-shiftcontrol/Integrations/guides/Google-Workspace',
+                                'using-shiftcontrol/Integrations/guides/JumpCloud',
                                 'using-shiftcontrol/Integrations/guides/OmniHR',
                                 'using-shiftcontrol/Integrations/guides/Slack',
                             ],

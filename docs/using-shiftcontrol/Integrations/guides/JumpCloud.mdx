@@ -1,0 +1,95 @@
+---
+title: 'JumpCloud'
+description: 'Set up a dedicated JumpCloud service admin, generate an API key, and locate your Organization ID for ShiftControl integration.'
+icon: 'shield'
+---
+import { Steps, Step } from "@site/src/components/Steps";
+
+<p style={{fontSize: "large"}}>Create a dedicated JumpCloud service admin, generate an API key, and find your Organization ID to complete the ShiftControl integration.</p>
+
+## Overview
+
+During onboarding we'll provide you with a unique link to connect ShiftControl to your JumpCloud instance. This link takes you to a secure form where you'll enter the API key and Organization ID you create in the steps below.
+
+The JumpCloud guide walks you through creating a dedicated service admin, generating an API key, and locating your Organization ID. Using a service account improves security, reduces operational risk, and makes it clear which actions are automated by ShiftControl in JumpCloud Directory Insights.
+
+## Why Use a Service Account
+
+- Separation of duties and clearer audit trail (actions show the service account as the actor in Directory Insights)
+- Avoids outages when a personal admin leaves and their account is disabled or deleted
+- No additional JumpCloud license cost for creating an admin account
+- Simplifies security controls and credential rotation
+
+Recommended pattern:
+- Create a Google Group named "ShiftControl Service" with an address like `shiftcontrol-service@yourdomain.com`
+- Add yourself (and relevant admins) to the group
+- Use that group email to create the JumpCloud service admin and receive password notifications
+
+## 1) Create a JumpCloud Service Admin
+
+Note: Only Admins with the "Administrator with Billing" role can create new admin accounts.
+
+<Steps>
+    <Step title="Open JumpCloud Administrators">
+        Log in to the JumpCloud Admin Portal. In the top-right corner, click your initials, then click <b>Administrators</b> to open Settings → Administrators.
+    </Step>
+
+    <Step title="Add a New Admin">
+        Click <b>+ Admin</b> and select <b>As New</b>.
+    </Step>
+
+    <Step title="Enter Account Details">
+        - First Name:  <code>ShiftControl</code>
+        - Last Name:  <code>Service</code>
+        - Administrator Email Address: (use your service address, e.g., <code>shiftcontrol-service@yourdomain.com</code>)
+    </Step>
+
+    <Step title="Assign Role and API Access">
+        - Under Permissions, choose an <code>Administrator with Billing</code> as the role.
+        - Select the checkbox <b>Enable API access</b>, enabling it.
+    </Step>
+
+    <Step title="Create and Activate">
+        Click <b>Create</b>. JumpCloud sends an email to the specified address with a link for setting the initial password. Use that link to set the password and activate the account, then you can sign into the Admin Portal with the new service admin.
+    </Step>
+</Steps>
+
+## 2) Generate an API Key
+
+To generate an API key in JumpCloud as an administrator:
+
+<Steps>
+    <Step title="Sign in as the Service Admin">
+        Log in to the JumpCloud Admin Portal using the new service admin account.
+    </Step>
+
+    <Step title="Open My API Key">
+        Click your initials/profile icon in the top-right corner and select <b>My API Key</b>.
+    </Step>
+
+    <Step title="Generate New Key">
+        In the "My API Key" pop-up, click <b>Generate New API Key</b>. Set the key to never expire.
+    </Step>
+
+    <Step title="Use It Immediately">
+        Copy the key and paste it directly into the ShiftControl onboarding form. Do not store it elsewhere; you can always revoke and generate a new one later if needed.
+    </Step>
+</Steps>
+
+## 3) Find Your Organization ID
+
+You will also need your JumpCloud Organization ID for the onboarding form.
+
+<Steps>
+    <Step title="Open Settings">
+        Log into the JumpCloud Admin Portal, find <b>Settings</b> in the left side menu toward the bottom and click it.
+    </Step>
+
+    <Step title="Organization Profile">
+        In Settings, you'll be in the <b>Organization Profile</b> (or Account Overview) page by default.
+    </Step>
+
+    <Step title="Copy the Organization ID">
+        Locate the Organization ID. Click the eye icon to reveal it and the double-page icon to copy it to your clipboard. Paste it into the ShiftControl onboarding form.
+    </Step>
+</Steps>
