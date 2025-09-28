@@ -1,0 +1,152 @@
+---
+title: 'Deel'
+description: 'Connect Deel to ShiftControl and make HR data your single source of truth for user management.'
+icon: 'users-gear'
+---
+
+import { Steps, Step } from "@site/src/components/Steps";
+import Admonition from '@theme/Admonition';
+
+<p style={{fontSize: "large"}}>Connect Deel to ShiftControl and make HR data your single source of truth for user management.</p>
+
+## Overview
+
+The Deel integration allows you to connect Deel as your HR system of record to ShiftControl, enabling HR data to become the single source of truth for user management across your organization. By syncing directly with Deel, ShiftControl automates onboarding, role changes, and offboarding without manual intervention.
+
+## Why It Matters
+
+- **Single Source of Truth**: Consolidate HR data from Deel into ShiftControl for consistent identity management
+- **Automated Lifecycle Management**: Handle user provisioning, updates, and deprovisioning automatically
+- **Pre-Start Provisioning**: Enable accounts before the employee’s start date so they’re ready to work on day one
+- **Streamlined Operations**: Reduce manual data entry and human error
+
+## Key Features
+
+- **Field Synchronization**: Core employee attributes (name, email, department, manager, etc.) flow into ShiftControl
+- **On-Demand Sync**: Manually trigger a sync anytime from the actions menu
+- **Automatic Status Management**: Keep your roster accurate with automatic disable/re-enable based on employment status
+
+## How It Works
+
+ShiftControl polls Deel hourly for new hires, role changes, and departures. The integration processes these changes automatically, ensuring user data stays up-to-date across connected systems.
+
+## Getting Started
+
+### Step 1: Generate a Deel API Token
+
+You’ll first need to generate an API token inside Deel to authorize the integration.
+
+<Steps>
+    <Step title="Navigate to Developer Center">
+        Go to **Developer Center → Access Tokens** inside Deel.
+
+        <img
+            src="/img/ShiftControl/Integrations/Deel/Deel-developer-center.png"
+            alt="Navigate to Deel Developer Center"
+        />
+    </Step>
+
+    <Step title="Generate a token">
+        Click **Generate new token**.
+
+        <img
+            src="/img/ShiftControl/Integrations/Deel/Deel-generate-token.png"
+            alt="Generate Deel Token"
+        />
+    </Step>
+
+    <Step title="Create a new token">
+        Give it a label (e.g. `ShiftControl`).
+        Choose **Organization token**.
+
+        <img
+            src="/img/ShiftControl/Integrations/Deel/Deel-name-token.png"
+            alt="Name Deel Token"
+        />
+    </Step>
+
+    <Step title="Select scopes">
+        Enable the following scopes:
+        - `people:read` – read worker information such as profile, time-off, and expenses
+
+        <Admonition type="note">
+            ShiftControl doesn't require more access than the `people:read` scope.
+        </Admonition>
+
+        <img
+            src="/img/ShiftControl/Integrations/Deel/Deel-token-permissions.png"
+            alt="Select Deel Scopes"
+        />
+
+    </Step>
+
+    <Step title="Configure sensitive data">
+        We recommend enabling:
+        - **Hide Sensitive Employment Information** (salary/compensation)
+        - Leave **Hide PII** disabled, otherwise the integration will not function.
+
+        <Admonition type="note">
+            ShiftControl only needs access to non-sensitive employee data to function properly. Deel doesn't have more granular PII control. Our integrations run automatically, which means we do not review the data provided to us. If you have concerns about data privacy, please reach out to us at <a href="mailto:privacy@shiftcontrol.io">privacy@shiftcontrol.io</a>
+        </Admonition>
+
+        <img
+            src="/img/ShiftControl/Integrations/Deel/Deel-token-sensitive.png"
+            alt="Configure sensitive data"
+        />
+    </Step>
+
+    <Step title="Review the token configuration">
+        Review your settings, then generate the token.
+
+        <img
+            src="/img/ShiftControl/Integrations/Deel/Deel-token-confirm.png"
+            alt="Finalize Deel Token"
+        />
+    </Step>
+
+    <Step title="Finalize and copy the token">
+        Copy the token immediately — Deel only shows it once!
+
+        <img
+            src="/img/ShiftControl/Integrations/Deel/Deel-finalize-token.png"
+            alt="Copy Deel Token"
+        />
+    </Step>
+</Steps>
+
+### Step 2: Add Deel in ShiftControl
+
+Now that you have your API token:
+
+<Steps>
+    <Step title="Add the Deel App">
+        Make sure you have added Deel as an application in ShiftControl. Navigate to **Integrations**.
+    </Step>
+
+    <Step title="Enable the Deel integration">
+        If the Deel Integration isn't yet enabled, click **Enable** in the context menu for Deel.
+    </Step>
+
+    <Step title="Add authorization">
+        click **Add Authorization** in the context menu for Deel.
+    </Step>
+
+    <Step title="Provide Credentials">
+        Enter the API token you generated in Deel.
+    </Step>
+
+    <Step title="Authorize the Integration">
+        Click **Authorize** to complete setup.
+    </Step>
+
+    <Step title="Monitor Synchronization">
+        ShiftControl will begin synchronizing automatically. You can trigger an on-demand sync anytime.
+    </Step>
+</Steps>
+
+## Benefits
+
+- **Hands-Off User Management**: Eliminate manual HR-driven user creation and updates
+- **Smoother Onboarding**: Employees have access to required apps from their first day
+- **Tighter Security**: Automatic deprovisioning when employees leave
+- **Data Accuracy**: Ensure consistent identity data across all connected systems

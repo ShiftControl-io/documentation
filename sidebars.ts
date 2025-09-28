@@ -90,6 +90,7 @@ const sidebars: SidebarsConfig = {
                             items: [
                                 'using-shiftcontrol/Integrations/guides/BambooHR',
                                 'using-shiftcontrol/Integrations/guides/Box',
+                                'using-shiftcontrol/Integrations/guides/Deel',
                                 'using-shiftcontrol/Integrations/guides/Google-Workspace',
                                 'using-shiftcontrol/Integrations/guides/JumpCloud',
                                 'using-shiftcontrol/Integrations/guides/OmniHR',
