@@ -14,7 +14,11 @@ const config: Config = {
     baseUrl: '/',
 
     onBrokenLinks: 'throw',
-    onBrokenMarkdownLinks: 'warn',
+    markdown: {
+        hooks: {
+            onBrokenMarkdownLinks: 'warn',
+        }
+    },
 
     // Even if you don't use internationalization, you can use this field to set
     // useful metadata like html lang. For example, if your site is Chinese, you
@@ -131,7 +135,7 @@ const config: Config = {
             darkTheme: prismThemes.dracula,
         },
         zoom: {
-            selector: '.markdown > img',
+            selector: '.markdown :not(em) > img, .steps-list img',
             background: {
                 light: 'rgb(255, 255, 255)',
                 dark: 'rgb(50, 50, 50)'

@@ -130,6 +130,14 @@ const sidebars: SidebarsConfig = {
             label: 'Partnerships',
             items: [
                 'partnerships/Blackpanda-ir1',
+                {
+                    type: 'category',
+                    label: 'Google Workspace Reseller',
+                    items: [
+                        'partnerships/Google-Workspace-Reseller/Google-Workspace-billing-transfer',
+                        'partnerships/Google-Workspace-Reseller/Managing-Google-Workspace-licenses'
+                    ],
+                },
             ],
         },
     ],
