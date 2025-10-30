@@ -1,0 +1,76 @@
+---
+title: 'User Roles'
+description: 'Manage administrative access and permissions across your organization using Role-Based Access Control (RBAC).'
+icon: 'shield'
+---
+
+import Admonition from '@theme/Admonition';
+
+<p style={{fontSize: "large"}}>Define who can manage settings, users, and data through detailed role-based permissions.</p>
+
+## Overview
+
+The **User Roles** page lets administrators control who has access to different parts of ShiftControl.
+The system uses **Role-Based Access Control (RBAC)** to assign permissions to users based on their responsibilities — ensuring that only authorized users can manage sensitive settings.
+
+<img
+    src="/img/ShiftControl/Settings/Settings-user-roles.png"
+    alt="User roles overview"
+    witdh="800"
+/>
+
+Roles can be tailored to provide varying levels of control, such as:
+
+| Role | Description |
+| ---- | ------------ |
+| **Full Admin** | Complete access to all settings, integrations, and data. |
+| **Read-only Admin** | Can view all configuration and reports, but cannot make changes. |
+
+<Admonition type="tip">
+    Use role separation to improve security — not everyone who manages users needs access to billing, API keys, or integrations.
+</Admonition>
+
+## Viewing and Searching Roles
+
+The User Roles list displays all users who currently have administrative access.
+Each entry includes:
+- **User** — The name and email of the admin.
+- **Roles** — The specific roles assigned to that user.
+
+You can use the search bar to quickly locate users or filter by assigned role.
+
+<img
+    src="/img/ShiftControl/Settings/Settings-user-roles.png"
+    alt="User roles list"
+/>
+
+## Adding or Editing an Admin User
+
+To create or update an admin’s assigned roles:
+
+1. Click **Add Admin User** (or the **⋮ menu → Edit**) to open the role editor.
+2. Select the **Admin User** from your organization’s directory.
+3. Under **Assigned Roles**, choose one or more roles from the dropdown.
+4. Click **Save** to confirm.
+
+<img
+    src="/img/ShiftControl/Settings/Settings-create-edit-user-role.png"
+    alt="Create or edit user role"
+/>
+
+The flow for **creating** and **editing** roles is identical — you can modify role assignments at any time.
+
+<Admonition type="note">
+    All changes take effect immediately. Users may need to refresh their browser for access changes to apply.
+</Admonition>
+
+## Removing an Admin User
+
+To revoke administrative access:
+1. Open the **⋮ menu** next to the user’s name.
+2. Select **Remove Admin User**.
+3. Confirm the action — the user will immediately lose admin privileges.
+
+<Admonition type="tip">
+    Before removing an admin, make sure another user has the same role if the responsibilities need to be maintained.
+</Admonition>

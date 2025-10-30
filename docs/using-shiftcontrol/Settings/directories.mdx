@@ -1,0 +1,64 @@
+---
+title: 'Directories'
+description: 'Manage HRIS and identity provider connections such as Google Workspace, JumpCloud, and BambooHR.'
+icon: 'grid'
+---
+
+import Admonition from '@theme/Admonition';
+
+<p style={{fontSize: "large"}}>Connect and manage your organization’s HRIS and identity providers in one place.</p>
+
+## Overview
+
+The **Directories** page lets you connect to your organization’s **HRIS** (Human Resources Information Systems) and **Identity Providers (IdPs)**.
+These integrations sync users, departments, locations, and other key organizational data into ShiftControl, helping automate onboarding, offboarding, and access management.
+
+<img
+    src="/img/ShiftControl/Settings/Settings-directories.png"
+    alt="Directories list view"
+    width="800"
+/>
+
+Each directory shows:
+- **Connector** – The service name (e.g., Google, JumpCloud, BambooHR).
+- **App Name** – The corresponding app integration.
+- **Type** – HRIS or Identity Provider.
+- **Status** – Whether the connector is enabled or disabled.
+- **Health** – Indicates whether data synchronization is running properly.
+- **Auth Status** – Shows whether authentication is required or has been provided.
+- **Primary** – Identifies which Identity Provider is the organization’s main source of truth.
+
+## Directory Types
+
+### HRIS
+Integrations such as **BambooHR**, **Deel**, or **HiBob** automatically sync employee details, departments, and locations.
+They’re the backbone for keeping user records up to date across systems.
+
+See our [Integration Management](/using-shiftcontrol/Integrations/Integration-management) page for more details.
+
+### Identity Providers
+Integrations like **Google Workspace** and **JumpCloud** manage authentication and account lifecycle events.
+They provide secure user identity management and are often used as the organization’s **primary directory**.
+
+<Admonition type="tip">
+    For most organizations, it’s best to connect both an HRIS and an Identity Provider — the HRIS manages employee records, while the IdP manages login and access.
+</Admonition>
+
+## Enabling a Directory
+
+To enable a directory connector:
+1. Click the **⋮ menu** beside the directory you want to enable.
+2. Choose **Authenticate** to connect your account.
+3. Once authenticated, the **Status** will update to **Enabled** and the **Health** indicator will show **Healthy** when sync is successful.
+
+<Admonition type="note">
+    Most connectors require admin-level credentials to authorize the integration.
+    Once connected, ShiftControl will automatically start syncing directory data every hour.
+</Admonition>
+
+## Managing Connected Directories
+
+After setup, each directory can be:
+- **Disabled** – Pauses syncing but keeps previous data cached.
+- **Reauthenticated** – If your authorization token expires.
+- **Set as Primary** – Determines which directory ShiftControl uses for identity data and user provisioning.

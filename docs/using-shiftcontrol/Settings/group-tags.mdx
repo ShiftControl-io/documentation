@@ -1,0 +1,90 @@
+---
+title: 'Group Tags'
+description: 'Create, edit, and organize group tags used to categorize groups across your organization.'
+icon: 'tags'
+---
+
+import Admonition from '@theme/Admonition';
+
+<p style={{fontSize: "large"}}>Define and manage the tags your organization uses to categorize groups consistently.</p>
+
+## Overview
+
+The **Group Tags** page under **Org Settings** allows administrators to create, edit, and organize the tag categories available to all groups in the organization.
+Group tags help classify and filter groups across the platform — making it easier to organize large sets of user groups by purpose, department, or access type.
+
+<img
+    src="/img/ShiftControl/Settings/Settings-group-tags.png"
+    alt="Group tags overview list"
+/>
+
+## Purpose of Group Tags
+
+Group tags serve as reusable labels to categorize groups within your organization.
+They make it easier to organize, search, and automate group-related workflows.
+Administrators often use tags to represent **team function**, **access level**, or **organizational purpose**.
+
+Here are a few common examples:
+
+| Tag | Description |
+| --- | --- |
+| **Alerts** | Used for system or vendor alerts and notifications. Example: groups receiving monitoring or status alerts. |
+| **Catch-all** | Represents addresses like `hello@`, `contact@`, or `legal@` — mailboxes that aggregate general inbound messages. |
+| **Department** | Defines official departments or teams, e.g., *Engineering*, *Finance*, *Marketing*. |
+| **Role Access** | Used for groups mapped to specific permissions or roles such as *AWS Admin Access* or *Finance Data Viewers*. |
+| **Service Account** | Tied to automated accounts in SaaS or infrastructure systems (e.g., bots or connectors). |
+| **Support** | Internal help addresses such as `it-support@` or `hr@` for handling employee requests. |
+
+These tags appear in **Group Management**, where they can be applied to individual groups to improve visibility and filtering.
+
+<Admonition type="tip">
+    Use clear, consistent tag names across your organization to make automation and reporting easier.
+</Admonition>
+
+## Viewing and Searching Tags
+
+Use the search bar to locate tags by **name** or **description**.
+Each tag in the list displays:
+
+- **Color** — The visual identifier for quick scanning.
+- **Group Tag Name** — The tag label visible when assigning tags to groups.
+- **Description** — A short explanation of the tag’s purpose.
+
+You can sort or download the tag list using the toolbar controls.
+
+## Creating a Group Tag
+
+To add a new tag:
+
+1. Click **Add Group Tag** at the top right of the screen.
+2. Fill out the form fields:
+- **Tag Name** – The name of the tag (e.g., “Service Account”).
+- **Tag Color** – Choose a color for easy visual identification.
+- **Description** – A short note describing the tag’s purpose.
+3. Click **Create Tag** to save.
+
+<img
+    src="/img/ShiftControl/Settings/Settings-create-a-group-tag.png"
+    alt="Create new group tag modal"
+    width="600"
+/>
+
+<Admonition type="tip">
+    Choose distinct colors to make tags easy to scan when managing large group lists.
+</Admonition>
+
+## Editing or Deleting Tags
+
+Each tag includes a **⋮ menu** with options to **Edit** or **Delete**.
+
+- **Edit** — Update the tag’s name, color, or description.
+You can use the color picker or enter a custom HEX code as an example.  All fields are editable by double-clicking on the field.
+
+<img
+    src="/img/ShiftControl/Settings/settings-edit-group-tags-color.png"
+    alt="Edit group tag color picker"
+    width="300"
+/>
+
+- **Delete** — Permanently remove a tag from the organization.
+Once deleted, any groups using that tag will no longer display it.

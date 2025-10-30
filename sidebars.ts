@@ -46,7 +46,14 @@ const sidebars: SidebarsConfig = {
             collapsed: false,
             label: 'Using ShiftControl',
             items: [
-                'using-shiftcontrol/shiftcontrol-dashboard',
+                {
+                    type: 'category',
+                    label: 'Dashboards',
+                    items: [
+                        'using-shiftcontrol/Dashboards/app-permissions',
+                        'using-shiftcontrol/Dashboards/app-spend',
+                    ],
+                },
                 'using-shiftcontrol/using-the-command-bar',
                 'using-shiftcontrol/task-management',
                 {
@@ -88,12 +95,20 @@ const sidebars: SidebarsConfig = {
                             type: 'category',
                             label: 'Integration Guides',
                             items: [
-                                'using-shiftcontrol/Integrations/guides/BambooHR',
-                                'using-shiftcontrol/Integrations/guides/Box',
-                                'using-shiftcontrol/Integrations/guides/Deel',
+                                {
+                                    type: 'category',
+                                    label: 'HRIS',
+                                    items: [
+                                        'using-shiftcontrol/Integrations/guides/BambooHR',
+                                        'using-shiftcontrol/Integrations/guides/Box',
+                                        'using-shiftcontrol/Integrations/guides/Deel',
+                                        'using-shiftcontrol/Integrations/guides/DreamTeam',
+                                        'using-shiftcontrol/Integrations/guides/HiBob',
+                                        'using-shiftcontrol/Integrations/guides/OmniHR',
+                                    ],
+                                },
                                 'using-shiftcontrol/Integrations/guides/Google-Workspace',
                                 'using-shiftcontrol/Integrations/guides/JumpCloud',
-                                'using-shiftcontrol/Integrations/guides/OmniHR',
                                 'using-shiftcontrol/Integrations/guides/Slack',
                             ],
                         },
@@ -104,6 +119,49 @@ const sidebars: SidebarsConfig = {
                     label: 'Reports',
                     items: [
                         'using-shiftcontrol/Reports/App-assignment-reports',
+                    ],
+                },
+                {
+                    type: 'category',
+                    label: 'Settings',
+                    items: [
+                        'using-shiftcontrol/Settings/settings-overview',
+                        {
+                            type: 'category',
+                            label: 'Personal',
+                            items: [
+                                'using-shiftcontrol/Settings/account-settings',
+                                'using-shiftcontrol/Settings/appearance',
+                                'using-shiftcontrol/Settings/user-api-keys',
+                            ],
+                        },
+                        {
+                            type: 'category',
+                            label: 'Organization',
+                            items: [
+                                'using-shiftcontrol/Settings/org-details',
+                                'using-shiftcontrol/Settings/group-tags',
+                                'using-shiftcontrol/Settings/user-roles',
+                                'using-shiftcontrol/Settings/org-api-keys',
+                                'using-shiftcontrol/Settings/departments',
+                                'using-shiftcontrol/Settings/locations',
+                            ],
+                        },
+                        {
+                            type: 'category',
+                            label: 'Connectors',
+                            items: [
+                                'using-shiftcontrol/Settings/directories',
+                                'using-shiftcontrol/Settings/app-connectors',
+                            ],
+                        },
+                        {
+                            type: 'category',
+                            label: 'JumpCloud',
+                            items: [
+                                'using-shiftcontrol/Settings/jumpcloud-admins',
+                            ],
+                        },
                     ],
                 },
                 {

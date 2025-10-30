@@ -1,0 +1,40 @@
+---
+title: 'Account Settings'
+description: 'View your personal profile information and manage security methods.'
+icon: 'user'
+---
+
+import Admonition from '@theme/Admonition';
+
+<p style={{fontSize: "large"}}>View your personal profile information and security details.</p>
+
+## Overview
+
+The **Account Settings** page displays your personal profile information and security methods.
+This area provides a quick view of your identity within ShiftControl — including your name, email, title, and department — as well as access to your authentication and security settings.
+
+<img
+    src="/img/ShiftControl/Settings/Settings-account-settings.png"
+    alt="Account settings view"
+/>
+
+## Profile Information
+
+The **Profile** tab includes your basic user details:
+- **First name** and **Last name**
+- **Primary email**
+- **Title**
+- **Department**
+
+This information is sourced from your directory or HR system and is currently **view-only**.
+If your organization’s directory integration (such as Google Workspace or JumpCloud) is active, these values will update automatically based on your synced profile.
+
+<Admonition type="note">
+    Profile details cannot be edited directly within ShiftControl.
+    To make updates, modify your information in your connected directory or HR system.
+</Admonition>
+
+## Security Methods
+
+The **Security Methods** tab shows authentication-related settings, such as your login provider or MFA configuration (if applicable).
+You can remove any existing authentication methods from this page, but adding new methods must be done through the JumpCloud console at https://console.jumpcloud.com.

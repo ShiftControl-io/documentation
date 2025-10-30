@@ -1,11 +1,11 @@
 ---
 title: 'Group Management'
-description: 'Overview of managing groups and using quick view.'
+description: 'Overview of managing groups, using quick view, and working with group tags.'
 icon: 'users'
 ---
+import Admonition from '@theme/Admonition';
 
-<p style={{fontSize: "large"}}>Overview of managing groups and using quick view.</p>
-
+<p style={{fontSize: "large"}}>Overview of managing groups, using quick view, and working with group tags.</p>
 
 ## Overview
 
@@ -19,19 +19,19 @@ The **Group Management** page allows administrators to manage user groups effici
 ## View and Discover Groups
 
 - **Group List**: A table displaying all groups within the organization, including their names, descriptions, and last update dates.
-- **Search**: Use the search bar to search for specific groups by name or description.
+- **Search**: Use the search bar to find specific groups by name or description.
 
 ## Adding a Group
 
-Clicking the [Add Group](/using-shiftcontrol/Groups/Adding-a-group) button located at the top of the screen to create a new group. This opens a form where you can input the group's name, description, and other settings.
+Click the [Add Group](/using-shiftcontrol/Groups/Adding-a-group) button at the top of the screen to create a new group. This opens a form where you can input the group's name, description, and any optional settings.
 
 ## Editing a Group
 
-Clicking the [Edit](/using-shiftcontrol/Groups/Editing-a-group) button next to any group in the list will take you to the group details page, where you can modify its information. We will cover the specific details in a separate section.
+Clicking the [Edit](/using-shiftcontrol/Groups/Editing-a-group) button next to any group in the list will take you to the group details page, where you can modify its information. We’ll cover specific options such as **group tags** below.
 
 ## Group Actions
 
-You can take the following actions on individual groups by using the dropdown menu next to each group:
+You can take the following actions on individual groups using the dropdown menu next to each group:
 
 - **Delete**: Permanently delete the group.
 
@@ -46,4 +46,48 @@ This makes it easier to assess group composition and user access at a glance.
 <img
     src="/img/ShiftControl/Groups/Group-membership-quick-view.png"
     alt="Quick view of group membership"
+    width="350"
 />
+
+## Group Tags
+
+Group Tags are a flexible way to categorize and organize your groups across the organization. Tags allow administrators to quickly filter, search, and identify groups based on their function, department, or purpose — without needing to rely solely on group names.
+
+### Purpose of Group Tags
+
+Group Tags make it easier to:
+- Filter and segment groups for reporting or automation.
+- Identify related groups that share common characteristics (e.g., “Catch-all”, “Service accounts”, “Departments”).
+- Understand the purpose of a group at a glance.
+- Simplify access reviews or audits by grouping similar entities.
+
+For example, you might tag groups as:
+- **Department-based**: `Marketing`, `Engineering`, `Finance`
+- **Location-based**: `Singapore`, `Hong Kong`, `United States`
+- **Shared Accounts**: Emails used to share access to one account in a SaaS service.
+
+### Viewing and Filtering by Tags
+
+On the Group Management page:
+- Tags are displayed directly under each group name or within a “Group tags” column in the table.
+- You can use the **Filter by Tag** option or click on the group tag in the sidebar to quickly narrow the list to groups with specific tags.
+
+
+### Editing Group Tags
+
+You can edit group tags in several ways:
+1. When editing a group, the group tag field is configurable in the General tab.
+2. You can find the `Change tag` option in the group's context menu on the Group Management page.
+3. You can bulk change multiple tags using the `Change tag` option in the bulk actions menu after selecting multiple groups.
+
+<img
+    src="/img/ShiftControl/Groups/Group-Change-tag.png"
+    alt="Edit a group tag"
+    width="500"
+/>
+
+All updates are reflected immediately on the Group Management list and in any filters using tags.
+
+<Admonition type="information">
+    The available tag set (what tags can exist across your organization) is managed from the **Organization Settings** section. Editing or deleting tag definitions will be covered there.
+</Admonition>
