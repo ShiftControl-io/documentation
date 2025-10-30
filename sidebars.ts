@@ -24,6 +24,17 @@ const standardLinks: SidebarConfig = [
         label: 'Release Notes',
         href: 'https://journey.shiftcontrol.io',
     },
+    {
+        type: 'link',
+        label: 'Log in to ShiftControl',
+        href: 'https://app.shiftcontrol.io',
+
+    },
+    {
+        type: 'link',
+        label: 'Support',
+        href: 'mailto:support@shiftcontrol.io',
+    },
 ];
 
 const sidebars: SidebarsConfig = {
@@ -49,6 +60,13 @@ const sidebars: SidebarsConfig = {
                 {
                     type: 'category',
                     label: 'Dashboards',
+                    link: {
+                        type: 'generated-index',
+                        title: 'Dashboards',
+                        description: 'Overview of ShiftControl Dashboards and their features.',
+                        slug: '/using-shiftcontrol/Dashboards',
+                        keywords: ['dashboards'],
+                    },
                     items: [
                         'using-shiftcontrol/Dashboards/app-permissions',
                         'using-shiftcontrol/Dashboards/app-spend',
@@ -59,6 +77,13 @@ const sidebars: SidebarsConfig = {
                 {
                     type: 'category',
                     label: 'Users',
+                    link: {
+                        type: 'generated-index',
+                        title: 'Users',
+                        description: 'Overview of User Management in ShiftControl.',
+                        slug: '/using-shiftcontrol/Users',
+                        keywords: ['users','user-management'],
+                    },
                     items: [
                         'using-shiftcontrol/Users/User-management',
                         'using-shiftcontrol/Users/Adding-a-user',
@@ -68,6 +93,13 @@ const sidebars: SidebarsConfig = {
                 {
                     type: 'category',
                     label: 'Groups',
+                    link: {
+                        type: 'generated-index',
+                        title: 'Groups',
+                        description: 'Overview of Group Management in ShiftControl.',
+                        slug: '/using-shiftcontrol/Groups',
+                        keywords: ['groups','group-management'],
+                    },
                     items: [
                         'using-shiftcontrol/Groups/Group-management',
                         'using-shiftcontrol/Groups/Adding-a-group',
@@ -78,6 +110,13 @@ const sidebars: SidebarsConfig = {
                 {
                     type: 'category',
                     label: 'Apps',
+                    link: {
+                        type: 'generated-index',
+                        title: 'Apps',
+                        description: 'Overview of App Management in ShiftControl.',
+                        slug: '/using-shiftcontrol/Apps',
+                        keywords: ['apps','app-management'],
+                    },
                     items: [
                         'using-shiftcontrol/Apps/App-management',
                         'using-shiftcontrol/Apps/Adding-an-app',
@@ -88,16 +127,37 @@ const sidebars: SidebarsConfig = {
                 {
                     type: 'category',
                     label: 'Integrations',
+                    link: {
+                        type: 'generated-index',
+                        title: 'Integrations',
+                        description: 'Overview of Integration Management in ShiftControl.',
+                        slug: '/using-shiftcontrol/Integrations',
+                        keywords: ['integrations','integration-management'],
+                    },
                     items: [
                         'using-shiftcontrol/Integrations/Integration-management',
                         'using-shiftcontrol/Integrations/Managing-integration-authorization',
                         {
                             type: 'category',
                             label: 'Integration Guides',
+                            link: {
+                                type: 'generated-index',
+                                title: 'Integration Guides',
+                                description: 'Step-by-step guides to help you set up popular integrations with ShiftControl.',
+                                slug: '/using-shiftcontrol/Integrations/integration-guides',
+                                keywords: ['integration','guides'],
+                            },
                             items: [
                                 {
                                     type: 'category',
                                     label: 'HRIS',
+                                    link: {
+                                        type: 'generated-index',
+                                        title: 'HRIS Integration Guides',
+                                        description: 'Step-by-step guides to help you set up popular HRIS integrations with ShiftControl.',
+                                        slug: '/using-shiftcontrol/Integrations/integration-guides/hris',
+                                        keywords: ['integration','guides','hris'],
+                                    },
                                     items: [
                                         'using-shiftcontrol/Integrations/guides/BambooHR',
                                         'using-shiftcontrol/Integrations/guides/Box',
@@ -117,6 +177,13 @@ const sidebars: SidebarsConfig = {
                 {
                     type: 'category',
                     label: 'Reports',
+                    link: {
+                        type: 'generated-index',
+                        title: 'Reports',
+                        description: 'Overview of Reporting in ShiftControl.',
+                        slug: '/using-shiftcontrol/Reports',
+                        keywords: ['reports','reporting' ],
+                    },
                     items: [
                         'using-shiftcontrol/Reports/App-assignment-reports',
                     ],
@@ -124,11 +191,25 @@ const sidebars: SidebarsConfig = {
                 {
                     type: 'category',
                     label: 'Settings',
+                    link: {
+                        type: 'generated-index',
+                        title: 'Settings',
+                        description: 'Overview of Settings in ShiftControl.',
+                        slug: '/using-shiftcontrol/Settings',
+                        keywords: ['settings'],
+                    },
                     items: [
                         'using-shiftcontrol/Settings/settings-overview',
                         {
                             type: 'category',
                             label: 'Personal',
+                            link: {
+                                type: 'generated-index',
+                                title: 'Personal Settings',
+                                description: 'Overview of Personal Settings in ShiftControl.',
+                                slug: '/using-shiftcontrol/Settings/personal',
+                                keywords: ['personal','settings'],
+                            },
                             items: [
                                 'using-shiftcontrol/Settings/account-settings',
                                 'using-shiftcontrol/Settings/appearance',
@@ -138,6 +219,13 @@ const sidebars: SidebarsConfig = {
                         {
                             type: 'category',
                             label: 'Organization',
+                            link: {
+                                type: 'generated-index',
+                                title: 'Organization Settings',
+                                description: 'Overview of Organization Settings in ShiftControl.',
+                                slug: '/using-shiftcontrol/Settings/organization',
+                                keywords: ['organization','settings'],
+                            },
                             items: [
                                 'using-shiftcontrol/Settings/org-details',
                                 'using-shiftcontrol/Settings/group-tags',
@@ -150,6 +238,13 @@ const sidebars: SidebarsConfig = {
                         {
                             type: 'category',
                             label: 'Connectors',
+                            link: {
+                                type: 'generated-index',
+                                title: 'Connectors',
+                                description: 'Overview of Connectors in ShiftControl.',
+                                slug: '/using-shiftcontrol/Settings/connectors',
+                                keywords: ['connectors'],
+                            },
                             items: [
                                 'using-shiftcontrol/Settings/directories',
                                 'using-shiftcontrol/Settings/app-connectors',
@@ -167,6 +262,13 @@ const sidebars: SidebarsConfig = {
                 {
                     type: 'category',
                     label: 'API',
+                    link: {
+                        type: 'generated-index',
+                        title: 'API',
+                        description: 'Overview of the ShiftControl API.',
+                        slug: '/using-shiftcontrol/API',
+                        keywords: ['api'],
+                    },
                     items: [
                         'using-shiftcontrol/API/ShiftControl-api',
                         'using-shiftcontrol/API/API-key-management',
@@ -177,6 +279,13 @@ const sidebars: SidebarsConfig = {
                 {
                     type: 'category',
                     label: 'JumpCloud',
+                    link: {
+                        type: 'generated-index',
+                        title: 'JumpCloud',
+                        description: 'Overview of using ShiftControl with JumpCloud.',
+                        slug: '/using-shiftcontrol/JumpCloud',
+                        keywords: ['jumpcloud'],
+                    },
                     items: [
                         'using-shiftcontrol/JumpCloud/Use-Google-Workspace-as-an-IdP',
                     ],
@@ -186,6 +295,13 @@ const sidebars: SidebarsConfig = {
         {
             type: 'category',
             label: 'Partnerships',
+            link: {
+                type: 'generated-index',
+                title: 'Partnerships',
+                description: 'Overview of ShiftControl Partnerships.',
+                slug: '/using-shiftcontrol/Partnerships',
+                keywords: ['jumpcloud'],
+            },
             items: [
                 'partnerships/Blackpanda-ir1',
                 {
