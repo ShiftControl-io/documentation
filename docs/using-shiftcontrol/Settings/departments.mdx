@@ -1,0 +1,76 @@
+---
+title: 'Departments'
+description: 'Manage department structures, sync from HRIS, and use departments for user and app assignments.'
+icon: 'building-2'
+---
+
+import Admonition from '@theme/Admonition';
+
+<p style={{fontSize: "large"}}>Define and manage your organization’s departments for better structure, visibility, and automation.</p>
+
+## Overview
+
+The **Departments** page under **Org Settings** allows administrators to manage the list of departments used throughout ShiftControl.
+Departments can be synced automatically through an HRIS integration or added manually. They provide structure across your organization and are used in user management, app ownership, and automation rules.
+
+<img
+    src="/img/ShiftControl/Settings/Settings-departments.png"
+    alt="Departments list view"
+    width="800"
+/>
+
+## Syncing with HRIS Integrations
+
+If your organization has an **HRIS integration** active, departments are automatically created and kept in sync with your HR system of record.
+This ensures your organizational structure in ShiftControl mirrors your HR data, keeping department names and hierarchies consistent.
+
+<Admonition type="warning">
+    When using an HRIS integration, you'll need to take extra care when managing departments from your HRIS system. Changes made to a department names in the HRIS system are treated as new departments in ShiftControl, so you should coordinate the change and update the Department name in ShiftControl accordingly.
+
+    When making Department changes, you should always be mindful of the potential impact on any linked users, apps, or dynamic groups. Such changes can accidentally remove all users from an app or group if not handled carefully.
+</Admonition>
+
+## Using Departments in ShiftControl
+
+Departments are a foundational part of how ShiftControl organizes and automates your workspace. They’re used in:
+
+- **User Profiles** – Assigning a user’s department for access control, reporting, and automation.
+- **Application Ownership** – Defining which department “owns” a specific app.
+- **Dynamic Group Rules** – Automatically assigning users to department-based groups.
+- **Reporting and Visibility** – Filtering data, usage, or compliance by department.
+
+<Admonition type="note">
+    When a department is created, ShiftControl automatically creates the related **Group**, tags it as a **Department group**, and assigns a **dynamic rule** so membership updates automatically as users are added to that department.
+</Admonition>
+
+## Creating or Editing a Department
+
+To add or modify departments manually:
+
+1. Click **Add Department** at the top right of the page.
+2. Enter a **Department Name** (e.g., *Marketing*, *Engineering*, *Finance*).
+3. Click **Save** to confirm.
+
+<img
+    src="/img/ShiftControl/Settings/Settings-create-edit-a-department.png"
+    alt="Add or edit a department"
+    width="600"
+/>
+
+You can also edit existing departments using the **⋮ menu** next to each entry.
+When renamed, any linked users, apps, or dynamic groups remain connected automatically.
+
+<Admonition type="tip">
+    Department-linked groups are dynamic — changes to a department’s user assignments automatically reflect in the related group.
+</Admonition>
+
+## Deleting a Department
+
+To delete a department:
+1. Open the **⋮ menu** next to the department name.
+2. Select **Delete Department**.
+3. Confirm the action. The associated department group will also be removed unless manually retained for record purposes.
+
+<Admonition type="note">
+    Deleting a department does not delete users. It only removes the department association and related dynamic group.
+</Admonition>

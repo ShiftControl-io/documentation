@@ -1,0 +1,62 @@
+---
+title: 'App Connectors'
+description: 'Connect third-party SaaS applications to pull user data and enable app insights across ShiftControl.'
+icon: 'plug'
+---
+
+import Admonition from '@theme/Admonition';
+
+<p style={{fontSize: "large"}}>Connect your SaaS tools to ShiftControl for richer app insights and automated user data syncing.</p>
+
+## Overview
+
+The **App Connectors** page lists and manages your integrations with third-party SaaS applications.
+These connectors pull user and app data into ShiftControl, enabling better visibility into who’s using which apps and where licenses are active.
+
+<img
+    src="/img/ShiftControl/Settings/Settings-app-connectors.png"
+    alt="App connectors list view"
+/>
+
+Each connector displays:
+- **Connector** – The service or integration name (e.g., Slack, HubSpot, Box).
+- **App name** – The connected app record in your catalog.
+- **Status** – Whether the connector is enabled or disabled.
+- **Health** – Connection health and data sync status.
+- **Auth Status** – Indicates whether authentication has been provided or is required.
+
+## How App Connectors Work
+
+App connectors use secure OAuth or API-based integrations to communicate with supported third-party services.
+Once connected, ShiftControl automatically syncs user information and app metadata at regular intervals (usually every hour).
+
+These integrations make it easier to:
+- See which users are active in each app.
+- Identify unused or duplicate licenses.
+- Centralize app management across your organization.
+
+<Admonition type="tip">
+    You can view all available connectors in the **App Catalog**.
+    If a service you use isn’t listed yet, you can still add it as a **Custom App**.
+</Admonition>
+
+## Enabling an App Connector
+
+To enable a connector:
+1. Locate the desired app in the list.
+2. Click the **⋮ menu** and choose **Authenticate**.
+3. Complete the OAuth or API key authentication flow.
+4. Once connected, the **Status** will change to **Enabled**, and **Auth Status** will show as **Authentication provided**.
+
+<Admonition type="note">
+    Some integrations (like Slack or HubSpot) may require admin-level permissions to complete the connection.
+</Admonition>
+
+## Managing Connectors
+
+After setup, you can:
+- **Disable** a connector to pause syncs temporarily.
+- **Reauthenticate** if credentials expire or permissions change.
+- **Delete authorization** to fully disconnect the app.
+
+See our [Integration Management](/using-shiftcontrol/Integrations/Integration-management) page for more details.

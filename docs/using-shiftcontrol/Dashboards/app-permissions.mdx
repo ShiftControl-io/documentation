@@ -1,0 +1,105 @@
+---
+title: 'App Permissions Dashboard'
+description: 'Understand and monitor which third-party apps have access to your organization’s data.'
+icon: 'lock'
+---
+
+import Admonition from '@theme/Admonition';
+
+<p style={{fontSize: "large"}}>Monitor third-party app permissions across your organization and identify potential access risks.</p>
+
+## Overview
+
+The **Permissions Dashboard** gives administrators visibility into how users and apps connect with third-party services through OAuth and other authorization mechanisms.
+It highlights which apps have access to organizational data, who granted those permissions, and the overall risk level of those connections.
+
+The source of this data is the oAuth logs from Google Workspace, and we visualize it here to help you manage app authorizations effectively.
+
+<img
+    src="/img/ShiftControl/Dashboards/Dashboard-app-permissions-top.png"
+    alt="Permissions Dashboard overview"
+/>
+
+This dashboard helps you:
+- Track all apps that users have authorized with their work accounts
+- Identify sensitive or restricted permissions
+- Detect risky integrations that may expose organizational data
+- Revoke unused or unnecessary app authorizations
+
+<Admonition type="tip">
+    Use the date filter at the top-right of the dashboard to switch between views such as <strong>Year to date</strong>, <strong>Last 90 days</strong>, or <strong>All time</strong>.
+</Admonition>
+
+## Key Metrics
+
+At the top of the dashboard, you’ll see quick summary cards that provide an overview of your organization’s app landscape:
+- **Total Apps** – The total number of apps connected by users.
+- **Users** – Number of users who have authorized at least one third-party app.
+- **Non-Sensitive Apps** – Apps with limited access to non-critical data.
+- **Sensitive Apps** – Apps requesting access to data such as email, files, or contacts.
+- **Restricted Apps** – Apps classified as high-risk based on data scope or provider reputation.
+
+## Authorizations and Revocations
+
+The chart on the left visualizes **Authorizations** and **Revocations** over time.
+This helps you spot spikes in app authorizations or bulk revocations that may indicate user onboarding, system changes, or security reviews.
+
+### Common Insights:
+- **High authorization spikes** may occur during tool rollouts or integrations.
+- **Unusual revocation activity** could suggest security audits or employee offboarding.
+
+## Third-Party Apps and Services
+
+The table on the right lists all third-party services users have connected.
+Each entry includes:
+- **App Name**
+- **Service Icon** – Quick identification of the connected platform.
+- **Permission Summary** – A compact view of granted scopes (e.g., Drive access, user profile, calendar).
+
+You can filter by:
+- **Permission type** – View all, sensitive, or restricted permissions.
+- **App category** – Narrow results to communication, CRM, or productivity apps.
+
+
+
+<img
+    src="/img/ShiftControl/Dashboards/Dashboard-app-permissions-bottom.png"
+    alt="Permissions detail sections"
+/>
+
+## Apps with Higher Risk Permissions
+
+This section lists apps that have been granted **sensitive** or **restricted** permissions.
+Use this view to review which integrations have broad data access, such as reading emails, accessing shared drives, or syncing contacts.
+
+Admins can investigate these apps further to:
+- Review who granted access
+- Determine if the app is necessary for business use
+- Revoke high-risk authorizations directly from the connected identity provider
+
+<Admonition type="warning">
+    Pay close attention to apps with permissions involving email, file access, or directory data — these typically pose higher data exposure risks.
+</Admonition>
+
+## Users Who Granted Permissions
+
+The final panel shows which users have authorized external apps and the corresponding services.
+For example:
+- **dan@shiftcontrol.io → Brella**
+- **krishna@shiftcontrol.io → Google Chrome Extensions**
+- **efrim@shiftcontrol.io → Zoom**
+
+You can filter by:
+- **App** – See all users who authorized a specific app
+- **User** – View all apps a particular user has connected
+
+<Admonition type="tip">
+    Combine this view with your identity provider logs to quickly cross-reference OAuth connections with employee access policies.
+</Admonition>
+
+## Using the Dashboard for Security Reviews
+
+The Permissions Dashboard is especially useful during:
+- **Quarterly security audits** – Identify new or unauthorized connections
+- **Offboarding** – Verify revoked permissions when employees depart
+- **Compliance checks** – Ensure only approved apps have access to organizational data

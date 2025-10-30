@@ -1,0 +1,65 @@
+---
+title: 'JumpCloud Admins'
+description: 'Manage and configure JumpCloud administrator accounts for secure integration and automation.'
+icon: 'cloud'
+---
+
+import Admonition from '@theme/Admonition';
+
+<p style={{fontSize: "large"}}>Manage JumpCloud administrator accounts that enable secure communication between ShiftControl and your JumpCloud environment.</p>
+
+## Overview
+
+The **JumpCloud Admins** page allows you to view, create, and manage the administrator accounts used to connect to your organization’s JumpCloud directory.
+These accounts are required to perform actions such as reading user data, syncing group memberships, and automating IT management tasks.
+
+<img
+    src="/img/ShiftControl/Settings/Settings-jumpcloud-admins.png"
+    alt="JumpCloud Admins list view"
+/>
+
+Each admin entry includes:
+- **Admin** – The name and email of the JumpCloud administrator.
+- **Admin Role** – The assigned role within JumpCloud (e.g., Administrator).
+- **Enabled** – Whether the admin account is active.
+- **Multi-Factor Authentication** – Indicates if MFA is enabled for this account.
+- **TOTP Enrolled** – Shows whether the admin has a TOTP authenticator configured.
+- **API Access** – Displays if the admin has API access enabled.
+
+<Admonition type="tip">
+    JumpCloud Admin accounts are separate from employee accounts.
+    We recommend using a format like <code>user+admin@domain.com</code> to distinguish admin logins from normal users.
+</Admonition>
+
+## Creating a JumpCloud Admin
+
+To create a new JumpCloud admin:
+1. Click **Add JumpCloud Admin**.
+2. Fill out the following fields:
+- **First name** and **Last name**
+- **Admin email**
+- **Admin role** (e.g., Administrator)
+- Toggle **Enable API access** if this admin will be used for API-based automation.
+3. Click **Save** to create the admin record.
+
+<img
+    src="/img/ShiftControl/Settings/Settings-create-edit-a-jumpcloud-admin.png"
+    alt="Create JumpCloud Admin form"
+/>
+
+<Admonition type="note">
+    The new admin will receive an invitation via email. Once they accept, their account will appear as active in the JumpCloud console and in ShiftControl.
+</Admonition>
+
+## Editing and Managing Admins
+
+You can manage each admin using the **⋮ menu** beside their name:
+- **Edit** – Update the admin’s role or API access status.
+- **Disable JumpCloud Admin** – Temporarily suspend the account’s access without deleting it.
+- **Delete JumpCloud Admin** – Permanently remove the account from the list.
+
+## Best Practices
+
+- Create **dedicated integration accounts** with clear naming (e.g., <code>automation+admin@yourdomain.com</code>).
+- Periodically **review admin access** and disable accounts that are no longer needed.
+- Keep **API access** enabled only for automation accounts that require it.

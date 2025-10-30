@@ -1,0 +1,83 @@
+---
+title: 'HiBob'
+description: 'Connect HiBob to ShiftControl and make HR data your single source of truth for user management.'
+icon: 'users'
+---
+import { Steps, Step } from "@site/src/components/Steps";
+
+<p style={{fontSize: "large"}}>Connect HiBob to ShiftControl and make HR data your single source of truth for user management.</p>
+
+## Overview
+
+The HiBob integration allows you to connect your HiBob system to ShiftControl, enabling HR data to become the single source of truth for user management across your organization. This integration streamlines user provisioning, updates, and lifecycle management based on your HR records.
+
+## Why It Matters
+
+- **HR-Driven Identity**: Your HR data becomes the single source of truth for identity management
+- **Clean User Records**: Maintains accurate user information during organizational changes
+- **License Optimization**: Saves on JumpCloud licenses by creating users only when needed
+- **Automated Lifecycle Management**: Automatically handles user provisioning, updates, and deprovisioning
+
+## Advantages Over JumpCloud's Built-in Connector
+
+Our HiBob integration offers several improvements over JumpCloud's native connector:
+
+- **Full Field Synchronization**: Manager and other key attributes now flow through completely
+- **Scoped Credentials**: Supply ShiftControl with a limited HiBob service user (no need to share JumpCloud super-admin credentials with HiBob)
+- **Cost Savings**: Unlike JumpCloud's native integration that may create staged users before their start date (costing you license fees), ShiftControl creates users only when actually needed
+
+## How It Works
+
+1. **Regular Synchronization**: ShiftControl polls HiBob regularly and compares records
+2. **Comprehensive Change Detection**: Automatically detects adds, updates, disables, and re-enables
+3. **Smart Pre-start Provisioning**: 5 days before a new hire's start date, we enable the account in silent mode so Gmail, Calendar, and Docs are ready without emailing the user
+
+## Creating a HiBob Service User
+
+Before setting up the integration in ShiftControl, create a HiBob service user (service account) which ShiftControl will use to read user data. Follow HiBob's official documentation for service users: https://apidocs.hibob.com/docs/api-service-users
+
+<Steps>
+    <Step title="Sign in to HiBob">
+        Sign in to your HiBob instance with administrator permissions.
+    </Step>
+
+    <Step title="Create a Service User">
+        Follow the HiBob documentation linked above to create a new service user (sometimes called a service account). Name it something identifiable like `ShiftControl`.
+    </Step>
+
+    <Step title="Assign Scopes">
+        Ensure the service user has the necessary scopes/permissions to read employee/user data. Refer to the HiBob docs for the exact scopes required.
+    </Step>
+
+    <Step title="Copy Credentials">
+        When the service user is created, copy the Service user ID and the Service user token (keep these secure). You will provide these to ShiftControl during setup.
+    </Step>
+</Steps>
+
+## Getting Started
+
+<Steps>
+    <Step title="Add the HiBob App">
+        Navigate to Integrations → HiBob and select "Add Authorization" in ShiftControl.
+    </Step>
+
+    <Step title="Provide Service User Credentials">
+        - Enter the Service user ID
+        - Paste the Service user token
+    </Step>
+
+    <Step title="Authorize the Integration">
+        Click "Authorize" to complete the setup. ShiftControl will validate the credentials and begin initial synchronization.
+    </Step>
+
+    <Step title="Monitor Synchronization">
+        ShiftControl will begin synchronizing with HiBob automatically — check the integration status page for progress and any errors.
+    </Step>
+</Steps>
+
+## Benefits
+
+- **Cleaner User Data**: Maintain accurate and up-to-date user information
+- **Smoother Onboarding**: New employees have access to necessary systems before their start date
+- **Tighter Security**: Proper deprovisioning when employees leave
+- **Reduced Manual Work**: Eliminate the need for manual user management tasks

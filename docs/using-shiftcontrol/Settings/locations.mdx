@@ -1,0 +1,73 @@
+---
+title: 'Locations'
+description: 'Manage organizational locations, sync from HRIS, and use locations for user and group assignments.'
+icon: 'map-pin'
+---
+
+import Admonition from '@theme/Admonition';
+
+<p style={{fontSize: "large"}}>Manage your organization’s locations for better structure, visibility, and automation.</p>
+
+## Overview
+
+The **Locations** page under **Org Settings** allows administrators to define and manage the list of organizational locations such as offices, regions, or countries.
+Locations can be automatically synced from your HRIS integration or added manually. They are used throughout ShiftControl to associate users, apps, and groups with specific physical or operational sites.
+
+<img
+    src="/img/ShiftControl/Settings/Settings-locations.png"
+    alt="Locations list view"
+/>
+
+## Syncing with HRIS Integrations
+
+When an **HRIS integration** is active, locations are automatically created and synced from your HR system.
+This ensures that the office and region data in ShiftControl always match your source of truth.
+
+<Admonition type="tip">
+    Even when HRIS syncing is enabled, you can still rename or add locations manually — ShiftControl maintains the correct internal mapping.
+</Admonition>
+
+## Using Locations in ShiftControl
+
+Locations are used to help segment and organize users, apps, and access controls across your organization.
+You’ll find them in several key areas:
+
+- **User Profiles** – Assign each user to a location for context, reporting, and visibility.
+- **Dynamic Group Rules** – Automatically group users by location for easy management and access policy enforcement.
+- **App Ownership** – Use locations to specify where an app is deployed or primarily used.
+- **Reporting and Governance** – Filter user or app data by location for audits or analytics.
+
+<Admonition type="note">
+    When a new location is created, ShiftControl automatically creates a **Location Group**, tags it as a **Location group**, and assigns a **dynamic rule** so membership updates automatically as users are assigned to that location.
+</Admonition>
+
+## Creating or Editing a Location
+
+To add or modify locations manually:
+
+1. Click **Add Location** at the top right of the page.
+2. Enter a **Location Name** (e.g., *Singapore*, *United States*, *Germany*).
+3. Click **Save** to confirm.
+
+<img
+    src="/img/ShiftControl/Settings/Settings-create-edit-a-location.png"
+    alt="Add or edit a location"
+/>
+
+You can also edit existing locations using the **⋮ menu** next to each entry.
+When renamed, any linked users or dynamic groups remain associated automatically.
+
+<Admonition type="tip">
+    Location-based groups are dynamic — users are automatically added or removed as their assigned location changes.
+</Admonition>
+
+## Deleting a Location
+
+To delete a location:
+1. Open the **⋮ menu** beside the location name.
+2. Select **Delete Location**.
+3. Confirm the deletion. The associated location group will also be removed unless manually retained.
+
+<Admonition type="note">
+    Deleting a location will not remove users — it only unassigns them from that location and deletes the related dynamic group.
+</Admonition>

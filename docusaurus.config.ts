@@ -82,16 +82,6 @@ const config: Config = {
                     label: 'App Guides',
                 },
                 {
-                    label: 'Support',
-                    href: 'mailto:support@shiftcontrol.io',
-                    position: 'right',
-                },
-                {
-                    label: 'Log in to ShiftControl',
-                    href: 'https://app.shiftcontrol.io',
-                    position: 'right',
-                },
-                {
                     type: 'search',
                     position: 'right',
                 },
