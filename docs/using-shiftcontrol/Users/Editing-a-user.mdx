@@ -72,7 +72,7 @@ Finance wants to know why software costs increased this quarter. Open high-cost 
     </Step>
 
     <Step title="Review security posture (Security tab)">
-        The Security tab is a read-only view of the user's authentication and security configuration across connected directories.
+        The Security tab shows the user's authentication and security configuration across connected directories.
 
         **Google Security** shows:
         - **2SV Status** -- Whether the user has 2-Step Verification enabled on their Google account.
@@ -81,7 +81,7 @@ Finance wants to know why software costs increased this quarter. Open high-cost 
         - **Recovery Phone** -- The phone number registered for account recovery.
 
         **JumpCloud MFA** shows:
-        - **Device Authenticator** -- Which MFA method the user has configured (e.g., 1Password, Google Authenticator). If this is empty, the user has not completed MFA enrollment.
+        - **Device Authenticator** -- Which MFA method the user has configured (e.g., 1Password, Google Authenticator). If this is empty, the user has not completed MFA enrollment. Admins can delete an existing MFA enrollment to force the user to re-enroll.
 
         Use this tab during security audits to verify that every user meets your organization's authentication requirements.
     </Step>
@@ -93,7 +93,7 @@ Finance wants to know why software costs increased this quarter. Open high-cost 
 
         **App Permission History** provides a timeline of when permissions were granted or revoked. This is valuable for investigating security incidents -- you can see exactly when a user authorized a suspicious application.
 
-        If you see an application that should not have access, coordinate with the user or your security team to revoke it through Google Workspace admin.
+        If you see an application that should not have access, use the **Revoke** button to remove its permissions directly from ShiftControl.
     </Step>
 
     <Step title="Review SaaS costs (SaaS Cost tab)">
@@ -144,7 +144,7 @@ If your organization has an HRIS integration configured (such as BambooHR), prof
 ## Things to Know
 
 - **Editing Department or Team can change access immediately.** Because dynamic groups evaluate user attributes in real time, changing a user's department from Engineering to Marketing could revoke their GitHub access and grant them HubSpot access -- all automatically. Make sure you understand the group rules before changing organizational fields.
-- **Security and App Permissions are read-only.** You cannot change MFA settings or revoke OAuth permissions directly from ShiftControl. These tabs are for visibility and auditing. Changes to security settings must be made in Google Workspace admin or JumpCloud.
+- **Security and App Permissions include admin actions.** You can revoke active OAuth app permissions directly from the App Permissions tab and delete a user's existing JumpCloud MFA enrollment from the Security tab to force re-enrollment. Google security fields (2SV status, recovery info) are read-only and must be managed in Google Workspace admin.
 - **SaaS cost data depends on your configuration.** Cost information is only as accurate as the subscription data configured in ShiftControl. If an application's cost is not set up, it will not appear in the totals.
 - **Deleting a user is permanent.** The trash icon in the header permanently removes the user from ShiftControl and JumpCloud. All their app access is revoked, and their identity is removed from connected systems. If you need to temporarily revoke access, use Deactivate instead.
 - **Previous/next navigation preserves context.** When auditing multiple users, use the arrows in the header to move between users without returning to the list. This is significantly faster than going back and forth during a security review or access audit.
