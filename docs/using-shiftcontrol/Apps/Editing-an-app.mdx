@@ -1,6 +1,7 @@
 ---
 title: 'Editing an App'
-description: 'How to edit bookmarks and SSO apps, and configure groups and users.'
+description: 'Edit app settings, SSO configuration, subscription costs, and user assignments in ShiftControl. Manage bookmarks and SSO apps in one place.'
+keywords: ['ShiftControl', 'app management', 'edit app', 'SSO', 'bookmarks', 'configuration']
 icon: 'grid-4'
 ---
 
@@ -10,75 +11,147 @@ import { Steps, Step } from "@site/src/components/Steps";
 
 ## Overview
 
-Editing an app allows you to modify the app’s settings, such as the name, description, and user assignments. The process differs slightly between **Bookmarks** and **SSO/SAML apps**.
+After adding an app, you manage everything about it from the app detail page. This includes basic information, subscription and cost tracking, SSO configuration, and user assignments. The detail page is organized into tabs so you can work on one area at a time without losing changes.
 
-You can refer to the [Adding an App](/using-shiftcontrol/Apps/Adding-an-app) guide for more detailed instructions for each of the steps below.
+## How It Works
 
-## Editing an App
+Click any app in the App Management table to open its detail page. The page has three main tabs:
 
-To edit an app, follow these steps:
+- **General** -- app identity, ownership, and basic settings.
+- **Subscription** -- plan details, billing, and cost tracking.
+- **Assignments** -- groups and individual users assigned to the app.
 
-<Steps>
+A sidebar on the right shows a summary of the app's assigned users and groups for quick reference.
 
-    <Step title="Navigate to the App Management Pane">
-        From the dashboard, navigate to the **App Management** pane where all apps are listed.
-    </Step>
+## The General Tab
 
-    <Step title="Select the App to Edit">
-        Find the app you wish to edit and click the **Edit** button next to its name.
-    </Step>
+The General tab controls how the app appears and who is responsible for it.
 
-    <Step title="Edit General Information">
-        In the **General** tab, modify the app name and description.
-        - If you are editing a **Bookmark**, update the **Bookmark URL** field.
-        - For SSO/SAML apps, this field will not appear.
+<img src="/img/ShiftControl/Apps/Edit-app-general-info.png" alt="Edit an app's general info"/>
 
-        <img src="/img/ShiftControl/Apps/Edit-app-general-info.png" alt="Edit an app's general info"/>
+| Field | What It Controls |
+|-------|-----------------|
+| **App name** | The display name shown in the dashboard and employee portal. |
+| **Primary admin** | The person responsible for managing this app day-to-day. |
+| **Budget owner** | The person responsible for the app's costs and renewals. |
+| **Owning department** | The department that owns this app (e.g., Engineering, Marketing). |
+| **Description** | A description visible to employees in their App Dashboard. |
+| **Bookmark URL** | (Bookmarks only) The URL users are sent to when they click the app. |
 
-    </Step>
+## The Subscription Tab
 
-    <Step title="Edit Group Assignments">
-        Navigate to the **Groups** tab to assign or update the groups associated with this app.
-        You can add or remove groups to control app access.
+The Subscription tab lets you track plan details and costs for the app. ShiftControl uses this information to calculate the estimated total cost shown in the App Management table.
 
-        <img src="/img/ShiftControl/Apps/Edit-app-groups.png" alt="Edit an app's groups"/>
-    </Step>
+| Field | What It Controls |
+|-------|-----------------|
+| **Plan duration** | How long the current plan lasts (e.g., 12 months). |
+| **Duration type** | Whether the duration is in months or years. |
+| **Billing cycle** | How often you're billed (monthly, annually, etc.). |
+| **Renewal grace period** | How many days after expiration you have before the plan lapses. |
+| **Plan end / renewal date** | When the plan ends or auto-renews. |
+| **Cost structure** | How costs are calculated (e.g., per user, flat rate). |
+| **Currency** | The currency for all cost fields (e.g., USD). |
+| **Cost** | The per-unit or flat cost (e.g., $84.00 per user). |
+| **Platform fee** | Toggle for whether there's an additional platform fee. |
+| **Notes** | Free-text notes about the subscription (e.g., contract terms, discount details). |
 
-    <Step title="Edit Individual Assignments">
-        In the **Individual Assignments** tab, manually assign individual users to the app.
-        Search for a user by name and add them to the app if needed.
+## The Assignments Tab
 
-        <img src="/img/ShiftControl/Apps/Edit-app-individual-assignments.png"
-             alt="Edit an app's indvidual assignments"/>
-    </Step>
+The Assignments tab controls who has access to the app. There are two sub-tabs:
 
-    <Step title="Configure SSO Settings (for SSO/SAML Apps)">
-        If you are editing an SSO/SAML app, go to the **SSO** tab to configure the Single Sign-On settings.
-        - You can download the **IDP public certificate** or the **SSO config metadata** for downstream applications.
+- **Groups** -- assign groups to the app. All members of the group automatically receive access. This is the recommended approach.
+- **Individual** -- assign specific users directly, outside of any group.
 
-        <img src="/img/ShiftControl/Apps/Edit-app-sso.png" alt="Edit an app's SSO configuration"/>
-    </Step>
+<img src="/img/ShiftControl/Apps/Edit-app-groups.png" alt="Edit an app's groups"/>
 
-    <Step title="Save All Changes">
-        After completing the edits, click **Save All** to apply the changes across all tabs.
-    </Step>
+Click **Add group** to assign a new group. To assign individual users, switch to the Individual sub-tab.
 
-</Steps>
+<img src="/img/ShiftControl/Apps/Edit-app-individual-assignments.png"
+     alt="Edit an app's individual assignments"/>
 
-## App Info Sidebar
+## SSO Configuration (SSO Apps Only)
 
-In the **Edit App** section, there is also a collapsible sidebar that provides additional information about the app. The sidebar includes information about which groups assign users to the app and which users are assigned.
+For SSO SAML and SSO OIDC apps, the SSO settings are available during editing. From here you can:
 
-### App Sidebar with Groups
+- View and download the **IDP public certificate**.
+- Download the **SSO config metadata** to provide to the app vendor.
+- Configure SAML assertion settings, attribute mappings, and other protocol-specific fields.
+
+<img src="/img/ShiftControl/Apps/Edit-app-sso.png" alt="Edit an app's SSO configuration"/>
+
+## The App Info Sidebar
+
+The right sidebar shows a quick summary of the app's assignments without leaving the current tab.
+
+### Groups View
+Shows which groups are assigned to this app.
+
 <img
     src="/img/ShiftControl/Apps/App-sidebar-groups.png"
     alt="App Sidebar with Groups"
     width={"400"}
 />
 
-### App Sidebar with Users
+### Users View
+Shows the individual users who have access (both through groups and direct assignment).
+
 <img
     src="/img/ShiftControl/Apps/App-sidebar-users.png"
     alt="App Sidebar with Users"
     width={"400"}
 />
+
+## Common Scenarios
+
+### Upgrading a Bookmark to SSO
+
+Open the Bookmark app, configure the SSO settings with the SAML or OIDC details from the app vendor, change the type, and save. All existing group and user assignments are preserved.
+
+### Tracking renewal dates and costs
+
+Open the app's Subscription tab and fill in the plan duration, renewal date, and per-user cost. When you return to App Management, the estimated total cost column reflects your entries.
+
+### Changing who has access
+
+Open the Assignments tab and add or remove groups. Group changes take effect immediately -- all members of an added group gain access, and members of a removed group lose access (unless they also have an individual assignment).
+
+## Step-by-Step: Editing an App
+
+<Steps>
+    <Step title="Navigate to App Management">
+        From the dashboard, go to **App Management** where all apps are listed.
+    </Step>
+    <Step title="Select the app">
+        Click the app you want to edit.
+    </Step>
+    <Step title="Edit General information">
+        In the **General** tab, update the name, description, admin, budget owner, department, or bookmark URL as needed.
+    </Step>
+    <Step title="Edit Subscription details">
+        Switch to the **Subscription** tab to update plan details, costs, and renewal information.
+    </Step>
+    <Step title="Edit Assignments">
+        Switch to the **Assignments** tab to add or remove groups and individual users.
+    </Step>
+    <Step title="Configure SSO (if applicable)">
+        For SSO apps, configure the SAML or OIDC settings. Download the IDP certificate or metadata as needed.
+    </Step>
+    <Step title="Save">
+        Click **Save** to apply your changes.
+    </Step>
+</Steps>
+
+## Things to Know
+
+- Changes to group assignments take effect immediately after saving. Users in a removed group lose access unless they also have a direct individual assignment.
+- The Subscription tab is for your tracking purposes. ShiftControl does not connect to vendors to pull billing data automatically.
+- You can navigate between tabs without losing unsaved work. Just click Save when you're done.
+- The sidebar updates in real time as you add or remove groups and users.
+- Bookmark apps do not have SSO configuration options. To add SSO, you need to change the app type.
+
+## Related Features
+
+- [App Management](/using-shiftcontrol/Apps/App-management) -- the main dashboard for all your apps.
+- [Adding an App](/using-shiftcontrol/Apps/Adding-an-app) -- how to add new apps from the catalog or as custom apps.
+- [App Discovery](/using-shiftcontrol/Apps/App-discovery) -- find OAuth-detected apps and add them to your managed list.
+- [Groups](/using-shiftcontrol/Groups/Group-management) -- manage the groups that control app access.

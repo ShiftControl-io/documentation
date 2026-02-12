@@ -1,6 +1,7 @@
 ---
 title: 'App Assignment Reporting'
-description: 'How to view and report on app assignments across users and applications.'
+description: 'Generate app assignment reports in ShiftControl. Pivot by app or user to audit access, prepare for compliance, and manage licenses.'
+keywords: ['ShiftControl', 'reports', 'app assignments', 'compliance', 'audit', 'analytics']
 icon: 'chart-line'
 ---
 
@@ -8,48 +9,71 @@ icon: 'chart-line'
 
 ## Overview
 
-**App Assignment Reporting** is a powerful feature that allows you to view and discover who is assigned to which application or, conversely, which applications are assigned to each user. This report provides detailed visibility into how users and apps are linked, whether through individual assignments or group assignments.
+Knowing who has access to what is one of the most common questions in IT. During audits, offboarding, or license reviews, you need a clear answer fast. **App Assignment Reporting** gives you a single view of every user-to-app relationship in your organization, so you can answer that question in seconds instead of hours.
+
+The report supports two pivot modes -- by app and by user -- along with search, pagination, and export. Whether you are preparing for a compliance audit or cleaning up unused licenses, this is the starting point.
 
 <img
     src="/img/ShiftControl/Reports/App-Assignment-report.png"
     alt="App Assignment Report"
 />
 
-## Viewing App Assignments
+## How It Works
 
-You can switch between viewing assignments by apps or by users, depending on your needs:
+ShiftControl continuously tracks app assignments, whether they were made directly to a user or inherited through a group. The App Assignment Report aggregates that data into an expandable, searchable table. You choose the angle:
 
-- **App View**: See which users are assigned to a specific app.
-- **User View**: Pivot to view which apps are assigned to a specific user.
+- **Pivot by App** -- Start from an app and see every user who has access.
+- **Pivot by User** -- Start from a user and see every app they can reach.
 
-### App Assignments by App
+Both views include the assignment method (direct or via group), so you can trace exactly how access was granted.
 
-This report provides a list of apps, and you can expand each app to see the app's assigned users. It includes the following information:
-- **Name**: The name of the user assigned to the app.
-- **Email**: The email address of the user.
-- **Title**: The title of the user.
-- **Department**: The department the user belongs to.
-- **Assignment Method**: Whether the user was assigned individually or through a group. If assigned through a group, the group name is displayed.
+## Common Scenarios
+
+| Scenario | How the report helps |
+|---|---|
+| **Compliance audit** | Pivot by app to show auditors exactly who has access to a regulated system. Export as CSV for their records. |
+| **Offboarding** | Pivot by user to see every app a departing employee holds. Verify nothing is missed after removal. |
+| **License optimization** | Pivot by app to identify users who still hold seats in tools they no longer use. Reclaim those licenses. |
+| **Security review** | Pivot by app for sensitive systems. Confirm that access is granted only through approved groups, not ad-hoc assignments. |
+
+## Viewing Assignments by App
+
+Toggle the pivot to **App** to see a list of all apps in your organization. Expand any row to reveal its assigned users.
+
+Each expanded row shows:
+- **Name** -- The user assigned to the app.
+- **Email** -- The user's email address.
+- **Title** -- The user's job title.
+- **Department** -- The department the user belongs to.
+- **Assignment Method** -- Whether the assignment is direct or inherited from a group. Group assignments display the group name.
 
 <img
     src="/img/ShiftControl/Reports/App-Assignment-report-by-app-detail.png"
     alt="App Assignment by App"
 />
 
-### App Assignments by User
+## Viewing Assignments by User
 
-This report provides a list of users, and you can expand each user to see the apps assigned to them. It includes the following information:
-- **App Name**: The name of the app assigned to the user.
-- **Assignment Method**: Whether the user was assigned individually or through a group. If assigned through a group, the group name is displayed.
+Toggle the pivot to **User** to see a list of all users. Expand any row to reveal the apps assigned to them.
+
+Each expanded row shows:
+- **App Name** -- The application assigned to the user.
+- **Assignment Method** -- Direct or via a named group.
 
 <img
     src="/img/ShiftControl/Reports/App-Assignment-report-by-user-detail.png"
     alt="App Assignment by User"
 />
 
-## Exporting App Assignments
+## Searching and Navigating
 
-The **Export** feature gives you the flexibility to export the assignment data in various formats for further analysis or reporting. Available export formats include:
+Use the search bar at the top of the report to filter by app name or user name, depending on the active pivot. Results update as you type.
+
+For large organizations, the report paginates automatically. Use the controls at the bottom to move between pages.
+
+## Exporting Data
+
+Click the **Export** button to download the current report. Available formats:
 
 - **Google Sheets**
 - **CSV**
@@ -57,18 +81,22 @@ The **Export** feature gives you the flexibility to export the assignment data i
 - **JSON (Flattened Structure)**
 - **JSON (Nested Structure)**
 
-This ensures that you have the ability to use the data in a way that best fits your needs, whether for internal reporting, compliance, or auditing purposes.
+Exports reflect the active pivot and any search filters, so you can generate targeted reports for specific audits or teams.
 
 <img
     src="/img/ShiftControl/Reports/App-Assignment-report-export.png"
     alt="App Assignment Export Options"
 />
 
-## Use Cases for App Assignment Reporting
+## Things to Know
 
-This feature is particularly useful for:
+- The report includes both direct and group-based assignments. You do not need to run separate queries.
+- Toggling between App and User pivots does not lose your search query.
+- Exported data matches what you see on screen, including any active filters.
+- The report reflects the current state of assignments. If you need historical data, export regularly or use your identity provider's audit logs.
 
-- **Offboarding**: Ensuring that users who are leaving the organization no longer have access to critical applications.
-- **Auditing and Compliance**: Ensuring that users have the correct access to applications, and that permissions are managed correctly.
-- **App License Management**: Identifying unused apps or users who no longer need access to certain apps, optimizing license usage and reducing costs.
-- **Security Reviews**: Ensuring that sensitive apps are assigned only to the appropriate users and that access is granted through secure methods like group management
+## Related Features
+
+- **[App Discovery](/using-shiftcontrol/Apps/App-discovery)** -- Find apps in use across your organization before they appear in this report.
+- **[Group Management](/using-shiftcontrol/Groups/Group-management)** -- Manage the groups that drive many of the assignments shown here.
+- **[Task Management](/using-shiftcontrol/task-management)** -- Act on tasks generated when new apps or assignment issues are detected.
