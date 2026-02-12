@@ -4,14 +4,16 @@ import type * as Preset from '@docusaurus/preset-classic';
 
 const config: Config = {
     title: 'ShiftControl Documentation',
-    tagline: 'Dinosaurs are cool',
+    tagline: 'Manage identities, groups, and SaaS applications from one platform.',
     favicon: 'img/favicon.png',
 
-    // Set the production url of your site here
     url: 'https://docs.shiftcontrol.io',
-    // Set the /<baseUrl>/ pathname under which your site is served
-    // For GitHub pages deployment, it is often '/<projectName>/'
     baseUrl: '/',
+
+    // Cloudflare Pages forces trailing slashes via 308 redirect.
+    // This ensures Docusaurus-generated links match the final URL,
+    // eliminating redirect chains and fixing canonical URL consistency.
+    trailingSlash: true,
 
     onBrokenLinks: 'throw',
     markdown: {
@@ -20,13 +22,42 @@ const config: Config = {
         }
     },
 
-    // Even if you don't use internationalization, you can use this field to set
-    // useful metadata like html lang. For example, if your site is Chinese, you
-    // may want to replace "en" with "zh-Hans".
     i18n: {
         defaultLocale: 'en',
         locales: ['en'],
     },
+
+    headTags: [
+        {
+            tagName: 'script',
+            attributes: {
+                type: 'application/ld+json',
+            },
+            innerHTML: JSON.stringify({
+                '@context': 'https://schema.org/',
+                '@type': 'Organization',
+                name: 'ShiftControl',
+                url: 'https://shiftcontrol.io/',
+                logo: 'https://docs.shiftcontrol.io/img/logo/light.svg',
+                sameAs: [
+                    'https://www.linkedin.com/company/shift-control-io',
+                    'https://github.com/shiftcontrol-io',
+                ],
+            }),
+        },
+        {
+            tagName: 'script',
+            attributes: {
+                type: 'application/ld+json',
+            },
+            innerHTML: JSON.stringify({
+                '@context': 'https://schema.org/',
+                '@type': 'WebSite',
+                name: 'ShiftControl Documentation',
+                url: 'https://docs.shiftcontrol.io/',
+            }),
+        },
+    ],
 
     presets: [
         [
@@ -35,12 +66,16 @@ const config: Config = {
                 docs: {
                     routeBasePath: '/',
                     sidebarPath: './sidebars.ts',
-                    // Please change this to your repo.
-                    // Remove this to remove the "edit this page" links.
                     editUrl:
                         'https://github.com/ShiftControl-io/documentation/edit/main',
                 },
                 blog: false,
+                sitemap: {
+                    lastmod: 'date',
+                    changefreq: 'weekly',
+                    priority: 0.5,
+                    filename: 'sitemap.xml',
+                },
                 theme: {
                     customCss: './src/css/custom.css',
                 },
@@ -55,6 +90,12 @@ const config: Config = {
             respectPrefersColorScheme: true,
         },
         image: 'img/shiftcontrol_social.png',
+        metadata: [
+            {name: 'keywords', content: 'ShiftControl, identity management, SaaS management, JumpCloud, Google Workspace, user provisioning, group management, IT administration'},
+            {name: 'twitter:card', content: 'summary_large_image'},
+            {property: 'og:type', content: 'website'},
+            {property: 'og:site_name', content: 'ShiftControl Documentation'},
+        ],
         navbar: {
             title: 'Documentation',
             logo: {
