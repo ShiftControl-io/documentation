@@ -4,33 +4,49 @@ description: 'An overview of User Management, where you can view, manage, and ed
 icon: 'users-viewfinder'
 ---
 
-<p style={{fontSize: "large"}}>An overview of User Management, where you can view, manage, and edit user details.</p>
+<p style={{fontSize: "large"}}>Your central hub for managing every person in your organization -- from onboarding their first day to offboarding their last.</p>
 
 ## Overview
 
-**User Management** provides a centralized view of all users within the ShiftControl platform. From here, you can view user details and take actions either individually or in bulk.
+Every person in your organization has a digital identity that determines what they can access, how they authenticate, and what tools they use every day. **User Management** is where you control all of it.
+
+When you manage users in ShiftControl, you are managing their identity across your entire stack. Changes you make here sync to JumpCloud, which in turn provisions or revokes access to every connected application. A single edit to a user's department or group membership can cascade into dozens of app-level permission changes -- automatically.
+
+This page gives you a real-time view of everyone in your organization: who they are, which directories they belong to, whether they are active, and how many groups and apps they touch.
 
 <img
     src="/img/ShiftControl/Users/User-Management.png"
     alt="User Management"
 />
 
-## View and Discover Users
+## How It Works
 
-- **User List**: A table displaying all users within the organization, including their names and email addresses.
-- **Search**: Use the search bar to search across various parameters, such as name, email, and other attributes to quickly find specific users.
+The Users list pulls identity data from JumpCloud and Google Workspace, then presents it in a unified view. Each row in the table represents a single person and shows:
 
-## Adding a User
+- **User** -- Their name, email, and avatar. This is the identity they use across all connected systems.
+- **Directory icons** -- Visual indicators showing which directories the user exists in (JumpCloud, Google Workspace). If a user is missing from one, you will spot it here.
+- **Status** -- Whether the user is Active or Inactive. Inactive users cannot authenticate to any connected applications.
+- **Groups and Apps** -- Counts showing how many groups the user belongs to and how many applications they can access. These numbers tell you the scope of a user's footprint in your organization.
 
-Click the [Add User](/using-shiftcontrol/Users/Adding-a-user) button located at the top of the screen to invite new users. This opens a form where you can input the new user's details, including their name, email, and role assignments.
+You can filter by directory (All directories, JumpCloud only, Google only) and by state (All states, Active, Inactive) to narrow down exactly who you are looking for. The search bar works across names, emails, and other attributes.
 
-## Editing Users
+## Common Scenarios
 
-Clicking the [Edit](/using-shiftcontrol/Users/Editing-a-user) button next to any user in the list will take you to the user details page, where you can modify their information. We will cover the specific details in a separate section.
+### Scenario: Auditing access before a compliance review
+
+Your security team needs a list of everyone with active access. Filter the Users list to show only **Active** users, then review the Groups and Apps counts. Users with unusually high app counts may warrant a closer look. Click into any user to see their full App Permissions tab and SaaS cost breakdown.
+
+### Scenario: Finding inactive users who still have app access
+
+Filter by **Inactive** status. If any inactive user still shows a non-zero Apps count, that is a sign their deprovisioning did not complete fully. Click into the user to investigate and revoke remaining access.
+
+### Scenario: Bulk onboarding for a new team
+
+Your company just acquired a five-person design team. Rather than adding them one at a time, add each user and assign them to the Design group. Their app access (Figma, Slack, Google Workspace) will be provisioned automatically based on group membership.
 
 ## User Actions
 
-You can take the following actions on individual users by using the dropdown menu next to each user:
+Click the action menu on any user row to take immediate action on an individual user.
 
 <img
     src="/img/ShiftControl/Users/User-actions.png"
@@ -38,26 +54,40 @@ You can take the following actions on individual users by using the dropdown men
     width={250}
 />
 
-- **Cancel Scheduled Activation**: Cancel any scheduled activation for the user.
-- **Schedule Deactivation**: Set a date for deactivating the user.
-- **Resend Activation**: Resend the activation email to the user.
-- **Disable User**: Disable the user account immediately.
-- **Force Password Reset**: Force the user to reset their password upon the next login.
-- **Set Password**: Manually set a password for the user.
+- **Cancel Scheduled Activation** -- If you have set a future activation date for a user and plans change, cancel it here. The user will remain in their current state.
+- **Schedule Deactivation** -- Set a future date to deactivate the user. Useful for employees with a known last day -- schedule it during offboarding and their access will be revoked automatically on that date.
+- **Resend Activation** -- Re-sends the activation email if the user lost it or it expired. They will receive fresh login credentials and setup instructions.
+- **Disable User** -- Immediately deactivates the user. They lose access to all connected applications. Use this for urgent offboarding situations.
+- **Force Password Reset** -- The user must create a new password on their next login attempt. Use this if you suspect their credentials have been compromised.
+- **Set Password** -- Manually assign a password for the user. Useful for service accounts or situations where the user cannot complete self-service password setup.
 
 ## Bulk Actions
 
-Bulk actions allow you to perform actions on multiple users at once. Select the users you wish to manage, and then choose from the following actions:
+Select multiple users using the checkboxes in the left column, then choose an action from the bulk actions menu. This is how you handle operations that affect many people at once -- seasonal onboarding, department-wide password resets, or end-of-contract offboarding.
 
 <img
     src="/img/ShiftControl/Users/Bulk-actions.png"
     alt="Bulk actions"
     width={250}
 />
-- **Activate/Deactivate**: Activate or deactivate multiple users in one step.
-- **Resend Activation**: Resend the activation email to all selected users.
-- **Cancel Scheduled Activation**: Cancel activations that are scheduled for multiple users.
-- **Password Management**: Perform bulk password management actions such as resetting passwords or forcing password resets.
-- **Disable**: Disable multiple users at once.
 
-The system will always indicate which actions are available based on the status of the selected users.
+- **Activate / Deactivate** -- Toggle access for multiple users in one step. Deactivating in bulk is the fastest way to offboard a departing team.
+- **Resend Activation** -- Send activation emails to everyone who has not completed setup yet.
+- **Cancel Scheduled Activation** -- Remove pending activations for multiple users.
+- **Password Management** -- Force password resets or set passwords across a group of users.
+- **Disable** -- Immediately disable multiple accounts. This is irreversible without re-activation.
+
+The menu only shows actions that are valid for the selected users. If you select a mix of active and inactive users, some options may not appear.
+
+## Things to Know
+
+- **Changes sync to JumpCloud.** When you activate, deactivate, or disable a user in ShiftControl, the change propagates to JumpCloud. From there, it affects every application connected through JumpCloud SSO. There may be a short sync delay (typically under a minute).
+- **Deactivation vs. disabling.** Deactivating a user suspends their access but preserves their account and data. Disabling is more aggressive -- use it when someone needs to be locked out immediately.
+- **Pagination.** The user list shows 10 users per page. Use the pagination controls at the bottom to navigate through larger organizations. The total count (e.g., "1 to 10 of 36 users") is always visible.
+- **Scheduled actions are not instant.** If you schedule a deactivation for a future date, the user retains full access until that date arrives. Double-check the scheduled date if timing is critical.
+
+## Related Features
+
+- [Adding a User](/using-shiftcontrol/Users/Adding-a-user) -- Create a new user identity and start the onboarding process.
+- [Editing a User](/using-shiftcontrol/Users/Editing-a-user) -- Update user details, review security settings, audit app permissions, and track SaaS costs.
+- [Groups](/using-shiftcontrol/Groups/Group-management) -- Manage the groups that control what applications and resources users can access.

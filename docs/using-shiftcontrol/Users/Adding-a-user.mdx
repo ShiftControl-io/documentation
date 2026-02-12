@@ -6,14 +6,45 @@ icon: 'user-plus'
 
 import { Steps, Step } from "@site/src/components/Steps";
 
-<p style={{fontSize: "large"}}>How to add a user to your organization.</p>
+<p style={{fontSize: "large"}}>When someone joins your company, adding them to ShiftControl creates their digital identity and provisions access to every tool they need -- automatically.</p>
 
 ## Overview
-Quickly and easily add a new user to your system, setting important profile information you can use to better organize your users and their access.
 
-## User Actions
+Adding a user in ShiftControl is the first step in onboarding. It is not just creating an account -- it is establishing a person's entire digital identity across your organization. The information you enter here flows into JumpCloud, which uses it to provision application access, assign security policies, and organize users into the right groups.
 
-### Adding a New User
+Every field in the user form serves a purpose beyond labeling. Department, Team, and Location drive dynamic group memberships, which in turn determine what applications and resources the person can access. Getting these right from the start means the new hire has everything they need on day one.
+
+## How It Works
+
+When you save a new user in ShiftControl:
+
+1. **A JumpCloud identity is created.** The user's profile, including their name, email, and organizational details, is synced to JumpCloud as the source of truth for authentication.
+2. **Dynamic group rules evaluate.** If you have groups configured to auto-include users based on Department, Location, or Team, the new user is added to matching groups automatically.
+3. **App access is provisioned.** Group memberships trigger application assignments. If the Engineering group grants access to GitHub, AWS, and Slack, a new engineer gets all three without any manual app-by-app setup.
+4. **An activation email is sent.** The user receives an email (to their primary or personal email, depending on your configuration) with instructions to set their password and configure MFA.
+
+## Common Scenarios
+
+### Scenario: Onboarding a new developer
+
+A software engineer is starting next Monday. You need them to have access to GitHub, AWS, Linear, and Slack on their first day.
+
+1. Add the user with their work email as the Primary Email.
+2. Set Department to **Engineering** and Team to **Platform**.
+3. These values automatically place them in the Engineering and Platform groups.
+4. Those groups grant access to GitHub, AWS, Linear, and Slack through group-based app assignments.
+5. Enter their personal email so the activation email arrives before their work accounts are set up.
+6. On Monday morning, they log in, complete MFA setup, and have everything ready.
+
+### Scenario: Adding a contractor with limited access
+
+A design contractor is joining for three months. They need Figma and Slack but nothing else.
+
+1. Add the user and set Department to **Contractors**.
+2. If you have a Contractors group with limited app assignments, they will only get access to the tools that group provides.
+3. After saving, you can schedule a deactivation date from the User Management page that matches their contract end date.
+
+## Step-by-Step Guide
 
 <img
     src="/img/ShiftControl/Users/Add-a-user.png"
@@ -22,29 +53,50 @@ Quickly and easily add a new user to your system, setting important profile info
 
 <Steps>
 
-    <Step title="Navigate to the Users Section or Dashboard">
-        You can add a user from the main dashboard or the **Users** tab on the left-hand menu. You can also use the
-        Command Bar to quickly **Add a User**.
+    <Step title="Navigate to Users">
+        Go to **Users** in the left sidebar, or use the Command Bar to quickly access **Add a User**. You can also add a user directly from the main dashboard.
     </Step>
 
-    <Step title="Click on 'Add User'">
-        At the top-right corner of the Users section or from the dashboard, click the **Add User** button. This will
-        open a new page for adding the user’s details.
+    <Step title="Click Add User">
+        Click the **Add User** button in the top-right corner. This opens the user creation form on the **Details** tab. (The Security and SaaS cost tabs are disabled until the user is saved -- they only apply to existing users.)
     </Step>
 
-    <Step title="Enter User Information">
-        Fill out the user's profile information. These fields allow you to organize your users dynamically so you can
-        easily manage their access and permissions.
+    <Step title="Enter identity information">
+        Fill in the user's core identity fields:
 
-        Importantly, you will need to enter:
-        - **Primary Email**: This is the email the user will use for all their identity and login activities.
-        - **Personal Email**: This field can be used to send activation emails to the user's personal email during the
-        onboarding process.
+        - **First Name / Last Name** -- The user's legal name. This appears across all connected applications and in JumpCloud.
+        - **Display Name** -- How the user's name appears in ShiftControl and connected apps. Useful when someone goes by a name different from their legal name.
+        - **Primary Email** -- This becomes the user's SSO login identity. It is the email they will use to authenticate into every connected application. Choose carefully -- changing this later affects all connected services.
+        - **Personal Email** -- An optional non-work email address. When provided, ShiftControl can send the activation email here instead of the primary email. This is essential for onboarding because the user's work email is not accessible until they complete setup.
     </Step>
 
-    <Step title="Save All">
-        Once the necessary information is entered, click the **Save All** button to save the new user and send
-        activation details.
+    <Step title="Set organizational details">
+        These fields do more than label the user -- they drive automatic group assignments and determine what the user can access:
+
+        - **Manager** -- Select the user's direct manager from the dropdown. This establishes the reporting hierarchy visible in the org chart and can be used for approval workflows.
+        - **Title** -- The user's job title. Displayed in their profile across connected systems.
+        - **Department** -- Determines which department-based dynamic groups the user is added to. If you have a "Marketing" group that auto-includes everyone in the Marketing department, setting this field is what triggers that membership.
+        - **Location** -- Can drive location-based groups and policies. If your London office has different compliance requirements than your San Francisco office, location-based groups handle that automatically.
+        - **Company** -- Relevant for organizations managing multiple legal entities or subsidiaries through a single ShiftControl instance.
+        - **Team** -- A more granular grouping than Department. A user might be in the Engineering department but on the Platform team, and each level can have its own group-based app assignments.
+    </Step>
+
+    <Step title="Save the user">
+        Click **Save Changes** to create the user. ShiftControl syncs the new identity to JumpCloud, evaluates group membership rules, provisions app access, and sends the activation email. The user will appear in the Users list with an Inactive status until they complete activation.
     </Step>
 
 </Steps>
+
+## Things to Know
+
+- **Primary Email cannot be easily changed later.** It becomes the user's SSO identity across all connected applications. Changing it after creation requires updates across JumpCloud and every connected service. Get it right the first time.
+- **Personal Email is your onboarding lifeline.** Since the user's work email does not exist until their account is activated, the personal email is how you reach them with setup instructions. Always include it for new hires.
+- **Department and Team drive access.** These are not just labels. If you have dynamic groups configured (and you should), the values you enter here directly control what applications the user gets access to. An incorrect department means incorrect access.
+- **The user starts as Inactive.** After creation, the user must complete the activation process (setting their password and configuring MFA) before they can access anything. You can track their activation status from the User Management page.
+- **You can set things up before their start date.** Create the user account days or weeks before they start. They will not be able to log in until they activate, so there is no security risk in creating accounts early.
+
+## Related Features
+
+- [User Management](/using-shiftcontrol/Users/User-management) -- View and manage all users, take bulk actions, and monitor activation status.
+- [Editing a User](/using-shiftcontrol/Users/Editing-a-user) -- After creating a user, you can edit their details, configure security settings, manage app permissions, and review SaaS costs.
+- [Groups](/using-shiftcontrol/Groups/Group-management) -- Understand how groups control application access and how dynamic groups use user attributes to automate membership.

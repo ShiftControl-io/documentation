@@ -1,128 +1,154 @@
 ---
 title: 'Editing a Group'
-description: 'How to edit a group and understanding the different ways to assign users.'
+description: 'How to configure group membership using dynamic rules, nested groups, and individual assignments.'
 icon: 'users-gear'
 ---
 
 import { Steps, Step } from "@site/src/components/Steps";
 import Admonition from '@theme/Admonition';
 
-<p style={{fontSize: "large"}}>How to edit a group and understanding the different ways to assign users.</p>
+<p style={{fontSize: "large"}}>Configure how users are added to a group using dynamic rules, nested groups, and individual assignments.</p>
 
 ## Overview
-When editing a group, you can configure all three tabs—dynamic assignments, nested assignments, and individual assignments. You can choose to assign users using one or any combination of these methods.
 
-### Group Assignments
+Editing a group is where you define who belongs to it, and by extension, who gets access to the apps assigned to that group. ShiftControl provides three rule types that you can use individually or combine to build exactly the membership you need:
+
+- **Dynamic rules** automatically add and remove users based on their profile attributes. When a user's attribute matches the rule, they are added. When it stops matching, they are removed.
+- **Nested rules** include all members of another group. If you nest the "Engineering" group inside an "All Technical Staff" group, every engineer is automatically a member of both.
+- **Individual assignments** let you manually add specific users. Use this for exceptions or when dynamic rules do not cover a particular case.
+
+Any combination of these three rule types can be active on a single group. Users who match any of the rules are included in the group.
+
+## How It Works
+
+When you edit a group, you see two tabs: **General** and **Group Rules**.
+
+The General tab holds the group's name, description, tag, and Google Sync settings. The Group Rules tab is where you configure membership. A right sidebar shows live group information including the current count of users, apps, and rules.
+
+When you change a group's rules and save, ShiftControl immediately recalculates membership. Users who now match the rules are added and gain app access. Users who no longer match are removed and lose app access. This happens in real time.
+
+### Group Detail View
 <img
     src="/img/ShiftControl/Groups/Edit-a-group-assignments.png"
     alt="Edit a group - assignments"
 />
 
-### Group Details
+### General Settings
 <img
     src="/img/ShiftControl/Groups/Edit-a-group-details.png"
     alt="Edit a group - details"
 />
 
-## Editing a group
+## Common Scenarios
 
-### Group Details
+**Automatically assign all users in a department** -- Edit the group, go to Group Rules, and add a dynamic rule: "When Department equals Accounting." Every user whose Department attribute is set to "Accounting" is automatically added. When someone transfers out of Accounting, they are automatically removed.
+
+**Build a group that combines multiple teams** -- Create a "Product Organization" group and nest the "Engineering," "Design," and "Product Management" groups inside it. Everyone in those three teams is automatically a member of the Product Organization group and gets access to any apps assigned to it.
+
+**Grant temporary access to a contractor** -- A contractor needs access to a specific tool for a project. Add them as an individual assignment to the relevant group. When the project ends, remove their individual assignment to revoke access.
+
+## Step-by-Step
 
 <Steps>
 
-    <Step title="Navigate to the Group Management Pane">
-        From the dashboard, navigate to the **Group Management** pane where all groups are listed.
+    <Step title="Open the Group">
+        Navigate to **Groups** in the sidebar, find the group you want to edit, and click on it to open the group detail page.
     </Step>
 
-    <Step title="Select the Group to Edit">
-        Find the group you wish to edit and click the **Edit** button in the same row as the group name.
+    <Step title="Edit General Details">
+        On the **General** tab, you can update the group name, description, tag, and Google Sync settings. Click **Save Changes** after making updates.
     </Step>
 
-    <Step title="Edit Group Details">
-        In the edit view, you can modify fields like the group name, description, and other settings.
-    </Step>
+    <Step title="Configure Dynamic Rules">
+        Switch to the **Group Rules** tab. Under the **Dynamic** section, click **Add condition** to create a new rule.
 
-    <Step title="Configure Dynamic Assignments">
-        Dynamic assignments allow you to automatically populate a group's membership based on user profile attributes.
+        Each dynamic rule follows the pattern: **When [attribute] equals [value]**.
 
-        - You can create rules based on user profile attributes such as **Cost Center**, **Department**, or other
-        fields.
-        - For example, you can assign all users in the **Operations** or **Human Resources** departments to a group.
-        - You can combine multiple rules, such as adding an **AND** condition that specifies both the department and the
-        company.
+        Available attributes include:
+        - **Cost Center**
+        - **Department**
+        - **Description**
+        - **Primary Email**
+        - **Employee Type**
+        - **Job Title**
+        - **Location**
+        - **Manager**
+        - **User State**
+        - **Team**
 
-        Attributes available for dynamic assignment include:
-        1. **Cost Center**
-        2. **Department**
-        3. **Description**
-        4. **Primary Email**
-        5. **Employee Type**
-        6. **Job Title**
-        7. **Location**
-        8. **Manager**
-        9. **User State**
+        You can add multiple conditions to a single rule. For example: "When Department equals Engineering AND Location equals San Francisco" to target only engineers in a specific office.
 
         <img src="/img/ShiftControl/Groups/Group-dynamic-assignments.png" alt="Group dynamic assignments"/>
     </Step>
 
-    <Step title="Configure Nested Assignments">
-        With nested assignments, you can include one group as part of another.
+    <Step title="Configure Nested Rules">
+        Under the **Nested** section, select other groups to include as members of this group.
 
-        - Click on the **Nested** tab when editing the group.
-        - Select other groups you'd like to include as part of the current group.
+        When you nest Group B inside Group A, every member of Group B becomes a member of Group A automatically. If someone is added to or removed from Group B, their membership in Group A updates as well.
 
         <img src="/img/ShiftControl/Groups/Group-nested-assignments.png" alt="Group nested assignments"/>
 
-        **Only one level of nesting is supported!** If this group is already used as a nested group in another group,
-        you'll see the warning shown below.
+        <Admonition type="caution">
+            **Only one level of nesting is supported.** If Group A nests Group B, then Group B cannot nest another group. ShiftControl will show a warning if you attempt to create a deeper nesting chain.
+        </Admonition>
 
         <img src="/img/ShiftControl/Groups/Group-nested-warning.png" alt="Group nested assignments warning"/>
     </Step>
 
     <Step title="Configure Individual Assignments">
-        Individual assignments allow you to manually add specific users to the group.
+        Under the **Individual** section, search for users by name and add them to the group manually.
 
-        - Click on the **Individual Assignments** tab.
-        - Search for a user by name and add them to the group.
-
-        This gives you flexibility to assign specific users manually if needed.
+        Individual assignments are useful for one-off exceptions, temporary access, or cases where no attribute-based rule would cleanly identify the right users.
 
         <img src="/img/ShiftControl/Groups/Group-individual-assignments.png" alt="Group individual assignments"/>
     </Step>
 
     <Step title="Save Changes">
-        Once you've configured the group assignments, click **Save All** to apply the changes. The group will now
-        reflect the updated membership based on the assignments you've made.
+        Click **Save Changes** to apply the updated rules. ShiftControl immediately recalculates group membership and updates app access for all affected users.
     </Step>
 
 </Steps>
 
 ## Group Info Sidebar
 
-In the **Edit Group** section, there is also a collapsible sidebar that provides additional information about the group. The sidebar includes information about the group rules, users assigned to the group, and apps that use the group for assignments.
+The right sidebar on the group detail page shows live information about the group across three tabs:
 
-<Admonition type="info">
-    You can hover over the icons in the sidebar to see more information about how users are assigned to the group.
-</Admonition>
+- **Users**: Lists all current members and shows how each was added (dynamic, nested, or individual). Hover over the icons to see assignment details.
+- **Apps**: Shows which applications are assigned to this group. Adding or removing an app here changes access for every group member.
+- **Rules**: Summarizes the active rules with counts for each type (Dynamic, Nested, Individual).
 
-### Group Sidebar with Rules
+### Sidebar -- Rules
 <img
     src="/img/ShiftControl/Groups/Group-sidebar-rules.png"
     alt="Group Sidebar with Rules"
     width={"400"}
 />
 
-### Group Sidebar with Users
+### Sidebar -- Users
 <img
     src="/img/ShiftControl/Groups/Group-sidebar-users.png"
     alt="Group Sidebar with Users"
     width={"400"}
 />
 
-
-### Group Sidebar with Apps
+### Sidebar -- Apps
 <img
     src="/img/ShiftControl/Groups/Group-sidebar-apps.png"
     alt="Group Sidebar with Apps"
     width={"400"}
 />
+
+## Things to Know
+
+- **Rule changes take effect immediately.** When you save updated rules, group membership and app access are recalculated right away. There is no delay or approval step.
+- **Dynamic rules are the most powerful option.** They keep groups accurate as your organization changes. When someone joins a department, changes locations, or gets a new title, dynamic rules automatically adjust their group membership.
+- **Nesting is limited to one level.** You cannot nest a group that already contains nested groups. This prevents circular dependencies and keeps group logic easy to understand.
+- **Individual assignments override nothing.** A user can be in a group through a dynamic rule, a nested group, and an individual assignment simultaneously. Removing one path does not remove the user if another path still applies.
+- **Removing a user from a group may revoke app access.** Before removing someone, check which apps are assigned to the group in the sidebar. The user will lose access to those apps unless they belong to another group that also has those apps assigned.
+- **The sidebar is your audit tool.** Use it to verify who is in a group, why they are there, and what apps they can access through this group.
+
+## Related Features
+
+- [Group Management](/using-shiftcontrol/Groups/Group-management) -- View and organize all groups from the central list.
+- [Adding a Group](/using-shiftcontrol/Groups/Adding-a-group) -- Create a new group before configuring its rules.
+- [Syncing Groups with Google](/using-shiftcontrol/Groups/Syncing-groups-with-google) -- Push group membership to Google Workspace.

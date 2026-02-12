@@ -8,50 +8,82 @@ icon: 'grid'
 
 ## Overview
 
-The **App Management** dashboard allows you see an overview of all your applications, including which apps are shown to your users in their employee portal. You can add, edit, and delete apps, making it easier to manage user access and track app usage across your organization.
+App Management is the central dashboard for every SaaS application in your organization. It shows you what apps you have, how they're connected, who has access, and what they cost. From here you add new apps, edit existing ones, and remove apps you no longer need.
 
 <img
     src="/img/ShiftControl/Apps/App-management.png"
     alt="App management"
 />
 
-We recommend adding every SaaS app in your organization to ShiftControl, even if you aren't ready to integrate Single Sign-on authentication. That's because apps can be either SSO Apps or Bookmarks, allowing you full control and flexibility.
+## How It Works
 
-### Benefits of adding all your apps
+The dashboard displays a table of all your installed apps with the following columns:
 
-	1.	**Unified Access:** When you add all apps and assign users in ShiftControl, your users will see all their assigned apps in their App Dashboard. This centralizes access and makes it easier for new users to discover and access their apps without needing to remember each app’s website.
-	2.	**Streamlined Provisioning:** Setting up all apps early facilitates the enablement of automatic provisioning and deprovisioning via user sync. User sync is often a premium feature on many SaaS services. We’re working to integrate user sync into lower license tiers for many services. By setting up your apps, groups, and assignments in advance, turning on user sync will be seamless and effortless.
-	3.	**Improved Security:** Adding all apps allows for better visibility and management of app usage within your organization. This enhances security by ensuring that access to each app is controlled and monitored, reducing the risk of unauthorized access.
-	4.	**Enhanced Productivity:** With all apps centralized in ShiftControl, employees spend less time searching for the right tools and more time being productive. The App Dashboard becomes a single point of entry for all work-related applications.
-	5.	**Simplified Onboarding:** New hires can be onboarded more quickly as they will have immediate access to all necessary apps from day one. This reduces the time and effort required for IT to manually set up each user.
-	6.	**Centralized Management**: ShiftControl provides a single platform to manage all your SaaS applications, making it easier to track app usage, manage licenses, and monitor user access. This centralized management simplifies IT operations and reduces administrative overhead.
-	7.	**Scalability:** As your organization grows, having all apps already set up in ShiftControl allows you to scale seamlessly. Adding new users, groups, and apps becomes a straightforward process, supporting your organization’s expansion.
-	8.	**Compliance and Reporting:** With all apps managed in one place, it’s easier to ensure compliance with organizational policies and regulatory requirements. ShiftControl can provide detailed reports on app usage and access, aiding in audits and compliance checks.
+- **App** -- the app icon and name.
+- **Type** -- how the app is connected: SSO SAML, SSO OIDC, or Bookmark.
+- **Sync** -- whether automatic user sync is configured.
+- **Users & Groups** -- how many users and groups are assigned.
+- **Est. Total Cost** -- the estimated total cost based on the subscription you configured.
 
-Integrating all your SaaS applications into ShiftControl not only enhances operational efficiency but also strengthens security and simplifies user management. Take advantage of ShiftControl’s capabilities to optimize your app management strategy.
+You can search by name, paginate through the list, and click any app to edit its details.
 
-We make discovering apps easier through App Discovery, which helps you find and add new apps to your organization. This feature is especially useful for discovering new apps that can enhance your team's productivity and collaboration.
+### App Types
 
-## View and Discover Apps
+ShiftControl supports three connection types. Each one determines how your users access the app and how much control you have.
 
-The App Management dashboard provides you with a comprehensive view of all the apps in your organization, including the following details:
-- **App Type**: Whether the app is a **Bookmark** or an **SSO/SAML** application.
-- **Portal Visibility**: Whether the app is shown in the user portal.
-- **User Sync**: Whether user sync is configured for the app.
-- **Groups Assigned**: How many groups are assigned to the app.
+| Type | What It Does | When to Use It |
+|------|-------------|----------------|
+| **SSO SAML** | Full single sign-on using the SAML protocol. Users authenticate through ShiftControl and are logged in automatically. | The app supports SAML and your license tier includes SSO. This is the most secure option. |
+| **SSO OIDC** | Full single sign-on using OpenID Connect. Works the same way as SAML but uses a different protocol. | The app supports OIDC but not SAML, or OIDC is the recommended integration. |
+| **Bookmark** | A portal link to the app. No SSO -- users log in to the app separately. | You want the app in the employee portal for easy access, but SSO is not available or not yet configured. |
 
-You can also use the search bar to find specific apps by name or description.
+### Why Add All Your Apps
+
+We recommend adding every SaaS app your organization uses, even the ones that don't support SSO yet. When all your apps are in ShiftControl:
+
+- **Employees see everything in one place.** Their App Dashboard becomes a single launch point for all work tools.
+- **Onboarding is faster.** New hires get access to all their apps on day one through group assignments.
+- **You can track costs.** The Subscription tab on each app lets you record plan details and per-user costs so you can see spend across your entire SaaS portfolio.
+- **You're ready for SSO later.** A Bookmark can be upgraded to SSO SAML or OIDC at any time without losing assignments or configuration.
+
+## Common Scenarios
+
+### Centralizing SaaS access for a growing team
+
+You have 30+ apps spread across different departments. Add them all to ShiftControl (SSO where possible, Bookmarks for the rest), assign them through groups, and every employee gets a personalized App Dashboard with the tools they need.
+
+### Setting up SSO for a new app
+
+Find the app in the App Catalog (983+ pre-configured apps), click "Add SSO app," configure the SAML or OIDC settings, assign groups, and save. Users can now authenticate through ShiftControl.
+
+### Tracking SaaS costs across your org
+
+Add subscription details (plan, billing cycle, per-user cost) to each app. The App Management table shows estimated total cost per app so you can spot expensive or underused tools.
 
 ## Adding an App
 
-Clicking the [Add new app](/using-shiftcontrol/Apps/Adding-an-app) button located at the top of the screen allows you to add a new app. This opens a form where you can input the app's details, including the app name, description, and other settings.
+Click the **Add new app** button at the top of the dashboard. This opens the [App Catalog](/using-shiftcontrol/Apps/Adding-an-app) where you can search 983+ pre-configured apps or add a custom app.
 
 ## Editing an App
 
-Clicking the [Edit](/using-shiftcontrol/Apps/Editing-an-app) button next to any app in the list will take you to the app details page, where you can modify its information. We will cover the specific details in a separate section.
+Click any app in the list to open its [detail page](/using-shiftcontrol/Apps/Editing-an-app). From there you can modify general information, subscription details, SSO configuration, and user assignments.
 
 ## App Actions
 
-You can take the following actions on individual apps by using the dropdown menu next to each app:
+Use the menu next to each app to:
 
-- **Delete**: Permanently delete the app.
+- **Delete** -- permanently remove the app and all its assignments.
+
+## Things to Know
+
+- Deleting an app removes all group and individual assignments. If the app uses SSO, users will lose single sign-on access immediately.
+- Bookmark apps do not control authentication. They are portal links only -- users still log in to the app with their own credentials.
+- The "Est. Total Cost" column is calculated from the subscription details you enter. It is not pulled from the app vendor automatically.
+- You can upgrade a Bookmark to an SSO app at any time by editing the app and configuring SSO settings.
+
+## Related Features
+
+- [Adding an App](/using-shiftcontrol/Apps/Adding-an-app) -- step-by-step guide for adding apps from the catalog or creating custom apps.
+- [Editing an App](/using-shiftcontrol/Apps/Editing-an-app) -- how to configure General, Subscription, and Assignment tabs.
+- [App Discovery](/using-shiftcontrol/Apps/App-discovery) -- automatically detect apps your users are accessing via OAuth.
+- [Groups](/using-shiftcontrol/Groups/Group-management) -- manage the groups used to assign apps to users.

@@ -8,40 +8,89 @@ icon: 'bell'
 
 ## Overview
 
-**Task Management** allows you to track tasks that require your attention. Each task represents an event or action that needs review or completion within your organization.
+ShiftControl monitors your environment continuously -- discovering new apps, detecting sync issues, and flagging items that need human decisions. When something requires your attention, it surfaces as a **task**. Task Management is your single queue for all of these actionable items, so nothing falls through the cracks.
 
 <img
     src="/img/ShiftControl/Task-management.png"
     alt="Task Management"
 />
 
+## How It Works
+
+Tasks are generated automatically by ShiftControl when events occur that need an admin's review. Common sources include:
+
+- **App discovery** -- A new application is detected in your environment. You decide whether to manage it, ignore it, or investigate further.
+- **Sync issues** -- An integration encounters a problem that cannot be resolved automatically.
+- **Assignment conflicts** -- A user or group assignment needs manual review.
+- **Policy violations** -- An action conflicts with a configured policy.
+
+Each task includes a title, details about what triggered it, the relevant assignment, and the date it was created. Tasks remain in the queue until you act on them.
+
+## Common Scenarios
+
+| Scenario | What to do |
+|---|---|
+| **New app detected** | An "App discovery available" task appears. Review the app, then decide to add it to your managed apps or dismiss the task. |
+| **Integration sync failed** | A task flags the issue with details. Investigate the integration, resolve the problem, then dismiss the task. |
+| **Bulk cleanup** | Multiple discovery tasks have accumulated. Select them all and use bulk actions to dismiss the ones you do not need. |
+| **Triage during onboarding** | Filter to Pending tasks to see what needs attention first. Work through items one at a time. |
+
 ## Accessing Task Management
 
-To access Task Management, click the bell icon in the top left corner of the ShiftControl interface. A bell with a blue dot indicates that you have unread tasks. Clicking the bell will open the Task Management panel, where you can view and manage your tasks.
+Click the **bell icon** in the top-left corner of the ShiftControl interface. A blue dot on the bell indicates unread tasks.
+
+You can also reach Task Management from anywhere using the Command Bar: press **Cmd + K**, then **Cmd + T**.
 
 <img
     src="/img/ShiftControl/Accessing-task-management.png"
     alt="Accessing task management"
 />
 
-## View Tasks
+## Viewing Tasks
 
-- **Task List**: The list of tasks that require your attention, including the task title, description, assigned user, and status.
-- **Search**: Use the search bar to find specific tasks.
-- **Filters**: Filter the list based on the status.
+The task list displays all items requiring your attention. The table includes:
+
+- **Title** -- A short description of the task (for example, "App discovery available").
+- **Details** -- Additional context about what triggered the task.
+- **Assignment** -- The user, app, or group related to the task.
+- **Created** -- The date the task was generated.
+
+Use the **search bar** to find specific tasks by keyword. Use the **filter** dropdown to narrow the list by status, such as Pending.
+
+The list paginates automatically. Navigation controls at the bottom show your position (for example, "1 to 10 of 70, Page 1 of 7").
 
 ## Task Actions
 
-You can take the following actions on tasks:
+Each task supports the following actions:
 
-- **Dismiss**: Remove the task from the list if it's no longer relevant or has been completed.
-- **Mark as Unread**: Mark the task as unread to remind yourself to review it later.
+- **Dismiss** -- Remove the task from your queue. Use this when the task is resolved or no longer relevant.
+- **Mark as Unread** -- Flag the task for later review. It stays in the queue but resets to an unread state so you do not forget it.
 
 ## Bulk Actions
 
-You can also take bulk actions on multiple tasks at once. Select the tasks you want to manage, then click the **Bulk Actions** button to take the same actions as are available in individual task actions.
+When tasks accumulate, process them in batches:
+
+1. Select multiple tasks using the checkboxes.
+2. Click the **Bulk Actions** button.
+3. Choose an action (Dismiss or Mark as Unread) to apply to all selected tasks at once.
+
+This is especially useful for clearing out a backlog of discovery notifications or resolved sync issues.
 
 <img
     src="/img/ShiftControl/Task-management-bulk-actions.png"
     alt="Task Management bulk actions"
 />
+
+## Things to Know
+
+- Tasks are generated automatically. You do not create them manually.
+- Dismissing a task removes it from the queue permanently. If a similar event occurs again, a new task will be created.
+- The bell icon's blue dot clears once all tasks have been read.
+- Tasks do not expire on their own. They remain in the Pending state until you take action.
+- The most common task type is "App discovery available," which appears when ShiftControl detects an application your organization is using but has not yet added to management.
+
+## Related Features
+
+- **[Command Bar](/using-shiftcontrol/using-the-command-bar)** -- Jump to Task Management instantly with `Cmd` then `T`.
+- **[App Discovery](/using-shiftcontrol/Apps/App-discovery)** -- The primary source of discovery tasks. Review detected apps here.
+- **[App Assignment Reports](/using-shiftcontrol/Reports/App-assignment-reports)** -- After acting on tasks, verify assignments are correct in the reports.

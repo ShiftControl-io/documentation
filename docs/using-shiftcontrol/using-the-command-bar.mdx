@@ -7,55 +7,93 @@ icon: 'magnifying-glass'
 <p style={{fontSize: "large"}}>Learn how to use the Command Bar in ShiftControl to search and quickly access key features such as users, groups, and apps.</p>
 
 ## Overview
-The Command Bar in ShiftControl allows for fast and efficient navigation across the platform. Users can search for specific items such as **users**, **groups**, or **apps** and navigate directly to their respective pages. Additionally, predefined keyboard shortcuts make it easy to perform common actions without the need for manual clicks.
+
+Clicking through menus is slow. The **Command Bar** gives you keyboard-driven access to everything in ShiftControl -- search for users, jump to a page, or start a workflow -- all without lifting your hands from the keyboard. If you have used Spotlight on macOS or the command palette in VS Code, the concept is the same.
 
 <img
     src="/img/ShiftControl/Command-bar.png"
     alt="ShiftControl Command Bar"
     width={500}
 />
-## How to Use the Command Bar
 
-1. **Accessing the Command Bar:**
+## How It Works
 
-The command bar can be accessed from any page within the ShiftControl Dashboard by using the shortcut `⌘ + K` (for macOS) or `Windows + K` (for Windows) to open it. You can also click the command bar at the top of the page.
+The Command Bar is a search-and-action overlay available on every page in ShiftControl. It works in two modes:
 
-2. **Searching:**
+1. **Search mode** -- Start typing to search across users, groups, and apps. Results appear in real time and you can select one to navigate directly to it.
+2. **Shortcut mode** -- Press a key sequence (like `A` then `U`) to jump straight to an action such as adding a user. No typing or searching required.
 
-Simply start typing in the command bar to search across **users**, **groups**, and **apps**. The search functionality will display matching results in real-time, allowing you to navigate to the specific item with ease.
+Both modes are accessed from the same bar, so you can switch between searching and shortcuts fluidly.
 
-3. **Executing Shortcuts:**
+## Common Scenarios
 
-In addition to search, the command bar supports predefined key sequences for fast navigation. For example, you can type the following key sequences:
-- Typing the letter `A` followed by `U` (`A`, `U`) will navigate to the **Add User** section.
-- Similarly, typing `A` followed by `G` (`A`, `G`) will navigate to the **Add Group** section.
-- These sequences allow you to perform actions quickly without searching through menus.
+| Scenario | What to do |
+|---|---|
+| **Find a user quickly** | Open the Command Bar, type part of their name or email, select from results. |
+| **Add a new user** | Open the Command Bar, press `A` then `U`. You are taken directly to the Add User form. |
+| **Jump to the dashboard** | Press `Cmd` then `D` from anywhere. |
+| **Check your tasks** | Press `Cmd` then `T` to go straight to the task list. |
+| **Navigate to a specific app** | Open the Command Bar, type the app name, select it from the results. |
 
-## Search Functionality
+## Opening the Command Bar
 
-The command bar is capable of searching across multiple entities, including:
+Use any of these methods:
 
-- **Users**: Search for specific users by name or email and navigate directly to their profile or management screen.
-- **Groups**: Easily search for user groups by name and view their details.
-- **Apps**: Search for apps within the platform and access their management or configuration pages.
+- Press **Cmd + K** on macOS (or **Ctrl + K** on Windows).
+- Click the **Quick Search** bar at the top of any page.
 
-By leveraging the search functionality, you can quickly locate and manage resources without navigating through multiple menus.
+The Command Bar opens as an overlay. Press **Esc** or click outside to close it.
 
-## Supported Shortcuts
+## Searching
 
-Below is a list of supported key sequences for quick navigation and actions within the platform:
+With the Command Bar open, start typing. ShiftControl searches across:
 
-| **Keystroke**        | **Action**                           |
-|----------------------|--------------------------------------|
-| `Shift + D`          | Navigate to Dashboard                |
-| `Shift + T`          | Navigate to Tasks                    |
-| `A` then `U`         | Add User                 |
-| `A` then `G`         | Add Group                |
-| `A` then `A`         | Add App                  |
-| `G` then `U`         | Go to Users             |
-| `G` then `G`         | Go to Groups            |
-| `G` then `A`         | Go to Apps              |
-| `G` then `D`         | Go to App Discovery            |
-| `G` then `I`         | Go to Integrations             |
+- **Users** -- by name or email.
+- **Groups** -- by group name.
+- **Apps** -- by app name.
 
-Explore the full functionality of the Command Bar to make your navigation and resource management smoother and more efficient.
+Results update as you type. Select a result to navigate directly to that item's detail page.
+
+## Keyboard Shortcuts
+
+The Command Bar supports key sequences for common actions. These shortcuts work after opening the Command Bar.
+
+### Quick Access
+
+| Shortcut | Action |
+|---|---|
+| `Cmd` then `D` | Go to Dashboard |
+| `Cmd` then `T` | Go to Tasks |
+
+### Add Something
+
+| Shortcut | Action |
+|---|---|
+| `A` then `U` | Add User |
+| `A` then `G` | Add Group |
+| `A` then `A` | Add App |
+
+### Go to a Section
+
+| Shortcut | Action |
+|---|---|
+| `G` then `U` | Go to Users |
+| `G` then `G` | Go to Groups |
+| `G` then `A` | Go to Apps |
+| `G` then `D` | Go to App Discovery |
+| `G` then `I` | Go to Integrations |
+
+The pattern is consistent: `A` means "add," `G` means "go to," and the second key identifies the target.
+
+## Things to Know
+
+- The Command Bar is available on every page. You do not need to navigate to a specific section first.
+- Keyboard shortcuts are key sequences, not simultaneous key presses. Press the first key, release it, then press the second.
+- Search is not case-sensitive. Partial matches work.
+- The Command Bar closes automatically after you select a result or execute a shortcut.
+
+## Related Features
+
+- **[Task Management](/using-shiftcontrol/task-management)** -- Quickly accessible via `Cmd` then `T` from the Command Bar.
+- **[User Management](/using-shiftcontrol/Users/User-management)** -- Add or find users directly from the Command Bar.
+- **[Group Management](/using-shiftcontrol/Groups/Group-management)** -- Add or navigate to groups without leaving the keyboard.

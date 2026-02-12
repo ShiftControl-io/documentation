@@ -1,47 +1,58 @@
 ---
 title: 'Group Management'
-description: 'Overview of managing groups, using quick view, and working with group tags.'
+description: 'Groups are the core of access management in ShiftControl. Learn how to view, organize, and manage your groups.'
 icon: 'users'
 ---
 import Admonition from '@theme/Admonition';
 
-<p style={{fontSize: "large"}}>Overview of managing groups, using quick view, and working with group tags.</p>
+<p style={{fontSize: "large"}}>Groups are the core of access management in ShiftControl. Every app assignment, every permission, and every access decision flows through groups.</p>
 
 ## Overview
 
-The **Group Management** page allows administrators to manage user groups efficiently. You can see a list of all available groups along with descriptions, the last update date, and several actions for managing those groups.
+Groups are how you give people access to apps in ShiftControl. Instead of assigning apps to individual users one at a time, you assign apps to groups and then manage who belongs to each group. When a user joins a group, they immediately gain access to every app assigned to that group. When they leave, that access is revoked.
+
+The **Group Management** page is your central hub for viewing and organizing all groups across your organization.
 
 <img
     src="/img/ShiftControl/Groups/Group-Management.png"
     alt="Group management"
 />
 
-## View and Discover Groups
+## How It Works
 
-- **Group List**: A table displaying all groups within the organization, including their names, descriptions, and last update dates.
-- **Search**: Use the search bar to find specific groups by name or description.
+The groups list displays a table with the following information for each group:
 
-## Adding a Group
+- **Group**: The group name and description.
+- **Group Tag**: A color-coded label that categorizes the group (Role Access, Team, Location, Department, Distribution, or No tag).
+- **Directory**: Which directory the group belongs to.
+- **Google Sync**: An icon indicating whether the group syncs to Google Workspace.
+- **Group Stats**: Counts of users and apps associated with the group.
 
-Click the [Add Group](/using-shiftcontrol/Groups/Adding-a-group) button at the top of the screen to create a new group. This opens a form where you can input the group's name, description, and any optional settings.
+Use the filters at the top of the page to narrow the list by directory or tag. The search bar lets you find specific groups by name.
 
-## Editing a Group
+## Common Scenarios
 
-Clicking the [Edit](/using-shiftcontrol/Groups/Editing-a-group) button next to any group in the list will take you to the group details page, where you can modify its information. We’ll cover specific options such as **group tags** below.
+**Department-based app access** -- Create a group like "Accounting" with a dynamic rule that matches users whose Department attribute equals "Accounting." Assign finance apps (QuickBooks, Expensify, NetSuite) to the group. Every accountant gets access automatically, and new hires in the department are added the moment their profile is set up.
 
-## Group Actions
+**Role-based access for cloud infrastructure** -- Create groups like "AWS Production Access" and "AWS Staging Access" tagged as Role Access. Assign the appropriate AWS SSO app to each group. Engineers who need production access are added to the production group; everyone else only gets staging.
 
-You can take the following actions on individual groups using the dropdown menu next to each group:
+**Location-based distribution lists** -- Create groups like "All Singapore Users" or "All America Users" with dynamic rules matching the Location attribute. Enable Google Sync to automatically create Google Workspace distribution lists, so you can email an entire office with one address.
 
-- **Delete**: Permanently delete the group.
+## Viewing and Filtering Groups
 
-## Quick View Capability
+### Search and Filter
 
-The **Quick View** feature provides an immediate snapshot of the users in a group without navigating away from the main page. With this tool, you can quickly check:
+Use the search bar to find groups by name. The filter dropdowns let you narrow the list:
+
+- **All directories**: Filter by the directory a group belongs to.
+- **All tags**: Filter by group tag to see only groups of a specific category.
+
+### Quick View
+
+Click on any group row to open a quick view sidebar that shows an immediate snapshot of the group without navigating away from the list. The quick view shows:
+
 - Which users are assigned to the group.
-- How the users were added (via individual assignment, dynamic assignment, or nested group assignment).
-
-This makes it easier to assess group composition and user access at a glance.
+- How each user was added (dynamic rule, nested group, or individual assignment).
 
 <img
     src="/img/ShiftControl/Groups/Group-membership-quick-view.png"
@@ -51,34 +62,28 @@ This makes it easier to assess group composition and user access at a glance.
 
 ## Group Tags
 
-Group Tags are a flexible way to categorize and organize your groups across the organization. Tags allow administrators to quickly filter, search, and identify groups based on their function, department, or purpose — without needing to rely solely on group names.
+Group tags categorize your groups so you can understand their purpose at a glance. Tags are color-coded and appear next to each group name in the list.
 
-### Purpose of Group Tags
+The default tag categories are:
 
-Group Tags make it easier to:
-- Filter and segment groups for reporting or automation.
-- Identify related groups that share common characteristics (e.g., “Catch-all”, “Service accounts”, “Departments”).
-- Understand the purpose of a group at a glance.
-- Simplify access reviews or audits by grouping similar entities.
+- **Department** -- Groups organized by business unit (Accounting, Engineering, Marketing).
+- **Team** -- Groups for cross-functional or project teams.
+- **Location** -- Groups based on office or region.
+- **Role Access** -- Groups that control access to specific tools or environments.
+- **Distribution** -- Groups used primarily for email distribution via Google Sync.
+- **No tag** -- Groups that have not been categorized yet.
 
-For example, you might tag groups as:
-- **Department-based**: `Marketing`, `Engineering`, `Finance`
-- **Location-based**: `Singapore`, `Hong Kong`, `United States`
-- **Shared Accounts**: Emails used to share access to one account in a SaaS service.
+### Filtering by Tag
 
-### Viewing and Filtering by Tags
+Click the tag filter dropdown on the Group Management page to show only groups with a specific tag. This is particularly useful during access reviews or audits when you need to verify all groups of a certain type.
 
-On the Group Management page:
-- Tags are displayed directly under each group name or within a “Group tags” column in the table.
-- You can use the **Filter by Tag** option or click on the group tag in the sidebar to quickly narrow the list to groups with specific tags.
+### Changing a Group Tag
 
+You can change a group's tag in three ways:
 
-### Editing Group Tags
-
-You can edit group tags in several ways:
-1. When editing a group, the group tag field is configurable in the General tab.
-2. You can find the `Change tag` option in the group's context menu on the Group Management page.
-3. You can bulk change multiple tags using the `Change tag` option in the bulk actions menu after selecting multiple groups.
+1. **From the group edit page**: Change the tag in the Group Tag dropdown on the General tab.
+2. **From the context menu**: Right-click or use the dropdown menu on a group row and select **Change tag**.
+3. **In bulk**: Select multiple groups using the checkboxes, then use the **Change tag** option from the bulk actions menu.
 
 <img
     src="/img/ShiftControl/Groups/Group-Change-tag.png"
@@ -86,8 +91,19 @@ You can edit group tags in several ways:
     width="500"
 />
 
-All updates are reflected immediately on the Group Management list and in any filters using tags.
-
 <Admonition type="information">
-    The available tag set (what tags can exist across your organization) is managed from the **Organization Settings** section. Editing or deleting tag definitions will be covered there.
+    The set of available tags for your organization is managed in **Organization Settings**. You can add, rename, or remove tag definitions there.
 </Admonition>
+
+## Things to Know
+
+- **Groups sync to JumpCloud.** ShiftControl groups are pushed to your JumpCloud directory, so group membership changes propagate to any JumpCloud-integrated systems.
+- **Deleting a group revokes access.** When you delete a group, every user in that group loses access to the apps assigned to it. Review the group's app assignments before deleting.
+- **Users can belong to multiple groups.** A user's total app access is the combined set of all apps from every group they belong to.
+- **Group changes take effect immediately.** When you add or remove a user from a group, their app access updates right away.
+
+## Related Features
+
+- [Adding a Group](/using-shiftcontrol/Groups/Adding-a-group) -- Create new groups and configure their settings.
+- [Editing a Group](/using-shiftcontrol/Groups/Editing-a-group) -- Configure dynamic, nested, and individual membership rules.
+- [Syncing Groups with Google](/using-shiftcontrol/Groups/Syncing-groups-with-google) -- Push group membership to Google Workspace for email distribution and permissions.

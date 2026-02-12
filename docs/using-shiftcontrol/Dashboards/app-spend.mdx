@@ -6,103 +6,102 @@ icon: 'chart-line'
 
 import Admonition from '@theme/Admonition';
 
-<p style={{fontSize: "large"}}>Get complete visibility into your organization’s SaaS spend, renewal timelines, and cost distribution by department and user.</p>
+<p style={{fontSize: "large"}}>Get complete visibility into your organization's SaaS spend, renewal timelines, and cost distribution by department and user.</p>
 
 ## Overview
 
-The **App Spend Dashboard** helps you track software costs, identify high-cost apps and users, and uncover opportunities to optimize your SaaS budget.
-It aggregates subscription data across your connected apps to provide a clear view of where your organization’s software spend is going.
+SaaS sprawl is one of the biggest hidden costs in modern organizations. Teams sign up for tools independently, subscriptions renew quietly, and before long you are spending thousands on software that nobody fully tracks. The **App Spend Dashboard** exists to solve that problem by bringing every subscription, renewal date, and per-user cost into a single view.
+
+This dashboard aggregates subscription data from your connected apps and presents it alongside user and department information from your directory. Instead of chasing invoices across vendors, you get a real-time picture of where your software budget is going and where you can save.
 
 <img
     src="/img/ShiftControl/Dashboards/Dashboard-app-spend-top.png"
     alt="App Spend Dashboard overview"
 />
 
-Key metrics include:
-- **Total Apps** – The total number of apps with active subscriptions.
-- **Active Users** – The number of users currently assigned to paid apps.
-- **Total Cost for All Apps** – Combined annual and monthly costs for all subscriptions.
-- **Average Cost per Active User** – Average software cost per employee based on active usage.
+## How It Works
+
+ShiftControl pulls subscription and licensing data from each connected application through its integrations. It combines that data with your organizational structure (departments, users, groups) to calculate costs at every level, from individual users up to the entire company.
+
+The dashboard refreshes as subscription data is updated, so the numbers reflect your current state rather than a point-in-time snapshot. Here is what the header metrics tell you at a glance:
+
+- **Total Apps** -- The number of apps with tracked subscriptions (e.g., 24 apps across your organization).
+- **Active Users** -- How many people are currently assigned to at least one paid app (e.g., 35 active users).
+- **Total Cost** -- Your combined annual and monthly software spend (e.g., $57,770/year or $4,814/month).
+- **Avg Cost per Active User** -- What you spend on software per employee (e.g., $1,651/year or $138/month).
 
 <Admonition type="tip">
-    Use the currency selector in the top-right corner to switch between available currencies for cost reporting.
+    Use the currency selector in the top-right corner to switch between available currencies for cost reporting. All dashboard figures will recalculate to the selected currency.
 </Admonition>
 
+## Common Scenarios
 
+### Scenario: Preparing for budget season
 
-## App Spend by Department Usage
+Your finance team needs a breakdown of software costs by department for the upcoming fiscal year. Instead of manually requesting receipts from every team lead, open the App Spend Dashboard, toggle the spend-by-department view, and export the data. You can see that Marketing accounts for the largest share of SaaS spend, followed by Sales and Engineering, and use those numbers directly in your budget planning.
 
-The **App Spend by** visualization shows how your SaaS budget is distributed across departments such as Sales, Marketing, Engineering, and Support.
-You can toggle between different grouping modes like *department usage* or *app category* to analyze spend patterns.
+### Scenario: Catching a renewal before it auto-renews
 
-This breakdown helps you:
-- Identify which teams drive the most SaaS spend
-- Detect underutilized licenses in smaller departments
-- Plan reallocation of budgets for upcoming renewals
+A $14,000/year Salesforce contract is coming up for renewal next month. The Subscription Renewals panel flags it with enough lead time for you to review usage, negotiate pricing, or consolidate licenses before the charge hits.
 
+### Scenario: Identifying savings opportunities
 
+You notice several apps on monthly billing plans in the Top-Spend Monthly Apps section. The dashboard shows that switching Zoom and Whimsical from monthly to annual billing would save your organization hundreds of dollars per year with no change in functionality.
+
+## App Spend by Department
+
+The **App Spend by** visualization breaks down your SaaS budget by department -- Marketing, Sales, Finance, Engineering, C-Suite, Product, and others. You can toggle between grouping modes like department usage or app category to see the same data from different angles.
+
+This matters because SaaS costs are rarely distributed evenly. One department might account for 40% of your total spend. Knowing that helps you:
+
+- Prioritize license audits in the highest-spending departments
+- Spot underutilized licenses in smaller teams that still carry full-price subscriptions
+- Make informed decisions about budget reallocation during renewals
 
 ## Subscription Renewals
 
-The **Subscription Renewals** panel lists upcoming renewals within a selected timeframe.
-Use the filters to sort:
-- **Per app** – View renewals by individual applications
-- **Per department** – Track renewals by organizational unit
-- **Next 12 months / 6 months / 30 days** – Adjust the lookahead window
+The **Subscription Renewals** panel shows what is coming due and when. You can filter the view to focus on what matters most:
 
-Each renewal entry displays:
-- App name and icon
-- Cost and billing frequency
-- Renewal date
+- **Per app** -- See renewals for individual applications like Figma, Asana, Xero, Slack, BambooHR, or Attio
+- **Per department** -- Track renewals grouped by organizational unit
+- **Time window** -- Adjust from next 12 months down to 6 months or 30 days
 
-
+Each renewal entry displays the app name and icon, the cost and billing frequency, and the renewal date. This gives finance teams and IT administrators a shared calendar of upcoming commitments so nothing slips through unnoticed.
 
 <img
     src="/img/ShiftControl/Dashboards/Dashboard-app-spend-middle.png"
-    alt="App Spend breakdown and insights"
+    alt="App Spend breakdown and renewal insights"
 />
 
 ## Top-Spend Apps
 
-The **Top-Spend Apps** section lists applications with the highest total cost.
-These are typically your largest SaaS investments and prime candidates for optimization or negotiation.
+The **Top-Spend Apps** section ranks your most expensive subscriptions so you know exactly where the bulk of your budget goes. These are the apps worth scrutinizing during renewal negotiations.
 
-Each app card displays:
-- Monthly and annual cost
-- Ranking based on total yearly spend
+Each app shows its monthly and annual cost with a clear ranking:
 
-Example:
-1. Salesforce — $1,208/month ($14,500/year)
-2. HubSpot — $842/month ($10,100/year)
-3. Google Workspace — $330/month ($3,960/year)
+1. **Salesforce** -- $1,208/mo
+2. **HubSpot** -- $842/mo
+3. **Google Workspace**
+4. **ShiftControl**
+5. **BambooHR**
 
-
+Seeing your top five in one place makes it easy to identify which vendor conversations will have the biggest budget impact.
 
 ## Top-Spend Monthly Apps
 
-This section compares **Monthly Plans** vs **Annual Plans** and suggests cost-saving opportunities by switching to annual billing cycles.
+This section highlights apps currently on **monthly billing plans** and compares their costs against what you would pay annually. A bar chart shows the annual vs. monthly cost side by side for apps like Zoom, Xero, Whimsical, and JumpCloud Password Manager.
 
-You’ll see:
-- A spend distribution bar between monthly and annual subscriptions
-- A per-app savings estimate (e.g., “Save $463 by switching Zoom to annual billing”)
+The insight here is straightforward: monthly plans are almost always more expensive than annual commitments. If you see a tool your team plans to keep for the next year, switching to annual billing is one of the simplest cost optimizations available.
 
 <Admonition type="note">
-    Annual plans typically come with 10–20% discounts and simplify budgeting for finance teams.
+    Annual plans typically come with 10-20% discounts and make budgeting more predictable for finance teams. Review this section quarterly to catch any new monthly subscriptions that would benefit from an annual switch.
 </Admonition>
-
-
 
 ## Complete Subscription Info
 
-If any subscription lacks cost or renewal data, you’ll see a **Complete subscription info** prompt.
-Adding this data enables more accurate reporting and helps the dashboard calculate renewal forecasts and per-user cost metrics.
+If any subscription is missing cost or renewal data, the dashboard displays a **Complete subscription info** prompt. Filling in this data is important because the dashboard can only calculate accurate forecasts and per-user cost metrics when it has complete information.
 
-Examples of missing subscriptions:
-- Apple Business Manager
-- AWS
-- Canva
-
-
+Adding missing data for apps like Apple Business Manager, AWS, or Canva takes a moment but significantly improves the accuracy of your spend reporting.
 
 <img
     src="/img/ShiftControl/Dashboards/Dashboard-app-spend-bottom.png"
@@ -111,21 +110,28 @@ Examples of missing subscriptions:
 
 ## High-Cost Users
 
-The **High-Cost Users** panel highlights users with above-average SaaS costs based on their assigned apps.
-Each user’s spend is compared to the organization’s mean SaaS cost per user.
+The **High-Cost Users** panel identifies individuals whose combined app subscriptions exceed your organization's average per-user cost. This is not about penalizing anyone -- it is about finding optimization opportunities.
 
+Common reasons a user shows up here include:
 
-This insight helps you:
-- Identify over-licensed or duplicate tool usage
-- Detect users with overlapping app access
-- Reassign or consolidate licenses during renewal planning
+- They have licenses for overlapping tools that serve the same purpose
+- They retained access to apps from a previous role or project
+- They are on a premium tier when a standard tier would suffice
 
+Reviewing this list during renewal planning helps you consolidate licenses and ensure each user has exactly the access they need.
 
+## Things to Know
 
-## Using the Dashboard for Spend Optimization
+- **Data accuracy depends on completeness.** The dashboard can only report on apps that have subscription data entered. Use the "Complete subscription info" prompts to fill gaps.
+- **Currency conversion is display-only.** Switching currencies recalculates the view but does not affect underlying subscription records.
+- **Renewal dates come from subscription data.** If a renewal date is wrong, update it in the app's subscription settings rather than on the dashboard itself.
+- **Per-user costs include all assigned apps.** If a user is assigned to an app but never logs in, their cost still reflects that license.
+- **Department breakdowns require department assignments.** Users without a department will appear under "Other" in the spend-by-department view.
 
-Use the App Spend Dashboard to:
-- Track and forecast renewal costs across all apps
-- Identify high-cost subscriptions for renegotiation
-- Reduce spend by shifting from monthly to annual plans
-- Detect underutilized apps and reallocate licenses
+## Related Features
+
+- [App Management](/using-shiftcontrol/Apps/App-management) -- Add, edit, and manage the apps that feed into this dashboard
+- [App Permissions Dashboard](/using-shiftcontrol/Dashboards/app-permissions) -- Monitor third-party app authorizations and access risks
+- [Departments](/using-shiftcontrol/Settings/departments) -- Configure the department structure used in spend breakdowns
+- [App Assignment Reports](/using-shiftcontrol/Reports/App-assignment-reports) -- Export detailed reports on which users are assigned to which apps
+- [Integration Management](/using-shiftcontrol/Integrations/Integration-management) -- Connect the apps and services that provide subscription data
