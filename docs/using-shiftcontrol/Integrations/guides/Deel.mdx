@@ -11,7 +11,7 @@ import Admonition from '@theme/Admonition';
 
 ## Overview
 
-The Deel integration allows you to connect Deel as your HR system of record to ShiftControl, enabling HR data to become the single source of truth for user management across your organization. By syncing directly with Deel, ShiftControl automates onboarding, role changes, and offboarding without manual intervention.
+The Deel connector allows you to connect Deel as your HR system of record to ShiftControl, enabling HR data to become the single source of truth for user management across your organization. By syncing directly with Deel, ShiftControl automates onboarding, role changes, and offboarding without manual intervention.
 
 ## Why It Matters
 
@@ -28,13 +28,13 @@ The Deel integration allows you to connect Deel as your HR system of record to S
 
 ## How It Works
 
-ShiftControl polls Deel hourly for new hires, role changes, and departures. The integration processes these changes automatically, ensuring user data stays up-to-date across connected systems.
+ShiftControl polls Deel hourly for new hires, role changes, and departures. The connector processes these changes automatically, ensuring user data stays up-to-date across connected systems.
 
 ## Getting Started
 
 ### Step 1: Generate a Deel API Token
 
-You’ll first need to generate an API token inside Deel to authorize the integration.
+You'll first need to generate an API token inside Deel to authorize the connector.
 
 <Steps>
     <Step title="Navigate to Developer Center">
@@ -83,10 +83,10 @@ You’ll first need to generate an API token inside Deel to authorize the integr
     <Step title="Configure sensitive data">
         We recommend enabling:
         - **Hide Sensitive Employment Information** (salary/compensation)
-        - Leave **Hide PII** disabled, otherwise the integration will not function.
+        - Leave **Hide PII** disabled, otherwise the connector will not function.
 
         <Admonition type="note">
-            ShiftControl only needs access to non-sensitive employee data to function properly. Deel doesn't have more granular PII control. Our integrations run automatically, which means we do not review the data provided to us. If you have concerns about data privacy, please reach out to us at <a href="mailto:privacy@shiftcontrol.io">privacy@shiftcontrol.io</a>
+            ShiftControl only needs access to non-sensitive employee data to function properly. Deel doesn't have more granular PII control. Our connectors run automatically, which means we do not review the data provided to us. If you have concerns about data privacy, please reach out to us at <a href="mailto:privacy@shiftcontrol.io">privacy@shiftcontrol.io</a>
         </Admonition>
 
         <img
@@ -123,8 +123,8 @@ Now that you have your API token:
         Make sure you have added Deel as an application in ShiftControl. Navigate to **Integrations**.
     </Step>
 
-    <Step title="Enable the Deel integration">
-        If the Deel Integration isn't yet enabled, click **Enable** in the context menu for Deel.
+    <Step title="Enable the Deel connector">
+        If the Deel connector isn't yet enabled, click **Enable** in the context menu for Deel.
     </Step>
 
     <Step title="Add authorization">
@@ -135,7 +135,7 @@ Now that you have your API token:
         Enter the API token you generated in Deel.
     </Step>
 
-    <Step title="Authorize the Integration">
+    <Step title="Authorize the Connector">
         Click **Authorize** to complete setup.
     </Step>
 

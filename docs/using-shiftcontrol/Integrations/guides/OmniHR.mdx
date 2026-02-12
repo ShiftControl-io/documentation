@@ -11,7 +11,7 @@ import Admonition from '@theme/Admonition';
 
 ## Overview
 
-The Omni HR integration allows you to connect your Omni HR system to ShiftControl, enabling HR data to become the single source of truth for user management across your organization. This integration is particularly valuable for our Asia-based customers, as Omni HR ships no native IdP connectors.
+The Omni HR connector allows you to connect your Omni HR system to ShiftControl, enabling HR data to become the single source of truth for user management across your organization. This connector is particularly valuable for our Asia-based customers, as Omni HR ships no native IdP connectors.
 
 ## Why It Matters
 
@@ -23,24 +23,24 @@ The Omni HR integration allows you to connect your Omni HR system to ShiftContro
 ## Key Features
 
 - **Full-Field Synchronization**: Manager, department, start date, and every other key attribute flow straight into ShiftControl
-- **On-Demand Sync**: Don't want to wait for the hourly update? Simply go to the actions menu for the integration and click "Refresh data" to start a new sync
+- **On-Demand Sync**: Don't want to wait for the hourly update? Simply go to the actions menu for the connector and click "Refresh data" to start a new sync
 - **Pre-Start Provisioning**: Five days before a new hire's start date, we silently enable the account so Gmail, Calendar, and Docs are ready without sending the welcome email
 - **Automatic Status Management**: Automatic disable/re-enable keeps your roster accurate and compliant
 
 ## How It Works
 
-ShiftControl polls Omni HR hourly to spot new hires, role changes, and departures. The integration automatically detects and processes changes, ensuring your user data is always up-to-date across all connected systems.
+ShiftControl polls Omni HR hourly to spot new hires, role changes, and departures. The connector automatically detects and processes changes, ensuring your user data is always up-to-date across all connected systems.
 
 ## Getting Started
 
 ### Step 1: Create an Omni HR Report
 
-Before setting up the integration in ShiftControl, you need to create a report in Omni HR that exposes the employee fields required for the integration:
+Before setting up the connector in ShiftControl, you need to create a report in Omni HR that exposes the employee fields required for the connector:
 
 <Steps>
     <Step title="Prepare a user account for API access">
         - You'll need a user account to access the Omni HR API
-        - The integration leverages Omni HR's access control system to retrieve data
+        - The connector leverages Omni HR's access control system to retrieve data
     </Step>
 
     <Step title="Navigate to Reports in Omni HR">
@@ -111,7 +111,7 @@ Before setting up the integration in ShiftControl, you need to create a report i
 
 ### Step 2: Add Authorization in ShiftControl
 
-Once you have created the report in Omni HR and have obtained the report ID, you can set up the integration in ShiftControl:
+Once you have created the report in Omni HR and have obtained the report ID, you can set up the connector in ShiftControl:
 
 <Steps>
     <Step title="Add the Omni HR App">
@@ -125,7 +125,7 @@ Once you have created the report in Omni HR and have obtained the report ID, you
         - Custom Report ID – the ID of the report you created in the previous step
     </Step>
 
-    <Step title="Authorize the Integration">
+    <Step title="Authorize the Connector">
         Click "Authorize" to complete the setup
     </Step>
 

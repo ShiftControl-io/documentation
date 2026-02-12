@@ -1,0 +1,86 @@
+---
+title: 'Managing Connector Authorization'
+description: 'How to provide and manage API key or OAuth credentials for connectors.'
+icon: 'plug-circle-plus'
+---
+
+import { Steps, Step } from "@site/src/components/Steps";
+
+<p style={{fontSize: "large"}}>How to provide and manage API key or OAuth credentials for connectors.</p>
+
+## Overview
+
+When managing connectors, you can provide one of two types of credentials depending on the connector:
+
+1. **API Key**: Directly enter an admin-level API key.
+2. **OAuth**: Go through an OAuth flow to authorize ShiftControl, such as for Google Workspace.
+
+Both processes are supported, and the one you use depends on the connector. The same process is used whether you're adding a new connector or updating existing credentials. All credentials are stored securely and can only be accessed by our systems.
+
+## Adding or Updating an API Key
+For API-based connectors, such as GitHub:
+
+<Steps>
+
+    <Step title="Navigate to the Connector to Configure">
+        Click on the action menu for the connector you wish to configure, and click either Add Authorization or Edit
+        Authorization.
+    </Step>
+
+    <Step title="Provide the API Key">
+        Enter the **API key** in the field.
+
+        <img
+            src="/img/ShiftControl/Integrations/Integration-add-API-key.png"
+            alt="Connector API Key"
+        />
+    </Step>
+
+    <Step title="Click Save">
+        Click **Save** to apply the key and authorize the connector.
+    </Step>
+
+    <Step title="Connector Authenticated">
+        Once the key is saved, the connector will be authenticated, and ShiftControl will start interacting with the
+        app.
+    </Step>
+
+</Steps>
+
+## Adding or Updating an OAuth Connector
+
+For OAuth-based connectors, such as Google Workspace:
+
+<Steps>
+
+    <Step title="Navigate to the Connector to Configure">
+        Click on the action menu for the connector you wish to configure, and click either Add Authorization or Edit
+        Authorization.
+    </Step>
+
+    <Step title="Redirect to OAuth Authorization Flow">
+        You will be redirected to the **OAuth authorization flow** for the chosen connector.
+    </Step>
+
+    <Step title="Provide Consent">
+        Follow the flow and provide your consent for ShiftControl to interact with the app.
+    </Step>
+
+    <Step title="Return to ShiftControl">
+        After completing the flow, you will be redirected back to ShiftControl, and you'll see a confirmation message
+        like the one below:
+        <img
+            src="/img/ShiftControl/Integrations/Intgration-oAuth-success.png"
+            alt="OAuth Authorization Success"
+        />
+    </Step>
+
+</Steps>
+
+## Updating a Connector
+
+To update credentials for an existing connector, follow the same process as when adding a new one—either entering a new API key or going through the OAuth authorization flow again.
+
+## Security
+
+All credentials provided, whether through API key or OAuth, are securely stored and used only by ShiftControl systems. We ensure that these credentials are encrypted and accessible only by authorized processes.

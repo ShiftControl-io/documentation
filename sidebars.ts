@@ -126,56 +126,6 @@ const sidebars: SidebarsConfig = {
                 },
                 {
                     type: 'category',
-                    label: 'Integrations',
-                    link: {
-                        type: 'generated-index',
-                        title: 'Integrations',
-                        description: 'Overview of Integration Management in ShiftControl.',
-                        slug: '/using-shiftcontrol/Integrations',
-                        keywords: ['integrations','integration-management'],
-                    },
-                    items: [
-                        'using-shiftcontrol/Integrations/Integration-management',
-                        'using-shiftcontrol/Integrations/Managing-integration-authorization',
-                        {
-                            type: 'category',
-                            label: 'Integration Guides',
-                            link: {
-                                type: 'generated-index',
-                                title: 'Integration Guides',
-                                description: 'Step-by-step guides to help you set up popular integrations with ShiftControl.',
-                                slug: '/using-shiftcontrol/Integrations/integration-guides',
-                                keywords: ['integration','guides'],
-                            },
-                            items: [
-                                {
-                                    type: 'category',
-                                    label: 'HRIS',
-                                    link: {
-                                        type: 'generated-index',
-                                        title: 'HRIS Integration Guides',
-                                        description: 'Step-by-step guides to help you set up popular HRIS integrations with ShiftControl.',
-                                        slug: '/using-shiftcontrol/Integrations/integration-guides/hris',
-                                        keywords: ['integration','guides','hris'],
-                                    },
-                                    items: [
-                                        'using-shiftcontrol/Integrations/guides/BambooHR',
-                                        'using-shiftcontrol/Integrations/guides/Box',
-                                        'using-shiftcontrol/Integrations/guides/Deel',
-                                        'using-shiftcontrol/Integrations/guides/DreamTeam',
-                                        'using-shiftcontrol/Integrations/guides/HiBob',
-                                        'using-shiftcontrol/Integrations/guides/OmniHR',
-                                    ],
-                                },
-                                'using-shiftcontrol/Integrations/guides/Google-Workspace',
-                                'using-shiftcontrol/Integrations/guides/JumpCloud',
-                                'using-shiftcontrol/Integrations/guides/Slack',
-                            ],
-                        },
-                    ],
-                },
-                {
-                    type: 'category',
                     label: 'Reports',
                     link: {
                         type: 'generated-index',
@@ -246,8 +196,45 @@ const sidebars: SidebarsConfig = {
                                 keywords: ['connectors'],
                             },
                             items: [
+                                'using-shiftcontrol/Integrations/Connector-management',
                                 'using-shiftcontrol/Settings/directories',
                                 'using-shiftcontrol/Settings/app-connectors',
+                                'using-shiftcontrol/Integrations/Managing-connector-authorization',
+                                {
+                                    type: 'category',
+                                    label: 'Connector Guides',
+                                    link: {
+                                        type: 'generated-index',
+                                        title: 'Connector Guides',
+                                        description: 'Step-by-step guides to help you set up popular connectors with ShiftControl.',
+                                        slug: '/using-shiftcontrol/Integrations/connector-guides',
+                                        keywords: ['connector','guides'],
+                                    },
+                                    items: [
+                                        {
+                                            type: 'category',
+                                            label: 'HRIS',
+                                            link: {
+                                                type: 'generated-index',
+                                                title: 'HRIS Connector Guides',
+                                                description: 'Step-by-step guides to help you set up popular HRIS connectors with ShiftControl.',
+                                                slug: '/using-shiftcontrol/Integrations/connector-guides/hris',
+                                                keywords: ['connector','guides','hris'],
+                                            },
+                                            items: [
+                                                'using-shiftcontrol/Integrations/guides/BambooHR',
+                                                'using-shiftcontrol/Integrations/guides/Box',
+                                                'using-shiftcontrol/Integrations/guides/Deel',
+                                                'using-shiftcontrol/Integrations/guides/DreamTeam',
+                                                'using-shiftcontrol/Integrations/guides/HiBob',
+                                                'using-shiftcontrol/Integrations/guides/OmniHR',
+                                            ],
+                                        },
+                                        'using-shiftcontrol/Integrations/guides/Google-Workspace',
+                                        'using-shiftcontrol/Integrations/guides/JumpCloud',
+                                        'using-shiftcontrol/Integrations/guides/Slack',
+                                    ],
+                                },
                             ],
                         },
                         {
@@ -259,23 +246,7 @@ const sidebars: SidebarsConfig = {
                         },
                     ],
                 },
-                {
-                    type: 'category',
-                    label: 'API',
-                    link: {
-                        type: 'generated-index',
-                        title: 'API',
-                        description: 'Overview of the ShiftControl API.',
-                        slug: '/using-shiftcontrol/API',
-                        keywords: ['api'],
-                    },
-                    items: [
-                        'using-shiftcontrol/API/ShiftControl-api',
-                        'using-shiftcontrol/API/API-key-management',
-                        'using-shiftcontrol/API/Adding-an-api-key',
-                        'using-shiftcontrol/API/Editing-an-api-key',
-                    ],
-                },
+                'using-shiftcontrol/API/ShiftControl-api',
                 {
                     type: 'category',
                     label: 'JumpCloud',
