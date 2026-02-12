@@ -10,7 +10,7 @@ icon: 'users-viewfinder'
 
 Every person in your organization has a digital identity that determines what they can access, how they authenticate, and what tools they use every day. **User Management** is where you control all of it.
 
-When you manage users in ShiftControl, you are managing their identity across your entire stack. Changes you make here sync to JumpCloud, which in turn provisions or revokes access to every connected application. A single edit to a user's department or group membership can cascade into dozens of app-level permission changes -- automatically.
+When you manage users in ShiftControl, you are managing their identity across your entire stack. Changes you make here are pushed to JumpCloud immediately via API, which in turn provisions or revokes access to every connected application. A single edit to a user's department or group membership can cascade into dozens of app-level permission changes -- automatically.
 
 This page gives you a real-time view of everyone in your organization: who they are, which directories they belong to, whether they are active, and how many groups and apps they touch.
 
@@ -81,7 +81,7 @@ The menu only shows actions that are valid for the selected users. If you select
 
 ## Things to Know
 
-- **Changes sync to JumpCloud.** When you activate, deactivate, or disable a user in ShiftControl, the change propagates to JumpCloud. From there, it affects every application connected through JumpCloud SSO. There may be a short sync delay (typically under a minute).
+- **Changes take effect immediately.** When you activate, deactivate, or disable a user in ShiftControl, the change is pushed to JumpCloud via API in real time. From there, it affects every application connected through JumpCloud SSO.
 - **Deactivation vs. disabling.** Deactivating a user suspends their access but preserves their account and data. Disabling is more aggressive -- use it when someone needs to be locked out immediately.
 - **Pagination.** The user list shows 10 users per page. Use the pagination controls at the bottom to navigate through larger organizations. The total count (e.g., "1 to 10 of 36 users") is always visible.
 - **Scheduled actions are not instant.** If you schedule a deactivation for a future date, the user retains full access until that date arrives. Double-check the scheduled date if timing is critical.

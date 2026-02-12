@@ -18,7 +18,7 @@ Every field in the user form serves a purpose beyond labeling. Department, Team,
 
 When you save a new user in ShiftControl:
 
-1. **A JumpCloud identity is created.** The user's profile, including their name, email, and organizational details, is synced to JumpCloud as the source of truth for authentication.
+1. **A JumpCloud identity is created.** The user's profile, including their name, email, and organizational details, is pushed to JumpCloud immediately via API as the source of truth for authentication.
 2. **Dynamic group rules evaluate.** If you have groups configured to auto-include users based on Department, Location, or Team, the new user is added to matching groups automatically.
 3. **App access is provisioned.** Group memberships trigger application assignments. If the Engineering group grants access to GitHub, AWS, and Slack, a new engineer gets all three without any manual app-by-app setup.
 4. **An activation email is sent.** The user receives an email (to their primary or personal email, depending on your configuration) with instructions to set their password and configure MFA.
@@ -82,10 +82,14 @@ A design contractor is joining for three months. They need Figma and Slack but n
     </Step>
 
     <Step title="Save the user">
-        Click **Save Changes** to create the user. ShiftControl syncs the new identity to JumpCloud, evaluates group membership rules, provisions app access, and sends the activation email. The user will appear in the Users list with an Inactive status until they complete activation.
+        Click **Save Changes** to create the user. ShiftControl pushes the new identity to JumpCloud immediately via API, evaluates group membership rules, provisions app access, and sends the activation email. The user will appear in the Users list with an Inactive status until they complete activation.
     </Step>
 
 </Steps>
+
+## HRIS Integration
+
+If your organization has an HRIS integration configured (such as BambooHR), user creation can be automated. When a new employee is added in your HR system, ShiftControl automatically creates their identity, sets their organizational details (department, location, manager), and triggers the same onboarding flow described above -- group evaluation, app provisioning, and activation email. Manual user creation is still available for cases not covered by your HRIS, such as contractors or service accounts.
 
 ## Things to Know
 

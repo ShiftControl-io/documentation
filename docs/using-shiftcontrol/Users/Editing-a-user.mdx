@@ -24,7 +24,7 @@ When you open a user for editing, ShiftControl pulls together data from multiple
 - **App permissions** show every OAuth grant the user has authorized, pulled from Google Workspace audit logs.
 - **SaaS cost data** aggregates known subscription costs for the user's assigned applications.
 
-Changes you make to the Details tab sync back to JumpCloud, which propagates them to connected applications. Security and App Permissions are read-only views that reflect the current state of the user's accounts.
+Changes you make to the Details tab are pushed to JumpCloud immediately via API, which propagates them to connected applications. Security and App Permissions are read-only views that reflect the current state of the user's accounts.
 
 ## Common Scenarios
 
@@ -68,7 +68,7 @@ Finance wants to know why software costs increased this quarter. Open high-cost 
         - **All identity and organizational fields** -- First Name, Last Name, Display Name, Manager, Primary Email, Personal Email, Title, Department, Location, Company, and Team. Changing Department or Team can move the user into different dynamic groups, which changes their app access.
         - **Email Aliases** -- Add alternate email addresses that route to the user's primary inbox. Click **Add alias** to create a new one. Aliases are useful when users need to receive email at multiple addresses (e.g., a role-based address like support@ or sales@).
 
-        Click **Save Changes** after making edits. Changes sync to JumpCloud and propagate to connected applications.
+        Click **Save Changes** after making edits. Changes are pushed to JumpCloud immediately via API and propagate to connected applications.
     </Step>
 
     <Step title="Review security posture (Security tab)">
@@ -136,6 +136,10 @@ Shows every application the user can access and how they got access (through whi
 <Admonition type="info">
     Hover over the icons in the sidebar to see additional details about how each group or app was assigned -- whether through direct assignment, dynamic group rules, or inherited from a parent group.
 </Admonition>
+
+## HRIS Integration
+
+If your organization has an HRIS integration configured (such as BambooHR), profile updates can happen automatically. When an employee's details change in your HR system -- such as a department transfer, title change, or new manager -- ShiftControl updates their profile automatically. These changes trigger dynamic group re-evaluation, which can adjust the user's app access in real time. Manual edits are still available and useful for fields not managed by your HRIS.
 
 ## Things to Know
 

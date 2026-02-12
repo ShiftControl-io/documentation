@@ -8,7 +8,7 @@ icon: 'bell'
 
 ## Overview
 
-ShiftControl monitors your environment continuously -- discovering new apps, detecting sync issues, and flagging items that need human decisions. When something requires your attention, it surfaces as a **task**. Task Management is your single queue for all of these actionable items, so nothing falls through the cracks.
+ShiftControl monitors your environment continuously -- discovering new apps and flagging items that need human decisions. When something requires your attention, it surfaces as a **task**. Task Management is your single queue for these actionable items, so nothing falls through the cracks.
 
 <img
     src="/img/ShiftControl/Task-management.png"
@@ -17,21 +17,15 @@ ShiftControl monitors your environment continuously -- discovering new apps, det
 
 ## How It Works
 
-Tasks are generated automatically by ShiftControl when events occur that need an admin's review. Common sources include:
+Tasks are generated automatically by ShiftControl when events occur that need an admin's review. Currently, the primary source of tasks is **App Discovery** -- when ShiftControl detects a new application being used in your environment, it creates an "App discovery available" task so you can decide whether to manage it, ignore it, or investigate further.
 
-- **App discovery** -- A new application is detected in your environment. You decide whether to manage it, ignore it, or investigate further.
-- **Sync issues** -- An integration encounters a problem that cannot be resolved automatically.
-- **Assignment conflicts** -- A user or group assignment needs manual review.
-- **Policy violations** -- An action conflicts with a configured policy.
-
-Each task includes a title, details about what triggered it, the relevant assignment, and the date it was created. Tasks remain in the queue until you act on them.
+Each task includes a title, details about what triggered it, the relevant app or assignment, and the date it was created. Tasks remain in the queue until you act on them.
 
 ## Common Scenarios
 
 | Scenario | What to do |
 |---|---|
 | **New app detected** | An "App discovery available" task appears. Review the app, then decide to add it to your managed apps or dismiss the task. |
-| **Integration sync failed** | A task flags the issue with details. Investigate the integration, resolve the problem, then dismiss the task. |
 | **Bulk cleanup** | Multiple discovery tasks have accumulated. Select them all and use bulk actions to dismiss the ones you do not need. |
 | **Triage during onboarding** | Filter to Pending tasks to see what needs attention first. Work through items one at a time. |
 
@@ -74,7 +68,7 @@ When tasks accumulate, process them in batches:
 2. Click the **Bulk Actions** button.
 3. Choose an action (Dismiss or Mark as Unread) to apply to all selected tasks at once.
 
-This is especially useful for clearing out a backlog of discovery notifications or resolved sync issues.
+This is especially useful for clearing out a backlog of discovery notifications.
 
 <img
     src="/img/ShiftControl/Task-management-bulk-actions.png"
