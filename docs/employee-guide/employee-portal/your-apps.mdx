@@ -1,0 +1,80 @@
+---
+title: 'Your Apps'
+description: 'Find and access all your work applications from the ShiftControl employee portal. Understand how SSO works and what to do if an app is missing.'
+keywords: ['ShiftControl', 'employee portal', 'apps', 'SSO', 'single sign-on', 'login']
+---
+
+import ConditionalContent from '@site/src/components/ConditionalContent';
+import Admonition from '@theme/Admonition';
+import ModeScreenshot from '@site/src/components/ModeScreenshot';
+
+<p style={{fontSize: "large"}}>All your work apps in one place — click to open, and ShiftControl handles the login.</p>
+
+## Your App Dashboard
+
+<ModeScreenshot path="EmployeePortal/App-dashboard" alt="ShiftControl employee portal showing your available apps" />
+
+When you log in to ShiftControl, you see your **App Dashboard** — a grid of all the applications your company has given you access to. These are the tools you use for your job: email, chat, project management, HR systems, and more.
+
+To open an app, just click it. Depending on how the app is set up, one of two things happens:
+
+<ConditionalContent modes={["jc-only", "jc-google", "google-jc"]}>
+
+- **[SSO](https://shiftcontrol.io/learn/what-is-sso) apps** — ShiftControl redirects you through JumpCloud, which logs you into the app automatically. You'll see an MFA prompt from JumpCloud before the app opens. This is the most secure option — you don't need a separate password for that app.
+- **Bookmark apps** — ShiftControl opens the app's login page. You'll need to log in with whatever credentials that app requires (possibly stored in your password manager), or click "Sign in with Google" if that option is available.
+
+</ConditionalContent>
+
+<ConditionalContent modes={["google-only"]}>
+
+- **Apps with Google sign-in** — Click "Continue with Google" and you're in. Your Google account handles the authentication.
+- **Other apps** — ShiftControl opens the app's login page. You'll need to log in with that app's credentials.
+
+</ConditionalContent>
+
+## Finding Apps
+
+Your apps are organized so you can find them quickly:
+
+- **All apps** — Shows everything you have access to
+- **Favorites** — Apps you've starred for quick access
+- **Search** — Type part of an app name to filter the grid
+
+## Missing an App?
+
+If you need access to an app that isn't on your dashboard:
+
+1. **Check with your manager** — App access is usually based on your team, department, or role. Your manager can request access for you.
+2. **Contact IT** — Your IT admin can add you to the right group in ShiftControl, which automatically grants access.
+
+<Admonition type="info">
+    You can't add apps to your dashboard yourself — access is managed by your IT team through groups. This ensures everyone has the right level of access for their role.
+</Admonition>
+
+<ConditionalContent modes={["jc-only", "jc-google", "google-jc"]}>
+
+## The [SSO](https://shiftcontrol.io/learn/what-is-sso) Login Flow
+
+When you click an SSO app, here's what happens:
+
+<ConditionalContent modes={["jc-google"]}>
+
+1. ShiftControl redirects you to JumpCloud
+2. If you're already authenticated to Google, this step is **automatic** — no action needed from you
+3. JumpCloud prompts for **MFA** (authenticator app on your phone)
+4. JumpCloud logs you into the app
+
+For most users, you'll only see **one MFA prompt** (from JumpCloud) since Google authentication happens automatically in the background. If your organization uses JumpCloud as the primary login instead of Google, you may occasionally see a JumpCloud login screen first, then the MFA prompt for the app.
+
+</ConditionalContent>
+
+<ConditionalContent modes={["jc-only"]}>
+
+1. ShiftControl redirects you to JumpCloud
+2. JumpCloud prompts for your password (if not already logged in)
+3. JumpCloud prompts for **MFA** (authenticator app on your phone)
+4. JumpCloud logs you into the app
+
+</ConditionalContent>
+
+</ConditionalContent>

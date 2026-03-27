@@ -1,65 +1,94 @@
 ---
 title: 'Directories'
-description: 'Connect and manage HRIS and identity providers in ShiftControl. Sync users from Google Workspace, JumpCloud, BambooHR, and more.'
-keywords: ['ShiftControl', 'settings', 'directories', 'HRIS', 'identity provider', 'JumpCloud', 'Google Workspace']
+description: 'Connect and manage identity providers and HRIS integrations in ShiftControl. Sync users from JumpCloud, Google Workspace, BambooHR, and more.'
+keywords: ['ShiftControl', 'settings', 'directories', 'HRIS', 'identity provider', 'JumpCloud', 'Google Workspace', 'connectors']
 icon: 'grid'
 ---
 
 import Admonition from '@theme/Admonition';
+import ConditionalContent from '@site/src/components/ConditionalContent';
+import ModeScreenshot from '@site/src/components/ModeScreenshot';
 
-<p style={{fontSize: "large"}}>Connect and manage your organization’s HRIS and identity providers in one place.</p>
+
+<p style={{fontSize: "large"}}>Connect your identity providers and HR systems so ShiftControl can manage your entire organization from one place.</p>
 
 ## Overview
 
-The **Directories** page lets you connect to your organization’s **HRIS** (Human Resources Information Systems) and **Identity Providers (IdPs)**.
-These integrations sync users, departments, locations, and other key organizational data into ShiftControl, helping automate onboarding, offboarding, and access management.
+The **Directories** page is where you connect the external systems that feed data into ShiftControl. These connections are the foundation of everything else — user provisioning, group sync, app access, and security policies all depend on having accurate, up-to-date directory data.
 
-<img
-    src="/img/ShiftControl/Settings/Settings-directories.png"
-    alt="Directories list view"
-    width="800"
-/>
+There are two types of directories you can connect:
 
-Each directory shows:
-- **Connector** – The service name (e.g., Google, JumpCloud, BambooHR).
-- **App Name** – The corresponding app integration.
-- **Type** – HRIS or Identity Provider.
-- **Status** – Whether the connector is enabled or disabled.
-- **Health** – Indicates whether data synchronization is running properly.
-- **Auth Status** – Shows whether authentication is required or has been provided.
-- **Primary** – Identifies which Identity Provider is the organization’s main source of truth.
+- **Identity Providers (IdPs)** — Systems like JumpCloud and Google Workspace that manage authentication, user accounts, and access control. Your IdP is the source of truth for who can log in and what they can access.
+- **HRIS integrations** — Systems like BambooHR, Deel, and HiBob that manage employee records. When someone is hired, promoted, or leaves, the HRIS pushes that change to ShiftControl, which propagates it to your IdP and connected apps.
 
-## Directory Types
-
-### HRIS
-Integrations such as **BambooHR**, **Deel**, or **HiBob** automatically sync employee details, departments, and locations.
-They’re the backbone for keeping user records up to date across systems.
-
-See our [Connector Management](/using-shiftcontrol/Integrations/Connector-management) page for more details.
-
-### Identity Providers
-Integrations like **Google Workspace** and **JumpCloud** manage authentication and account lifecycle events.
-They provide secure user identity management and are often used as the organization’s **primary directory**.
+<ModeScreenshot path="Settings/Directories" alt="Directories settings showing connected identity providers and HRIS integrations with status and health" />
 
 <Admonition type="tip">
-    For most organizations, it’s best to connect both an HRIS and an Identity Provider — the HRIS manages employee records, while the IdP manages login and access.
+    The most powerful setup combines an IdP **and** an HRIS. The HRIS handles the people data (departments, managers, start/end dates) while the IdP handles authentication and access. ShiftControl bridges the two so changes flow automatically.
 </Admonition>
 
-## Enabling a Directory
+## What You See
 
-To enable a directory connector:
-1. Click the **⋮ menu** beside the directory you want to enable.
-2. Choose **Authenticate** to connect your account.
-3. Once authenticated, the **Status** will update to **Enabled** and the **Health** indicator will show **Healthy** when sync is successful.
+Each directory row shows at a glance whether the integration is healthy:
+
+| Column | What It Tells You |
+|--------|------------------|
+| **Connector** | The service name (JumpCloud, Google, BambooHR, etc.) |
+| **App Name** | The corresponding app in your ShiftControl app list |
+| **Type** | Identity Provider or HRIS |
+| **Status** | Enabled (actively syncing) or Disabled (paused) |
+| **Health** | Healthy (sync working), Unhealthy (sync issues), or N/A |
+| **Auth Status** | Whether the integration has valid credentials |
+| **Primary** | Which IdP is the authoritative source for identity data |
+
+## Connecting a Directory
+
+1. Find the directory you want to connect in the list.
+2. Click the **⋮ menu** and select **Authenticate**.
+3. Follow the OAuth or credential flow for that service. Most connectors require admin-level access.
+4. Once authenticated, the Status changes to **Enabled** and Health shows **Healthy** when the first sync completes.
 
 <Admonition type="note">
-    Most connectors require admin-level credentials to authorize the integration.
-    Once connected, ShiftControl will automatically start syncing directory data every hour.
+    ShiftControl syncs directory data automatically on a regular schedule. The first sync happens immediately after authentication and imports your existing users, departments, and organizational structure.
 </Admonition>
 
-## Managing Connected Directories
+## Managing Directories
 
-After setup, each directory can be:
-- **Disabled** – Pauses syncing but keeps previous data cached.
-- **Reauthenticated** – If your authorization token expires.
-- **Set as Primary** – Determines which directory ShiftControl uses for identity data and user provisioning.
+After a directory is connected, you can:
+
+- **Disable** — Pauses syncing but preserves cached data. Useful for troubleshooting or temporary disconnects.
+- **Reauthenticate** — Refresh expired credentials without losing your configuration.
+- **Set as Primary** — Designates which Identity Provider is the authoritative source for user identity data. When two directories have conflicting information about a user, the Primary directory wins.
+
+<ConditionalContent modes={["jc-google"]}>
+
+### Your Setup: JumpCloud + Google Workspace
+
+With both directories connected, the Directories page shows JumpCloud and Google Workspace side by side. In your configuration:
+
+- **JumpCloud** is marked as Primary — it handles authentication, SSO, MFA, and is the source of truth for user identity.
+- **Google Workspace** is connected as a secondary directory — it manages Google-specific features like email, Google Groups, admin roles, and Google Drive permissions.
+
+Both directories show as **Enabled** and **Healthy** when properly configured. ShiftControl keeps both in sync — changes to users and groups in ShiftControl are pushed to both directories simultaneously.
+
+</ConditionalContent>
+
+<ConditionalContent modes={["google-only"]}>
+
+### Your Setup: Google Workspace
+
+Google Workspace is your primary (and only) Identity Provider. ShiftControl manages your Google directory directly — user accounts, Google Groups, admin roles, and access to Google services all flow through this connection.
+
+</ConditionalContent>
+
+## Things to Know
+
+- **Changing the Primary directory is significant.** The Primary IdP determines whose data wins in conflicts and which system handles authentication. Don't change this casually — understand the implications for your user accounts first.
+- **Disabling a directory doesn't delete data.** Users imported from a disabled directory remain in ShiftControl. They just won't receive updates until the directory is re-enabled.
+- **HRIS and IdP serve different roles.** Don't try to use an HRIS as your IdP or vice versa. The HRIS knows about people (hiring, departures, transfers). The IdP knows about access (authentication, permissions, app provisioning). ShiftControl connects the two.
+
+## Related Features
+
+- [Connector Management](/using-shiftcontrol/Integrations/Connector-management/) — Detailed guide to setting up and managing connectors
+- [Google Workspace Connector Guide](/using-shiftcontrol/Integrations/connector-guides/) — Step-by-step Google Workspace setup
+- [Settings Overview](/using-shiftcontrol/Settings/settings-overview/) — Navigate all settings sections

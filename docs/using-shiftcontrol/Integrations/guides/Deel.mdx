@@ -4,7 +4,6 @@ description: 'Integrate Deel with ShiftControl to sync HR data, automate user pr
 keywords: ['ShiftControl', 'Deel', 'connector', 'integration', 'setup guide', 'HRIS', 'user management']
 icon: 'users-gear'
 ---
-
 import { Steps, Step } from "@site/src/components/Steps";
 import Admonition from '@theme/Admonition';
 
@@ -41,29 +40,20 @@ You'll first need to generate an API token inside Deel to authorize the connecto
     <Step title="Navigate to Developer Center">
         Go to **Developer Center → Access Tokens** inside Deel.
 
-        <img
-            src="/img/ShiftControl/Integrations/Deel/Deel-developer-center.png"
-            alt="Navigate to Deel Developer Center"
-        />
+        <img src="/img/ShiftControl/Integrations/Deel/Deel-developer-center-light.webp" alt="Navigate to Deel Developer Center" />
     </Step>
 
     <Step title="Generate a token">
         Click **Generate new token**.
 
-        <img
-            src="/img/ShiftControl/Integrations/Deel/Deel-generate-token.png"
-            alt="Generate Deel Token"
-        />
+        <img src="/img/ShiftControl/Integrations/Deel/Deel-generate-token-light.webp" alt="Generate Deel Token" />
     </Step>
 
     <Step title="Create a new token">
         Give it a label (e.g. `ShiftControl`).
         Choose **Organization token**.
 
-        <img
-            src="/img/ShiftControl/Integrations/Deel/Deel-name-token.png"
-            alt="Name Deel Token"
-        />
+        <img src="/img/ShiftControl/Integrations/Deel/Deel-name-token-light.webp" alt="Name Deel Token" />
     </Step>
 
     <Step title="Select scopes">
@@ -74,10 +64,7 @@ You'll first need to generate an API token inside Deel to authorize the connecto
             ShiftControl doesn't require more access than the `people:read` scope.
         </Admonition>
 
-        <img
-            src="/img/ShiftControl/Integrations/Deel/Deel-token-permissions.png"
-            alt="Select Deel Scopes"
-        />
+        <img src="/img/ShiftControl/Integrations/Deel/Deel-token-permissions-light.webp" alt="Select Deel Scopes" />
 
     </Step>
 
@@ -90,28 +77,19 @@ You'll first need to generate an API token inside Deel to authorize the connecto
             ShiftControl only needs access to non-sensitive employee data to function properly. Deel doesn't have more granular PII control. Our connectors run automatically, which means we do not review the data provided to us. If you have concerns about data privacy, please reach out to us at <a href="mailto:privacy@shiftcontrol.io">privacy@shiftcontrol.io</a>
         </Admonition>
 
-        <img
-            src="/img/ShiftControl/Integrations/Deel/Deel-token-sensitive.png"
-            alt="Configure sensitive data"
-        />
+        <img src="/img/ShiftControl/Integrations/Deel/Deel-token-sensitive-light.webp" alt="Configure sensitive data" />
     </Step>
 
     <Step title="Review the token configuration">
         Review your settings, then generate the token.
 
-        <img
-            src="/img/ShiftControl/Integrations/Deel/Deel-token-confirm.png"
-            alt="Finalize Deel Token"
-        />
+        <img src="/img/ShiftControl/Integrations/Deel/Deel-token-confirm-light.webp" alt="Finalize Deel Token" />
     </Step>
 
     <Step title="Finalize and copy the token">
         Copy the token immediately — Deel only shows it once!
 
-        <img
-            src="/img/ShiftControl/Integrations/Deel/Deel-finalize-token.png"
-            alt="Copy Deel Token"
-        />
+        <img src="/img/ShiftControl/Integrations/Deel/Deel-finalize-token-light.webp" alt="Copy Deel Token" />
     </Step>
 </Steps>
 

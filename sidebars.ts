@@ -55,7 +55,7 @@ const sidebars: SidebarsConfig = {
         {
             type: 'category',
             collapsed: false,
-            label: 'Using ShiftControl',
+            label: 'Using ShiftControl (Admins)',
             items: [
                 {
                     type: 'category',
@@ -63,7 +63,7 @@ const sidebars: SidebarsConfig = {
                     link: {
                         type: 'generated-index',
                         title: 'Dashboards',
-                        description: 'Overview of ShiftControl Dashboards and their features.',
+                        description: 'Monitor OAuth permissions, track SaaS spending, and spot security risks across your organization.',
                         slug: '/using-shiftcontrol/Dashboards',
                         keywords: ['dashboards'],
                     },
@@ -80,12 +80,13 @@ const sidebars: SidebarsConfig = {
                     link: {
                         type: 'generated-index',
                         title: 'Users',
-                        description: 'Overview of User Management in ShiftControl.',
+                        description: 'Add, edit, and manage every person in your organization. Control access, onboard new hires, and offboard departing employees.',
                         slug: '/using-shiftcontrol/Users',
                         keywords: ['users','user-management'],
                     },
                     items: [
                         'using-shiftcontrol/Users/User-management',
+                        'using-shiftcontrol/Users/Viewing-a-user',
                         'using-shiftcontrol/Users/Adding-a-user',
                         'using-shiftcontrol/Users/Editing-a-user',
                     ],
@@ -96,15 +97,15 @@ const sidebars: SidebarsConfig = {
                     link: {
                         type: 'generated-index',
                         title: 'Groups',
-                        description: 'Overview of Group Management in ShiftControl.',
+                        description: 'Organize users into groups that automatically control app access, email distribution, and security policies.',
                         slug: '/using-shiftcontrol/Groups',
                         keywords: ['groups','group-management'],
                     },
                     items: [
                         'using-shiftcontrol/Groups/Group-management',
+                        'using-shiftcontrol/Groups/Viewing-a-group',
                         'using-shiftcontrol/Groups/Adding-a-group',
                         'using-shiftcontrol/Groups/Editing-a-group',
-                        'using-shiftcontrol/Groups/Syncing-groups-with-google',
                     ],
                 },
                 {
@@ -113,12 +114,13 @@ const sidebars: SidebarsConfig = {
                     link: {
                         type: 'generated-index',
                         title: 'Apps',
-                        description: 'Overview of App Management in ShiftControl.',
+                        description: 'Manage your SaaS applications, discover shadow IT, control SSO, and track software costs across your org.',
                         slug: '/using-shiftcontrol/Apps',
                         keywords: ['apps','app-management'],
                     },
                     items: [
                         'using-shiftcontrol/Apps/App-management',
+                        'using-shiftcontrol/Apps/Viewing-an-app',
                         'using-shiftcontrol/Apps/Adding-an-app',
                         'using-shiftcontrol/Apps/Editing-an-app',
                         'using-shiftcontrol/Apps/App-discovery',
@@ -130,7 +132,7 @@ const sidebars: SidebarsConfig = {
                     link: {
                         type: 'generated-index',
                         title: 'Reports',
-                        description: 'Overview of Reporting in ShiftControl.',
+                        description: 'Generate app assignment reports, audit access, and export data for compliance reviews.',
                         slug: '/using-shiftcontrol/Reports',
                         keywords: ['reports','reporting' ],
                     },
@@ -144,7 +146,7 @@ const sidebars: SidebarsConfig = {
                     link: {
                         type: 'generated-index',
                         title: 'Settings',
-                        description: 'Overview of Settings in ShiftControl.',
+                        description: 'Configure your organization, manage directories, set up connectors, and control admin access.',
                         slug: '/using-shiftcontrol/Settings',
                         keywords: ['settings'],
                     },
@@ -156,7 +158,7 @@ const sidebars: SidebarsConfig = {
                             link: {
                                 type: 'generated-index',
                                 title: 'Personal Settings',
-                                description: 'Overview of Personal Settings in ShiftControl.',
+                                description: 'Your account profile, theme preferences, and personal API keys.',
                                 slug: '/using-shiftcontrol/Settings/personal',
                                 keywords: ['personal','settings'],
                             },
@@ -172,7 +174,7 @@ const sidebars: SidebarsConfig = {
                             link: {
                                 type: 'generated-index',
                                 title: 'Organization Settings',
-                                description: 'Overview of Organization Settings in ShiftControl.',
+                                description: 'Organization details, departments, locations, group tags, user roles, and API keys.',
                                 slug: '/using-shiftcontrol/Settings/organization',
                                 keywords: ['organization','settings'],
                             },
@@ -191,7 +193,7 @@ const sidebars: SidebarsConfig = {
                             link: {
                                 type: 'generated-index',
                                 title: 'Connectors',
-                                description: 'Overview of Connectors in ShiftControl.',
+                                description: 'Connect identity providers (JumpCloud, Google Workspace) and HRIS systems to sync your organization data.',
                                 slug: '/using-shiftcontrol/Settings/connectors',
                                 keywords: ['connectors'],
                             },
@@ -244,6 +246,13 @@ const sidebars: SidebarsConfig = {
                                 'using-shiftcontrol/Settings/jumpcloud-admins',
                             ],
                         },
+                        {
+                            type: 'category',
+                            label: 'Google Workspace',
+                            items: [
+                                'using-shiftcontrol/Settings/google-admins',
+                            ],
+                        },
                     ],
                 },
                 'using-shiftcontrol/API/ShiftControl-api',
@@ -253,7 +262,7 @@ const sidebars: SidebarsConfig = {
                     link: {
                         type: 'generated-index',
                         title: 'JumpCloud',
-                        description: 'Overview of using ShiftControl with JumpCloud.',
+                        description: 'Configure JumpCloud as your identity provider, set up Google Workspace as an IdP, and manage the JumpCloud integration.',
                         slug: '/using-shiftcontrol/JumpCloud',
                         keywords: ['jumpcloud'],
                     },
@@ -269,7 +278,7 @@ const sidebars: SidebarsConfig = {
             link: {
                 type: 'generated-index',
                 title: 'Partnerships',
-                description: 'Overview of ShiftControl Partnerships.',
+                description: 'Security partnerships and Google Workspace reseller services to complement your ShiftControl setup.',
                 slug: '/using-shiftcontrol/Partnerships',
                 keywords: ['jumpcloud'],
             },
@@ -285,12 +294,16 @@ const sidebars: SidebarsConfig = {
                 },
             ],
         },
-    ],
-    onboardingSidebar: [
-        ...standardLinks,
         {
             type: 'category',
-            label: 'Onboarding',
+            label: 'Onboarding to ShiftControl',
+            link: {
+                type: 'generated-index',
+                title: 'Onboarding to ShiftControl',
+                description: 'Set up ShiftControl for your organization — what to prepare, how to onboard, and what to do after.',
+                slug: '/onboarding',
+                keywords: ['onboarding', 'setup'],
+            },
             items: [
                 'onboarding/Onboarding-intro',
                 'onboarding/Before-onboarding',
@@ -310,6 +323,34 @@ const sidebars: SidebarsConfig = {
                 'app-guides/Google-Workspace',
                 'app-guides/Microsoft-Azure',
                 'app-guides/Slack',
+            ],
+        },
+    ],
+    employeeGuideSideBar: [
+        ...standardLinks,
+        {
+            type: 'category',
+            label: 'Employee Guide',
+            collapsed: false,
+            items: [
+                'employee-guide/what-is-shiftcontrol',
+                {
+                    type: 'category',
+                    label: 'Employee Portal',
+                    link: {
+                        type: 'generated-index',
+                        title: 'Employee Portal',
+                        description: 'Your app dashboard, org chart, and account security — everything you see as an employee.',
+                        slug: '/employee-guide/employee-portal',
+                        keywords: ['employee', 'portal', 'apps'],
+                    },
+                    items: [
+                        'employee-guide/employee-portal/your-apps',
+                        'employee-guide/employee-portal/org-chart',
+                        'employee-guide/employee-portal/account-security',
+                    ],
+                },
+                'employee-guide/onboarding',
             ],
         },
     ],

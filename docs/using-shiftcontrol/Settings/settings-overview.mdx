@@ -1,22 +1,58 @@
 ---
 title: 'Settings Overview'
-description: 'Overview of personal and organizational settings, including account configuration, appearance, API keys, and organization-level controls.'
-keywords: ['ShiftControl', 'settings', 'configuration', 'account settings', 'API keys', 'organization settings']
+description: 'Configure your ShiftControl organization — personal preferences, org-wide controls, directory connectors, and admin access for JumpCloud and Google Workspace.'
+keywords: ['ShiftControl', 'settings', 'configuration', 'account settings', 'API keys', 'organization settings', 'directories', 'connectors']
 icon: 'settings'
 ---
 
-<p style={{fontSize: "large"}}>Overview of personal and organizational settings within ShiftControl.</p>
+import ConditionalContent from "@site/src/components/ConditionalContent";
+
+<p style={{fontSize: "large"}}>Configure everything about your ShiftControl organization — from your personal profile to org-wide directory integrations.</p>
 
 ## Overview
 
-The **Settings** area is where users and administrators manage both individual and organization-wide preferences.
-It’s divided into two main sections: **Personal Settings** and **Org Settings**.
-This layout helps distinguish between user-specific configurations (like profile or appearance) and organization-level management (like group tags or user roles).
+The Settings area is organized into sections based on what you're configuring and who it affects:
 
-<img
-    src="/img/ShiftControl/Settings/Settings-overview.png"
-    alt="Settings overview"
-    width="800"
-/>
+### Personal Settings
+Your individual account — profile details, theme preferences, and personal API keys. Changes here only affect you, not your organization.
 
-Click on each section in the side menu to learn more.
+- **[Account Settings](/using-shiftcontrol/Settings/account-settings/)** — Your name, email, and profile information
+- **[Appearance](/using-shiftcontrol/Settings/appearance/)** — Light mode, dark mode, and display preferences
+- **[User API Keys](/using-shiftcontrol/Settings/user-api-keys/)** — Personal API keys for automation and scripting
+
+### Organization Settings
+Settings that affect your entire organization. Only admins can modify these.
+
+- **[Organization Details](/using-shiftcontrol/Settings/org-details/)** — Company name, domain, and features
+- **[Departments](/using-shiftcontrol/Settings/departments/)** — Department definitions that drive dynamic group memberships
+- **[Locations](/using-shiftcontrol/Settings/locations/)** — Office locations for location-based groups and policies
+- **[Group Tags](/using-shiftcontrol/Settings/group-tags/)** — Color-coded categories for organizing groups
+- **[User Roles](/using-shiftcontrol/Settings/user-roles/)** — ShiftControl admin role assignments
+- **[Organization API Keys](/using-shiftcontrol/Settings/org-api-keys/)** — Org-level API keys for integrations
+
+### Connectors
+Integrate external systems with ShiftControl to sync identity data, automate provisioning, and unify management.
+
+- **[Directories](/using-shiftcontrol/Settings/directories/)** — Connect identity providers (JumpCloud, Google Workspace) and HRIS systems
+- **[App Connectors](/using-shiftcontrol/Settings/app-connectors/)** — Connect apps for usage data and cost tracking
+
+### Directory Admin Management
+
+<ConditionalContent modes={["jc-only"]}>
+
+- **[JumpCloud Admins](/using-shiftcontrol/Settings/jumpcloud-admins/)** — Manage JumpCloud admin accounts, MFA, and API access
+
+</ConditionalContent>
+
+<ConditionalContent modes={["jc-google", "google-jc"]}>
+
+- **[JumpCloud Admins](/using-shiftcontrol/Settings/jumpcloud-admins/)** — Manage JumpCloud admin accounts, MFA, and API access
+- **[Google Workspace Admins](/using-shiftcontrol/Settings/google-admins/)** — Manage Google Workspace admin roles and scope
+
+</ConditionalContent>
+
+<ConditionalContent modes={["google-only"]}>
+
+- **[Google Workspace Admins](/using-shiftcontrol/Settings/google-admins/)** — Manage Google Workspace admin roles and scope
+
+</ConditionalContent>

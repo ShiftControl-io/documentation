@@ -4,7 +4,7 @@ description: 'Define and manage group tags in ShiftControl to categorize, filter
 keywords: ['ShiftControl', 'settings', 'group tags', 'categorization', 'organization', 'configuration']
 icon: 'tags'
 ---
-
+import ModeScreenshot from "@site/src/components/ModeScreenshot";
 import Admonition from '@theme/Admonition';
 
 <p style={{fontSize: "large"}}>Define and manage the tags your organization uses to categorize groups consistently.</p>
@@ -14,10 +14,7 @@ import Admonition from '@theme/Admonition';
 The **Group Tags** page under **Org Settings** allows administrators to create, edit, and organize the tag categories available to all groups in the organization.
 Group tags help classify and filter groups across the platform — making it easier to organize large sets of user groups by purpose, department, or access type.
 
-<img
-    src="/img/ShiftControl/Settings/Settings-group-tags.png"
-    alt="Group tags overview list"
-/>
+<ModeScreenshot path="Settings/Settings-group-tags" alt="Group tags overview list" />
 
 ## Purpose of Group Tags
 
@@ -64,11 +61,7 @@ To add a new tag:
 - **Description** – A short note describing the tag’s purpose.
 3. Click **Create Tag** to save.
 
-<img
-    src="/img/ShiftControl/Settings/Settings-create-a-group-tag.png"
-    alt="Create new group tag modal"
-    width="600"
-/>
+<ModeScreenshot path="Settings/Settings-create-a-group-tag" alt="Create new group tag modal" />
 
 <Admonition type="tip">
     Choose distinct colors to make tags easy to scan when managing large group lists.
@@ -78,14 +71,7 @@ To add a new tag:
 
 Each tag includes a **⋮ menu** with options to **Edit** or **Delete**.
 
-- **Edit** — Update the tag’s name, color, or description.
-You can use the color picker or enter a custom HEX code as an example.  All fields are editable by double-clicking on the field.
-
-<img
-    src="/img/ShiftControl/Settings/settings-edit-group-tags-color.png"
-    alt="Edit group tag color picker"
-    width="300"
-/>
+- **Edit** — Update the tag’s name, color, or description. You can use the color picker or enter a custom HEX code. All fields are editable by double-clicking on the field.
 
 - **Delete** — Permanently remove a tag from the organization.
 Once deleted, any groups using that tag will no longer display it.

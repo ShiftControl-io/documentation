@@ -5,90 +5,155 @@ keywords: ['ShiftControl', 'user management', 'identity', 'onboarding', 'offboar
 icon: 'users-viewfinder'
 ---
 
-<p style={{fontSize: "large"}}>Your central hub for managing every person in your organization -- from onboarding their first day to offboarding their last.</p>
+import ConditionalContent from '@site/src/components/ConditionalContent';
+import ModeScreenshot from '@site/src/components/ModeScreenshot';
+
+
+<p style={{fontSize: "large"}}>Your single view of every person in your organization — who they are, what they can access, and whether their security is in order.</p>
 
 ## Overview
 
-Every person in your organization has a digital identity that determines what they can access, how they authenticate, and what tools they use every day. **User Management** is where you control all of it.
+The Users page is the heart of ShiftControl. Every person in your organization has a row here, and that row tells you everything you need to know at a glance: their identity, which directories they belong to, whether they're active, and how many groups and apps they touch.
 
-When you manage users in ShiftControl, you are managing their identity across your entire stack. Changes you make here are pushed to JumpCloud immediately via API, which in turn provisions or revokes access to every connected application. A single edit to a user's department or group membership can cascade into dozens of app-level permission changes -- automatically.
+When you make changes here, they ripple through your entire stack. Activate a user and they get access to every app their groups provide. Deactivate them and access is revoked everywhere. Change their department and their group memberships — and therefore their app access — update automatically.
 
-This page gives you a real-time view of everyone in your organization: who they are, which directories they belong to, whether they are active, and how many groups and apps they touch.
+<ConditionalContent modes={["jc-google", "google-jc"]}>
 
-<img
-    src="/img/ShiftControl/Users/User-Management.png"
-    alt="User Management"
-/>
+With both JumpCloud and Google Workspace connected, the Users list shows identity data from both directories in a unified view. Each user row displays directory icons for JumpCloud and Google Workspace side by side — so you can immediately see which directories a user exists in and whether they're synced to both.
 
-## How It Works
+</ConditionalContent>
 
-The Users list pulls identity data from JumpCloud and Google Workspace, then presents it in a unified view. Each row in the table represents a single person and shows:
+<ModeScreenshot path="Users/User-management" alt="User Management page showing all users with directory status, groups, and app counts" />
 
-- **User** -- Their name, email, and avatar. This is the identity they use across all connected systems.
-- **Directory icons** -- Visual indicators showing which directories the user exists in (JumpCloud, Google Workspace). If a user is missing from one, you will spot it here.
-- **Status** -- Whether the user is Active or Inactive. Inactive users cannot authenticate to any connected applications.
-- **Groups and Apps** -- Counts showing how many groups the user belongs to and how many applications they can access. These numbers tell you the scope of a user's footprint in your organization.
+## What You See
 
-You can filter by directory (All directories, JumpCloud only, Google only) and by state (All states, Active, Inactive) to narrow down exactly who you are looking for. The search bar works across names, emails, and other attributes.
+Each row in the users table shows:
+
+| Column | What It Tells You |
+|--------|------------------|
+| **User** | Name, email, and avatar — this is the identity used across all connected systems |
+| **Directory** | Icons showing which directories the user exists in |
+| **Status** | Active (can authenticate) or Inactive (access suspended) |
+| **Groups & Apps** | How many groups they belong to and how many apps they can access |
+
+Use the filters to narrow down what you're looking at:
+- **Directory filter** — Show users from a specific directory only
+- **Status filter** — Active, Inactive, or all
+- **Search** — Find users by name, email, or other attributes
 
 ## Common Scenarios
 
-### Scenario: Auditing access before a compliance review
+### Auditing access before a compliance review
 
-Your security team needs a list of everyone with active access. Filter the Users list to show only **Active** users, then review the Groups and Apps counts. Users with unusually high app counts may warrant a closer look. Click into any user to see their full App Permissions tab and SaaS cost breakdown.
+Your security team needs a list of everyone with active access. Filter to **Active** users, then review the Groups and Apps counts. Users with unusually high app counts warrant a closer look — click into them to see their full permissions. You can export this data for your compliance documentation.
 
-### Scenario: Finding inactive users who still have app access
+### Finding inactive users who still have app access
 
-Filter by **Inactive** status. If any inactive user still shows a non-zero Apps count, that is a sign their deprovisioning did not complete fully. Click into the user to investigate and revoke remaining access.
+Filter by **Inactive** status. If any inactive user still shows a non-zero Apps count, their deprovisioning didn't complete fully. Click in to investigate and revoke remaining access. This is a common finding during security audits.
 
-### Scenario: Bulk onboarding for a new team
+### Bulk onboarding a new team
 
-Your company just acquired a five-person design team. Rather than adding them one at a time, add each user and assign them to the Design group. Their app access (Figma, Slack, Google Workspace) will be provisioned automatically based on group membership.
+Your company acquired a five-person design team. Add each user and assign them to the Design group — their app access (Figma, Slack, Google Workspace) provisions automatically based on group membership. No need to configure apps one at a time.
 
 ## User Actions
 
-Click the action menu on any user row to take immediate action on an individual user.
+Click the **⋮ menu** on any user row for quick actions.
 
-<img
-    src="/img/ShiftControl/Users/User-actions.png"
-    alt="User actions"
-    width={250}
-/>
+<ConditionalContent modes={["jc-google", "google-jc"]}>
 
-- **Cancel Scheduled Activation** -- If you have set a future activation date for a user and plans change, cancel it here. The user will remain in their current state.
-- **Schedule Deactivation** -- Set a future date to deactivate the user. Useful for employees with a known last day -- schedule it during offboarding and their access will be revoked automatically on that date.
-- **Resend Activation** -- Re-sends the activation email if the user lost it or it expired. They will receive fresh login credentials and setup instructions.
-- **Disable User** -- Immediately deactivates the user. They lose access to all connected applications. Use this for urgent offboarding situations.
-- **Force Password Reset** -- The user must create a new password on their next login attempt. Use this if you suspect their credentials have been compromised.
-- **Set Password** -- Manually assign a password for the user. Useful for service accounts or situations where the user cannot complete self-service password setup.
+When both directories are connected, the context menu shows a **directory selector** first — choose **JumpCloud** or **Google Workspace**, then see the actions available for that directory. This lets you manage each directory identity independently.
+
+**JumpCloud actions** (shown for users in JumpCloud):
+- **Edit** — Open the user's JumpCloud profile for editing
+- **Send activation instructions** — Send setup email with login credentials and MFA instructions
+- **Set password** — Manually assign a password
+- **Schedule deactivation** — Set a future date to revoke access
+- **Disable** — Immediately suspend the user's JumpCloud account
+- **Delete** — Permanently remove the user from JumpCloud
+
+**Google Workspace actions** (shown for users in Google, varies by user status):
+- **Suspend** / **Restore** — Suspend or restore a Google Workspace account (active users can be suspended; suspended/archived users can be restored)
+- **Reset password** / **Send password reset** — Reset or email a password reset link
+- **Send sign-in instructions** — Send login instructions (shown for users who haven't logged in yet)
+- **Sign out all sessions** — Force sign-out from all Google sessions
+- **Change organizational unit** — Move the user to a different Google OU
+- **Archive** — Archive the Google Workspace account (preserves data, revokes access)
+- **Delete** — Permanently delete the Google Workspace account
+
+</ConditionalContent>
+
+<ConditionalContent modes={["jc-only"]}>
+
+- **Edit** — Open the user's profile for editing
+- **Send activation instructions** — Send the setup email with login credentials and MFA instructions
+- **Set password** — Manually assign a password
+- **Schedule deactivation** — Set a future date to revoke access
+- **Disable** — Immediately suspend the user's account
+- **Delete** — Permanently remove the user
+
+</ConditionalContent>
+
+<ConditionalContent modes={["google-only"]}>
+
+Actions vary by the user's current status (active, suspended, or archived):
+- **Suspend** / **Restore** — Suspend or restore the Google account
+- **Reset password** / **Send password reset** — Reset or email a password reset link
+- **Send sign-in instructions** — Send login instructions for new users
+- **Sign out all sessions** — Force sign-out from all Google sessions
+- **Change organizational unit** — Move to a different Google OU
+- **Archive** — Archive the account (preserves data, revokes access)
+- **Delete** — Permanently delete the account
+
+</ConditionalContent>
+
+Actions are context-sensitive — only actions that apply to the user's current status and your permissions are shown. For example, you won't see "Suspend" on an already-suspended user, or "Delete" if you don't have delete permissions.
 
 ## Bulk Actions
 
-Select multiple users using the checkboxes in the left column, then choose an action from the bulk actions menu. This is how you handle operations that affect many people at once -- seasonal onboarding, department-wide password resets, or end-of-contract offboarding.
+Select multiple users with the checkboxes, then choose an action from the bulk menu. This is how you handle operations at scale — seasonal onboarding, department-wide password resets, or end-of-contract offboarding.
 
-<img
-    src="/img/ShiftControl/Users/Bulk-actions.png"
-    alt="Bulk actions"
-    width={250}
-/>
+<ConditionalContent modes={["jc-google", "google-jc"]}>
 
-- **Activate / Deactivate** -- Toggle access for multiple users in one step. Deactivating in bulk is the fastest way to offboard a departing team.
-- **Resend Activation** -- Send activation emails to everyone who has not completed setup yet.
-- **Cancel Scheduled Activation** -- Remove pending activations for multiple users.
-- **Password Management** -- Force password resets or set passwords across a group of users.
-- **Disable** -- Immediately disable multiple accounts. This is irreversible without re-activation.
+The bulk menu shows a **directory sub-menu** — select **JumpCloud** or **Google Workspace** to apply the action to that directory for all selected users.
 
-The menu only shows actions that are valid for the selected users. If you select a mix of active and inactive users, some options may not appear.
+**JumpCloud bulk actions:**
+Activate, Send activation instructions, Cancel scheduled activation, Schedule deactivation, Cancel scheduled deactivation, Disable, Enable, Send password reset, Force password reset, Set password, Delete
+
+**Google Workspace bulk actions:**
+Suspend, Restore, Delete
+
+</ConditionalContent>
+
+<ConditionalContent modes={["jc-only"]}>
+
+Activate, Send activation instructions, Cancel scheduled activation, Schedule deactivation, Cancel scheduled deactivation, Disable, Enable, Send password reset, Force password reset, Set password, Delete
+
+</ConditionalContent>
+
+<ConditionalContent modes={["google-only"]}>
+
+Suspend, Restore, Delete
+
+</ConditionalContent>
+
+Each action is only enabled when at least one selected user is eligible. For example, "Activate" is disabled if all selected users are already active.
 
 ## Things to Know
 
-- **Changes take effect immediately.** When you activate, deactivate, or disable a user in ShiftControl, the change is pushed to JumpCloud via API in real time. From there, it affects every application connected through JumpCloud SSO.
-- **Deactivation vs. disabling.** Deactivating a user suspends their access but preserves their account and data. Disabling is more aggressive -- use it when someone needs to be locked out immediately.
-- **Pagination.** The user list shows 10 users per page. Use the pagination controls at the bottom to navigate through larger organizations. The total count (e.g., "1 to 10 of 36 users") is always visible.
-- **Scheduled actions are not instant.** If you schedule a deactivation for a future date, the user retains full access until that date arrives. Double-check the scheduled date if timing is critical.
+- **Changes take effect immediately.** Activating, deactivating, or disabling a user pushes the change to your connected directories in real time. From there, it cascades to every connected application.
+
+<ConditionalContent modes={["jc-google", "google-jc"]}>
+
+- **Dual-directory visibility.** The Directory column shows icons for each directory a user belongs to. If someone is missing from one directory, you'll see only one icon — a quick way to spot sync issues.
+
+</ConditionalContent>
+
+- **Deactivation vs. disabling.** Deactivating suspends access but preserves the account and its data. Disabling is more aggressive — use it when someone needs to be locked out immediately and you don't need to preserve their state.
+- **Scheduled actions aren't instant.** A scheduled deactivation means the user keeps full access until that date. Double-check the date if timing is critical for security.
+- **Pagination.** The list shows 10 users per page. The total count (e.g., "1 to 10 of 36 users") is always visible at the bottom.
 
 ## Related Features
 
-- [Adding a User](/using-shiftcontrol/Users/Adding-a-user) -- Create a new user identity and start the onboarding process.
-- [Editing a User](/using-shiftcontrol/Users/Editing-a-user) -- Update user details, review security settings, audit app permissions, and track SaaS costs.
-- [Groups](/using-shiftcontrol/Groups/Group-management) -- Manage the groups that control what applications and resources users can access.
+- [Adding a User](/using-shiftcontrol/Users/Adding-a-user/) — Create a new identity and start the onboarding process
+- [Editing a User](/using-shiftcontrol/Users/Editing-a-user/) — Update details, review security, audit permissions, track costs
+- [Groups](/using-shiftcontrol/Groups/Group-management/) — Manage the groups that control what apps users can access

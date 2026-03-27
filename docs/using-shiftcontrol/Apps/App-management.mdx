@@ -5,16 +5,17 @@ keywords: ['ShiftControl', 'app management', 'SaaS', 'application provisioning',
 icon: 'grid'
 ---
 
-<p style={{fontSize: "large"}}>How to manage and configure apps for your users.</p>
+import ModeScreenshot from '@site/src/components/ModeScreenshot';
+import ConditionalContent from '@site/src/components/ConditionalContent';
+
+
+<p style={{fontSize: "large"}}>Your central view of every SaaS application in your organization — what you have, who has access, and what it costs.</p>
 
 ## Overview
 
-App Management is the central dashboard for every SaaS application in your organization. It shows you what apps you have, how they're connected, who has access, and what they cost. From here you add new apps, edit existing ones, and remove apps you no longer need.
+App Management shows every SaaS application connected to ShiftControl. Each app row tells you its type (SSO, bookmark, or managed), how many groups and users have access, and what it costs per user. From here you add new apps, edit existing ones, configure SSO, and remove apps you no longer need.
 
-<img
-    src="/img/ShiftControl/Apps/App-management.png"
-    alt="App management"
-/>
+<ModeScreenshot path="Apps/App-management" alt="App Management page showing installed applications with type, access, and cost information" />
 
 ## How It Works
 
@@ -30,22 +31,39 @@ You can search by name, paginate through the list, and click any app to edit its
 
 ### App Types
 
-ShiftControl supports three connection types. Each one determines how your users access the app and how much control you have.
+<ConditionalContent modes={["jc-only", "jc-google", "google-jc"]}>
+
+With JumpCloud connected, ShiftControl supports three app types. SSO is powered by JumpCloud as the identity provider.
 
 | Type | What It Does | When to Use It |
 |------|-------------|----------------|
-| **SSO SAML** | Full single sign-on using the SAML protocol. Users authenticate through ShiftControl and are logged in automatically. | The app supports SAML and your license tier includes SSO. This is the most secure option. |
-| **SSO OIDC** | Full single sign-on using OpenID Connect. Works the same way as SAML but uses a different protocol. | The app supports OIDC but not SAML, or OIDC is the recommended integration. |
-| **Bookmark** | A portal link to the app. No SSO -- users log in to the app separately. | You want the app in the employee portal for easy access, but SSO is not available or not yet configured. |
+| **SSO (SAML)** | Full single sign-on using the SAML protocol. Users authenticate through JumpCloud and are logged in automatically. | The app supports SAML and your license tier includes SSO. This is the most secure option. |
+| **SSO (OIDC)** | Full single sign-on using OpenID Connect. Same benefit as SAML, different protocol. | The app supports OIDC but not SAML, or OIDC is the recommended integration. |
+| **Bookmark** | A portal link to the app. No SSO — users log in to the app separately. | You want the app in the employee portal for easy access, but SSO isn't available or configured yet. |
+
+A Bookmark can be upgraded to SSO SAML or OIDC at any time without losing assignments or configuration.
+
+</ConditionalContent>
+
+<ConditionalContent modes={["google-only"]}>
+
+With Google Workspace as your directory, apps in ShiftControl are managed as portal links — they appear in your employees' app dashboard for easy access. SSO for Google Workspace apps is managed through Google's own authentication system.
+
+</ConditionalContent>
 
 ### Why Add All Your Apps
 
-We recommend adding every SaaS app your organization uses, even the ones that don't support SSO yet. When all your apps are in ShiftControl:
+We recommend adding every SaaS app your organization uses. When all your apps are in ShiftControl:
 
 - **Employees see everything in one place.** Their App Dashboard becomes a single launch point for all work tools.
 - **Onboarding is faster.** New hires get access to all their apps on day one through group assignments.
 - **You can track costs.** The Subscription tab on each app lets you record plan details and per-user costs so you can see spend across your entire SaaS portfolio.
-- **You're ready for SSO later.** A Bookmark can be upgraded to SSO SAML or OIDC at any time without losing assignments or configuration.
+
+<ConditionalContent modes={["jc-only", "jc-google", "google-jc"]}>
+
+- **You're ready for SSO later.** A Bookmark can be upgraded to SSO SAML or OIDC at any time without losing assignments.
+
+</ConditionalContent>
 
 ## Common Scenarios
 
@@ -65,15 +83,28 @@ Add subscription details (plan, billing cycle, per-user cost) to each app. The A
 
 Click the **Add new app** button at the top of the dashboard. This opens the [App Catalog](/using-shiftcontrol/Apps/Adding-an-app) where you can search 983+ pre-configured apps or add a custom app.
 
-## Editing an App
+## Viewing and Editing an App
 
-Click any app in the list to open its [detail page](/using-shiftcontrol/Apps/Editing-an-app). From there you can modify general information, subscription details, SSO configuration, and user assignments.
+Click any app name in the list to open its [detail page](/using-shiftcontrol/Apps/Viewing-an-app/). From there you can review configuration, SSO settings, subscription costs, and assignments. To make changes, see [Editing an App](/using-shiftcontrol/Apps/Editing-an-app/).
 
 ## App Actions
 
-Use the menu next to each app to:
+Click the **⋮ menu** on any app row:
 
-- **Delete** -- permanently remove the app and all its assignments.
+- **Edit** — Open the app for editing
+- **Delete** — Permanently remove the app and all its assignments (disabled for the ShiftControl app itself)
+
+<ConditionalContent modes={["jc-only", "jc-google", "google-jc"]}>
+
+Additional actions available for JumpCloud-managed apps:
+
+- **Regenerate Secret** — Rotate OIDC client secrets (OIDC apps only)
+- **Convert to SSO App** — Upgrade a bookmark to SSO (bookmark apps only, disabled if directory sync is active)
+- **Convert to bookmark app** — Downgrade an SSO app to a bookmark (SAML apps only, disabled if directory sync is active)
+
+</ConditionalContent>
+
+**Bulk actions:** Select multiple apps and choose **Delete** to remove them in bulk.
 
 ## Things to Know
 

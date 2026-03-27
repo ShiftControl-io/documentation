@@ -4,7 +4,7 @@ description: 'Define and manage departments in ShiftControl. Sync from HRIS inte
 keywords: ['ShiftControl', 'settings', 'departments', 'HRIS', 'organization structure', 'configuration']
 icon: 'building-2'
 ---
-
+import ModeScreenshot from "@site/src/components/ModeScreenshot";
 import Admonition from '@theme/Admonition';
 
 <p style={{fontSize: "large"}}>Define and manage your organization’s departments for better structure, visibility, and automation.</p>
@@ -14,11 +14,7 @@ import Admonition from '@theme/Admonition';
 The **Departments** page under **Org Settings** allows administrators to manage the list of departments used throughout ShiftControl.
 Departments can be synced automatically through an HRIS integration or added manually. They provide structure across your organization and are used in user management, app ownership, and automation rules.
 
-<img
-    src="/img/ShiftControl/Settings/Settings-departments.png"
-    alt="Departments list view"
-    width="800"
-/>
+<ModeScreenshot path="Settings/Settings-departments" alt="Departments list view" />
 
 ## Syncing with HRIS Integrations
 
@@ -52,11 +48,7 @@ To add or modify departments manually:
 2. Enter a **Department Name** (e.g., *Marketing*, *Engineering*, *Finance*).
 3. Click **Save** to confirm.
 
-<img
-    src="/img/ShiftControl/Settings/Settings-create-edit-a-department.png"
-    alt="Add or edit a department"
-    width="600"
-/>
+<ModeScreenshot path="Settings/Settings-create-edit-a-department" alt="Add or edit a department" />
 
 You can also edit existing departments using the **⋮ menu** next to each entry.
 When renamed, any linked users, apps, or dynamic groups remain connected automatically.

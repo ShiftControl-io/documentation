@@ -16,6 +16,7 @@ const config: Config = {
     trailingSlash: true,
 
     onBrokenLinks: 'throw',
+    onBrokenAnchors: 'warn',
     markdown: {
         hooks: {
             onBrokenMarkdownLinks: 'warn',
@@ -112,9 +113,9 @@ const config: Config = {
                 },
                 {
                     type: 'docSidebar',
-                    sidebarId: 'onboardingSidebar',
+                    sidebarId: 'employeeGuideSideBar',
                     position: 'left',
-                    label: 'Onboarding',
+                    label: 'Employee Guide',
                 },
                 {
                     type: 'docSidebar',
@@ -171,11 +172,12 @@ const config: Config = {
                 light: 'rgb(255, 255, 255)',
                 dark: 'rgb(50, 50, 50)'
             },
-            config: {
-                // options you can specify via https://github.com/francoischalifour/medium-zoom#usage
-            }
+            config: {}
         }
     } satisfies Preset.ThemeConfig,
+    clientModules: [
+        require.resolve('./src/clientModules/zoomReattach.ts'),
+    ],
     plugins: [
         'docusaurus-plugin-image-zoom',
         [

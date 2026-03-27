@@ -1,0 +1,106 @@
+---
+title: 'Viewing an App'
+description: 'View app details, SSO configuration, subscription costs, and who has access in ShiftControl.'
+keywords: ['ShiftControl', 'app management', 'view app', 'SSO', 'subscriptions', 'access']
+icon: 'grid'
+---
+
+import ModeScreenshot from '@site/src/components/ModeScreenshot';
+import ConditionalContent from '@site/src/components/ConditionalContent';
+
+<p style={{fontSize: "large"}}>See everything about an app — who has access, how it's configured, what it costs, and how SSO is set up.</p>
+
+## Overview
+
+The app detail page is where you go to understand an application's full footprint:
+- "Who has access to this app and through which groups?"
+- "What does this subscription cost and when does it renew?"
+- "How is SSO configured?"
+- "Who owns this app?"
+
+Click any app name in the [App Management](/using-shiftcontrol/Apps/App-management/) list to open it.
+
+<ModeScreenshot path="Apps/App-detail" alt="App detail page showing configuration and assignments" />
+
+## The Details Tab
+
+Shows the app's basic information:
+- **App name** — Display name across ShiftControl and the employee portal
+- **Primary admin** — Person responsible for day-to-day management
+- **Budget owner** — Person responsible for costs and renewals
+- **Owning department** — Which department owns this app
+- **Description** — Visible to employees in their app dashboard
+- **Bookmark URL** — (Bookmarks only) Where users are sent when they click the app
+
+## The Subscription Tab
+
+Shows plan details and costs that feed into the [App Spend Dashboard](/using-shiftcontrol/Dashboards/app-spend/):
+- Plan duration, billing cycle, and renewal date
+- Per-user or flat-rate cost
+- Platform fees and notes
+
+This is where you check before renewal conversations — see exactly what you're paying and when the charge hits.
+
+## The Assignments Tab
+
+Shows who has access and how:
+
+- **Groups sub-tab** — Which groups are assigned to this app. Every member of those groups has access.
+- **Individual sub-tab** — Users assigned directly, outside of any group.
+
+<ModeScreenshot path="Apps/Edit-app-groups" alt="App assignments showing groups with access" />
+
+The sidebar mirrors this with quick counts:
+
+<ModeScreenshot path="Apps/App-sidebar-users" alt="Sidebar showing users with access to this app" />
+
+<ConditionalContent modes={["jc-only", "jc-google", "google-jc"]}>
+
+## The SSO Tab (SSO Apps Only)
+
+For SSO SAML and SSO OIDC apps, shows the JumpCloud identity provider configuration:
+- IDP public certificate
+- SSO config metadata (downloadable for the app vendor)
+- SAML assertion settings and attribute mappings
+
+<ModeScreenshot path="Apps/Edit-app-sso" alt="SSO configuration with IdP settings" />
+
+</ConditionalContent>
+
+## Context Menu Actions
+
+Click the **⋮ menu** on any app row in the App Management list:
+
+- **Edit** — Open the app for editing
+- **Delete** — Remove the app from ShiftControl (disabled for the ShiftControl app itself)
+
+<ConditionalContent modes={["jc-only", "jc-google", "google-jc"]}>
+
+Additional actions for JumpCloud-managed apps:
+- **Regenerate Secret** — Rotate OIDC client secrets (OIDC apps only)
+- **Convert to SSO App** — Upgrade a bookmark to SSO (bookmark apps only, disabled if directory sync is active)
+- **Convert to bookmark app** — Downgrade an SSO app to a bookmark (SAML apps only, disabled if directory sync is active)
+
+</ConditionalContent>
+
+Bulk actions: Select multiple apps and choose **Delete** to remove them in bulk.
+
+## Common Scenarios
+
+### Preparing for a renewal negotiation
+
+Open the app, check the **Subscription** tab for the current cost and renewal date. Check **Assignments > Groups** to see how many people actually have access. Cross-reference with usage data to build your negotiation case.
+
+### Investigating why someone has access
+
+Open the app, check the **Assignments** tab. If access is group-based, click into the group to understand its membership rules. If it's an individual assignment, you can see who added it.
+
+### Verifying SSO is configured correctly
+
+Open the app, go to the **SSO** tab. Verify the IdP URL, certificate, and assertion settings match what the vendor expects.
+
+## Related Features
+
+- [App Management](/using-shiftcontrol/Apps/App-management/) — Return to the full app list
+- [Editing an App](/using-shiftcontrol/Apps/Editing-an-app/) — Make changes to app settings
+- [App Spend Dashboard](/using-shiftcontrol/Dashboards/app-spend/) — Organization-wide cost view

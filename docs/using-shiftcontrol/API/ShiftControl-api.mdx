@@ -1,48 +1,51 @@
 ---
-title: 'ShiftControl API Info'
-description: 'Explore the ShiftControl REST API to automate user management, update redirect URIs, and integrate with tools like Zapier and Make.'
-keywords: ['ShiftControl', 'API', 'REST API', 'integration', 'automation', 'developer']
+title: 'ShiftControl API'
+description: 'Automate user management, integrate with tools, and manage API keys using the ShiftControl REST API.'
+keywords: ['ShiftControl', 'API', 'REST API', 'integration', 'automation', 'developer', 'API keys']
 icon: 'code'
 ---
 
-<p style={{fontSize: "large"}}>An overview of the ShiftControl API, allowing you to integrate and automate various functions within ShiftControl.</p>
+import Admonition from '@theme/Admonition';
 
-## What is an API?
+<p style={{fontSize: "large"}}>Automate ShiftControl operations and integrate with your existing tools using the REST API.</p>
 
-An API (Application Programming Interface) allows different software applications to communicate with each other. It provides a set of rules and protocols for building and interacting with software applications.
+## Overview
 
-<img
-    src="/img/ShiftControl/API/shiftcontrol-api-docs.png"
-    alt="ShiftControl API Docs"
-/>
+The ShiftControl API lets you programmatically manage users, groups, apps, and other resources. Use it to automate repetitive tasks, integrate with workflow tools, or build custom integrations.
+
+**API Documentation:** [api.shiftcontrol.io/api-docs](https://api.shiftcontrol.io/api-docs) — available in Scalar, Redoc, and Swagger formats. You can test API calls directly on the site.
 
 ## Common Use Cases
 
-Our customers use the ShiftControl API for various purposes, such as:
+- **Automating user management** — Create, update, or deactivate users programmatically. Useful for HRIS integrations or custom onboarding workflows.
+- **Updating redirect URIs** — When deploying new test environments, update the redirect URI of an OIDC app to manage active endpoints automatically.
+- **Integration with workflow tools** — Connect ShiftControl to Make, Zapier, or Workato to trigger actions based on events in other systems.
 
-- **Updating Redirect URIs**: When deploying a new test of their system, customers need to update the redirect URI of an OIDC app to manage the current active redirect URI endpoints. The API can automate this process.
-- **Integration with Other Apps**: You can integrate ShiftControl with other applications like Make, Zapier, or Workato to automate workflows and enhance functionality.
-- **Automating User Management**: You can automate user management tasks like creating, updating, or deleting users in ShiftControl using the API.
+## API Keys
 
-## API Documentation
+You need an API key to authenticate requests. ShiftControl provides two types:
 
-You can find our API documentation at [ShiftControl API Docs](https://api.shiftcontrol.io/api-docs). The documentation is available in Scalar, Redoc, and Swagger formats, and you can execute and test APIs directly on our site.
+**Organization API Keys** — Associated with your organization, not a specific user. These have full administrative rights and can access all organization-wide data and actions.
 
-## API Tokens
+<Admonition type="warning">
+    Org API keys have the highest permission level. Use them only for trusted server-side integrations, never in client-side code.
+</Admonition>
 
-- **User API Tokens**: These tokens are associated with individual users and provide access to user-specific data and actions. These tokens have limited rights based on the user's role and permissions.
-- **Org API Tokens**: These tokens are associated with an organization and provide access to organization-wide data and actions. These are top-level admin tokens and have all rights.
-- **Access Tokens**: These tokens are used to authenticate API requests from our Frontend and ensure secure communication between applications.
+**User API Keys** — Associated with an individual user. These have permissions limited to what that user's role allows. Use these for user-scoped integrations or personal automation scripts.
 
-The ShiftControl API provides powerful tools to automate and integrate various functions, making it easier to manage your IT environment.
+Manage your keys in Settings:
+- [Organization API Keys](/using-shiftcontrol/Settings/org-api-keys/) — Create and manage org-level keys
+- [User API Keys](/using-shiftcontrol/Settings/user-api-keys/) — Create and manage your personal keys
 
-## Using Postman with ShiftControl API
+## Using Postman
 
-Postman is a popular API client that allows you to test and automate API requests.
+To test the API with Postman:
 
-To use Postman with our API:
+1. Download the [OpenAPI Spec](https://api.shiftcontrol.io/api-docs/openapi.json)
+2. Import it into Postman ([instructions](https://learning.postman.com/docs/integrations/available-integrations/working-with-openAPI/))
+3. Set your API key in the Authorization header
 
-1. Download the [OpenAPI Spec](https://api.shiftcontrol.io/api-docs/openapi.json) from our site.
-2. Import the OpenAPI Spec into Postman.
+## Related Features
 
-For detailed instructions, refer to [Postman OpenAPI Integration](https://learning.postman.com/docs/integrations/available-integrations/working-with-openAPI/).
+- [Organization API Keys](/using-shiftcontrol/Settings/org-api-keys/) — Manage org-level API keys
+- [User API Keys](/using-shiftcontrol/Settings/user-api-keys/) — Manage personal API keys

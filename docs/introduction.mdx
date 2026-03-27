@@ -1,23 +1,74 @@
 ---
 title: Introduction
 description: 'ShiftControl makes IT management easy for growing teams. Manage identities, apps, SSO, and security from one centralized platform.'
-keywords: ['ShiftControl', 'introduction', 'IT management', 'identity', 'SaaS management', 'JumpCloud', 'security']
+keywords: ['ShiftControl', 'introduction', 'IT management', 'identity', 'SaaS management', 'JumpCloud', 'Google Workspace', 'security']
 slug: /
 ---
 
-<p style={{fontSize: "large"}}>An introduction and overview of ShiftControl</p>
+import Admonition from '@theme/Admonition';
+import ConditionalContent from '@site/src/components/ConditionalContent';
+
+<p style={{fontSize: "large"}}>The IT management platform that gives growing teams enterprise-grade identity, access, and cost control — without the complexity.</p>
 
 <img
     src="/img/security-basic-right.png"
     alt="Security is a basic right"
 />
 
-## What does ShiftControl Do?
+<Admonition type="tip" title="Choose your setup">
+    Use the **directory selectors** at the top of every page to match these docs to your ShiftControl configuration. Set your primary and additional directories, and the documentation will adapt to show exactly what applies to you.
+</Admonition>
 
-Many smaller businesses don't have a dedicated IT person, so the task of managing IT is usually left to a founder, first engineer, or someone from Finance or HR! We've seen it all! We built ShiftControl to make it easy for anyone in the company to manage and control their IT environments with ease.
+## What is ShiftControl?
 
-We believe that good identity management is the cornerstone of all strong and secure IT and business operations. Think about it, you use your identity for everything, from your email, to chat, talking to customers, and more. Why should you leave your identity management fragmented and insecure?
+ShiftControl is an IT management platform built for teams that don't have (or don't want) a full-time IT department. If you're a founder managing logins in a spreadsheet, an office manager juggling five admin consoles, or a first engineer who inherited IT — ShiftControl is for you.
 
-At the base of ShiftControl is a strong identity management platform called JumpCloud. JumpCloud provides you with a centralized identity, a directory for all your users, and strong multi-factor authentication that can be intrated with many services.
+At its core, ShiftControl does four things:
 
-JumpCloud is very powerful, however, it required technical knowledge to operate. That's why ShiftControl, at it's core, is an administrative overlay on top of JumpCloud. We make it much easier to understand and manage your identity, and then we add a bunch of additional features on top of that to make it easier and more automatic to do things like onboard/offboard users, identity and control your SaaS costs, and so much more.
+1. **Centralizes identity** — Every person in your company gets one identity that controls access to everything. No more fragmented accounts across dozens of SaaS tools.
+2. **Automates access** — When someone joins, they get the right apps on day one based on their role, department, and team. When they leave, access is revoked everywhere — automatically.
+3. **Controls SaaS costs** — See exactly what your organization spends on software, per user and per app. Find unused licenses before they renew.
+4. **Strengthens security** — MFA enforcement, OAuth permission auditing, and admin oversight across your entire stack.
+
+## How It Works
+
+ShiftControl connects to your identity providers and manages everything through a single interface.
+
+<ConditionalContent modes={["jc-only"]}>
+
+Your organization uses **JumpCloud** as the identity provider. ShiftControl sits on top of JumpCloud and provides a simpler, more powerful admin experience. Changes you make in ShiftControl are pushed to JumpCloud via API in real time, which propagates them to every connected application.
+
+</ConditionalContent>
+
+<ConditionalContent modes={["jc-google"]}>
+
+Your organization uses **JumpCloud** as the primary identity provider with **Google Workspace** connected as a secondary directory. ShiftControl manages both from a single interface — user profiles, group memberships, security settings, and admin access flow to both directories simultaneously. JumpCloud handles authentication and SSO while Google Workspace manages email, Google Groups, and Google-specific access.
+
+</ConditionalContent>
+
+<ConditionalContent modes={["google-only"]}>
+
+Your organization uses **Google Workspace** as the identity provider. ShiftControl manages your Google directory, admin roles, group memberships, and application access from a single interface that's easier to use than the Google Admin Console.
+
+</ConditionalContent>
+
+## What You Can Do
+
+| Area | What It Does | Why It Matters |
+|------|-------------|----------------|
+| **[Users](/using-shiftcontrol/Users/)** | Add, edit, activate, deactivate people | One place to control everyone's access |
+| **[Groups](/using-shiftcontrol/Groups/)** | Organize users, automate app access | New hire gets the right tools on day one |
+| **[Apps](/using-shiftcontrol/Apps/)** | Manage SaaS apps, discover shadow IT | Know what your team is actually using |
+| **[Dashboards](/using-shiftcontrol/Dashboards/)** | OAuth audit, spend tracking | Catch risky permissions and overspending |
+| **[Reports](/using-shiftcontrol/Reports/)** | App assignments, access audits | Ready for compliance reviews |
+| **[Settings](/using-shiftcontrol/Settings/)** | Directories, connectors, admin roles | Configure ShiftControl for your org |
+
+## Try the Live Demo
+
+Want to see ShiftControl in action before setting up? Our **[live demo](https://demo.shiftcontrol.io)** lets you explore every feature with realistic sample data — no login required. Click around, try the workflows, and see how it all fits together.
+
+## Getting Started
+
+If you're setting up ShiftControl for the first time, start with the [Quickstart guide](/getting-started/quickstart/). It walks you through connecting your identity providers and configuring your first users and groups.
+
+If you're already set up and looking for how to do something specific, use the sidebar or the search bar at the top of the page.
