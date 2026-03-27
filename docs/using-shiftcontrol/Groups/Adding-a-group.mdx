@@ -6,8 +6,12 @@ icon: 'users-medical'
 ---
 
 import { Steps, Step } from "@site/src/components/Steps";
+import ModeScreenshot from '@site/src/components/ModeScreenshot';
 
-<p style={{fontSize: "large"}}>Create a new group to start managing app access for a set of users.</p>
+import ConditionalContent from '@site/src/components/ConditionalContent';
+
+
+<p style={{fontSize: "large"}}>Create a group, define who belongs to it, and every member automatically gets the right app access.</p>
 
 ## Overview
 
@@ -25,10 +29,7 @@ When you create a group, you set its name, description, and optional tag. You ca
 
 The moment a user matches a group's rules, they are added to the group and gain access to every app assigned to it. This happens automatically for dynamic and nested rules. For individual assignments, access is granted as soon as you save the change.
 
-<img
-    src="/img/ShiftControl/Groups/Add-a-group.png"
-    alt="Add a group"
-/>
+<ModeScreenshot path="Groups/Add-a-group" alt="Add a group" />
 
 ## Common Scenarios
 
@@ -55,7 +56,7 @@ The moment a user matches a group's rules, they are added to the group and gain 
 
         - **Group Name**: A clear, descriptive name (e.g., "Accounting" or "AWS Production Access").
         - **Group Tag**: Select a tag to categorize the group (Department, Team, Location, Role Access, Distribution, or leave as No tag).
-        - **Sync to Google**: Toggle this on if you want the group to sync to Google Workspace as a distribution list. See [Syncing Groups with Google](/using-shiftcontrol/Groups/Syncing-groups-with-google) for details.
+        - **Sync to Google**: Toggle this on to sync the group to Google Workspace (see [Syncing with Google Workspace](#syncing-with-google-workspace) below).
         - **Description**: Explain what this group is for and who should be in it. This helps other admins understand the group's purpose.
     </Step>
 
@@ -69,16 +70,46 @@ The moment a user matches a group's rules, they are added to the group and gain 
 
 </Steps>
 
+<ConditionalContent modes={["jc-google"]}>
+
+## Syncing with Google Workspace
+
+On the **Details** tab, toggle **Sync to Google** to connect this group to a Google Workspace group. When enabled:
+
+1. Enter the email address for the Google Group (e.g., `engineering@yourcompany.com`). This must be a domain registered in your Google Workspace.
+2. If a Google Group already exists at that address, ShiftControl takes over managing its membership. If not, ShiftControl creates a new one.
+3. From that point on, every membership change in ShiftControl is automatically pushed to Google Workspace — add a user here, they appear in the Google Group. Remove them, they're removed.
+
+**What ShiftControl manages:**
+- **Membership** — ShiftControl is the source of truth. All member additions and removals are pushed to Google.
+- **Group settings** — Managed through ShiftControl's [Templates](/using-shiftcontrol/Groups/Group-management/#google-workspace-group-templates), which replace Google's confusing 60+ settings with clear, opinionated presets.
+
+**Things to know about Google Sync:**
+- **Sync is one-directional.** ShiftControl pushes to Google. Changes made directly in the Google Admin Console may be overwritten.
+- **Updates are near-instant.** Membership changes appear in Google Workspace within seconds.
+- **Email addresses must be on your domain.** Only addresses from domains registered in your Google Workspace work.
+- **Disabling sync doesn't delete the Google Group.** The group continues to exist but ShiftControl stops managing it.
+- **You can enable sync later.** You don't need to decide when creating the group — toggle it on any time from the Details tab.
+- **Dynamic rules + Google Sync is the most powerful combination.** Create a dynamic rule (e.g., Location equals "Singapore") and enable sync — you get a distribution list that stays current automatically.
+
+### Common Google Sync Use Cases
+
+- **Office-wide email distribution** — Group with dynamic Location rule + sync → `singapore@yourcompany.com` that updates automatically
+- **Department mailing lists** — Group with dynamic Department rule + sync → `engineering@yourcompany.com` that never goes stale
+- **Shared Drive access** — Sync a group to Google, assign that Google Group to a Shared Drive. Access updates automatically with membership.
+- **Project teams** — Nest team groups, enable sync → project email alias and Google resource access in one step
+
+</ConditionalContent>
+
 ## Things to Know
 
 - **A group without rules has no members.** Creating a group is just the first step. You need to configure membership rules or add individual users before anyone gains access.
 - **Group names should be descriptive.** Other admins will see these names throughout ShiftControl. "AWS Production Access" is better than "Group 7."
 - **Tags are optional but recommended.** Tags make it much easier to filter and audit groups as your organization grows. Choose a tag that reflects the group's purpose.
-- **Google Sync can be enabled later.** You do not need to decide on Google Sync when creating the group. You can enable it at any time by editing the group.
 - **Downstream effects are immediate.** As soon as you add membership rules and save, users who match those rules gain access to any apps assigned to the group.
 
 ## Related Features
 
-- [Group Management](/using-shiftcontrol/Groups/Group-management) -- View and organize all groups from the central list.
-- [Editing a Group](/using-shiftcontrol/Groups/Editing-a-group) -- Configure dynamic, nested, and individual membership rules.
-- [Syncing Groups with Google](/using-shiftcontrol/Groups/Syncing-groups-with-google) -- Push group membership to Google Workspace.
+- [Group Management](/using-shiftcontrol/Groups/Group-management/) — View and organize all groups
+- [Viewing a Group](/using-shiftcontrol/Groups/Viewing-a-group/) — Review membership and settings
+- [Editing a Group](/using-shiftcontrol/Groups/Editing-a-group/) — Configure membership rules and settings

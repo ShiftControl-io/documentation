@@ -1,111 +1,139 @@
 ---
 title: 'Quickstart'
-description: 'Get started with ShiftControl fast. Trust JumpCloud in Google Workspace, configure API permissions, and set up your first users.'
+description: 'Get started with ShiftControl. Connect your identity providers, configure Google Workspace, and start managing your organization.'
 keywords: ['ShiftControl', 'quickstart', 'getting started', 'setup', 'onboarding', 'JumpCloud', 'Google Workspace']
 ---
 
 import Admonition from '@theme/Admonition';
 import { Steps, Step } from "@site/src/components/Steps";
+import ConditionalContent from '@site/src/components/ConditionalContent';
 
-<p style={{fontSize: "large"}}>Start managing your organization quickly with ShiftControl</p>
+<p style={{fontSize: "large"}}>Get ShiftControl connected to your directories and start managing your organization in minutes.</p>
 
-## Trust JumpCloud in Google Workspace
-
-If you use Google Workspace, the first thing you'll need to do it trust the JumpCloud apps in your Google Workspace Admin interface.
-
-This process is only required if an organization has their API Controls for Google Workspace Admin set to restricted, but we recommend following the process no matter what to ensure the apps are authorized.
-
-<Admonition type="note">
-If the app doesn't have the right permissions, you'll receive a 400 error admin_policy_enforce ([Read
-more](https://jumpcloud.com/support/troubleshoot-google-workspace-integration#_error_400__admin_policy_enforced_))
-when trying to approve the JumpCloud app during initial setup.
+<Admonition type="tip">
+    Want to explore before setting up? Try the <a href="https://demo.shiftcontrol.io" target="_blank">live demo</a> — no login required. You can see every feature in action before connecting your own directories.
 </Admonition>
 
-You can trust the JumpCloud apps in order to add them without having to lower the restrictions enforced.
+<ConditionalContent modes={["jc-only", "jc-google"]}>
 
-The following apps will need to be approved/trusted:
+## Step 1: Trust JumpCloud in Google Workspace
 
-| App Name | Purpose | Identifier |
-|-- |-- |-- |
-| JumpCloud | Directory Sync of users and groups from JumpCloud | 409100557052-up2bjo6c85fdvipudtkaqr7jqsesqnam.apps.googleusercontent.com |
-| JumpCloud | Single Sign-On | 629652647736-b7u1qe4oktmn7b6vnmdbabrd32lds4as.apps.googleusercontent.com |
+If you use Google Workspace alongside JumpCloud, the first step is to trust the JumpCloud apps in your Google Workspace Admin interface. This allows JumpCloud to sync users and provide Single Sign-On to Google services.
+
+<Admonition type="note">
+    This step is only required if your organization has API Controls set to **restricted** in Google Workspace Admin. However, we recommend following it regardless to ensure the apps are properly authorized.
+</Admonition>
+
+The following JumpCloud apps need to be approved:
+
+| App | Purpose | Client ID |
+|-----|---------|-----------|
+| **JumpCloud** | Directory sync of users and groups | `409100557052-up2bjo6c85fdvipudtkaqr7jqsesqnam.apps.googleusercontent.com` |
+| **JumpCloud** | Single Sign-On | `629652647736-b7u1qe4oktmn7b6vnmdbabrd32lds4as.apps.googleusercontent.com` |
 
 <Steps>
-    <Step title="Login to the Google Workspace Admin Panel">
-        Go to https://admin.google.com, log in as an Admin.
+    <Step title="Open Google Workspace Admin">
+        Go to [admin.google.com](https://admin.google.com) and log in as a Google Workspace admin.
     </Step>
-    <Step title="Access the API Controls">
-        Go to Security→Access and data control→API Controls.
+    <Step title="Navigate to API Controls">
+        Go to **Security → Access and data control → API Controls**.
     </Step>
-    <Step title="Manage Google Services">
-        Click on Manage Google Services.
+    <Step title="Open Managed Google Services">
+        Click **Manage Google Services**.
         <img
             src="/img/JumpCloud-Trust/JumpCloud-Trust-Manage-Google-Services.png"
-            alt="Manage Google Services"
+            alt="Manage Google Services in Google Workspace Admin"
         />
     </Step>
     <Step title="View configured apps">
-        In the middle card (Configured Apps), click on View list.
+        In the Configured Apps card, click **View list**.
         <img
             src="/img/JumpCloud-Trust/JumpCloud-Trust-Configured-Apps.png"
-            alt="Configured Apps"
+            alt="Configured Apps list"
         />
     </Step>
-    <Step title="Add an OAuth App">
-        Click on the Add App pulldown and select Oauth App Name or Client ID.
+    <Step title="Add an OAuth app">
+        Click the **Add App** dropdown and select **OAuth App Name or Client ID**.
         <img
             src="/img/JumpCloud-Trust/JumpCloud-Trust-Add-Oauth-App.png"
-            alt="Add Oauth App"
+            alt="Add OAuth App"
         />
     </Step>
-    <Step title="Search for each app">
-        For each item in our list of apps to approve repeat steps 6 to 11. Enter the ID and hit search.
+    <Step title="Search and approve each app">
+        For each app in the table above, paste the Client ID and click **Search**. Then select the app, choose **Your Org** (all users), set it to **Trusted**, and click **Finish**.
+
+        Repeat for both JumpCloud apps.
         <img
             src="/img/JumpCloud-Trust/JumpCloud-Trust-Search-Apps.png"
-            alt="Search Apps"
-        />
-    </Step>
-    <Step title="Select the app">
-        Click Select on the App Name.
-        <img
-            src="/img/JumpCloud-Trust/JumpCloud-Trust-Select-app-name.png"
-            alt="Select App"
-        />
-    </Step>
-    <Step title="Select OAuth ID">
-        Select the oAuth ID and hit Select.
-        <img
-            src="/img/JumpCloud-Trust/JumpCloud-Trust-Select-Oauth-ID.png"
-            alt="Select OAuth ID"
-        />
-    </Step>
-    <Step title="Continue with all users">
-        Choose “Your Org” (all users) and continue.
-        <img
-            src="/img/JumpCloud-Trust/JumpCloud-Trust-Continue-all-users.png"
-            alt="Continue with all users"
-        />
-    </Step>
-    <Step title="Trust the app">
-        Select Trusted and Continue.
-        <img
-            src="/img/JumpCloud-Trust/JumpCloud-Trust-Select-Trusted.png"
-            alt="Trust the app"
-        />
-    </Step>
-    <Step title="Finish">
-        Click Finish.
-        <img
-            src="/img/JumpCloud-Trust/JumpCloud-Trust-Finish.png"
-            alt="Click Finish"
+            alt="Search for JumpCloud app by Client ID"
         />
     </Step>
 </Steps>
 
-You have now trusted the apps that we'll authorize to sync Google Workspace with JumpCloud.
+You've now authorized JumpCloud to sync with Google Workspace. Next, connect Google Workspace as a directory in ShiftControl.
 
-## Add the Google Workspace Directory
+</ConditionalContent>
+
+<ConditionalContent modes={["jc-google"]}>
+
+## Step 2: Connect Google Workspace in ShiftControl
+
+With JumpCloud trusted in Google, the next step is to connect Google Workspace as a directory so ShiftControl can manage both directories from one place.
+
+<Steps>
+    <Step title="Add Google Workspace from the App Catalog">
+        Go to **Apps → Catalog** in ShiftControl. Search for **Google Workspace** and click **Add**. This installs Google Workspace as a managed application.
+    </Step>
+    <Step title="Enable the Google Workspace directory connector">
+        Go to **Settings → Connectors → Directories**. Find **Google** in the list and click the **⋮ menu → Authenticate**.
+    </Step>
+    <Step title="Complete the authorization flow">
+        A Google authorization window will open. Sign in with a Google Workspace admin account and grant ShiftControl the requested permissions. These permissions allow ShiftControl to read and manage users, groups, and admin roles in your Google Workspace.
+    </Step>
+    <Step title="Verify the connection">
+        After authorization, the Google connector status should show **Enabled** with a **Healthy** health indicator. ShiftControl will begin syncing your Google Workspace data immediately — users, groups, and admin roles will start appearing throughout the platform.
+    </Step>
+</Steps>
+
+Once connected, you'll see Google Workspace data in:
+- **Users** — Directory icons showing which users exist in Google Workspace
+- **Groups** — Google Groups sync and distribution list management
+- **Dashboards** — OAuth permission auditing from Google Workspace
+- **Settings → Google Admins** — Google Workspace admin role management
+
+</ConditionalContent>
+
+<ConditionalContent modes={["jc-only"]}>
+
+## Step 2: Start Managing Your Organization
+
+With JumpCloud trusted (if you use Google Workspace) and ShiftControl connected to your JumpCloud directory, you're ready to start managing your organization:
+
+1. **[Review your users](/using-shiftcontrol/Users/User-management/)** — ShiftControl syncs your JumpCloud users automatically. Check that everyone appears correctly.
+2. **[Set up groups](/using-shiftcontrol/Groups/Group-management/)** — Create groups based on departments, teams, and roles to automate app access.
+3. **[Manage your apps](/using-shiftcontrol/Apps/App-management/)** — Assign applications to groups so access is provisioned automatically.
+
+</ConditionalContent>
+
+<ConditionalContent modes={["google-only"]}>
+
+## Getting Started with Google Workspace
+
+ShiftControl is launching a **self-service onboarding flow** for Google Workspace-only organizations. This will walk you through connecting your Google Workspace directory, setting up users and groups, and configuring app access — all without needing JumpCloud.
 
 <Admonition type="info">
-This section is coming soon, we're updating the process to make this easier!
+    The Google Workspace self-service setup is coming soon. In the meantime, <a href="mailto:support@shiftcontrol.io">contact our team</a> and we'll get you set up directly.
 </Admonition>
+
+While you wait, explore the [live demo](https://demo.shiftcontrol.io) to see how ShiftControl works with Google Workspace.
+
+</ConditionalContent>
+
+## What's Next
+
+Now that your directories are connected, explore what ShiftControl can do:
+
+- **[Users](/using-shiftcontrol/Users/)** — Add, edit, and manage everyone in your organization
+- **[Groups](/using-shiftcontrol/Groups/)** — Automate app access through group memberships
+- **[Apps](/using-shiftcontrol/Apps/)** — Manage SaaS applications and discover shadow IT
+- **[Dashboards](/using-shiftcontrol/Dashboards/)** — Monitor OAuth permissions and track SaaS spending

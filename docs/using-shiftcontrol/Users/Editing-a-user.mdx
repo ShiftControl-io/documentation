@@ -1,157 +1,82 @@
 ---
 title: 'Editing a User'
-description: 'Edit user profiles, review security posture, audit OAuth permissions, and track per-user SaaS spend in ShiftControl settings.'
-keywords: ['ShiftControl', 'user management', 'edit user', 'identity', 'profile', 'permissions']
+description: 'Update user profiles, change organizational details, and manage directory-specific settings in ShiftControl.'
+keywords: ['ShiftControl', 'user management', 'edit user', 'identity', 'profile']
 icon: 'user-gear'
 ---
 
 import { Steps, Step } from "@site/src/components/Steps";
 import Admonition from '@theme/Admonition';
+import ConditionalContent from '@site/src/components/ConditionalContent';
+import ModeScreenshot from '@site/src/components/ModeScreenshot';
 
-<p style={{fontSize: "large"}}>View and update everything about a user -- their profile, security posture, application permissions, and SaaS spend -- all from one place.</p>
+<p style={{fontSize: "large"}}>Update a user's profile, organizational details, and directory-specific settings.</p>
 
 ## Overview
 
-The Edit User page is the most detailed view of any person in your organization. It goes far beyond changing a name or email. From here, you can audit a user's security configuration, review every OAuth permission they have granted, track what their application access costs, and understand their group and app memberships at a glance.
+When you need to change something about a user — their department, title, manager, email aliases, or other profile fields — you do it from the Edit User page. Changes are pushed to your connected directories immediately via API.
 
-This is the page you open when someone asks "What does this person have access to?" or "How much are we spending on this user's tools?" or "Is this person's MFA properly configured?"
+To view a user's security posture, app permissions, and SaaS costs without editing, see [Viewing a User](/using-shiftcontrol/Users/Viewing-a-user/).
 
-## How It Works
+<ModeScreenshot path="Users/User-detail-info" alt="User detail page in edit mode" />
 
-When you open a user for editing, ShiftControl pulls together data from multiple sources into a single interface:
+## What You Can Edit
 
-- **Profile details** come from JumpCloud and are editable directly.
-- **Security data** is pulled from Google Workspace (2-Step Verification status, recovery info) and JumpCloud (MFA configuration).
-- **App permissions** show every OAuth grant the user has authorized, pulled from Google Workspace audit logs.
-- **SaaS cost data** aggregates known subscription costs for the user's assigned applications.
+### Identity Fields
 
-Changes you make to the Details tab are pushed to JumpCloud immediately via API, which propagates them to connected applications. Security and App Permissions are read-only views that reflect the current state of the user's accounts.
+- **First Name / Last Name** — The user's legal name, reflected across all connected apps and directories
+- **Display Name** — How the name appears in ShiftControl and connected apps
+- **Primary Email** — The user's SSO login identity. **Changing this affects all connected services** — do so with caution
+- **Personal Email** — Non-work email for activation emails and recovery
 
-## Common Scenarios
+### Organizational Details
 
-### Scenario: Investigating a security alert
+These fields drive dynamic group memberships and therefore app access:
 
-Your security team flags a user whose recovery email is set to a personal Gmail address. Open the user, go to the **Security** tab, and check the Recovery Email field under Google Security. You can see their 2-Step Verification status and whether MFA is properly enforced. If the user has weak security settings, coordinate with them to update their recovery information and ensure MFA is enabled.
+- **Manager** — Sets the reporting hierarchy (used in org chart and approval workflows)
+- **Title** — Job title, displayed across connected systems
+- **Department** — Drives department-based dynamic groups. Changing this can immediately add/remove the user from groups and change their app access
+- **Location** — Drives location-based groups and policies
+- **Company** — For organizations managing multiple entities
+- **Team** — More granular than department, with its own group-based assignments
 
-### Scenario: Reviewing a departing employee's access
-
-An employee gave their two-week notice. Before their last day, open their profile and review the **App Permissions** tab to see every OAuth permission they have granted -- Superhuman, Stripe, Linear, and others. Check the **SaaS Cost** tab to understand the budget impact of offboarding. Review the sidebar to see which groups they belong to, so you know what access will be revoked when they are deactivated.
-
-### Scenario: Responding to a budget review
-
-Finance wants to know why software costs increased this quarter. Open high-cost users from the Users list and check their **SaaS Cost** tab. The total cost, per-app breakdown, and monthly averages give you the data you need. Cross-reference with the **App Permissions** tab to see if the user is still actively using all their authorized applications.
-
-## Step-by-Step Guide
-
-<img
-    src="/img/ShiftControl/Users/Edit-a-user.png"
-    alt="Edit a user"
-/>
-
-<Steps>
-
-    <Step title="Open the user">
-        From the **Users** list, click on the user you want to view or edit. The Edit User page opens with the user's header at the top showing their avatar, name, email, and status badge (Active or Inactive). You can navigate between users with the previous/next arrows without going back to the list.
-    </Step>
-
-    <Step title="Use the header actions">
-        The action buttons in the header give you quick access to common operations:
-
-        - **Reset password** (key icon) -- Force the user to set a new password.
-        - **Copy user info** (copy icon) -- Copy the user's details to your clipboard for sharing.
-        - **Contact user** (phone icon) -- Reach the user through their contact information.
-        - **Delete user** (trash icon) -- Permanently remove the user from ShiftControl and JumpCloud. This is irreversible.
-    </Step>
-
-    <Step title="Edit profile details (Details tab)">
-        The Details tab contains the same fields from user creation, plus additional options for existing users:
-
-        - **All identity and organizational fields** -- First Name, Last Name, Display Name, Manager, Primary Email, Personal Email, Title, Department, Location, Company, and Team. Changing Department or Team can move the user into different dynamic groups, which changes their app access.
-        - **Email Aliases** -- Add alternate email addresses that route to the user's primary inbox. Click **Add alias** to create a new one. Aliases are useful when users need to receive email at multiple addresses (e.g., a role-based address like support@ or sales@).
-
-        Click **Save Changes** after making edits. Changes are pushed to JumpCloud immediately via API and propagate to connected applications.
-    </Step>
-
-    <Step title="Review security posture (Security tab)">
-        The Security tab shows the user's authentication and security configuration across connected directories.
-
-        **Google Security** shows:
-        - **2SV Status** -- Whether the user has 2-Step Verification enabled on their Google account.
-        - **2SV Enforcement** -- Whether your organization's policy requires this user to have 2SV enabled.
-        - **Recovery Email** -- The email address Google will use if the user is locked out. Verify this is a company-approved address.
-        - **Recovery Phone** -- The phone number registered for account recovery.
-
-        **JumpCloud MFA** shows:
-        - **Device Authenticator** -- Which MFA method the user has configured (e.g., 1Password, Google Authenticator). If this is empty, the user has not completed MFA enrollment. Admins can delete an existing MFA enrollment to force the user to re-enroll.
-
-        Use this tab during security audits to verify that every user meets your organization's authentication requirements.
-    </Step>
-
-    <Step title="Audit app permissions (App Permissions tab)">
-        The App Permissions tab shows every OAuth permission the user has granted to third-party applications through their Google account.
-
-        **Active OAuth Permissions** lists every application that currently has access to the user's data -- applications like Superhuman, Stripe, Attio, Cal.com, Linear, and Google Chrome extensions. Each entry shows what the application has access to.
-
-        **App Permission History** provides a timeline of when permissions were granted or revoked. This is valuable for investigating security incidents -- you can see exactly when a user authorized a suspicious application.
-
-        If you see an application that should not have access, use the **Revoke** button to remove its permissions directly from ShiftControl.
-    </Step>
-
-    <Step title="Review SaaS costs (SaaS Cost tab)">
-        The SaaS Cost tab gives you a financial view of the user's application footprint:
-
-        - **Total Apps** -- The number of SaaS applications assigned to this user.
-        - **Total Cost** -- The combined annual and monthly cost of all assigned applications.
-        - **Average Per App** -- The average cost per application, useful for benchmarking.
-        - **App Cost List** -- A line-by-line breakdown showing each application and its individual cost.
-
-        This data helps with budget planning, license optimization (are they using all these tools?), and offboarding cost recovery (what subscriptions can be cancelled or reassigned?).
-    </Step>
-
-</Steps>
-
-## User Info Sidebar
-
-The right sidebar provides a quick-reference view of the user's group memberships and application assignments without leaving the edit page.
-
-### Groups Tab
-
-<img
-    src="/img/ShiftControl/Users/User-sidebar-groups.png"
-    alt="User Sidebar with Groups"
-    width={"400"}
-/>
-
-Shows every group the user belongs to, along with how they were added (manually assigned vs. dynamically added based on their attributes). This is the fastest way to understand why a user has the access they have -- their groups determine their applications.
-
-### Apps Tab
-
-<img
-    src="/img/ShiftControl/Users/User-sidebar-apps.png"
-    alt="User Sidebar with Apps"
-    width={"400"}
-/>
-
-Shows every application the user can access and how they got access (through which group assignment). If a user has access to something they should not, this view tells you which group is granting it so you can fix the root cause rather than just removing the individual assignment.
-
-<Admonition type="info">
-    Hover over the icons in the sidebar to see additional details about how each group or app was assigned -- whether through direct assignment, dynamic group rules, or inherited from a parent group.
+<Admonition type="warning">
+    Changing Department or Team can immediately change a user's app access if you have dynamic groups configured. The user may gain or lose access to applications in real time.
 </Admonition>
+
+### Email Aliases
+
+Add alternate email addresses that route to the user's primary inbox. Click **Add alias** to create a new one.
+
+<ConditionalContent modes={["jc-google", "google-jc"]}>
+
+### Google Workspace Settings
+
+Below the standard fields, you can manage Google-specific settings:
+
+- **Recovery Email** — The email Google uses if the user is locked out
+- **Recovery Phone** — Phone number for Google account recovery
+- **Show user in global directory** — Toggle visibility in the Google Workspace directory
+- **Email Aliases** — Google-specific email aliases
+
+</ConditionalContent>
 
 ## HRIS Integration
 
-If your organization has an HRIS integration configured (such as BambooHR), profile updates can happen automatically. When an employee's details change in your HR system -- such as a department transfer, title change, or new manager -- ShiftControl updates their profile automatically. These changes trigger dynamic group re-evaluation, which can adjust the user's app access in real time. Manual edits are still available and useful for fields not managed by your HRIS.
+If your organization has an HRIS integration (like BambooHR), profile updates can happen automatically. When an employee's details change in your HR system — department transfer, title change, new manager — ShiftControl updates their profile automatically, which triggers dynamic group re-evaluation and can adjust app access in real time.
+
+Manual edits are still available for fields not managed by your HRIS.
 
 ## Things to Know
 
-- **Editing Department or Team can change access immediately.** Because dynamic groups evaluate user attributes in real time, changing a user's department from Engineering to Marketing could revoke their GitHub access and grant them HubSpot access -- all automatically. Make sure you understand the group rules before changing organizational fields.
-- **Security and App Permissions include admin actions.** You can revoke active OAuth app permissions directly from the App Permissions tab and delete a user's existing JumpCloud MFA enrollment from the Security tab to force re-enrollment. Google security fields (2SV status, recovery info) are read-only and must be managed in Google Workspace admin.
-- **SaaS cost data depends on your configuration.** Cost information is only as accurate as the subscription data configured in ShiftControl. If an application's cost is not set up, it will not appear in the totals.
-- **Deleting a user is permanent.** The trash icon in the header permanently removes the user from ShiftControl and JumpCloud. All their app access is revoked, and their identity is removed from connected systems. If you need to temporarily revoke access, use Deactivate instead.
-- **Previous/next navigation preserves context.** When auditing multiple users, use the arrows in the header to move between users without returning to the list. This is significantly faster than going back and forth during a security review or access audit.
+- **Changes propagate immediately.** Edits are pushed to your connected directories via API in real time.
+- **Department/Team changes affect access.** Dynamic groups re-evaluate immediately, so changing organizational fields can add or remove app access.
+- **Primary Email is hard to change.** It's the SSO identity across all services. Get it right the first time.
+- **Deleting a user is permanent.** The trash icon permanently removes the user from ShiftControl and your connected directories. Use Deactivate instead if you need to temporarily revoke access.
 
 ## Related Features
 
-- [User Management](/using-shiftcontrol/Users/User-management) -- Return to the full user list for bulk actions, filtering, and search.
-- [Adding a User](/using-shiftcontrol/Users/Adding-a-user) -- Create new user identities with the right organizational details from the start.
-- [Groups](/using-shiftcontrol/Groups/Group-management) -- Understand how group memberships drive the access you see in the sidebar.
+- [Viewing a User](/using-shiftcontrol/Users/Viewing-a-user/) — Review security, permissions, and costs without editing
+- [User Management](/using-shiftcontrol/Users/User-management/) — Return to the full user list
+- [Adding a User](/using-shiftcontrol/Users/Adding-a-user/) — Create new user identities
+- [Groups](/using-shiftcontrol/Groups/Group-management/) — Understand how groups drive access

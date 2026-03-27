@@ -1,0 +1,202 @@
+---
+title: 'New Employee Onboarding'
+description: 'Step-by-step guide for new employees setting up their accounts with ShiftControl, JumpCloud, and Google Workspace.'
+keywords: ['ShiftControl', 'onboarding', 'new employee', 'setup', 'JumpCloud', 'Google Workspace', 'MFA', 'activation']
+---
+
+import { Steps, Step } from "@site/src/components/Steps";
+import Admonition from '@theme/Admonition';
+import ConditionalContent from '@site/src/components/ConditionalContent';
+
+<p style={{fontSize: "large"}}>Welcome to your new company! Here's how to set up your accounts and get access to your work tools.</p>
+
+## What to Expect
+
+Your IT team has already created your accounts using ShiftControl. **You don't need to sign up for ShiftControl itself** — your account there is created automatically. What you need to do is activate your identity provider account(s) and set up security.
+
+How you receive your credentials depends on whether you're onboarding in the office or remotely.
+
+<ConditionalContent modes={["google-only"]}>
+
+## Setting Up Google Workspace
+
+### If You're Onboarding In the Office
+
+Your IT or HR team will give you your Google Workspace credentials (your work email and a temporary password) directly — either in person, via chat, or printed out.
+
+<Steps>
+    <Step title="Log in to Google">
+        Go to [accounts.google.com](https://accounts.google.com) and sign in with your work email and the temporary password you were given.
+    </Step>
+    <Step title="Set your new password">
+        Google will prompt you to create a new password. Choose something strong and unique.
+    </Step>
+    <Step title="Set up 2-Step Verification">
+        Google will guide you through enabling [2-Step Verification](https://support.google.com/accounts/answer/185839). We strongly recommend setting up a **passkey** (fingerprint or face recognition) for the most convenient and secure option.
+
+        <Admonition type="warning">
+            **Set up 2-Step Verification immediately.** If you don't enable it within a few days, Google may lock you out of your account as a security precaution. Don't put this off.
+        </Admonition>
+
+        Options for your second factor:
+        - **Passkey** (recommended) — Fingerprint or face recognition via TouchID, Windows Hello, or Android biometrics
+        - **Google Authenticator** — A 6-digit code from an app on your phone
+        - **Security key** — A physical FIDO2 key
+    </Step>
+    <Step title="You're set!">
+        You can now access your email, Google Drive, Calendar, and all your work apps. Go to [app.shiftcontrol.io](https://app.shiftcontrol.io) to see your employee portal with all your available apps.
+    </Step>
+</Steps>
+
+### If You're Onboarding Remotely
+
+You'll receive an email from **ShiftControl** (from noreply@hey.shiftcontrol.io) at your personal email address with your Google Workspace credentials.
+
+<img src="/img/ShiftControl/Onboarding/google-activation-email.webp" alt="ShiftControl email with Google Workspace credentials — shows username and temporary password" />
+
+The email contains your **username** (work email) and a **temporary password**. From there, follow the same steps as above — log in at [accounts.google.com](https://accounts.google.com), set your new password, and enable 2-Step Verification.
+
+</ConditionalContent>
+
+<ConditionalContent modes={["jc-google"]}>
+
+## Setting Up Your Accounts
+
+Your company uses both **Google Workspace** and **JumpCloud**. You'll need to set up both — Google first (for email), then JumpCloud (for SSO app access).
+
+### Step 1: Set Up Google Workspace
+
+**In the office:** Your IT/HR team will give you your Google credentials directly.
+
+**Remotely:** You'll receive an email from **ShiftControl** at your personal email:
+
+<img src="/img/ShiftControl/Onboarding/google-activation-email.webp" alt="ShiftControl email with Google Workspace credentials — shows username and temporary password" />
+
+<Steps>
+    <Step title="Log in to Google">
+        Go to [accounts.google.com](https://accounts.google.com) and sign in with your work email and the temporary password.
+    </Step>
+    <Step title="Set your new password">
+        Google will prompt you to create a new password.
+    </Step>
+    <Step title="Set up 2-Step Verification">
+        Enable [2-Step Verification](https://support.google.com/accounts/answer/185839) immediately. We recommend a **passkey** (fingerprint/face) for the best experience.
+
+        <Admonition type="warning">
+            **Don't skip this.** Google may lock your account within a few days if 2-Step Verification isn't enabled.
+        </Admonition>
+    </Step>
+</Steps>
+
+### Step 2: Set Up JumpCloud
+
+After Google is set up, you'll set up JumpCloud for [SSO](https://shiftcontrol.io/learn/what-is-sso) access to your work apps.
+
+**In the office:** Your IT team will give you JumpCloud credentials.
+
+**Remotely:** You'll receive a separate email from **JumpCloud**:
+
+<img src="/img/ShiftControl/Onboarding/jumpcloud-activation-email.webp" alt="JumpCloud activation email with Set Up Account button" />
+
+<Steps>
+    <Step title="Click 'Set Up Account' or log in">
+        If you received the JumpCloud email, click the **Set Up Account** button. If you were given credentials in person, go to [console.jumpcloud.com](https://console.jumpcloud.com).
+    </Step>
+    <Step title="Set your JumpCloud password">
+        Create a strong, unique password. This should be **different from your Google password**.
+
+        <Admonition type="info">
+            You'll rarely use this password again after setup. Since your company uses Google as the primary login, JumpCloud will authenticate you through Google automatically in the future. But JumpCloud requires a password to be set on first login.
+        </Admonition>
+    </Step>
+    <Step title="Set up JumpCloud MFA">
+        JumpCloud will prompt you to configure multi-factor authentication. We recommend [JumpCloud Protect](https://jumpcloud.com/support/jumpcloud-protect-for-end-users) — a push notification app:
+
+        1. **Download JumpCloud Protect** on your phone ([FAQ](https://jumpcloud.com/support/faq-jumpcloud-protect-end-users))
+        2. **Enroll JumpCloud Protect** by scanning the QR code
+        3. **Add a device factor** (optional but recommended) — once logged in, go to the [Security tab in JumpCloud](https://jumpcloud.com/support/get-started-user-portal) and enroll **Windows Hello** (Windows) or **Touch ID** (Mac) for faster authentication on your laptop
+    </Step>
+</Steps>
+
+### Step 3: Access Your Apps
+
+Once both accounts are set up, go to [app.shiftcontrol.io](https://app.shiftcontrol.io) — your ShiftControl employee portal. You'll see all the apps available to you. Click any app to open it.
+
+<Admonition type="info">
+    **Why two accounts?** Google handles your email and Google apps. JumpCloud provides [SSO](https://shiftcontrol.io/learn/what-is-sso) to the work apps your organization has configured. ShiftControl ties them together and provides your employee portal. When you open an SSO app, if you're already logged into Google, that part is automatic — you'll typically just see the JumpCloud MFA prompt.
+</Admonition>
+
+</ConditionalContent>
+
+<ConditionalContent modes={["jc-only"]}>
+
+## Setting Up JumpCloud
+
+### If You're Onboarding In the Office
+
+Your IT/HR team will give you your JumpCloud credentials directly.
+
+### If You're Onboarding Remotely
+
+You'll receive an email from **JumpCloud**:
+
+<img src="/img/ShiftControl/Onboarding/jumpcloud-activation-email.webp" alt="JumpCloud activation email with Set Up Account button" />
+
+<Steps>
+    <Step title="Click 'Set Up Account' or log in">
+        If you received the email, click **Set Up Account**. Otherwise, go to [console.jumpcloud.com](https://console.jumpcloud.com) with the credentials you were given.
+    </Step>
+    <Step title="Set your password">
+        Create a strong, unique password. This is the password you'll use to log into JumpCloud and access your SSO apps.
+    </Step>
+    <Step title="Set up MFA">
+        JumpCloud will prompt you to set up multi-factor authentication. We recommend [JumpCloud Protect](https://jumpcloud.com/support/jumpcloud-protect-for-end-users) — a push notification app for easy MFA:
+
+        1. **Download JumpCloud Protect** on your phone ([FAQ](https://jumpcloud.com/support/faq-jumpcloud-protect-end-users))
+        2. **Enroll JumpCloud Protect** by scanning the QR code
+        3. **Add a device factor** (optional) — once logged in, go to the [Security tab in JumpCloud](https://jumpcloud.com/support/get-started-user-portal) and enroll **Windows Hello** (Windows) or **Touch ID** (Mac) for faster laptop authentication
+    </Step>
+    <Step title="Access your apps">
+        Go to [app.shiftcontrol.io](https://app.shiftcontrol.io) to see your employee portal with all your available apps.
+    </Step>
+</Steps>
+
+</ConditionalContent>
+
+## Common Questions
+
+### I didn't get an activation email
+Check your spam/junk folder. If it's not there, contact your IT admin — they can resend it. For remote onboarding, make sure your IT team has your correct personal email address.
+
+### I can't log in after setup
+<ConditionalContent modes={["jc-google", "google-jc"]}>
+Make sure you're using the right credentials for the right system — you have separate passwords for Google and JumpCloud. Try resetting your password through the login page, or contact your IT admin.
+</ConditionalContent>
+<ConditionalContent modes={["jc-only", "google-only"]}>
+Try resetting your password through the login page. If that doesn't work, contact your IT admin.
+</ConditionalContent>
+
+<ConditionalContent modes={["jc-google", "google-jc", "google-only"]}>
+
+### Google locked my account
+This usually happens because 2-Step Verification wasn't enabled in time. Contact your IT admin — they can temporarily reset your account so you can set up 2SV.
+
+</ConditionalContent>
+
+<ConditionalContent modes={["jc-google", "google-jc", "jc-only"]}>
+
+### I see an MFA prompt when opening an app
+<ConditionalContent modes={["jc-google", "google-jc"]}>
+This is JumpCloud verifying you before granting access to the SSO app. If you're already logged into Google, that part is automatic — you'll typically only see the JumpCloud MFA prompt.
+</ConditionalContent>
+<ConditionalContent modes={["jc-only"]}>
+JumpCloud prompts for MFA each time you access an SSO app. This is a security feature that verifies you before granting access.
+</ConditionalContent>
+
+</ConditionalContent>
+
+### An app I need isn't on my portal
+App access is managed by your IT team through groups (based on your department, team, or role). Ask your manager or IT admin to add you to the right group.
+
+### I lost my MFA device
+Contact your IT admin immediately. They can reset your MFA enrollment so you can set up a new device.

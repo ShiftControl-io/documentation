@@ -1,126 +1,119 @@
 ---
 title: 'App Permissions Dashboard'
-description: 'Monitor third-party OAuth app permissions across your organization with ShiftControl. Identify access risks and manage data exposure proactively.'
+description: 'Monitor third-party OAuth app permissions across your organization with ShiftControl. Identify access risks, review user grants, and revoke risky permissions.'
 keywords: ['ShiftControl', 'dashboard', 'app permissions', 'OAuth', 'security', 'third-party access', 'analytics']
 icon: 'lock'
 ---
 
 import Admonition from '@theme/Admonition';
+import ConditionalContent from '@site/src/components/ConditionalContent';
+import ModeScreenshot from '@site/src/components/ModeScreenshot';
 
-<p style={{fontSize: "large"}}>Monitor third-party app permissions across your organization and identify potential access risks before they become security incidents.</p>
+
+<p style={{fontSize: "large"}}>See every third-party app your team has authorized, what data it can access, and who granted the permission — then take action.</p>
+
+<ConditionalContent modes={["jc-only"]}>
+<Admonition type="info">
+    The App Permissions Dashboard requires Google Workspace to be connected. It monitors OAuth permissions granted through Google accounts. Connect Google Workspace as an additional directory to enable this dashboard.
+</Admonition>
+</ConditionalContent>
 
 ## Overview
 
-Every time an employee clicks "Sign in with Google" or authorizes a third-party app, they are granting that app access to your organization's data. Most of these authorizations are harmless -- a project management tool reading a user's profile, for example. But some grant access to email, shared drives, or directory data, and those permissions persist until someone explicitly revokes them.
+Every time an employee clicks "Sign in with Google" or authorizes a third-party app, they're granting that app access to your organization's data. Most authorizations are harmless — a project management tool reading a user's profile. But some grant access to email, shared drives, or directory data, and those permissions persist until someone explicitly revokes them.
 
-The **App Permissions Dashboard** exists to make this invisible web of access visible. It shows you every third-party app that users have authorized, what level of access each app has, and which users are responsible. Instead of discovering risky integrations during a security incident, you can proactively monitor and manage them.
+The **App Permissions Dashboard** makes this invisible web of access visible. Instead of discovering risky integrations during a security incident, you can monitor and manage them proactively.
 
-<img
-    src="/img/ShiftControl/Dashboards/Dashboard-app-permissions-top.png"
-    alt="Permissions Dashboard overview"
-/>
+<ModeScreenshot path="Dashboards/Dashboard-overview" alt="App Permissions Dashboard showing authorization metrics, trends, and third-party app list" />
 
 ## How It Works
 
-ShiftControl pulls OAuth authorization logs from Google Workspace and aggregates them into a unified view. Every time a user in your organization grants or revokes access to a third-party app through their Google account, that event is captured and reflected in this dashboard.
+ShiftControl pulls OAuth authorization data from Google Workspace and aggregates it into four views:
 
-The dashboard classifies each app's permissions into risk tiers based on the scope of data access requested. An app that only reads a user's basic profile is treated differently from one that can read email or modify shared drive files. This classification powers the header metrics and the risk-based filtering throughout the dashboard.
+**Header metrics** give you the big picture:
 
-Header metrics give you the big picture at a glance:
-
-- **Total Apps** -- The number of distinct third-party apps that have been authorized across your organization (e.g., 812 apps).
-- **Total Authorizations** -- The total number of active authorization grants (e.g., 121 authorizations), since a single app can be authorized by multiple users.
-- **Unique Users** -- How many individual users have authorized at least one third-party app (e.g., 64 users).
-- **At Risk Users** -- Users who have authorized apps with sensitive or restricted permissions (e.g., 13 users), flagged for priority review.
+| Metric | What It Tells You |
+|--------|------------------|
+| **Total Apps** | Distinct third-party apps authorized across your org |
+| **Total Authorizations** | Active authorization grants (one app can be authorized by many users) |
+| **Unique Users** | How many people have authorized at least one third-party app |
+| **At Risk Users** | Users who authorized apps with sensitive or restricted permissions |
 
 <Admonition type="tip">
-    Use the date filter at the top-right of the dashboard to switch between views such as <strong>Year to date</strong>, <strong>Last 90 days</strong>, or <strong>All time</strong> to focus your review on the most relevant timeframe.
+    Use the date filter (top-right) to switch between <strong>Year to date</strong>, <strong>Last 90 days</strong>, or <strong>All time</strong>.
 </Admonition>
 
 ## Common Scenarios
 
 ### Scenario: Quarterly security audit
 
-Your security team runs a quarterly review of third-party access. Open the App Permissions Dashboard, filter to the last 90 days, and review the "Apps with Higher Risk Permissions" section. You find that a marketing tool was recently authorized with email read access by three users. You verify whether the tool is approved, and if not, coordinate revocation through your identity provider.
+Your security team runs a quarterly review. Open this dashboard, filter to the last 90 days, and review "Apps with Higher Risk Permissions." You find a marketing tool with email read access authorized by three users. You click into one of those users to check their full App Permissions tab, decide the tool isn't approved, and revoke its access directly from the user's profile.
 
 ### Scenario: Employee offboarding
 
-When an employee leaves, you need to ensure their third-party authorizations are revoked. Use the "Users Who Granted Permissions" section to search for the departing user and see every app they authorized. Cross-reference this with your offboarding checklist to confirm all access has been removed.
+When someone leaves, you need to ensure their third-party authorizations are cleaned up. Search for the departing user in "Users Who Granted Permissions" to see every app they authorized. Then click into their user profile and go to the **App Permissions** tab where you can review and revoke each grant individually.
 
 ### Scenario: Investigating a suspicious authorization spike
 
-The Authorizations and Revocations chart shows an unusual spike in new authorizations last Tuesday. You drill into the Third-Party Apps list filtered to that date range and discover that a team rolled out a new integration without going through IT approval. You can assess the permissions it requested and decide whether to allow or revoke it organization-wide.
+The trend chart shows an unusual spike in new authorizations last Tuesday. You filter the Third-Party Apps list to that date range and discover a team rolled out a new integration without IT approval. You assess its permission scopes and decide whether to allow or revoke it.
 
 ## Authorizations and Revocations Over Time
 
-The line chart on the left side of the dashboard tracks **Authorizations** and **Revocations** over time. This trend view is valuable because single-day snapshots miss the patterns that matter:
+The trend chart tracks **Authorizations** (new grants) and **Revocations** (removed grants) over time:
 
-- **Steady growth in authorizations** suggests users are continuously adding new tools, which may indicate shadow IT growth.
-- **Spikes in authorizations** often correspond to tool rollouts, team onboarding, or integration deployments.
-- **Spikes in revocations** typically indicate security reviews, offboarding events, or policy enforcement actions.
+- **Steady growth in authorizations** — your organization's shadow IT surface is expanding
+- **Authorization spikes** — a team rolled out a new tool, or a batch onboarding happened
+- **Revocation spikes** — a security review, offboarding event, or policy enforcement action
 
-Tracking both lines together gives you a sense of whether your organization's third-party access surface is expanding or being actively managed.
+Watching both lines together tells you whether third-party access is being actively managed or growing unchecked.
 
 ## Third-Party Apps and Services
 
-The apps list shows every third-party service that users have connected through their Google accounts. Each entry displays the app name, its icon for quick identification, and a summary of the permissions it was granted.
+Every app that users have connected through their Google accounts appears here. Filter by:
+- **Permission level** — all, sensitive only, or restricted only
+- **Permission type** — focus on specific data access categories
 
-You can filter this list by:
-
-- **Permission level** -- View all permissions, or narrow to only sensitive or restricted grants
-- **Permission type** -- Filter by specific permission types to focus your review
-
-This is your master inventory of third-party integrations. When someone asks "what apps have access to our data?" this list is the answer.
-
-<img
-    src="/img/ShiftControl/Dashboards/Dashboard-app-permissions-bottom.png"
-    alt="Higher risk permissions and users who granted access"
-/>
+This is your master inventory. When someone asks "what apps have access to our data?" — this is the answer.
 
 ## Apps with Higher Risk Permissions
 
-This section filters specifically to apps that have been granted **sensitive** or **restricted** permissions. These are the apps that can read email, access shared drives, sync contacts, or perform other high-impact operations on behalf of your users.
+Filters specifically to apps with **sensitive** or **restricted** permissions — apps that can read email, access shared drives, sync contacts, or modify data on behalf of your users.
 
-The section shows the number of permission types in play (e.g., 240 permission types across your sensitive and restricted apps), giving you a sense of the breadth of access that has been granted.
-
-For each flagged app, you should consider:
-
-- **Is this app approved for business use?** If not, it should be revoked.
-- **Who granted access?** A single user authorizing a niche tool is different from half your organization using it.
+For each flagged app, ask:
+- **Is it approved for business use?** If not, revoke it.
+- **Who authorized it?** One person using a niche tool is different from half the org.
 - **Are the permissions proportional?** An app that needs calendar access but also requests email read permissions deserves scrutiny.
 
 <Admonition type="warning">
-    Pay close attention to apps with permissions involving email, file access, or directory data. These represent the highest data exposure risk and should be reviewed during every security audit.
+    Apps with email, file access, or directory data permissions represent the highest data exposure risk. Review these every security audit cycle.
 </Admonition>
 
 ## Users Who Granted Permissions
 
-The final panel shifts the view from apps to people. It shows which users have authorized external apps, displayed with user avatars for quick identification, along with the specific services they connected.
+This panel shifts the view from apps to people — showing which users have the most third-party app connections.
 
-This user-centric view helps you:
+**Key workflows from this view:**
 
-- **Identify power authorizers** -- Users who have granted access to an unusually high number of apps
-- **Support offboarding** -- Quickly see all third-party access tied to a specific user
-- **Enforce policy** -- Spot users who may have authorized apps that violate your organization's security policies
+- **Click a user's name** to open their full profile in [User Management](/using-shiftcontrol/Users/Editing-a-user/). From there, go to the **App Permissions** tab to see every active OAuth grant with details about what each app can access.
+- **Revoke permissions** directly from a user's App Permissions tab — no need to open the Google Admin Console.
+- **Spot power authorizers** — users with an unusually high number of app connections may be a security risk.
 
-You can filter by app to see all users who authorized a specific service, or by user to see every app a particular person has connected.
+<ConditionalContent modes={["jc-google", "google-jc"]}>
 
-<Admonition type="tip">
-    Combine this view with your identity provider logs to cross-reference OAuth connections with employee access policies. This is especially useful during compliance reviews.
-</Admonition>
+The user detail page shows a complete security view across both directories. The **Security** tab has Google 2SV status alongside JumpCloud MFA status, while the **App Permissions** tab shows all Google OAuth grants — giving you the full picture of a user's security posture in one place.
+
+</ConditionalContent>
 
 ## Things to Know
 
-- **Data comes from Google Workspace OAuth logs.** This dashboard only shows authorizations made through Google accounts. Apps authorized through other identity providers are not reflected here.
-- **"At Risk Users" is based on permission classification.** A user is flagged as at risk if they have authorized any app with sensitive or restricted permissions, regardless of whether that app is approved by IT.
-- **Revocation happens in your identity provider.** The dashboard surfaces the data, but revoking an app's access is done through Google Workspace admin controls, not directly in ShiftControl.
-- **Authorization counts include historical grants.** If a user authorized an app six months ago and never revoked it, that authorization still appears in the totals.
-- **New apps may take time to classify.** Freshly authorized apps appear immediately, but their risk classification may update as ShiftControl processes the permission scopes.
+- **Requires Google Workspace.** This dashboard pulls data from Google OAuth logs. Without Google Workspace connected, there's no data to display.
+- **"At Risk" is based on permission scope.** A user is flagged if they authorized any app with sensitive or restricted permissions, regardless of whether IT approved the app.
+- **You can revoke from ShiftControl.** Click through to a user's App Permissions tab to revoke individual app grants without opening the Google Admin Console.
+- **Historical grants are included.** An app authorized six months ago that was never revoked still appears in the totals.
+- **New apps classify quickly.** Freshly authorized apps appear immediately; risk classification updates as ShiftControl processes the permission scopes.
 
 ## Related Features
 
-- [App Spend Dashboard](/using-shiftcontrol/Dashboards/app-spend) -- Monitor the cost side of your app portfolio alongside permission risks
-- [App Discovery](/using-shiftcontrol/Apps/App-discovery) -- Find and catalog apps in use across your organization
-- [App Management](/using-shiftcontrol/Apps/App-management) -- Manage the apps connected to ShiftControl
-- [Connector Management](/using-shiftcontrol/Integrations/Connector-management) -- Configure the Google Workspace connector that feeds this dashboard
-- [Google Workspace Integration Guide](/using-shiftcontrol/Integrations/guides/Google-Workspace) -- Set up the connection that provides OAuth authorization data
+- [Editing a User — App Permissions tab](/using-shiftcontrol/Users/Editing-a-user/) — View and revoke individual OAuth grants per user
+- [App Spend Dashboard](/using-shiftcontrol/Dashboards/app-spend/) — Monitor the cost side alongside permission risks
+- [App Discovery](/using-shiftcontrol/Apps/App-discovery/) — Find unmanaged apps across your organization

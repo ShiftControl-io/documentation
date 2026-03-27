@@ -6,8 +6,9 @@ icon: 'chart-line'
 ---
 
 import Admonition from '@theme/Admonition';
+import ModeScreenshot from '@site/src/components/ModeScreenshot';
 
-<p style={{fontSize: "large"}}>Get complete visibility into your organization's SaaS spend, renewal timelines, and cost distribution by department and user.</p>
+<p style={{fontSize: "large"}}>See exactly where your software budget goes — by app, department, and user — and find savings before renewals hit.</p>
 
 ## Overview
 
@@ -15,10 +16,7 @@ SaaS sprawl is one of the biggest hidden costs in modern organizations. Teams si
 
 This dashboard aggregates subscription data that you enter for each app and presents it alongside user and department information from your directory. Instead of chasing invoices across vendors, you get a centralized picture of where your software budget is going and where you can save.
 
-<img
-    src="/img/ShiftControl/Dashboards/Dashboard-app-spend-top.png"
-    alt="App Spend Dashboard overview"
-/>
+<ModeScreenshot path="Dashboards/App-spend-dashboard" alt="App Spend Dashboard showing cost metrics, department breakdown, and renewal calendar" />
 
 ## How It Works
 
@@ -69,11 +67,6 @@ The **Subscription Renewals** panel shows what is coming due and when. You can f
 
 Each renewal entry displays the app name and icon, the cost and billing frequency, and the renewal date. This gives finance teams and IT administrators a shared calendar of upcoming commitments so nothing slips through unnoticed.
 
-<img
-    src="/img/ShiftControl/Dashboards/Dashboard-app-spend-middle.png"
-    alt="App Spend breakdown and renewal insights"
-/>
-
 ## Top-Spend Apps
 
 The **Top-Spend Apps** section ranks your most expensive subscriptions so you know exactly where the bulk of your budget goes. These are the apps worth scrutinizing during renewal negotiations.
@@ -104,11 +97,6 @@ The insight here is straightforward: monthly plans are almost always more expens
 If any subscription is missing cost or renewal data, the dashboard displays a **Complete subscription info** prompt. Filling in this data is important because the dashboard can only calculate accurate forecasts and per-user cost metrics when it has complete information.
 
 Adding missing data for apps like Apple Business Manager, AWS, or Canva takes a moment but significantly improves the accuracy of your spend reporting.
-
-<img
-    src="/img/ShiftControl/Dashboards/Dashboard-app-spend-bottom.png"
-    alt="Subscription completion and high-cost users"
-/>
 
 ## High-Cost Users
 

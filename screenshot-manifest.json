@@ -1,0 +1,468 @@
+{
+  "$schema": "Screenshot manifest for ShiftControl documentation. Used by AI agents to recapture screenshots.",
+  "baseUrl": "https://demo.shiftcontrol.io",
+  "localUrl": "http://localhost:8005",
+  "viewport": { "width": 1440, "height": 900 },
+  "format": "webp",
+  "quality": 90,
+  "pathPattern": "{section}/{mode_folder}/{theme_folder}/{name}.webp",
+  "fallback": "If a mode doesn't have a screenshot, fall back to jc-google. The ModeScreenshot component handles this automatically.",
+  "localStartCommand": "cd ~/WebstormProjects/shiftcontrol-saas/services/frontend && npm run dev:test-demo-screenshot",
+  "notes": [
+    "IMPORTANT: Run dev:test-demo-screenshot (not dev:test-demo) to hide TanStack devtools logo.",
+    "Every product screenshot varies by mode — even subtle differences like dropdown arrows on Add buttons in dual-directory modes.",
+    "All screenshots are captured per mode × per theme (light + dark).",
+    "The 'modes' array on each screenshot controls which mode variants to capture.",
+    "Use the localUrl during development, baseUrl for production recaptures.",
+    "NAVIGATION: Use direct URLs, NOT clicking. AG Grid rows don't have standard <tr> elements — click navigation fails silently.",
+    "MODAL SUPPRESSION: The mode= param triggers a welcome modal. Suppress it BEFORE navigation with: page.addInitScript(() => localStorage.setItem('SC_DEMO_WELCOME_LAST_SHOWN', new Date().toISOString()))",
+    "TABS (Users): Use ?tab=security|appPermissions|saasCost URL param. Set mode/theme first, suppress modal, THEN navigate to tab URL.",
+    "TABS (Groups/Apps): No URL param support yet — must click Radix UI tabs after page load. Use position-based clicking or [role='tab'] selectors.",
+    "SIDEBAR TABS: Right sidebar tabs require clicking after page load. Use position-based x>900 disambiguation.",
+    "VERIFICATION: After each capture batch, run duplicate detection to catch navigation failures immediately."
+  ],
+  "knownIds": {
+    "_comment": "Direct-navigable IDs from mock data. Use these in URLs instead of clicking AG Grid rows.",
+    "user": "66b42ef6693525dd6b48d7ed",
+    "user_first_in_list": "66b417c8b170fe888e997f27",
+    "group": "01912fd8-6663-7e31-b98b-9355bcc868be",
+    "group_with_dynamic": "01912fd8-c595-7dbf-b18d-bd9ea9f17574",
+    "app_aws": "01912fe5-9dd5-754c-9bfa-4d5f3a160ceb",
+    "app_google_workspace": "01912fe7-7048-7e3d-986d-ce18f1e0ea33",
+    "app_bamboohr_sso": "0191dac9-e6a4-7d6d-97c4-229ea0c61592",
+    "_note_sso": "Use app_bamboohr_sso for SSO tab screenshots — it has actual SAML config. AWS doesn't always have SSO configured in the demo."
+  },
+  "directUrls": {
+    "_comment": "Use these URLs to navigate directly instead of clicking through the UI.",
+    "user_detail": "/admin/org/users/view/{user_id}",
+    "user_detail_security": "/admin/org/users/view/{user_id}?tab=security",
+    "user_detail_app_permissions": "/admin/org/users/view/{user_id}?tab=appPermissions",
+    "user_detail_saas_cost": "/admin/org/users/view/{user_id}?tab=saasCost",
+    "group_detail_details": "/admin/org/groups/view/{group_id}?tab=details",
+    "group_detail_dynamic": "/admin/org/groups/view/{group_id}?tab=dynamic",
+    "group_detail_nested": "/admin/org/groups/view/{group_id}?tab=nested",
+    "group_detail_individual": "/admin/org/groups/view/{group_id}?tab=individual",
+    "group_detail_settings": "/admin/org/groups/view/{group_id}?tab=settings",
+    "app_detail_details": "/admin/org/apps/view/{app_id}?tab=details",
+    "app_detail_subscription": "/admin/org/apps/view/{app_id}?tab=subscription",
+    "app_detail_groups": "/admin/org/apps/view/{app_id}?tab=groups",
+    "app_detail_individual": "/admin/org/apps/view/{app_id}?tab=individual",
+    "app_detail_sso": "/admin/org/apps/view/{app_id}?tab=sso",
+    "group_detail": "/admin/org/groups/view/{group_id}",
+    "app_detail": "/admin/org/apps/view/{app_id}",
+    "tasks": "/admin/org/tasks",
+    "users_list": "/admin/org/users",
+    "groups_list": "/admin/org/groups",
+    "apps_list": "/admin/org/apps",
+    "app_catalog": "/admin/org/apps/catalog",
+    "app_discovery": "/admin/org/apps/discovery",
+    "dashboard_oauth": "/admin/dashboards/oauth",
+    "dashboard_spend": "/admin/dashboards/app-spend",
+    "reports_assignments": "/admin/org/reports/apps/assignments"
+  },
+  "modes": {
+    "jc_gws": { "folder": "jc-google", "params": "?mode=jc_gws", "label": "JumpCloud + Google Workspace" },
+    "jc_only": { "folder": "jc-only", "params": "?mode=jc_only", "label": "JumpCloud Only" },
+    "gws_only": { "folder": "gws-only", "params": "?mode=gws_only", "label": "Google Workspace Only" }
+  },
+  "themes": {
+    "light": { "folder": "light", "params": "&theme=light" },
+    "dark": { "folder": "dark", "params": "&theme=dark" }
+  },
+  "screenshots": {
+    "_comment": "All paths relative to static/img/ShiftControl/. All captured per mode × per theme unless 'modes' restricts it.",
+
+    "Users/User-management": {
+      "route": "/admin/org/users",
+      "description": "Users list — directory icons, status, group/app counts. In jc_gws mode, Add User has a dropdown arrow for Google user option.",
+      "modes": ["jc_gws", "jc_only", "gws_only"],
+      "component": "ModeScreenshot",
+      "usedIn": ["docs/using-shiftcontrol/Users/User-management.mdx"]
+    },
+    "Users/User-detail-info": {
+      "route": "/admin/org/users/view/{first_user}",
+      "tab": "Details",
+      "description": "User detail — profile fields, directory status icons in header. jc_gws shows Google Workspace section below standard fields.",
+      "modes": ["jc_gws", "jc_only", "gws_only"],
+      "component": "ModeScreenshot",
+      "usedIn": ["docs/using-shiftcontrol/Users/Editing-a-user.mdx"]
+    },
+    "Users/User-detail-google-section": {
+      "route": "/admin/org/users/view/{first_user}",
+      "tab": "Details",
+      "action": "Scroll down to Google Workspace section",
+      "description": "Google Workspace fields: recovery email, recovery phone, directory toggle, email aliases",
+      "modes": ["jc_gws"],
+      "component": "ModeScreenshot",
+      "usedIn": ["docs/using-shiftcontrol/Users/Editing-a-user.mdx"]
+    },
+    "Users/User-detail-security": {
+      "route": "/admin/org/users/view/{first_user}",
+      "tab": "Security",
+      "description": "Security tab. jc_gws: Google 2SV + JumpCloud MFA side by side. jc_only: JumpCloud MFA only. gws_only: Google security only.",
+      "modes": ["jc_gws", "jc_only", "gws_only"],
+      "component": "ModeScreenshot",
+      "usedIn": ["docs/using-shiftcontrol/Users/Editing-a-user.mdx"]
+    },
+    "Users/User-detail-app-permissions": {
+      "route": "/admin/org/users/view/{first_user}",
+      "tab": "App Permissions",
+      "description": "Active OAuth permissions and history. Tab only exists with Google connected. In jc_only this tab is replaced by SaaS Cost.",
+      "modes": ["jc_gws", "jc_only"],
+      "component": "ModeScreenshot",
+      "usedIn": ["docs/using-shiftcontrol/Users/Editing-a-user.mdx"]
+    },
+    "Users/User-detail-saas-cost": {
+      "route": "/admin/org/users/view/{first_user}",
+      "tab": "SaaS Cost",
+      "description": "Per-user SaaS spend breakdown by app",
+      "modes": ["jc_gws"],
+      "component": "ModeScreenshot",
+      "usedIn": ["docs/using-shiftcontrol/Users/Editing-a-user.mdx"]
+    },
+    "Users/Add-a-user": {
+      "route": "/admin/org/users",
+      "action": "Click 'Add User' button. In jc_gws mode, button has dropdown arrow with Google user option.",
+      "description": "New user creation form — Details tab with identity and org fields",
+      "modes": ["jc_gws", "jc_only", "gws_only"],
+      "component": "Screenshot",
+      "usedIn": ["docs/using-shiftcontrol/Users/Adding-a-user.mdx"]
+    },
+    "Users/User-sidebar-groups": {
+      "route": "/admin/org/users/view/{first_user}",
+      "action": "Right sidebar > Groups tab",
+      "description": "User sidebar showing group memberships with assignment method icons (JC/Google/sync indicators vary by mode)",
+      "modes": ["jc_gws", "jc_only", "gws_only"],
+      "component": "Screenshot",
+      "usedIn": ["docs/using-shiftcontrol/Users/Editing-a-user.mdx"]
+    },
+    "Users/User-sidebar-apps": {
+      "route": "/admin/org/users/view/{first_user}",
+      "action": "Right sidebar > Apps tab",
+      "description": "User sidebar showing app access with group source",
+      "modes": ["jc_gws", "jc_only", "gws_only"],
+      "component": "Screenshot",
+      "usedIn": ["docs/using-shiftcontrol/Users/Editing-a-user.mdx"]
+    },
+
+    "Groups/Group-management": {
+      "route": "/admin/org/groups",
+      "description": "Groups list — tags, directory icons, sync status, member counts. In jc_gws, Add Group has dropdown arrow for Google group option.",
+      "modes": ["jc_gws", "jc_only", "gws_only"],
+      "component": "ModeScreenshot",
+      "usedIn": ["docs/using-shiftcontrol/Groups/Group-management.mdx"]
+    },
+    "Groups/Group-detail": {
+      "route": "/admin/org/groups/view/{group}",
+      "group": "Use 'All Departments' for gws_only. Any group for others.",
+      "description": "Group detail — membership rules, sidebar with users/apps/rules. Directory icons in header vary by mode.",
+      "modes": ["jc_gws", "jc_only", "gws_only"],
+      "component": "ModeScreenshot",
+      "usedIn": ["docs/using-shiftcontrol/Groups/Editing-a-group.mdx"]
+    },
+    "Groups/Add-a-group": {
+      "route": "/admin/org/groups",
+      "action": "Click 'Add Group' button (has dropdown in jc_gws mode)",
+      "description": "New group creation form",
+      "modes": ["jc_gws", "jc_only", "gws_only"],
+      "component": "Screenshot",
+      "usedIn": ["docs/using-shiftcontrol/Groups/Adding-a-group.mdx"]
+    },
+    "Groups/Edit-a-group-details": {
+      "route": "/admin/org/groups/view/{group}",
+      "tab": "Details",
+      "description": "Group General tab — name, description, tag, Google Sync toggle",
+      "modes": ["jc_gws", "jc_only", "gws_only"],
+      "component": "Screenshot",
+      "usedIn": ["docs/using-shiftcontrol/Groups/Editing-a-group.mdx"]
+    },
+    "Groups/Edit-a-group-assignments": {
+      "route": "/admin/org/groups/view/{group}",
+      "tab": "Individual",
+      "description": "Group Individual assignments tab",
+      "modes": ["jc_gws", "jc_only", "gws_only"],
+      "component": "Screenshot",
+      "usedIn": ["docs/using-shiftcontrol/Groups/Editing-a-group.mdx"]
+    },
+    "Groups/Group-dynamic-assignments": {
+      "route": "/admin/org/groups/view/{group_with_dynamic_rules}",
+      "tab": "Dynamic",
+      "description": "Dynamic membership rules — When [attribute] equals [value]",
+      "modes": ["jc_gws", "jc_only", "gws_only"],
+      "component": "Screenshot",
+      "usedIn": ["docs/using-shiftcontrol/Groups/Editing-a-group.mdx"]
+    },
+    "Groups/Group-nested-assignments": {
+      "route": "/admin/org/groups/view/{group_with_nested}",
+      "tab": "Nested",
+      "description": "Nested group inclusion rules",
+      "modes": ["jc_gws", "jc_only", "gws_only"],
+      "component": "Screenshot",
+      "usedIn": ["docs/using-shiftcontrol/Groups/Editing-a-group.mdx"]
+    },
+    "Groups/Group-individual-assignments": {
+      "route": "/admin/org/groups/view/{group}",
+      "tab": "Individual",
+      "description": "Individual user assignments to group",
+      "modes": ["jc_gws", "jc_only", "gws_only"],
+      "component": "Screenshot",
+      "usedIn": ["docs/using-shiftcontrol/Groups/Editing-a-group.mdx"]
+    },
+    "Groups/Group-sidebar-rules": {
+      "route": "/admin/org/groups/view/{group}",
+      "action": "Right sidebar > Rules tab",
+      "description": "Group sidebar — rule counts (Dynamic, Nested, Individual)",
+      "modes": ["jc_gws", "jc_only", "gws_only"],
+      "component": "Screenshot",
+      "usedIn": ["docs/using-shiftcontrol/Groups/Editing-a-group.mdx"]
+    },
+    "Groups/Group-sidebar-users": {
+      "route": "/admin/org/groups/view/{group}",
+      "action": "Right sidebar > Users tab",
+      "description": "Group sidebar — member list with assignment method and directory icons",
+      "modes": ["jc_gws", "jc_only", "gws_only"],
+      "component": "Screenshot",
+      "usedIn": ["docs/using-shiftcontrol/Groups/Editing-a-group.mdx"]
+    },
+    "Groups/Group-sidebar-apps": {
+      "route": "/admin/org/groups/view/{group}",
+      "action": "Right sidebar > Apps tab",
+      "description": "Group sidebar — assigned applications",
+      "modes": ["jc_gws", "jc_only", "gws_only"],
+      "component": "Screenshot",
+      "usedIn": ["docs/using-shiftcontrol/Groups/Editing-a-group.mdx"]
+    },
+
+    "Apps/App-management": {
+      "route": "/admin/org/apps",
+      "description": "Installed apps list — type, spend, group/user counts",
+      "modes": ["jc_gws", "jc_only", "gws_only"],
+      "component": "ModeScreenshot",
+      "usedIn": ["docs/using-shiftcontrol/Apps/App-management.mdx"]
+    },
+    "Apps/App-catalog": {
+      "route": "/admin/org/apps/catalog",
+      "description": "App catalog — search, 900+ apps with functionality badges",
+      "modes": ["jc_gws", "jc_only", "gws_only"],
+      "component": "ModeScreenshot",
+      "usedIn": []
+    },
+    "Apps/App-discovery": {
+      "route": "/admin/org/apps/discovery",
+      "description": "Shadow IT detection — discovered OAuth apps with activity counts",
+      "modes": ["jc_gws", "jc_only"],
+      "component": "ModeScreenshot",
+      "usedIn": ["docs/using-shiftcontrol/Apps/App-discovery.mdx"]
+    },
+    "Apps/App-detail": {
+      "route": "/admin/org/apps/view/{app}",
+      "app": "Google Workspace or AWS",
+      "description": "App detail — General tab with ownership, sidebar. SSO tab varies by app type.",
+      "modes": ["jc_gws", "jc_only", "gws_only"],
+      "component": "ModeScreenshot",
+      "usedIn": ["docs/using-shiftcontrol/Apps/Editing-an-app.mdx"]
+    },
+    "Apps/Edit-app-general-info": {
+      "route": "/admin/org/apps/view/{app}",
+      "tab": "General",
+      "app": "AWS or any SSO app",
+      "description": "App General tab — name, admin, budget owner, department, description",
+      "modes": ["jc_gws", "jc_only", "gws_only"],
+      "component": "Screenshot",
+      "usedIn": ["docs/using-shiftcontrol/Apps/Editing-an-app.mdx"]
+    },
+    "Apps/Edit-app-groups": {
+      "route": "/admin/org/apps/view/{app}",
+      "tab": "Assignments > Groups",
+      "description": "App group assignments",
+      "modes": ["jc_gws", "jc_only", "gws_only"],
+      "component": "Screenshot",
+      "usedIn": ["docs/using-shiftcontrol/Apps/Editing-an-app.mdx"]
+    },
+    "Apps/Edit-app-individual-assignments": {
+      "route": "/admin/org/apps/view/{app}",
+      "tab": "Assignments > Individual",
+      "description": "App individual user assignments",
+      "modes": ["jc_gws", "jc_only", "gws_only"],
+      "component": "Screenshot",
+      "usedIn": ["docs/using-shiftcontrol/Apps/Editing-an-app.mdx"]
+    },
+    "Apps/Edit-app-sso": {
+      "route": "/admin/org/apps/view/{app_bamboohr_sso}?tab=sso",
+      "tab": "Single Sign-On",
+      "app": "BambooHR (0191dac9-e6a4-7d6d-97c4-229ea0c61592) — has actual SAML SSO config. Do NOT use AWS or non-SSO apps.",
+      "description": "SSO configuration — IdP certificate, metadata, SAML settings. Tab only exists with JumpCloud connected.",
+      "modes": ["jc_gws", "jc_only"],
+      "component": "Screenshot",
+      "usedIn": ["docs/using-shiftcontrol/Apps/Editing-an-app.mdx"]
+    },
+    "Apps/App-sidebar-groups": {
+      "route": "/admin/org/apps/view/{app}",
+      "action": "Right sidebar > Groups tab",
+      "description": "App sidebar — assigned groups with directory icons",
+      "modes": ["jc_gws", "jc_only", "gws_only"],
+      "component": "Screenshot",
+      "usedIn": ["docs/using-shiftcontrol/Apps/Editing-an-app.mdx"]
+    },
+    "Apps/App-sidebar-users": {
+      "route": "/admin/org/apps/view/{app}",
+      "action": "Right sidebar > Users tab",
+      "description": "App sidebar — users with access and directory icons",
+      "modes": ["jc_gws", "jc_only", "gws_only"],
+      "component": "Screenshot",
+      "usedIn": ["docs/using-shiftcontrol/Apps/Editing-an-app.mdx"]
+    },
+
+    "Dashboards/Dashboard-overview": {
+      "route": "/admin/dashboards/oauth",
+      "description": "OAuth permissions dashboard — metrics, trend chart, app list, user grants",
+      "modes": ["jc_gws", "jc_only", "gws_only"],
+      "component": "ModeScreenshot",
+      "usedIn": ["docs/using-shiftcontrol/Dashboards/app-permissions.mdx"]
+    },
+    "Dashboards/App-spend-dashboard": {
+      "route": "/admin/dashboards/app-spend",
+      "description": "SaaS spend dashboard — costs by department, renewals, top spend",
+      "modes": ["jc_gws", "jc_only", "gws_only"],
+      "component": "ModeScreenshot",
+      "usedIn": ["docs/using-shiftcontrol/Dashboards/app-spend.mdx"]
+    },
+
+    "Reports/App-assignment-reports": {
+      "route": "/admin/org/reports/apps/assignments",
+      "description": "App assignment report — pivot by app or user, expandable rows",
+      "modes": ["jc_gws", "jc_only", "gws_only"],
+      "component": "ModeScreenshot",
+      "usedIn": ["docs/using-shiftcontrol/Reports/App-assignment-reports.mdx"]
+    },
+
+    "Settings/Directories": {
+      "route": "/settings/connectors/directories",
+      "description": "Directory connectors — IdPs and HRIS with status, health, primary indicator. Row composition varies per mode.",
+      "modes": ["jc_gws", "jc_only", "gws_only"],
+      "component": "ModeScreenshot",
+      "usedIn": ["docs/using-shiftcontrol/Settings/directories.mdx"]
+    },
+    "Settings/Google-admins": {
+      "route": "/settings/google/admins",
+      "description": "Google Workspace admin accounts with roles and scope",
+      "modes": ["jc_gws", "gws_only"],
+      "component": "ModeScreenshot",
+      "usedIn": ["docs/using-shiftcontrol/Settings/google-admins.mdx"]
+    },
+    "Settings/JumpCloud-admins": {
+      "route": "/settings/jumpcloud/admins",
+      "description": "JumpCloud admin accounts with MFA status and API access",
+      "modes": ["jc_gws", "jc_only"],
+      "component": "ModeScreenshot",
+      "usedIn": ["docs/using-shiftcontrol/Settings/jumpcloud-admins.mdx"]
+    },
+    "Settings/Org-details": {
+      "route": "/settings/org/view",
+      "description": "Organization name, domain, currency, feature toggles",
+      "modes": ["jc_gws", "jc_only", "gws_only"],
+      "component": "ModeScreenshot",
+      "usedIn": ["docs/using-shiftcontrol/Settings/org-details.mdx"]
+    },
+    "Settings/Account-settings": {
+      "route": "/settings/account",
+      "description": "Personal profile — name, email, security methods",
+      "modes": ["jc_gws", "jc_only", "gws_only"],
+      "component": "ModeScreenshot",
+      "usedIn": ["docs/using-shiftcontrol/Settings/account-settings.mdx"]
+    },
+    "Settings/Settings-account-settings": {
+      "route": "/settings/account",
+      "description": "Account settings — profile and security methods (detail view)",
+      "modes": ["jc_gws", "jc_only", "gws_only"],
+      "component": "Screenshot",
+      "usedIn": ["docs/using-shiftcontrol/Settings/account-settings.mdx"]
+    },
+    "Settings/Settings-departments": {
+      "route": "/settings/departments",
+      "description": "Departments list",
+      "modes": ["jc_gws", "jc_only", "gws_only"],
+      "component": "Screenshot",
+      "usedIn": ["docs/using-shiftcontrol/Settings/departments.mdx"]
+    },
+    "Settings/Settings-group-tags": {
+      "route": "/settings/group-tags",
+      "description": "Group tags with color codes",
+      "modes": ["jc_gws", "jc_only", "gws_only"],
+      "component": "Screenshot",
+      "usedIn": ["docs/using-shiftcontrol/Settings/group-tags.mdx"]
+    },
+    "Settings/Settings-locations": {
+      "route": "/settings/locations",
+      "description": "Locations list",
+      "modes": ["jc_gws", "jc_only", "gws_only"],
+      "component": "Screenshot",
+      "usedIn": ["docs/using-shiftcontrol/Settings/locations.mdx"]
+    },
+    "Settings/Settings-user-roles": {
+      "route": "/settings/user-roles",
+      "description": "ShiftControl admin role assignments",
+      "modes": ["jc_gws", "jc_only", "gws_only"],
+      "component": "Screenshot",
+      "usedIn": ["docs/using-shiftcontrol/Settings/user-roles.mdx"]
+    },
+    "Settings/Settings-org-api-keys": {
+      "route": "/settings/org/keys",
+      "description": "Organization API keys",
+      "modes": ["jc_gws", "jc_only", "gws_only"],
+      "component": "Screenshot",
+      "usedIn": ["docs/using-shiftcontrol/Settings/org-api-keys.mdx"]
+    },
+    "Settings/Settings-user-api-keys": {
+      "route": "/settings/user/keys",
+      "description": "Personal user API keys",
+      "modes": ["jc_gws", "jc_only", "gws_only"],
+      "component": "Screenshot",
+      "usedIn": ["docs/using-shiftcontrol/Settings/user-api-keys.mdx"]
+    },
+    "Settings/Settings-org-details": {
+      "route": "/settings/org/view",
+      "description": "Org name, domain, currency, feature toggles",
+      "modes": ["jc_gws", "jc_only", "gws_only"],
+      "component": "Screenshot",
+      "usedIn": ["docs/using-shiftcontrol/Settings/org-details.mdx"]
+    },
+    "Settings/Settings-app-connectors": {
+      "route": "/settings/connectors/apps",
+      "description": "App data connectors (Box, HubSpot, Slack)",
+      "modes": ["jc_gws", "jc_only", "gws_only"],
+      "component": "Screenshot",
+      "usedIn": ["docs/using-shiftcontrol/Settings/app-connectors.mdx"]
+    },
+    "Settings/Settings-appearance": {
+      "route": "/settings/appearance",
+      "description": "Theme and display preferences",
+      "modes": ["jc_gws", "jc_only", "gws_only"],
+      "component": "Screenshot",
+      "usedIn": ["docs/using-shiftcontrol/Settings/appearance.mdx"]
+    },
+
+    "Reports/App-Assignment-report": {
+      "route": "/admin/org/reports/apps/assignments",
+      "description": "App assignment report detail view",
+      "modes": ["jc_gws", "jc_only", "gws_only"],
+      "component": "Screenshot",
+      "usedIn": ["docs/using-shiftcontrol/Reports/App-assignment-reports.mdx"]
+    },
+
+    "Command-bar": {
+      "action": "Press Cmd+K to open command bar overlay",
+      "description": "Command bar search/action palette",
+      "modes": ["jc_gws", "jc_only", "gws_only"],
+      "component": "Screenshot",
+      "usedIn": ["docs/using-shiftcontrol/using-the-command-bar.mdx"]
+    },
+    "Task-management": {
+      "route": "/admin/tasks",
+      "description": "Task management list with pending tasks",
+      "modes": ["jc_gws", "jc_only", "gws_only"],
+      "component": "Screenshot",
+      "usedIn": ["docs/using-shiftcontrol/task-management.mdx"]
+    }
+  }
+}

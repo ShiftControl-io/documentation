@@ -3,56 +3,231 @@
  * bundles Infima by default. Infima is a CSS framework designed to
  * work well for content-centric websites.
  */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
+@import url('https://api.fontshare.com/v2/css?f[]=switzer@300,400,500,600,700&display=swap');
 
 body {
-  font-family: 'Inter', sans-serif;
+  font-family: 'Switzer', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  letter-spacing: 0.01em;
 }
 
-/* You can override the default Infima variables here. */
+/* Brand buttons */
+.button--primary {
+  border-radius: 12px;
+}
+
+/* Links — blue accent, not teal for body text */
+html[data-theme='dark'] .markdown a {
+  color: #4da6ff;
+}
+
+html[data-theme='dark'] .markdown a:hover {
+  color: #80bfff;
+}
+
+/* ─── Light Theme ─── */
 html[data-theme='light'] {
-  --ifm-color-primary: #2e8555;
-  --ifm-color-primary-dark: #29784c;
-  --ifm-color-primary-darker: #277148;
-  --ifm-color-primary-darkest: #205d3b;
-  --ifm-color-primary-light: #33925d;
-  --ifm-color-primary-lighter: #359962;
-  --ifm-color-primary-lightest: #3cad6e;
+  --ifm-color-primary: #0080ff;
+  --ifm-color-primary-dark: #0073e6;
+  --ifm-color-primary-darker: #006dd9;
+  --ifm-color-primary-darkest: #005ab3;
+  --ifm-color-primary-light: #1a8dff;
+  --ifm-color-primary-lighter: #2696ff;
+  --ifm-color-primary-lightest: #4da6ff;
   --ifm-code-font-size: 95%;
-  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
+  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.06);
   --ifm-background-color: #ffffff;
   --ifm-navbar-background-color: #ffffff;
-  --step-line-bg: rgba(156, 163, 175, 0.7); /* Light mode */
-  --step-number-bg: #f3f4f6; /* Light mode */
-  --step-number-color: #1f2937; /* Light mode */
-  --step-title-color: #111827; /* Light mode */
-  --prose-color: #111827; /* Light mode */
+  --ifm-font-color-base: #1a1d23;
+  --ifm-heading-color: #0a0b0d;
+  --ifm-font-size-base: 16px;
+  --ifm-line-height-base: 1.65;
+  --ifm-heading-font-weight: 600;
+  --step-line-bg: rgba(156, 163, 175, 0.5);
+  --step-number-bg: #f0f2f5;
+  --step-number-color: #1a1d23;
+  --step-title-color: #0a0b0d;
+  --prose-color: #1a1d23;
+  --sc-accent: #00c1bf;
+  --sc-card-bg: #f8f9fb;
+  --sc-card-border: #e5e7eb;
+  --sc-card-hover-border: #0080ff;
+  --sc-text-muted: #6b7280;
 }
 
-/* For readability concerns, you should choose a lighter palette in dark mode. */
+/* ─── Dark Theme ─── */
 html[data-theme='dark'] {
-  --ifm-color-primary: #f8fafc;
-  --ifm-color-primary-dark: #21af90;
-  --ifm-color-primary-darker: #1fa588;
-  --ifm-color-primary-darkest: #1a8870;
-  --ifm-color-primary-light: #29d5b0;
-  --ifm-color-primary-lighter: #32d8b4;
-  --ifm-color-primary-lightest: #4fddbf;
+  --ifm-color-primary: #e8eaed;
+  --ifm-color-primary-dark: #d0d3d9;
+  --ifm-color-primary-darker: #c4c8cf;
+  --ifm-color-primary-darkest: #a0a5af;
+  --ifm-color-primary-light: #f0f1f3;
+  --ifm-color-primary-lighter: #f5f6f7;
+  --ifm-color-primary-lightest: #ffffff;
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
-  --ifm-background-color: #0a0a0b;
-  --ifm-footer-background-color: #0a0a0b;
-  --ifm-navbar-background-color: #0a0a0b;
-  --ifm-navbar-link-color: #f8fafc;
-  --ifm-navbar-link-active-color: #94a3b8;
-  --step-line-bg: rgba(255, 255, 255, 0.1); /* Dark mode */
-  --step-number-bg: #26292E; /* Dark mode */
-  --step-number-color: #ffffff; /* Dark mode */
-  --step-title-color: #f8fafc; /* Dark mode */
-  --prose-color: #f8fafc; /* Dark mode */
+  --ifm-background-color: #08090a;
+  --ifm-footer-background-color: #08090a;
+  --ifm-navbar-background-color: #08090a;
+  --ifm-navbar-link-color: #f7f8f8;
+  --ifm-navbar-link-active-color: #ffffff;
+  --ifm-font-color-base: #d0d6e0;
+  --ifm-heading-color: #f7f8f8;
+  --ifm-font-size-base: 16px;
+  --ifm-line-height-base: 1.65;
+  --ifm-heading-font-weight: 600;
+  --step-line-bg: rgba(255, 255, 255, 0.08);
+  --step-number-bg: #14161c;
+  --step-number-color: #f7f8f8;
+  --step-title-color: #f7f8f8;
+  --prose-color: #d0d6e0;
+  --sc-accent: #00c1bf;
+  --sc-card-bg: #0f1115;
+  --sc-card-border: #1e2028;
+  --sc-card-hover-border: #4da6ff;
+  --sc-text-muted: #8a8f98;
+}
+
+/* Dark mode sidebar — active item gets white text, subtle highlight bg */
+html[data-theme='dark'] .menu__link--active:not(.menu__link--sublist) {
+  color: #ffffff;
+}
+
+html[data-theme='dark'] .menu__link {
+  color: #9ca3af;
+}
+
+html[data-theme='dark'] .menu__link:hover {
+  color: #e8eaed;
 }
 
 html[data-theme='dark'] p {
-  color: #9ea4a4; /* Replace with your desired color */
+  color: #b0b6c0;
+}
+
+/* ─── Typography Refinements ─── */
+.markdown h1 {
+  font-size: 2.25rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+}
+
+.markdown h2 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  line-height: 1.3;
+  margin-top: 2.5rem;
+}
+
+.markdown h3 {
+  font-size: 1.2rem;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+.markdown p {
+  font-size: 1rem;
+  line-height: 1.7;
+}
+
+/* ─── Generated Index Cards (Category Pages) ─── */
+.card {
+  border: 1px solid var(--sc-card-border) !important;
+  border-radius: 12px !important;
+  background: var(--sc-card-bg) !important;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.15s ease !important;
+  overflow: hidden;
+}
+
+.card:hover {
+  border-color: var(--sc-card-hover-border) !important;
+  box-shadow: 0 4px 20px rgba(0, 128, 255, 0.08);
+  transform: translateY(-2px);
+}
+
+html[data-theme='dark'] .card:hover {
+  box-shadow: 0 4px 20px rgba(77, 166, 255, 0.08);
+}
+
+/* Card title — clean, no emoji, no truncation */
+.card h2 {
+  font-size: 1.05rem;
+  font-weight: 600;
+  line-height: 1.3;
+  margin-bottom: 0;
+}
+
+/* Card description — full text, no truncation */
+.card p {
+  color: var(--sc-text-muted);
+  font-size: 0.85rem;
+  line-height: 1.55;
+  margin-top: 0.4rem;
+  margin-bottom: 0;
+}
+
+/* No underline on card hover — border highlight is enough */
+a.card,
+a.card:hover {
+  text-decoration: none;
+}
+
+a.card:hover h2,
+a.card:hover p {
+  text-decoration: none;
+}
+
+/* ─── Sidebar Polish ─── */
+.menu__link {
+  font-size: 0.875rem;
+  font-weight: 450;
+  border-radius: 8px;
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+.menu__link--active:not(.menu__link--sublist) {
+  font-weight: 550;
+}
+
+/* ─── Breadcrumbs ─── */
+.breadcrumbs__link {
+  font-size: 0.8rem;
+}
+
+/* ─── Navbar ─── */
+.navbar {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+  box-shadow: none;
+}
+
+html[data-theme='dark'] .navbar {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+/* ─── Footer ─── */
+.footer {
+  border-top: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+html[data-theme='dark'] .footer {
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+/* ─── Admonitions ─── */
+.alert {
+  border-radius: 10px;
+}
+
+/* ─── Images ─── */
+.markdown img {
+  border-radius: 10px;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+html[data-theme='dark'] .markdown img {
+  border-color: rgba(255, 255, 255, 0.08);
 }
 
 
@@ -181,4 +356,200 @@ html[data-theme='dark'] .accordion-title {
 
 html[data-theme='dark'] .accordion-content {
   color: #e0e0e0;
+}
+
+/* ─── Config Mode Selector ─── */
+
+.config-mode-bar {
+  position: fixed;
+  top: var(--ifm-navbar-height, 60px);
+  left: 0;
+  right: 0;
+  z-index: 199;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  background-color: var(--ifm-background-color);
+  padding: 0.45rem 0;
+}
+
+/* Offset main content below the fixed mode selector bar */
+.main-wrapper {
+  padding-top: 44px;
+}
+
+html[data-theme='dark'] .config-mode-bar {
+  border-bottom-color: rgba(255, 255, 255, 0.08);
+}
+
+.config-mode-bar--placeholder {
+  height: 44px;
+}
+
+.config-mode-bar__inner {
+  padding: 0 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+/* ─── Directory Field (label + select pair) ─── */
+
+.config-mode-field {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.config-mode-field__label {
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: #6b7280;
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+html[data-theme='dark'] .config-mode-field__label {
+  color: #8a8f98;
+}
+
+/* ─── Select Dropdown ─── */
+
+.config-mode-select {
+  font-family: inherit;
+  font-size: 0.8rem;
+  font-weight: 500;
+  padding: 0.25rem 1.75rem 0.25rem 0.6rem;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  border-radius: 8px;
+  background-color: transparent;
+  color: var(--ifm-font-color-base);
+  cursor: pointer;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24'%3E%3Cpath fill='%236b7280' d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.4rem center;
+  transition: border-color 0.15s ease;
+}
+
+html[data-theme='dark'] .config-mode-select {
+  border-color: rgba(255, 255, 255, 0.12);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24'%3E%3Cpath fill='%238a8f98' d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");
+}
+
+.config-mode-select:hover {
+  border-color: var(--ifm-color-primary);
+}
+
+.config-mode-select:focus {
+  outline: none;
+  border-color: var(--ifm-color-primary);
+  box-shadow: 0 0 0 2px rgba(0, 128, 255, 0.15);
+}
+
+html[data-theme='dark'] .config-mode-select:focus {
+  box-shadow: 0 0 0 2px rgba(77, 166, 255, 0.15);
+}
+
+/* ─── Tooltip ─── */
+
+.config-mode-tooltip-wrap {
+  position: relative;
+  display: inline-flex;
+}
+
+.config-mode-tooltip-trigger {
+  cursor: help;
+}
+
+.config-mode-info-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  border: 1px solid #9ca3af;
+  font-size: 0.6rem;
+  font-weight: 600;
+  color: #9ca3af;
+  line-height: 1;
+}
+
+html[data-theme='dark'] .config-mode-info-icon {
+  border-color: #6b7280;
+  color: #6b7280;
+}
+
+.config-mode-tooltip {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  transform: none;
+  width: 320px;
+  max-width: 90vw;
+  padding: 0.75rem 1rem;
+  font-size: 0.8rem;
+  font-weight: 400;
+  line-height: 1.55;
+  color: #f7f8f8;
+  background: #1a1d23;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+  z-index: 300;
+  pointer-events: none;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  white-space: normal;
+}
+
+html[data-theme='light'] .config-mode-tooltip {
+  color: #ffffff;
+  background: #1a1d23;
+  border-color: transparent;
+}
+
+/* ─── Conditional Content ─── */
+
+.conditional-content--hidden {
+  display: none;
+}
+
+/* ─── Mode Callout ─── */
+
+.mode-callout {
+  border: 1px solid rgba(0, 193, 191, 0.3);
+  border-radius: 0.5rem;
+  padding: 0.75rem 1rem;
+  margin: 1rem 0;
+  background: rgba(0, 193, 191, 0.04);
+}
+
+html[data-theme='dark'] .mode-callout {
+  border-color: rgba(0, 193, 191, 0.4);
+  background: rgba(0, 193, 191, 0.08);
+}
+
+.mode-callout__header {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #0080ff;
+  margin-bottom: 0.4rem;
+}
+
+html[data-theme='dark'] .mode-callout__header {
+  color: #00c1bf;
+}
+
+.mode-callout__icon {
+  font-size: 0.9rem;
+}
+
+.mode-callout__body {
+  font-size: 0.9rem;
+  line-height: 1.5;
 }

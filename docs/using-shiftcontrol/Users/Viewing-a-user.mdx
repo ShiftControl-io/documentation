@@ -1,0 +1,151 @@
+---
+title: 'Viewing a User'
+description: 'View a user profile, review their security posture, audit OAuth permissions, and check SaaS costs — all from one page in ShiftControl.'
+keywords: ['ShiftControl', 'user management', 'view user', 'security audit', 'permissions', 'SaaS cost']
+icon: 'user'
+---
+
+import Admonition from '@theme/Admonition';
+import ConditionalContent from '@site/src/components/ConditionalContent';
+import ModeScreenshot from '@site/src/components/ModeScreenshot';
+
+<p style={{fontSize: "large"}}>See everything about a person — their identity, security posture, app permissions, and costs — in one place.</p>
+
+## Overview
+
+The user detail page is where you go to answer questions like:
+- "Is this person's MFA properly configured?"
+- "What third-party apps has this user authorized?"
+- "How much are we spending on this user's tools?"
+- "What groups is this person in, and what access do those groups give them?"
+
+You reach this page by clicking any user's name in the [User Management](/using-shiftcontrol/Users/User-management/) list.
+
+<ModeScreenshot path="Users/User-detail-info" alt="User detail page showing profile, directory status, and sidebar" />
+
+## The Details Tab
+
+The default view shows the user's profile information — name, email, title, department, location, team, and manager. This is the identity data that flows to your connected directories.
+
+<ConditionalContent modes={["jc-google", "google-jc"]}>
+
+Below the standard fields, you'll see a **Google Workspace** section with Google-specific settings:
+
+- **Recovery Email** — The email address Google uses if the user is locked out
+- **Recovery Phone** — Phone number for Google account recovery
+- **Show user in global directory** — Whether this user appears in your Google Workspace directory listing
+- **Email Aliases** — Additional email addresses that route to the user's primary Google inbox
+
+<ModeScreenshot path="Users/User-detail-google-section" alt="Google Workspace section with recovery email, phone, and directory settings" />
+
+</ConditionalContent>
+
+## The Security Tab
+
+The Security tab shows the user's authentication and security configuration.
+
+<ModeScreenshot path="Users/User-detail-security" alt="Security tab showing MFA and authentication status" />
+
+<ConditionalContent modes={["jc-only"]}>
+
+**JumpCloud MFA** shows which MFA method the user has configured (e.g., 1Password, Google Authenticator). If this is empty, the user hasn't completed MFA enrollment. You can delete an existing enrollment to force the user to re-enroll.
+
+</ConditionalContent>
+
+<ConditionalContent modes={["jc-google", "google-jc"]}>
+
+The Security tab is divided into two sections:
+
+**Google Security:**
+- **2SV Status** — Whether 2-Step Verification is enabled
+- **2SV Enforcement** — Whether your org policy requires this user to have 2SV
+- **Recovery Email / Phone** — Account recovery contact info
+- **Admin Roles** — Any Google Workspace admin roles assigned to this user
+
+**JumpCloud Multi-Factor Authentication:**
+- **Device Authenticator** — Which MFA method is configured (1Password, Google Authenticator, etc.)
+
+Having both on one tab gives you a complete security posture view without switching between the Google Admin Console and JumpCloud.
+
+</ConditionalContent>
+
+<ConditionalContent modes={["google-only"]}>
+
+**Google Security** shows 2-Step Verification status, enforcement, recovery email/phone, and any admin roles. This is a read-only view — changes to Google security settings are made through the Google Admin Console.
+
+</ConditionalContent>
+
+## The App Permissions Tab
+
+<ConditionalContent modes={["jc-google", "google-jc", "google-only"]}>
+
+The App Permissions tab shows every OAuth permission the user has granted to third-party applications through their Google account.
+
+<ModeScreenshot path="Users/User-detail-app-permissions" alt="App Permissions tab showing active OAuth grants" />
+
+**Active OAuth Permissions** lists every app that currently has access to the user's data — apps like Superhuman, Stripe, Linear, and Chrome extensions. Each entry shows what data the app can access.
+
+**Revoking access:** Each row has a revoke button (user-minus icon) that lets you remove that app's OAuth authorization for this user directly from ShiftControl. This revokes the token — the app immediately loses access to the user's data. No need to open the Google Admin Console. This is the action you take when you spot a risky or unauthorized app during a security review.
+
+**App Permission History** shows a timeline of when permissions were granted or revoked. This is valuable for investigating security incidents — you can see exactly when a user authorized a suspicious application and when access was revoked.
+
+</ConditionalContent>
+
+<ConditionalContent modes={["jc-only"]}>
+
+<Admonition type="info">
+    The App Permissions tab requires Google Workspace to be connected. It monitors OAuth permissions granted through Google accounts.
+</Admonition>
+
+</ConditionalContent>
+
+## The SaaS Cost Tab
+
+The SaaS Cost tab gives you a financial view of the user's application footprint:
+
+- **Total Apps** — Number of SaaS applications assigned to this user
+- **Total Cost** — Combined annual and monthly cost of all assigned applications
+- **Average Per App** — Average cost per application, useful for benchmarking
+- **App Cost List** — Line-by-line breakdown of each app and its cost
+
+This data helps with budget planning, license optimization (are they using all these tools?), and offboarding cost recovery (what subscriptions can be cancelled?).
+
+## The User Info Sidebar
+
+The right sidebar provides a quick-reference view without leaving the current tab.
+
+### Groups Tab
+
+<ModeScreenshot path="Users/User-sidebar-groups" alt="Sidebar showing group memberships" />
+
+Shows every group the user belongs to and how they were added (manually, dynamically, or via nesting). This is the fastest way to understand *why* a user has the access they have — their groups determine their applications.
+
+### Apps Tab
+
+<ModeScreenshot path="Users/User-sidebar-apps" alt="Sidebar showing app access" />
+
+Shows every application the user can access and how they got access (through which group). If a user has access to something they shouldn't, this tells you which group is granting it so you can fix the root cause.
+
+## Common Scenarios
+
+### Investigating a security alert
+
+Your security team flags a user whose recovery email is a personal Gmail address. Open the user, go to the **Security** tab, and check the Recovery Email field. You can see their 2SV status and whether MFA is properly enforced. If their security settings are weak, coordinate with them to update recovery info and enable MFA.
+
+### Reviewing a departing employee's access
+
+An employee gave their two-week notice. Open their profile and check:
+1. **App Permissions tab** — see every OAuth grant they've authorized. Revoke anything risky.
+2. **SaaS Cost tab** — understand the budget impact of offboarding.
+3. **Sidebar > Groups** — see which groups they're in, so you know what access will be revoked when they're deactivated.
+4. **Sidebar > Apps** — verify every app they touch.
+
+### Responding to a budget review
+
+Finance wants to know why software costs increased. Open high-cost users and check their **SaaS Cost** tab. Cross-reference with the **App Permissions** tab to see if they're still actively using all their authorized applications.
+
+## Related Features
+
+- [User Management](/using-shiftcontrol/Users/User-management/) — Return to the full user list
+- [Editing a User](/using-shiftcontrol/Users/Editing-a-user/) — Make changes to a user's profile
+- [App Permissions Dashboard](/using-shiftcontrol/Dashboards/app-permissions/) — Organization-wide OAuth permission monitoring

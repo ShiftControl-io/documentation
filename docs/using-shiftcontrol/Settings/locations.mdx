@@ -4,7 +4,7 @@ description: 'Define and manage office locations in ShiftControl. Sync from HRIS
 keywords: ['ShiftControl', 'settings', 'locations', 'HRIS', 'organization structure', 'configuration']
 icon: 'map-pin'
 ---
-
+import ModeScreenshot from "@site/src/components/ModeScreenshot";
 import Admonition from '@theme/Admonition';
 
 <p style={{fontSize: "large"}}>Manage your organization’s locations for better structure, visibility, and automation.</p>
@@ -14,10 +14,7 @@ import Admonition from '@theme/Admonition';
 The **Locations** page under **Org Settings** allows administrators to define and manage the list of organizational locations such as offices, regions, or countries.
 Locations can be automatically synced from your HRIS integration or added manually. They are used throughout ShiftControl to associate users, apps, and groups with specific physical or operational sites.
 
-<img
-    src="/img/ShiftControl/Settings/Settings-locations.png"
-    alt="Locations list view"
-/>
+<ModeScreenshot path="Settings/Settings-locations" alt="Locations list view" />
 
 ## Syncing with HRIS Integrations
 
@@ -50,10 +47,7 @@ To add or modify locations manually:
 2. Enter a **Location Name** (e.g., *Singapore*, *United States*, *Germany*).
 3. Click **Save** to confirm.
 
-<img
-    src="/img/ShiftControl/Settings/Settings-create-edit-a-location.png"
-    alt="Add or edit a location"
-/>
+<ModeScreenshot path="Settings/Settings-create-edit-a-location" alt="Add or edit a location" />
 
 You can also edit existing locations using the **⋮ menu** next to each entry.
 When renamed, any linked users or dynamic groups remain associated automatically.

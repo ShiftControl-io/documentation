@@ -4,17 +4,15 @@ description: 'Detect shadow IT with ShiftControl App Discovery. Automatically fi
 keywords: ['ShiftControl', 'app discovery', 'SaaS', 'OAuth', 'shadow IT', 'application management']
 icon: 'radar'
 ---
+import ModeScreenshot from "@site/src/components/ModeScreenshot";
 
-<p style={{fontSize: "large"}}>How to use the App Discovery to discover applications in your organization.</p>
+<p style={{fontSize: "large"}}>Find every app your team is using — including the ones they didn't tell you about.</p>
 
 ## Overview
 
-App Discovery is a shadow IT detection tool. It automatically finds applications your users are accessing via OAuth grants -- apps that may not be officially managed or approved by your organization. Instead of relying on employees to report every tool they sign up for, App Discovery surfaces them for you so you can decide whether to manage, monitor, or block them.
+App Discovery is your shadow IT detection tool. It automatically surfaces applications your users have authorized via OAuth — apps that may not be officially managed or approved by your organization. Instead of relying on employees to self-report every tool they sign up for, App Discovery finds them for you so you can decide whether to manage, monitor, or block them.
 
-<img
-    src="/img/ShiftControl/Apps/App-discovery.png"
-    alt="App Discovery"
-/>
+<ModeScreenshot path="Apps/App-discovery" alt="App Discovery showing unauthorized OAuth apps detected across the organization" />
 
 ## How It Works
 
@@ -55,10 +53,7 @@ Use the **search bar** to find a specific app by name. Use the **state filter** 
 
 Expand any discovered app row to see detailed activity: which users took which actions, what OAuth scopes were granted, and when.
 
-<img
-    src="/img/ShiftControl/Apps/App-Assignment-details.png"
-    alt="App Discovery details"
-/>
+<ModeScreenshot path="Apps/App-Assignment-details" alt="App Discovery details" />
 
 ## Adding a Discovered App
 
@@ -80,10 +75,7 @@ You can view snoozed, dismissed, and added apps at any time using the state filt
 
 Select multiple apps using the checkboxes, then click **Bulk Actions** to apply Snooze, Dismiss, or Reset to all selected apps at once. This is useful for triaging a large number of newly discovered apps.
 
-<img
-    src="/img/ShiftControl/Apps/App-discovery-bulk-actions.png"
-    alt="App Discovery bulk actions"
-/>
+<ModeScreenshot path="Apps/App-discovery-bulk-actions" alt="App Discovery bulk actions" />
 
 ## Things to Know
 

@@ -1,0 +1,118 @@
+---
+title: 'What is ShiftControl?'
+description: 'A simple explanation of ShiftControl, JumpCloud, and Google Workspace — what they do, how they work together, and what it means for you as an employee.'
+keywords: ['ShiftControl', 'employee', 'guide', 'JumpCloud', 'Google Workspace', 'identity', 'SSO']
+---
+
+import Admonition from '@theme/Admonition';
+import ConditionalContent from '@site/src/components/ConditionalContent';
+
+<p style={{fontSize: "large"}}>Your company uses ShiftControl to manage your work apps, identity, and security. Here's what that means for you.</p>
+
+## The Short Version
+
+ShiftControl is your company's platform for managing work applications, identities, and security. It provides you with:
+
+- **An employee portal** at [app.shiftcontrol.io](https://app.shiftcontrol.io) where you can see and launch all your work apps
+- **An org chart** to find colleagues and understand team structures
+- **Visibility into your security** settings and account status
+
+Your ShiftControl account is created automatically when your IT team adds you — you don't need to sign up separately. To log in, just go to [app.shiftcontrol.io](https://app.shiftcontrol.io) and sign in with your work email. You'll be authenticated automatically through your company's identity provider.
+
+<ConditionalContent modes={["jc-only"]}>
+
+## How It Works at Your Company
+
+Your company uses **JumpCloud** as the identity system. JumpCloud manages your login, password, and multi-factor authentication. ShiftControl connects to JumpCloud to give you and your IT team a better experience.
+
+**What this means for you:**
+- You log in with your **JumpCloud credentials** (email and password)
+- You set up **MFA through JumpCloud** (usually an authenticator app on your phone)
+- When you click on a work app that has [SSO (single sign-on)](https://shiftcontrol.io/learn/what-is-sso) enabled, JumpCloud handles the login — you'll see an MFA prompt before being logged into the app
+- Your [employee portal](/employee-guide/employee-portal/your-apps/) at [app.shiftcontrol.io](https://app.shiftcontrol.io) shows all the apps available to you
+
+</ConditionalContent>
+
+<ConditionalContent modes={["jc-google"]}>
+
+## How It Works at Your Company
+
+Your company uses three systems together. Here's what each one does:
+
+| System | What It Does For You |
+|--------|---------------------|
+| **Google Workspace** | Your email, Google Drive, Calendar, and Google login. This is probably what you use most day-to-day. |
+| **JumpCloud** | Provides [single sign-on (SSO)](https://shiftcontrol.io/learn/what-is-sso) to the work apps your organization has configured for SSO. When you click an SSO app, JumpCloud securely logs you in. |
+| **ShiftControl** | Your employee portal where you see all your apps, org chart, and account info. Also what your IT team uses to manage everything. Log in at [app.shiftcontrol.io](https://app.shiftcontrol.io). |
+
+**What this means for you:**
+- You log in with your **Google account** for most things
+- When you open an SSO app, if you're already authenticated to Google, the Google part is automatic — you'll just see the **JumpCloud MFA prompt** before the app opens
+- Your [employee portal](/employee-guide/employee-portal/your-apps/) at [app.shiftcontrol.io](https://app.shiftcontrol.io) shows all the apps available to you
+
+<Admonition type="info">
+    **Will I see two MFA prompts?** Usually not — if you're already logged into Google, that step is automatic. You'll typically just see one MFA prompt from JumpCloud when opening an SSO app. However, if your organization uses JumpCloud as the primary login (instead of Google), you may occasionally see two prompts — one for JumpCloud authentication and one for the app itself.
+</Admonition>
+
+</ConditionalContent>
+
+<ConditionalContent modes={["google-only"]}>
+
+## How It Works at Your Company
+
+Your company uses **Google Workspace** as the identity system. Your Google account is your primary work identity — email, apps, and login all go through Google. ShiftControl provides the employee portal where you see all your apps, and is what your IT team uses to manage everything.
+
+**What this means for you:**
+- You log in with your **Google account**
+- **2-Step Verification** through Google keeps your account secure
+- Your [employee portal](/employee-guide/employee-portal/your-apps/) at [app.shiftcontrol.io](https://app.shiftcontrol.io) shows all the apps available to you
+
+</ConditionalContent>
+
+<ConditionalContent modes={["jc-only", "jc-google", "google-jc"]}>
+
+## ShiftControl vs JumpCloud Portal
+
+You may notice you have access to two portals:
+
+| Portal | URL | Use It For |
+|--------|-----|-----------|
+| **ShiftControl** | [app.shiftcontrol.io](https://app.shiftcontrol.io) | **Your primary portal.** See all your apps, org chart, account info. Better experience overall. |
+| **JumpCloud** | [console.jumpcloud.com](https://console.jumpcloud.com) | Managing your MFA settings. You'll see the same apps here, but ShiftControl is the better experience for day-to-day use. |
+
+**Use ShiftControl for everything.** You'll see the same apps in both places, but ShiftControl provides a better experience with org chart, app organization, and additional features coming soon.
+
+The only time you need to go to JumpCloud directly is to **manage your MFA enrollment** (adding a new device, changing your authenticator). JumpCloud handles MFA automatically when you open SSO apps — it'll prompt you when needed without you having to log into the JumpCloud console.
+
+</ConditionalContent>
+
+## Logging Into ShiftControl
+
+Go to [app.shiftcontrol.io](https://app.shiftcontrol.io) and enter your work email address. ShiftControl will automatically redirect you to your company's identity provider:
+
+<ConditionalContent modes={["jc-google"]}>
+- Most likely you'll be redirected to **Google** for authentication, which then connects to JumpCloud
+</ConditionalContent>
+<ConditionalContent modes={["jc-only"]}>
+- You'll be redirected to **JumpCloud** to authenticate with your password and MFA
+</ConditionalContent>
+<ConditionalContent modes={["google-only"]}>
+- You'll be redirected to **Google** to authenticate
+</ConditionalContent>
+
+Once authenticated, you're in — no separate ShiftControl password needed.
+
+## What's Coming
+
+ShiftControl is expanding what's available to you as an employee. Coming soon:
+- **Employee directory** — Browse all employees and groups in your organization
+- **Your groups** — See which groups you belong to and what access they give you
+- **Access requests** — Request access to apps, groups, or resources directly through ShiftControl
+
+## What You'll Need to Do as a New Hire
+
+Your IT team will send you setup instructions for your identity provider. See the [Onboarding Guide](/employee-guide/onboarding/) for step-by-step instructions on setting up your account, password, and MFA.
+
+## Need Help?
+
+If you're having trouble logging in, can't find an app, or have questions about your account, contact your company's IT team or admin. They manage your access through ShiftControl and can help resolve any issues.

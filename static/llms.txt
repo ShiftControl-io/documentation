@@ -1,0 +1,61 @@
+# ShiftControl Documentation
+
+> ShiftControl is an IT management platform for growing teams. It centralizes identity management, automates app access through groups, tracks SaaS costs, and monitors OAuth permissions — all from one interface.
+
+ShiftControl connects to identity providers (JumpCloud, Google Workspace) and HRIS systems (BambooHR, Deel, HiBob) to manage users, groups, applications, and security across your organization.
+
+## Core Concepts
+
+- **Users**: Every person in your org has an identity managed through ShiftControl. Changes propagate to connected directories and apps in real time.
+- **Groups**: Access is controlled through groups, not individual assignments. Users are added to groups (dynamically, via nesting, or individually) and gain access to all apps assigned to those groups.
+- **Apps**: SaaS applications are managed centrally — SSO configuration, group-based assignments, cost tracking, and shadow IT discovery.
+- **Directories**: Identity providers (JumpCloud, Google Workspace) and HRIS systems connect to ShiftControl to sync users, departments, and organizational structure.
+
+## Documentation
+
+- [Introduction](https://docs.shiftcontrol.io/): Overview of ShiftControl and what it does
+- [Quickstart](https://docs.shiftcontrol.io/getting-started/quickstart/): Get started with ShiftControl
+- [User Management](https://docs.shiftcontrol.io/using-shiftcontrol/Users/User-management/): View, filter, and manage all users
+- [Adding a User](https://docs.shiftcontrol.io/using-shiftcontrol/Users/Adding-a-user/): Create user identities and provision access
+- [Editing a User](https://docs.shiftcontrol.io/using-shiftcontrol/Users/Editing-a-user/): Profile, security, OAuth permissions, SaaS costs
+- [Group Management](https://docs.shiftcontrol.io/using-shiftcontrol/Groups/Group-management/): View and organize groups
+- [Adding a Group](https://docs.shiftcontrol.io/using-shiftcontrol/Groups/Adding-a-group/): Create groups with dynamic rules
+- [Editing a Group](https://docs.shiftcontrol.io/using-shiftcontrol/Groups/Editing-a-group/): Dynamic rules, nested groups, individual assignments
+- [Syncing Groups with Google](https://docs.shiftcontrol.io/using-shiftcontrol/Groups/Syncing-groups-with-google/): Push group membership to Google Workspace
+- [App Management](https://docs.shiftcontrol.io/using-shiftcontrol/Apps/App-management/): Manage installed SaaS applications
+- [Adding an App](https://docs.shiftcontrol.io/using-shiftcontrol/Apps/Adding-an-app/): Add apps from catalog or as custom bookmarks
+- [Editing an App](https://docs.shiftcontrol.io/using-shiftcontrol/Apps/Editing-an-app/): SSO, subscriptions, assignments
+- [App Discovery](https://docs.shiftcontrol.io/using-shiftcontrol/Apps/App-discovery/): Detect shadow IT via OAuth monitoring
+- [App Permissions Dashboard](https://docs.shiftcontrol.io/using-shiftcontrol/Dashboards/app-permissions/): Monitor third-party OAuth permissions
+- [App Spend Dashboard](https://docs.shiftcontrol.io/using-shiftcontrol/Dashboards/app-spend/): Track SaaS spending by app, department, user
+- [App Assignment Reports](https://docs.shiftcontrol.io/using-shiftcontrol/Reports/App-assignment-reports/): Audit who has access to what
+- [Settings Overview](https://docs.shiftcontrol.io/using-shiftcontrol/Settings/settings-overview/): All configuration options
+- [Directories](https://docs.shiftcontrol.io/using-shiftcontrol/Settings/directories/): Connect identity providers and HRIS
+- [JumpCloud Admins](https://docs.shiftcontrol.io/using-shiftcontrol/Settings/jumpcloud-admins/): Manage JumpCloud admin accounts
+- [Google Workspace Admins](https://docs.shiftcontrol.io/using-shiftcontrol/Settings/google-admins/): Manage Google admin roles
+- [API](https://docs.shiftcontrol.io/using-shiftcontrol/API/): REST API for automation and integrations
+- [Command Bar](https://docs.shiftcontrol.io/using-shiftcontrol/using-the-command-bar/): Keyboard-driven search and navigation
+- [Task Management](https://docs.shiftcontrol.io/using-shiftcontrol/task-management/): Track and manage IT tasks
+
+## Directory Modes
+
+ShiftControl supports multiple directory configurations:
+- **JumpCloud + Google Workspace**: JumpCloud as primary IdP with Google Workspace for email, Google Groups, and Google admin management
+- **JumpCloud Only**: JumpCloud as the sole identity provider
+- **Google Workspace Only**: Google Workspace as the sole identity provider (self-service onboarding coming soon)
+
+## Key Workflows
+
+1. **Onboarding**: Add user → dynamic groups evaluate → app access provisioned → activation email sent
+2. **Offboarding**: Deactivate user → access revoked across all connected apps and directories
+3. **Access audit**: App Assignment Report → pivot by app or user → export for compliance
+4. **Shadow IT detection**: App Discovery → review unauthorized OAuth apps → approve or dismiss
+5. **Cost optimization**: App Spend Dashboard → identify unused licenses → reclaim before renewal
+6. **Security review**: App Permissions Dashboard → find risky OAuth grants → click user → revoke
+
+## Links
+
+- [ShiftControl Website](https://shiftcontrol.io)
+- [Live Demo](https://demo.shiftcontrol.io) (no login required)
+- [Release Notes](https://journey.shiftcontrol.io)
+- [Support](mailto:support@shiftcontrol.io)

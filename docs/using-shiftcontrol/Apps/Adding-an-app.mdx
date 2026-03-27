@@ -1,218 +1,80 @@
 ---
-title: 'Adding an app'
-description: 'Add SSO apps, bookmarks, and custom integrations in ShiftControl. Browse 983+ pre-configured apps or create your own entries.'
-keywords: ['ShiftControl', 'app management', 'add app', 'SaaS', 'SSO', 'application provisioning']
-icon: 'grid'
+title: 'Adding an App'
+description: 'Add SaaS apps to ShiftControl from the catalog or as custom apps. Configure SSO, assign groups, and manage access.'
+keywords: ['ShiftControl', 'app management', 'add app', 'SSO', 'SaaS', 'provisioning', 'bookmarks']
+icon: 'circle-plus'
 ---
 
-import Admonition from "@theme/Admonition";import { Steps, Step } from "@site/src/components/Steps";
+import { Steps, Step } from "@site/src/components/Steps";
+import Admonition from '@theme/Admonition';
+import ModeScreenshot from "@site/src/components/ModeScreenshot";
+import ConditionalContent from '@site/src/components/ConditionalContent';
 
-<p style={{fontSize: "large"}}>A quick guide on adding and managing apps.</p>
+<p style={{fontSize: "large"}}>Add apps from a catalog of 900+ pre-configured integrations, or create custom apps for anything not listed.</p>
 
 ## Overview
 
-Adding an app to ShiftControl makes it available for assignment to users and groups. Once added, the app appears in the App Management dashboard and can be shown in the employee portal. You can add apps from a catalog of 983+ pre-configured applications, or create custom apps for tools not in the catalog.
+Every app your organization uses should be in ShiftControl — whether it supports SSO or not. Adding an app makes it available in the employee portal, enables group-based access management, and lets you track subscription costs.
 
-## How It Works
+<ModeScreenshot path="Apps/Apps-adding-an-app" alt="App catalog showing available applications" />
 
-ShiftControl provides two ways to add apps:
+## From the App Catalog
 
-1. **From the App Catalog** -- browse or search pre-configured apps. Each catalog entry shows which functionality it supports (Bookmark, SSO, JIT provisioning, User sync). You choose whether to add it as an SSO app or a Bookmark.
-2. **Custom apps** -- for apps not in the catalog. You can create a Custom SSO Integration (SAML/OIDC) or a Custom Bookmark with your own name, icon, and URL.
-
-<img
-    src="/img/ShiftControl/Apps/Apps-adding-an-app.png"
-    alt="App catalog"
-/>
-
-The catalog shows supported functionality badges for each app so you can see at a glance whether SSO, JIT provisioning, or user sync are available. Each app row has action buttons -- "Add bookmark" and/or "Add SSO app" -- depending on what that app supports.
-
-## Types of Apps
-
-### SSO Apps (SAML and OIDC)
-
-SSO apps provide true single sign-on. Users authenticate through ShiftControl and are logged in to the app automatically -- no separate password required. This is the most secure option because you control the authentication flow, can enforce MFA, and can revoke access instantly.
-
-Use SSO when: your app supports SAML or OIDC and your license tier includes SSO.
-
-### Bookmarks
-
-Bookmarks are portal links. The app appears in the employee App Dashboard and users can click to open it, but they log in to the app separately. No authentication flows through ShiftControl.
-
-Use Bookmarks when:
-- The app doesn't support SSO.
-- Your license tier doesn't include SSO yet.
-- You want the app in the portal for discoverability while you plan the SSO rollout.
-
-Bookmarks can be upgraded to SSO apps at any time without losing assignments.
-
-## Common Scenarios
-
-### Your app is in the catalog and supports SSO
-
-Search the catalog, click "Add SSO app," configure the connection, assign groups, and save. Follow the app-specific SSO guide for detailed settings.
-
-### Your app is in the catalog but you're not ready for SSO
-
-Search the catalog, click "Add bookmark." The app appears in the portal immediately. You can configure SSO later by editing the app.
-
-### Your app is not in the catalog
-
-Click "+ Add Custom" and choose either "Custom SSO Integration" or "Custom Bookmark." You'll provide the app name, description, URL, and (for SSO) the SAML/OIDC configuration.
-
-## Adding an SSO App from the Catalog
+The catalog contains 900+ pre-configured apps. Each listing shows what the app supports — Bookmark, SSO, JIT provisioning, User sync — so you know your options before adding.
 
 <Steps>
-    <Step title="Go to App Management">
-        Log in to [ShiftControl](https://app.shiftcontrol.io) and navigate to **App Management**.
+    <Step title="Open the catalog">
+        Go to **Apps** and click **Add new app** to open the catalog.
     </Step>
-    <Step title="Click 'Add new app'">
-        Click the **Add new app** button to open the App Catalog.
+    <Step title="Find your app">
+        Search by name. The catalog filters in real time.
     </Step>
-    <Step title="Search for the app">
-        Enter the app name in the search bar. The catalog filters in real time.
-        <img
-            src="/img/ShiftControl/Apps/Apps-Search-for-app.png"
-            alt="Search for app in catalog"
-        />
+    <Step title="Choose the app type">
+        <ConditionalContent modes={["jc-only", "jc-google", "google-jc"]}>
+        Click **Add SSO app** for full single sign-on, or **Add Bookmark** for a portal link without SSO. SSO is the more secure option if the app supports it.
+        </ConditionalContent>
+        <ConditionalContent modes={["google-only"]}>
+        Click **Add** to add the app to your organization's portal.
+        </ConditionalContent>
     </Step>
-    <Step title="Click 'Add SSO app'">
-        Click the **Add SSO app** button next to the app name.
+    <Step title="Configure the app">
+        Set the app name, description, and ownership details. For bookmarks, enter the URL. For SSO apps, configure the SAML or OIDC settings (you can do this later if you don't have them yet).
     </Step>
-    <Step title="Configure general info">
-        Set a recognizable name and add a description. The description is visible to employees in their App Dashboard.
-        <Admonition type="note">You can navigate between tabs freely and click Save when you're done. You can always edit the app later.</Admonition>
-    </Step>
-    <Step title="Assign groups">
-        Assign groups to control who gets access.
-        <Admonition type="info">Use groups (departments, teams, etc.) rather than individual assignments. If you find yourself repeating individual assignments, it's time to create a group.</Admonition>
-        <img src="/img/ShiftControl/Apps/Apps-Assign-groups.png" alt="Assign groups"/>
-    </Step>
-    <Step title="Assign individual users (optional)">
-        Add individual users if needed.
-        <img src="/img/ShiftControl/Apps/Apps-Assign-users.png" alt="Assign users"/>
-    </Step>
-    <Step title="Configure SSO settings (optional)">
-        If you know your SSO settings, configure them now. Otherwise, skip this and follow the app-specific SSO guide later.
+    <Step title="Assign access">
+        Assign groups to control who gets access. All members of the assigned groups will see the app in their portal.
+        <Admonition type="info">Use groups rather than individual assignments wherever possible. If you're repeating individual assignments, it's time to create a group.</Admonition>
     </Step>
     <Step title="Save">
-        Click **Save** to add the app.
+        Click **Save**. The app is now available to assigned users.
     </Step>
 </Steps>
 
-## Adding a Custom SSO Integration
+<ConditionalContent modes={["jc-only", "jc-google", "google-jc"]}>
 
-<Steps>
-    <Step title="Go to App Management">
-        Log in to [ShiftControl](https://app.shiftcontrol.io) and navigate to **App Management**.
-    </Step>
-    <Step title="Click 'Add new app'">
-        Click the **Add new app** button.
-    </Step>
-    <Step title="Click 'Add Custom'">
-        Click **+ Add Custom** and choose **Custom SSO Integration**.
-    </Step>
-    <Step title="Configure general info">
-        Set the app name and description.
-        <Admonition type="note">You can navigate between tabs freely and click Save when you're done. You can always edit the app later.</Admonition>
-    </Step>
-    <Step title="Assign groups">
-        Assign groups to the app.
-        <Admonition type="info">Use groups rather than individual assignments wherever possible.</Admonition>
-        <img src="/img/ShiftControl/Apps/Apps-Assign-groups.png" alt="Assign groups"/>
-    </Step>
-    <Step title="Assign individual users (optional)">
-        Add individual users if needed.
-        <img src="/img/ShiftControl/Apps/Apps-Assign-users.png" alt="Assign users"/>
-    </Step>
-    <Step title="Configure SSO settings">
-        Enter the SAML or OIDC configuration for the app.
-    </Step>
-    <Step title="Save">
-        Click **Save** to add the app.
-    </Step>
-</Steps>
+## Custom Apps
 
-## Adding a Bookmark from the Catalog
+If your app isn't in the catalog, click **Add Custom** and choose:
 
-<Steps>
-    <Step title="Go to App Management">
-        Log in to [ShiftControl](https://app.shiftcontrol.io) and navigate to **App Management**.
-    </Step>
-    <Step title="Click 'Add new app'">
-        Click the **Add new app** button to open the App Catalog.
-    </Step>
-    <Step title="Search for the app">
-        Enter the app name in the search bar.
-        <img
-            src="/img/ShiftControl/Apps/Apps-Search-for-app.png"
-            alt="Search for app in catalog"
-        />
-    </Step>
-    <Step title="Click 'Add Bookmark'">
-        Click the **Add Bookmark** button next to the app name.
-    </Step>
-    <Step title="Configure general info">
-        Set the app name, description, and bookmark URL.
-        <Admonition type="info">The bookmark URL is typically your organization's login URL or vanity URL for the app.</Admonition>
-        <Admonition type="note">You can navigate between tabs freely and click Save when you're done.</Admonition>
-    </Step>
-    <Step title="Assign groups">
-        Assign groups to the app.
-        <Admonition type="info">Use groups rather than individual assignments wherever possible.</Admonition>
-        <img src="/img/ShiftControl/Apps/Apps-Assign-groups.png" alt="Assign groups"/>
-    </Step>
-    <Step title="Assign individual users (optional)">
-        Add individual users if needed.
-        <img src="/img/ShiftControl/Apps/Apps-Assign-users.png" alt="Assign users"/>
-    </Step>
-    <Step title="Save">
-        Click **Save** to add the bookmark.
-    </Step>
-</Steps>
+- **Custom SSO Integration** — For apps that support SAML or OIDC but aren't in the catalog. You'll need the SSO configuration details from the app vendor.
+- **Custom Bookmark** — For any app you want in the employee portal. Enter the app's login URL and assign groups.
 
-## Adding a Custom Bookmark
+The setup flow is the same as catalog apps — configure, assign groups, save.
 
-<Steps>
-    <Step title="Go to App Management">
-        Log in to [ShiftControl](https://app.shiftcontrol.io) and navigate to **App Management**.
-    </Step>
-    <Step title="Click 'Add new app'">
-        Click the **Add new app** button.
-    </Step>
-    <Step title="Click 'Add Custom'">
-        Click **+ Add Custom** and choose **Custom Bookmark**.
-    </Step>
-    <Step title="Configure general info">
-        Set the app name, description, and bookmark URL.
-        <Admonition type="info">The bookmark URL is typically your organization's login URL or vanity URL for the app.</Admonition>
-        <Admonition type="note">You can navigate between tabs freely and click Save when you're done.</Admonition>
-    </Step>
-    <Step title="Assign groups">
-        Assign groups to the app.
-        <Admonition type="info">Use groups rather than individual assignments wherever possible.</Admonition>
-        <img src="/img/ShiftControl/Apps/Apps-Assign-groups.png" alt="Assign groups"/>
-    </Step>
-    <Step title="Assign individual users (optional)">
-        Add individual users if needed.
-        <img src="/img/ShiftControl/Apps/Apps-Assign-users.png" alt="Assign users"/>
-    </Step>
-    <Step title="Save">
-        Click **Save** to add the bookmark.
-    </Step>
-</Steps>
+</ConditionalContent>
 
 ## Things to Know
 
-- The App Catalog contains 983+ pre-configured apps. If your app isn't listed, use the Custom option.
-- Functionality badges in the catalog (Bookmark, SSO, JIT provisioning, User sync) tell you what the app supports before you add it. Not all features may be available on every license tier.
-- A Bookmark can be upgraded to SSO later without recreating the app or losing group assignments.
-- Group assignments are the recommended way to manage app access. Individual assignments work but don't scale well.
-- SSO configuration details vary by app. Check the app-specific SSO guide for the correct settings.
+- **Catalog apps are pre-configured.** SSO settings, logos, and metadata are pre-filled. You may still need to configure the app vendor side (e.g., entering the IdP URL in the vendor's admin panel).
+<ConditionalContent modes={["jc-only", "jc-google", "google-jc"]}>
+- **Bookmarks can be upgraded to SSO later.** Add an app as a bookmark now and upgrade it to SSO SAML or OIDC at any time without losing group assignments.
+- **SSO configuration varies by app.** Check the [App Guides](/app-guides/Atlassian/) for step-by-step SSO setup for popular apps.
+</ConditionalContent>
+- **Group assignments are the recommended approach.** They scale better than individual assignments and automatically include new group members.
+- **Apps appear in the employee portal immediately.** Once saved and assigned, users see the app in their dashboard.
 
 ## Related Features
 
-- [App Management](/using-shiftcontrol/Apps/App-management) -- view and manage all installed apps.
-- [Editing an App](/using-shiftcontrol/Apps/Editing-an-app) -- modify app settings, subscriptions, and assignments after creation.
-- [App Discovery](/using-shiftcontrol/Apps/App-discovery) -- find apps your users are already using via OAuth.
-- [Groups](/using-shiftcontrol/Groups/Group-management) -- create and manage the groups used for app assignments.
+- [App Management](/using-shiftcontrol/Apps/App-management/) — View and manage all installed apps
+- [Viewing an App](/using-shiftcontrol/Apps/Viewing-an-app/) — Review app configuration and assignments
+- [Editing an App](/using-shiftcontrol/Apps/Editing-an-app/) — Modify settings after creation
+- [App Discovery](/using-shiftcontrol/Apps/App-discovery/) — Find apps your users are already using via OAuth

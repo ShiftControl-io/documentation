@@ -5,106 +5,150 @@ keywords: ['ShiftControl', 'group management', 'access control', 'dynamic groups
 icon: 'users'
 ---
 import Admonition from '@theme/Admonition';
+import ConditionalContent from '@site/src/components/ConditionalContent';
+import ModeScreenshot from '@site/src/components/ModeScreenshot';
 
-<p style={{fontSize: "large"}}>Groups are the core of access management in ShiftControl. Every app assignment, every permission, and every access decision flows through groups.</p>
+
+<p style={{fontSize: "large"}}>Groups are how you give people access to apps in ShiftControl. Every app assignment, every permission, and every access decision flows through groups.</p>
 
 ## Overview
 
-Groups are how you give people access to apps in ShiftControl. Instead of assigning apps to individual users one at a time, you assign apps to groups and then manage who belongs to each group. When a user joins a group, they immediately gain access to every app assigned to that group. When they leave, that access is revoked.
+Instead of assigning apps to individual users one at a time, you assign apps to groups — then manage who belongs to each group. When someone joins a group, they immediately gain access to every app assigned to it. When they leave, that access is revoked.
 
-The **Group Management** page is your central hub for viewing and organizing all groups across your organization.
+This is the approach that scales. A new developer doesn't need five separate app assignments. They need to be added to the Engineering group, and everything else follows.
 
-<img
-    src="/img/ShiftControl/Groups/Group-Management.png"
-    alt="Group management"
-/>
+<ModeScreenshot path="Groups/Group-management" alt="Group Management page showing all groups with tags, directory sync status, and member counts" />
 
-## How It Works
+## What You See
 
-The groups list displays a table with the following information for each group:
+The groups table shows:
 
-- **Group**: The group name and description.
-- **Group Tag**: A color-coded label that categorizes the group (Role Access, Team, Location, Department, Distribution, or No tag).
-- **Directory**: Which directory the group belongs to.
-- **Google Sync**: An icon indicating whether the group syncs to Google Workspace.
-- **Group Stats**: Counts of users and apps associated with the group.
+| Column | What It Tells You |
+|--------|------------------|
+| **Group** | Name and description |
+| **Group Tag** | Color-coded category (Department, Team, Location, Role Access, Distribution) |
+| **Directory** | Which directories the group is synced to |
+| **Group Stats** | Number of users and apps associated with the group |
 
-Use the filters at the top of the page to narrow the list by directory or tag. The search bar lets you find specific groups by name.
+<ConditionalContent modes={["jc-google", "google-jc"]}>
+
+With both JumpCloud and Google Workspace connected, the Directory column shows icons for each directory a group syncs to. Groups can exist in one or both directories. Sync arrows between icons indicate that membership changes are pushed to both directories automatically.
+
+</ConditionalContent>
+
+Use the filters at the top to narrow by directory or tag. The sidebar shows group counts by tag category — click any category to filter.
 
 ## Common Scenarios
 
-**Department-based app access** -- Create a group like "Accounting" with a dynamic rule that matches users whose Department attribute equals "Accounting." Assign finance apps (QuickBooks, Expensify, NetSuite) to the group. Every accountant gets access automatically, and new hires in the department are added the moment their profile is set up.
+**Department-based app access** — Create an "Accounting" group with a dynamic rule matching users whose Department equals "Accounting." Assign QuickBooks, Expensify, and NetSuite to the group. Every accountant gets access automatically — including new hires the moment their profile is set up.
 
-**Role-based access for cloud infrastructure** -- Create groups like "AWS Production Access" and "AWS Staging Access" tagged as Role Access. Assign the appropriate AWS SSO app to each group. Engineers who need production access are added to the production group; everyone else only gets staging.
+**Role-based cloud access** — Create groups like "AWS Production" and "AWS Staging" tagged as Role Access. Assign the appropriate AWS SSO app to each. Engineers who need production access join the production group. Everyone else gets staging only.
 
-**Location-based distribution lists** -- Create groups like "All Singapore Users" or "All America Users" with dynamic rules matching the Location attribute. Enable Google Sync to automatically create Google Workspace distribution lists, so you can email an entire office with one address.
-
-## Viewing and Filtering Groups
-
-### Search and Filter
-
-Use the search bar to find groups by name. The filter dropdowns let you narrow the list:
-
-- **All directories**: Filter by the directory a group belongs to.
-- **All tags**: Filter by group tag to see only groups of a specific category.
-
-### Quick View
-
-Click on any group row to open a quick view sidebar that shows an immediate snapshot of the group without navigating away from the list. The quick view shows:
-
-- Which users are assigned to the group.
-- How each user was added (dynamic rule, nested group, or individual assignment).
-
-<img
-    src="/img/ShiftControl/Groups/Group-membership-quick-view.png"
-    alt="Quick view of group membership"
-    width="350"
-/>
+**Location-based distribution lists** — Create "All Singapore Users" with a dynamic rule matching Location equals "Singapore." Enable Google Sync to automatically create a Google Workspace distribution list. Now anyone can email the entire Singapore office at one address.
 
 ## Group Tags
 
-Group tags categorize your groups so you can understand their purpose at a glance. Tags are color-coded and appear next to each group name in the list.
+Tags categorize your groups so you can understand their purpose at a glance, filter the list, and apply appropriate settings. ShiftControl provides predefined tag categories that cover common group purposes:
 
-The default tag categories are:
+| Tag | Purpose | Example |
+|-----|---------|---------|
+| **Department** | Official departments and teams | Accounting, Engineering, Marketing |
+| **Location** | Groups by office, site, or region | Singapore Office, London HQ |
+| **Team** | Cross-functional or project-based teams | Platform Team, Q4 Launch |
+| **Role Access** | Groups mapped to system roles or permissions | AWS Production Access, GitHub Admin |
+| **Distribution** | General purpose email distribution lists | All Hands, Newsletter |
+| **Catch-all** | Addresses like hello@, contact@, legal@, security@ | contact@ |
+| **Support** | Groups for internal requests | it-support@, hr@ |
+| **Alerts** | Groups for system or vendor notifications | PagerDuty Alerts, AWS Alerts |
+| **Service Account** | Groups tied to automated service accounts | CI/CD Pipeline, Monitoring |
+| **Shared Account** | Shared login accounts used by multiple users | Social Media Account, Demo Account |
+| **Custom** | Org-defined groups for anything else | — |
 
-- **Department** -- Groups organized by business unit (Accounting, Engineering, Marketing).
-- **Team** -- Groups for cross-functional or project teams.
-- **Location** -- Groups based on office or region.
-- **Role Access** -- Groups that control access to specific tools or environments.
-- **Distribution** -- Groups used primarily for email distribution via Google Sync.
-- **No tag** -- Groups that have not been categorized yet.
-
-### Filtering by Tag
-
-Click the tag filter dropdown on the Group Management page to show only groups with a specific tag. This is particularly useful during access reviews or audits when you need to verify all groups of a certain type.
-
-### Changing a Group Tag
-
-You can change a group's tag in three ways:
-
-1. **From the group edit page**: Change the tag in the Group Tag dropdown on the General tab.
-2. **From the context menu**: Right-click or use the dropdown menu on a group row and select **Change tag**.
-3. **In bulk**: Select multiple groups using the checkboxes, then use the **Change tag** option from the bulk actions menu.
-
-<img
-    src="/img/ShiftControl/Groups/Group-Change-tag.png"
-    alt="Edit a group tag"
-    width="500"
-/>
+You can change a group's tag from the group edit page, the context menu, or in bulk by selecting multiple groups.
 
 <Admonition type="information">
-    The set of available tags for your organization is managed in **Organization Settings**. You can add, rename, or remove tag definitions there.
+    You can create additional custom tags with your own names and colors in <a href="/using-shiftcontrol/Settings/group-tags/">Group Tags Settings</a>. Each tag belongs to one of the predefined categories above.
 </Admonition>
+
+## Google Workspace Group Templates
+
+<ConditionalContent modes={["jc-google", "google-jc", "google-only"]}>
+
+Google Workspace groups have over 60 settings spread across three separate permission screens, with labels like "Who can post" that don't clearly explain what they control. The default settings often allow anyone to join, anyone to leave, and don't save message history — which is rarely what you want.
+
+ShiftControl solves this with **templates** — curated presets that configure all Google Group settings at once, using clear language instead of Google's confusing terminology.
+
+### Available Templates
+
+| Template | Best For | Key Settings |
+|----------|----------|-------------|
+| **Standard** (default) | Most use cases — departments, teams, distribution lists | Anyone can email this group (including external). IT controls membership. Visible in directory. Message history saved. |
+| **Internal** | Groups that should only receive email from your organization | Only org members can email this group. IT controls membership. Visible in directory. |
+| **Restricted** | Sensitive groups — leadership, HR, legal, board | Hidden from directory. Only members can see the group, its members, or messages. Members only can email. |
+| **Team-managed** | Social groups, committees, clubs, project teams | Members can add/remove others and request to join. Members manage their own group. Visible in directory. |
+
+### What Templates Control
+
+Every template configures settings across five categories:
+
+- **Membership** — Who can join, who can leave, who can see members, who manages membership
+- **Sending & Delivery** — Who can email the group, spam handling, reply behavior, message footers
+- **Visibility** — Who can find the group, who can read messages, directory listing
+- **Moderation** — Who can delete/lock messages, content organization
+- **Message History** — Whether messages are archived and searchable
+
+### Quick Toggles
+
+On each group's Settings tab, four important settings are promoted as standalone toggles regardless of which template you're using:
+
+- **Show in directory** — Whether the group appears in your org's contacts and email autocomplete
+- **Send as group address** — Whether members can send email that appears to come from the group's address
+- **Save message history** — Whether messages are archived in a browsable, searchable record
+- **Team inbox** — Whether the group acts as a shared queue where conversations can be assigned, tracked, and resolved
+
+### Custom Settings
+
+If none of the templates fit, choose **Custom** to configure every setting individually. ShiftControl uses clear, human-readable labels (e.g., "Who can email this group" instead of Google's "Who can post") and explains what each setting actually controls.
+
+ShiftControl also detects which template a group currently matches — so you can see at a glance whether a group's settings have drifted from the preset.
+
+### Applying Templates
+
+You can apply a template to a group in two ways:
+- **From the group edit page** — Open a group, go to the Settings tab, and select a template
+- **In bulk** — From the Groups list, select multiple groups, click the **⋮ menu**, and choose **Apply template** to standardize settings across many groups at once
+
+</ConditionalContent>
+
+<ConditionalContent modes={["jc-only"]}>
+
+<Admonition type="info">
+    Google Workspace Group Templates are available when Google Workspace is connected as a directory. They let you manage Google's complex group settings through simple, opinionated presets.
+</Admonition>
+
+</ConditionalContent>
+
+## Group Actions
+
+Click the **⋮ menu** on any group row:
+
+- **Change tag** — Reassign the group's category tag (Department, Team, Location, etc.)
+- **Apply template** — Apply a predefined group configuration template
+- **Edit** — Open the group for editing (requires CanUpdateGroups permission)
+- **Import to JumpCloud** — Import a Google-only group into JumpCloud (shown only when the group exists in Google but not JumpCloud)
+- **Delete** — Remove the group and revoke all its app access (requires CanDeleteGroups permission)
+
+**Bulk actions:** Select multiple groups and choose **Delete** to remove them in bulk.
 
 ## Things to Know
 
-- **Groups are pushed to JumpCloud immediately.** ShiftControl groups are pushed to your JumpCloud directory via API in real time, so group membership changes propagate to any JumpCloud-integrated systems.
-- **Deleting a group revokes access.** When you delete a group, every user in that group loses access to the apps assigned to it. Review the group's app assignments before deleting.
-- **Users can belong to multiple groups.** A user's total app access is the combined set of all apps from every group they belong to.
-- **Group changes take effect immediately.** When you add or remove a user from a group, their app access updates right away.
+- **Group changes take effect immediately.** Adding or removing a user from a group updates their app access right away. No delays, no manual propagation.
+- **Deleting a group revokes access.** Every user in that group loses access to its assigned apps. Always review app assignments before deleting.
+- **Users can belong to multiple groups.** A user's total app access is the combined set of all apps from every group they're in.
+- **Groups sync to your connected directories.** Changes are pushed via API in real time, so group membership propagates to any directory-integrated systems.
 
 ## Related Features
 
-- [Adding a Group](/using-shiftcontrol/Groups/Adding-a-group) -- Create new groups and configure their settings.
-- [Editing a Group](/using-shiftcontrol/Groups/Editing-a-group) -- Configure dynamic, nested, and individual membership rules.
-- [Syncing Groups with Google](/using-shiftcontrol/Groups/Syncing-groups-with-google) -- Push group membership to Google Workspace for email distribution and permissions.
+- [Adding a Group](/using-shiftcontrol/Groups/Adding-a-group/) — Create new groups and configure membership rules
+- [Editing a Group](/using-shiftcontrol/Groups/Editing-a-group/) — Configure dynamic, nested, and individual membership
+- [Adding a Group — Google Sync](/using-shiftcontrol/Groups/Adding-a-group/#syncing-with-google-workspace) — Sync membership to Google Workspace
