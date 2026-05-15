@@ -37,7 +37,7 @@ const VALID_MODES: ConfigMode[] = ['jc-only', 'jc-google', 'google-only', 'googl
 
 const COOKIE_NAME = 'sc-docs-mode';
 const COOKIE_MAX_AGE = 31536000; // 1 year
-const DEFAULT_MODE: ConfigMode = 'jc-google';
+const DEFAULT_MODE: ConfigMode = 'google-only';
 
 function getCookie(name: string): string | undefined {
   if (typeof document === 'undefined') return undefined;

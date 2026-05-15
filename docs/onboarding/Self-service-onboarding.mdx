@@ -1,0 +1,105 @@
+---
+title: 'Self-Service Onboarding (Google Workspace)'
+description: 'Onboard your Google Workspace organization to ShiftControl without a setup call. Sign up, validate your domain, authorize Google, and land on a provisioned org.'
+keywords: ['ShiftControl', 'onboarding', 'self-service', 'Google Workspace', 'signup', 'setup', 'OAuth']
+icon: 'rocket-launch'
+---
+
+import Admonition from '@theme/Admonition';
+import { Steps, Step } from "@site/src/components/Steps";
+import ConditionalContent from '@site/src/components/ConditionalContent';
+
+<p style={{fontSize: "large"}}>Stand up a ShiftControl organization on Google Workspace in minutes — no sales call required.</p>
+
+## Overview
+
+ShiftControl's self-service onboarding lets a Google Workspace Super Admin sign up, connect their workspace, and land on a fully-provisioned ShiftControl org without help from our team. It's the right path for Google-Workspace-only organizations that want to get going immediately.
+
+If your organization runs JumpCloud (with or without Google Workspace), use the [white-glove onboarding](/onboarding/Onboarding-intro) path instead. The JumpCloud setup needs a guided session because of the IdP trust steps in the Google Admin console.
+
+<Admonition type="info" title="Who this is for">
+    You can use self-service onboarding if (1) your organization uses Google Workspace as its only identity provider, (2) you sign up using a Google Workspace **Super Admin** account, and (3) your domain isn't already claimed by another ShiftControl organization.
+</Admonition>
+
+## How It Works
+
+Self-service onboarding is a five-step wizard. ShiftControl does the work behind the scenes while you click through:
+
+1. **Sign-up** — You authenticate with a Google Workspace admin account. PropelAuth (the identity layer underneath ShiftControl) creates your user record and links it to your Google identity.
+2. **Domain validation** — ShiftControl confirms that your sign-up email belongs to a Google Workspace domain you administer, and that no other ShiftControl organization already owns it. This prevents two organizations from claiming the same workspace.
+3. **OAuth authorization** — You consent to the Google scopes ShiftControl needs. The [Google Workspace OAuth flow](/using-shiftcontrol/Integrations/guides/Google-Workspace-OAuth-flow/) page explains every scope individually.
+4. **Connect apps (optional)** — The wizard offers app connectors (HRIS, etc.). You can skip everything here and connect them later from Settings.
+5. **Provisioning** — ShiftControl reads your Google directory once authorization is complete, creates the ShiftControl-side org records, promotes Google Workspace to your primary directory, and provisions roles, groups, and users. You're redirected to the Manage Users screen when it's done.
+
+Provisioning happens in a single transactional step — if anything fails partway, the system rolls back so you don't end up half-onboarded. Once provisioning succeeds, completed organizations are gated from returning to the onboarding flow.
+
+## Common Scenarios
+
+### Scenario: First IT hire at a 30-person startup
+
+You're the new IT person at a company that started on Google Workspace. There's no JumpCloud, no Okta — just Google. You want centralized control over users, groups, and app access this week, not next month. Self-service onboarding gets you a working ShiftControl org in under ten minutes. You import every existing Workspace user automatically, create your first group, and start cleaning up SaaS access immediately.
+
+### Scenario: Founder evaluating ShiftControl before talking to sales
+
+You're a CEO who wants to see ShiftControl working with your real data before scheduling a demo. You sign up self-service, look at your actual users and apps, and decide whether the product fits — without committing to a meeting first.
+
+### Scenario: Replacing an old IdP
+
+Your company is moving off another identity provider and consolidating on Google Workspace. Self-service onboarding gives you a clean ShiftControl org on top of Google so you can rebuild your group and app access model from scratch.
+
+## Step-by-Step Guide
+
+<Steps>
+    <Step title="Go to the sign-up page">
+        Visit <a href="https://app.shiftcontrol.io/signup" target="_blank">app.shiftcontrol.io/signup</a> and click **Sign up with Google**.
+    </Step>
+    <Step title="Authenticate as a Google Workspace Super Admin">
+        Google's sign-in screen opens. Sign in with the Google Workspace admin account you want to use. You must be a **Super Admin** in this workspace — lower-tier admin roles cannot grant the directory and audit scopes ShiftControl needs.
+    </Step>
+    <Step title="Wait for domain validation">
+        ShiftControl checks three things: that you signed in with a Google Workspace account (not a personal Gmail), that your email's domain is owned by your workspace, and that no existing ShiftControl org has already claimed this workspace. This usually takes a second.
+
+        See the [Domain validation](#domain-validation) section below for what to do if you hit a validation error.
+    </Step>
+    <Step title="Authorize the OAuth scopes">
+        The Google consent screen appears, listing every scope ShiftControl is asking for. Review the list, then click **Allow**.
+
+        ShiftControl never asks for scopes it isn't using. The full breakdown — every scope, what API surface it grants, why ShiftControl needs it — lives on the [Google Workspace OAuth flow](/using-shiftcontrol/Integrations/guides/Google-Workspace-OAuth-flow/) page.
+    </Step>
+    <Step title="Choose which app connectors to set up">
+        The Connect Apps step offers HRIS integrations and other connectors. Pick the ones you want now, skip the rest. None of these are required to finish onboarding — you can come back from **Settings → Connectors** anytime.
+    </Step>
+    <Step title="Watch provisioning complete">
+        ShiftControl reads your Google directory, creates the ShiftControl org, sets Google Workspace as your primary directory, and imports users, groups, and admin roles. Provisioning runs as a single atomic step — if anything fails, the system rolls back rather than leaving you in a half-state.
+    </Step>
+    <Step title="Land on Manage Users">
+        Once provisioning succeeds, ShiftControl redirects you to **Users**. Your Google Workspace users, groups, departments, and admin roles are already there. From here, the [Users](/using-shiftcontrol/Users/) and [Groups](/using-shiftcontrol/Groups/) sections of the docs are your next stops.
+    </Step>
+</Steps>
+
+## Domain Validation
+
+Domain validation is where most self-service errors surface. Here's what each one means:
+
+| Error | What it means | What to do |
+|-------|---------------|------------|
+| **Not a Google Workspace account** | You signed in with a `@gmail.com` or other personal Google account, not a Workspace account. | Sign out and sign in again with your work Google Workspace account. |
+| **Domain not eligible** | The domain you signed in with isn't recognized as part of a Google Workspace you administer. | Confirm you're signed in as a Super Admin of your Workspace, and that the domain matches what's configured in **Google Admin → Domains**. |
+| **Domain already claimed** | Another ShiftControl organization has already onboarded this workspace. | [Contact support](mailto:support@shiftcontrol.io) — most likely a teammate set up the org first. We can invite you to it. |
+| **Unsaved changes** | You navigated mid-onboarding and have unsaved progress. | Use the wizard back/next buttons to return to a known step. ShiftControl preserves your progress so you don't lose work. |
+
+## Things to Know
+
+- **You can't re-enter onboarding after it completes.** Once provisioning succeeds, the onboarding routes are gated for your org. This prevents accidentally re-running provisioning and clobbering your real data. If you genuinely need to restart, contact support.
+- **Google Workspace is set as your primary directory automatically.** When provisioning runs, ShiftControl promotes Google to primary. You don't need to configure anything in **Settings → Directories** after onboarding — it's already done.
+- **Provisioning is atomic.** If the Google API hits an error mid-flow, ShiftControl rolls back the partial state rather than leaving you with a half-onboarded org. Just retry.
+- **You don't need to install JumpCloud.** Self-service onboarding is the Google-only path. If you later want to add JumpCloud as an additional directory, you can do that from **Settings → Connectors → Directories**.
+- **Delegated OAuth is available if you don't have admin access right now.** Start the onboarding flow with your regular account, and at the OAuth step use the [Delegated OAuth](/using-shiftcontrol/Integrations/guides/Google-Workspace-OAuth-flow/#delegated-oauth) option to send a 48-hour authorization link to your Workspace Super Admin.
+- **Onboarding copy and steps may shift slightly between releases.** This page describes the intended flow; minor UI label changes can land at any time without a docs update.
+
+## Related Features
+
+- [Google Workspace OAuth flow](/using-shiftcontrol/Integrations/guides/Google-Workspace-OAuth-flow/) — every scope ShiftControl requests, with rationale
+- [Quickstart](/getting-started/quickstart/) — the high-speed version of this page
+- [Directories](/using-shiftcontrol/Settings/directories/) — managing your primary and additional directories after onboarding
+- [Onboarding (JumpCloud customers)](/onboarding/Onboarding-intro/) — the guided path for JumpCloud-based organizations

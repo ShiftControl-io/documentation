@@ -1,0 +1,118 @@
+---
+title: 'Google Workspace OAuth flow'
+description: 'How ShiftControl authenticates with Google Workspace via OAuth — every scope explained, the consent screen, delegated authorization, and re-auth behavior.'
+keywords: ['ShiftControl', 'Google Workspace', 'OAuth', 'scopes', 'authorization', 'consent', 'admin', 'delegated']
+icon: 'shield-keyhole'
+---
+
+import Admonition from '@theme/Admonition';
+import { Steps, Step } from "@site/src/components/Steps";
+
+<p style={{fontSize: "large"}}>Everything that happens when you authorize ShiftControl in Google Workspace — and exactly what you're approving.</p>
+
+## Overview
+
+ShiftControl manages your Google Workspace through Google's published OAuth APIs. There is no agent, no service account inside your tenant, and no master credential that bypasses Google's permission model. Every API call ShiftControl makes against your workspace uses tokens issued through the OAuth flow described on this page, and every token is scoped to the specific permissions you approved.
+
+Understanding the OAuth flow matters because:
+
+- **You're approving real permissions.** Each scope grants access to a slice of the Google Admin SDK. You should know what each one is for.
+- **Authorization can be delegated.** If you're not a Google Workspace Super Admin, you can send a 48-hour link to someone who is.
+- **Re-authorization is non-destructive.** Re-running the flow refreshes tokens without breaking your existing org or losing data.
+
+## How It Works
+
+ShiftControl uses a standard OAuth 2.0 authorization-code flow. The shape:
+
+1. **Initiate** — You click an "Authenticate" or "Sign up with Google" button in ShiftControl. We generate a one-time `state` value with cryptographic entropy and a per-integration `nonce` index — this prevents an attacker from replaying or substituting the authorization request.
+2. **Consent** — Google shows the consent screen with the full list of scopes ShiftControl is requesting. Until you click **Allow**, ShiftControl cannot see or call anything.
+3. **Callback** — Google redirects back to ShiftControl with an authorization code bound to that one-time `state`. ShiftControl validates the `state`, exchanges the code for an access token and a refresh token, and stores them encrypted.
+4. **Use** — Every subsequent API call uses the access token. When it expires (typically every hour), ShiftControl silently uses the refresh token to get a new one.
+5. **Refresh / re-auth** — If the refresh token is revoked (you removed ShiftControl from Google Admin, rotated credentials, or hit a long inactivity window), the integration goes Unhealthy and prompts a re-auth. Re-auth runs the same flow above and resets the integration's health.
+
+## Required Scopes
+
+ShiftControl only requests the scopes it actually uses. Every scope in this table appears on the Google consent screen during authorization.
+
+| Scope | API surface | What ShiftControl does with it |
+|-------|-------------|-------------------------------|
+| `https://www.googleapis.com/auth/userinfo.email` | OAuth 2.0 basic | Links the authorizing Google user to a ShiftControl account |
+| `https://www.googleapis.com/auth/userinfo.profile` | OAuth 2.0 basic | Reads the authorizing user's display name and avatar |
+| `https://www.googleapis.com/auth/admin.directory.user` | Directory API | List, create, update, suspend, and delete users in your workspace |
+| `https://www.googleapis.com/auth/admin.directory.user.security` | Directory API | Read security state for users (e.g., 2-step verification status, sign-in info, app passwords) |
+| `https://www.googleapis.com/auth/admin.directory.userschema` | Directory API | Manage custom user-profile schemas — used to write **Teams** assignments into the Google directory so they're visible across systems |
+| `https://www.googleapis.com/auth/admin.directory.group` | Directory API | List, create, update, and delete Google Groups |
+| `https://www.googleapis.com/auth/admin.directory.group.member` | Directory API | Add and remove members from Google Groups, including nested groups |
+| `https://www.googleapis.com/auth/apps.groups.settings` | Groups Settings API | Configure group-level settings (visibility, posting permissions, aliases) |
+| `https://www.googleapis.com/auth/admin.reports.audit.readonly` | Reports API | Read your Google audit logs to surface app permissions, login activity, and security events in ShiftControl dashboards |
+| `https://www.googleapis.com/auth/admin.datatransfer` | Data Transfer API | Initiate data transfers between users when offboarding (transfer Drive, Calendar, etc. from a departing user to their replacement) |
+
+<Admonition type="note">
+    ShiftControl never asks for `https://mail.google.com/`, `https://www.googleapis.com/auth/drive`, or any scope that grants access to message bodies, file contents, or personal data. We manage *identity and access*, not user content.
+</Admonition>
+
+## The Consent Screen
+
+When you authorize ShiftControl, Google shows a verified-publisher consent screen. The screen lists:
+
+- **Application name:** ShiftControl
+- **Publisher:** ShiftControl, Inc.
+- **Scopes:** the full list above
+
+Reviewing the consent screen is your decision point. ShiftControl cannot proceed without your explicit approval — clicking **Allow** is what creates the tokens. You can revoke at any time from [myaccount.google.com/permissions](https://myaccount.google.com/permissions).
+
+## Delegated OAuth
+
+Not everyone who starts the onboarding or connector flow is a Google Workspace Super Admin. The scopes ShiftControl needs require Super Admin consent — but you don't need to be the Super Admin yourself to start the flow.
+
+Delegated OAuth lets a non-admin (or an admin without their credentials in front of them) generate a one-time, 48-hour authorization link, and send it to a Super Admin who completes the flow on their end.
+
+### How delegation works
+
+<Steps>
+    <Step title="Start the OAuth flow">
+        From **Settings → Directories**, click the Google connector's **⋮ menu → Authenticate**.
+    </Step>
+    <Step title="Choose Delegate authorization">
+        Instead of signing in yourself, select **Delegate this** and enter the email address of your Google Workspace Super Admin.
+    </Step>
+    <Step title="ShiftControl sends a one-time link">
+        The Super Admin receives an email with a unique authorization link. The link is valid for 48 hours and is single-use. The Super Admin does not need a ShiftControl account — clicking the link drops them directly into the Google consent screen.
+    </Step>
+    <Step title="Super Admin approves the scopes">
+        They click **Allow** on the Google consent screen. ShiftControl exchanges the resulting code for tokens and links them to your ShiftControl org.
+    </Step>
+    <Step title="Status updates back in ShiftControl">
+        Once the Super Admin completes consent, the Google connector status flips to **Enabled / Healthy** in your ShiftControl org. The Super Admin doesn't see any of your ShiftControl data — they only approve the OAuth.
+    </Step>
+</Steps>
+
+### Multiple concurrent delegations
+
+You can have multiple delegation links outstanding for the same Google integration. This is intentional — if you sent a link to one admin and they didn't act on it, you can send another to a different admin without invalidating the first. Whichever one is completed first wins; the others lapse harmlessly when their 48 hours expire.
+
+## Re-Authentication
+
+If your Google integration ever goes Unhealthy — Google revoked the token, the refresh window lapsed, or credentials rotated — ShiftControl prompts you to re-authenticate.
+
+Re-auth is non-destructive:
+
+- Successful re-auth **resets the integration's health** back to Healthy.
+- Your existing ShiftControl data (users, groups, app assignments, departments) is untouched.
+- The new tokens replace the old ones; the old ones are revoked.
+- Re-auth can be delegated the same way the initial authorization can.
+
+## Things to Know
+
+- **Scopes can change between releases.** When ShiftControl adds a feature that needs a new scope, that scope appears on the consent screen the next time you authorize. Existing tokens that don't include the new scope keep working for the features they were granted for — re-auth is what picks up the additional scope.
+- **The Data Transfer scope was previously feature-flagged.** ShiftControl's offboarding-time data transfer (`admin.datatransfer`) is now part of the standard scope set. If you authorized before that flag was lifted, you may be prompted to re-authorize to grant it.
+- **You can audit consent at Google.** [myaccount.google.com/permissions](https://myaccount.google.com/permissions) shows every third-party app that has access, including ShiftControl. Revoking from there is one of two ways to disconnect (the other is **Settings → Directories → Disable** in ShiftControl).
+- **OAuth state is single-use.** If you abandon an authorization mid-flow and come back later, you need to start a new flow. The original `state` and `nonce` are no longer valid. This is by design — it prevents replay attacks.
+
+## Related Features
+
+- [Self-service onboarding](/onboarding/Self-service-onboarding/) — the new-org flow that uses this OAuth flow as Step 3
+- [Quickstart](/getting-started/quickstart/) — the high-level setup walkthrough
+- [Directories](/using-shiftcontrol/Settings/directories/) — manage primary, additional, and disconnected directories
+- [Google Workspace Connector Guide](/using-shiftcontrol/Integrations/guides/Google-Workspace/) — the day-to-day Google Workspace connector setup
+- [Google Admins](/using-shiftcontrol/Settings/google-admins/) — manage who holds each Google Workspace admin role inside ShiftControl

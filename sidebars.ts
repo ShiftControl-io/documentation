@@ -233,6 +233,7 @@ const sidebars: SidebarsConfig = {
                                             ],
                                         },
                                         'using-shiftcontrol/Integrations/guides/Google-Workspace',
+                                        'using-shiftcontrol/Integrations/guides/Google-Workspace-OAuth-flow',
                                         'using-shiftcontrol/Integrations/guides/JumpCloud',
                                         'using-shiftcontrol/Integrations/guides/Slack',
                                     ],
@@ -306,6 +307,7 @@ const sidebars: SidebarsConfig = {
             },
             items: [
                 'onboarding/Onboarding-intro',
+                'onboarding/Self-service-onboarding',
                 'onboarding/Before-onboarding',
                 'onboarding/During-onboarding',
                 'onboarding/After-onboarding',
