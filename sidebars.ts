@@ -293,6 +293,23 @@ const sidebars: SidebarsConfig = {
         },
         {
             type: 'category',
+            label: 'AI Assistants',
+            link: {
+                type: 'generated-index',
+                title: 'AI Assistants',
+                description: 'Connect ShiftControl to Claude, Cursor, ChatGPT, and other AI assistants via the MCP server. Run pre-built Skills for common SaaS-management workflows.',
+                slug: '/ai-assistants',
+                keywords: ['ai', 'mcp', 'claude', 'cursor', 'chatgpt', 'skills'],
+            },
+            items: [
+                'ai-assistants/Introduction',
+                'ai-assistants/Connect-your-ai-tool',
+                'ai-assistants/MCP-tools-reference',
+                'ai-assistants/Skills',
+            ],
+        },
+        {
+            type: 'category',
             label: 'Partnerships',
             link: {
                 type: 'generated-index',

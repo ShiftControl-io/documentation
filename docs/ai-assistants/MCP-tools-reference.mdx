@@ -1,0 +1,73 @@
+---
+title: 'MCP tools reference'
+description: 'Every tool the ShiftControl MCP server exposes — what it returns, what it accepts, and which ones write.'
+keywords: ['ShiftControl', 'MCP', 'tools', 'reference', 'API', 'AI']
+icon: 'wrench'
+---
+
+import Admonition from '@theme/Admonition';
+
+<p style={{fontSize: "large"}}>Every tool the ShiftControl MCP server exposes — read and write.</p>
+
+The ShiftControl MCP server at `https://mcp.shiftcontrol.io/mcp` exposes 11 tools today. Read tools are safe to call any time; write tools require an explicit `confirm: true` argument in the call itself, so destructive operations are always deliberate rather than incidental.
+
+## Read tools
+
+These tools read your ShiftControl data and never modify it. Permissions match your own ShiftControl role — if you can't see a resource in the UI, the AI can't see it either.
+
+| Tool | Purpose | Typical first call |
+|------|---------|---------------------|
+| `list_my_orgs` | List the ShiftControl organizations your account belongs to. Returns each org's ID and name. | Yes — most other tools need an `orgId`, so call this first. |
+| `list_users` | Paginated user list with optional filters (status, role, department, etc.). | "Show me every disabled user." |
+| `get_user` | Full detail for a single user by ID — profile, groups, app access, security state. | "What apps does Alex have access to?" |
+| `list_groups` | Paginated group list with filter. | "List all groups tagged 'department'." |
+| `get_group` | Full detail for one group — members, dynamic rules, app assignments. | "Who's in the Engineering group?" |
+| `list_teams` | Paginated team list. | "What teams do we have?" |
+| `list_oauth_apps` | Paginated list of OAuth apps your Workspace users have granted access to (the Permissions Dashboard data). | "Which OAuth apps have admin scopes?" |
+| `get_oauth_app` | Full detail for one OAuth app — users who granted it, scopes, risk indicators. | "Who granted access to Notion AI?" |
+| `list_apps` | Paginated list of managed applications in ShiftControl. | "Show me every SSO app." |
+| `get_subscription` | Subscription detail for a managed app — pricing, contract length, renewal. | "What's our Notion subscription look like?" |
+
+## Write tools
+
+Write tools modify ShiftControl data. Each one requires `confirm: true` in the arguments so the AI can't write by accident — a missing `confirm` returns a dry-run preview instead of doing the work.
+
+| Tool | What it changes | Confirmation |
+|------|-----------------|--------------|
+| `update_subscription` | Updates an app's subscription record — cost, billing cycle, contract length, renewal date. | `confirm: true` required. Calling without `confirm` returns a preview of the diff so you can review before approving. |
+
+<Admonition type="note" title="More write tools coming">
+    The v1 tool surface is intentionally read-heavy so AI clients can build context safely. Additional write tools (group membership, app assignments, user lifecycle actions) are on the roadmap. Watch [journey.shiftcontrol.io](https://journey.shiftcontrol.io) for announcements.
+</Admonition>
+
+## Common usage patterns
+
+**Discover your org**
+
+Ask: "What ShiftControl orgs do I belong to?"
+
+The AI calls `list_my_orgs` first, gets your org ID, then carries that ID through every subsequent call. You don't have to specify it manually.
+
+**Audit access**
+
+Ask: "List every user who has access to AWS and isn't in the Engineering group."
+
+The AI typically composes this from `list_apps` (to find the AWS app ID), `get_app` (to get the assigned users and groups), `list_groups` with filter (to identify Engineering members), then synthesizes the answer.
+
+**Update a subscription**
+
+Ask: "Bump the Notion subscription to $1,400 per year starting next renewal."
+
+The AI calls `update_subscription` without `confirm: true` first to show you the diff, then asks for explicit approval. Only after you say "yes" does it call again with `confirm: true`. This is the gating model — destructive actions are always two-step.
+
+## Authentication and scope
+
+Every tool call uses your OAuth-authenticated session. ShiftControl validates the token against PropelAuth on every request. There's no separate API key, no service account, and no way for an AI client to call a tool you don't have permission for — your role in ShiftControl determines what the tool can do.
+
+If your token expires, your AI client refreshes it silently. If refresh fails (you signed out, the org revoked your access, the token was revoked from your account), the next call surfaces a "sign in again" prompt in the AI tool. Re-authorizing is one click in your browser.
+
+## Related
+
+- **[Connect your AI tool](/ai-assistants/Connect-your-ai-tool/)** — install paths for every supported client
+- **[Skills](/ai-assistants/Skills/)** — pre-built workflows that combine these tools into useful multi-step automations
+- **[Google Workspace OAuth flow](/using-shiftcontrol/Integrations/guides/Google-Workspace-OAuth-flow/)** — for the underlying directory authorization (separate from the MCP OAuth)

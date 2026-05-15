@@ -1,0 +1,73 @@
+---
+title: 'Skills'
+description: 'Pre-built AI workflows that combine the ShiftControl MCP server with multi-step instructions. Install with a URL, run from natural conversation.'
+keywords: ['ShiftControl', 'Skills', 'MCP', 'workflows', 'AI', 'automation']
+icon: 'wand-magic-sparkles'
+---
+
+import Admonition from '@theme/Admonition';
+
+<p style={{fontSize: "large"}}>Pre-built AI workflows for common SaaS-management tasks. Install with a URL, run with a sentence.</p>
+
+## What Skills are
+
+A **ShiftControl Skill** is a folder of instructions that your AI assistant loads to handle a specific multi-step task. Each Skill combines:
+
+- **Domain knowledge** — what the task is, when to use it, what the right outcome looks like
+- **MCP tool orchestration** — which ShiftControl tools to call, in what order, with what data
+- **Guardrails** — when to ask the user before acting, what counts as a successful result
+
+Skills are open source and live at [github.com/ShiftControl-io/skills](https://github.com/ShiftControl-io/skills). Each Skill is a folder with a `SKILL.md` describing the task, plus any supporting files.
+
+## How Skills work with the MCP server
+
+Skills don't replace the MCP server — they're layered on top of it. The MCP server gives your AI the raw tools (`list_users`, `update_subscription`, etc.); a Skill gives it the instructions for how to use those tools to accomplish a specific goal.
+
+You can run ShiftControl from your AI without installing any Skill — the MCP server alone is enough for ad-hoc questions like "list every disabled user." Skills become useful when you have a repeatable, multi-step task you want your AI to handle the same way every time.
+
+## Installing a Skill
+
+The exact install steps depend on your AI client. The general shape:
+
+1. **Connect the MCP server first** — see [Connect your AI tool](/ai-assistants/Connect-your-ai-tool/). Skills assume MCP is already wired up.
+2. **Add the Skill** to your client. For Claude Code, that's `/skill add <url>`. For Claude Desktop, you'd drop the Skill folder into your skills directory. For other clients, follow their Skill / agent / extension docs.
+3. **Verify** by asking the AI to run the Skill by name.
+
+The authoritative per-client install steps live in [INSTALL.md](https://github.com/ShiftControl-io/skills/blob/main/INSTALL.md) in the Skills repo — that's the file that gets updated when AI clients change their installation paths.
+
+## Current catalog
+
+### refresh-subscription-info
+
+Finds recent SaaS invoices in your email and proposes ShiftControl subscription updates (cost, billing cycle, contract length) based on what it sees.
+
+**What it does, step by step:**
+
+1. Searches your email for recent invoices from SaaS vendors
+2. Cross-references each vendor with your ShiftControl app catalog via `list_apps`
+3. For each match, reads the current subscription state via `get_subscription`
+4. Computes a diff between what your invoice says and what ShiftControl has on record
+5. Shows you the proposed updates and asks for explicit approval
+6. Calls `update_subscription` (with `confirm: true`) for each update you approve
+
+**Requirements:** the `shiftcontrol` MCP server plus an email-search MCP (Gmail, Microsoft Graph, or your AI client's built-in email integration).
+
+**Skill folder:** [skills/refresh-subscription-info](https://github.com/ShiftControl-io/skills/blob/main/skills/refresh-subscription-info/SKILL.md)
+
+<Admonition type="info" title="More Skills coming">
+    The Skills catalog is open and growing. New entries get announced at [journey.shiftcontrol.io](https://journey.shiftcontrol.io), and the [Skills repo](https://github.com/ShiftControl-io/skills) is the live source of truth.
+</Admonition>
+
+## Writing your own Skill
+
+If you've built a repeatable AI workflow that hits ShiftControl, you can publish it as a Skill — either privately for your team, or as a contribution to the public catalog.
+
+A Skill at minimum is a folder with a `SKILL.md` file. The `SKILL.md` has frontmatter (`name`, `description`, trigger phrases) and a body that explains the task to the AI: when to use it, what the right MCP tool sequence is, and what guardrails to apply (especially around write tools).
+
+Contributing to the public catalog: open a PR at [github.com/ShiftControl-io/skills](https://github.com/ShiftControl-io/skills). The repo README has the contribution checklist.
+
+## Related
+
+- **[Introduction to AI Assistants](/ai-assistants/Introduction/)** — start here if MCP is new to you
+- **[Connect your AI tool](/ai-assistants/Connect-your-ai-tool/)** — install paths for every supported client
+- **[MCP tools reference](/ai-assistants/MCP-tools-reference/)** — what the underlying tools do
