@@ -13,12 +13,12 @@ import Admonition from '@theme/Admonition';
 
 ShiftControl exposes an [MCP server](https://modelcontextprotocol.io/) at `https://mcp.shiftcontrol.io/mcp`. Once you connect your AI assistant to it, you can talk to ShiftControl like you'd talk to a colleague:
 
-- "Which users haven't logged in for 30 days?"
-- "List every group that has access to AWS."
-- "Update the Notion subscription to the new annual price of $1,200."
-- "Show me the apps that haven't been used since March."
+- "List all our apps."
+- "Show me everyone in the Engineering department."
+- "Who's on the Sales team?"
+- "I just got the Notion renewal invoice — update the subscription to $1,200 per year."
 
-The AI does the API calls behind the scenes using your existing ShiftControl permissions. There's no service account, no API key to manage, and no separate role — your AI sees exactly what you see.
+The AI does the API calls behind the scenes using your existing ShiftControl permissions. There's no service account, no API key to manage, and no separate role — your AI sees exactly what you see. The tool surface is intentionally focused: read your org structure (users, groups, teams, apps, OAuth apps) and update subscription records — see the [MCP tools reference](/ai-assistants/MCP-tools-reference/) for the exact list.
 
 ## What you get
 

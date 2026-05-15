@@ -48,17 +48,39 @@ Ask: "What ShiftControl orgs do I belong to?"
 
 The AI calls `list_my_orgs` first, gets your org ID, then carries that ID through every subsequent call. You don't have to specify it manually.
 
-**Audit access**
+**List apps and look at one**
 
-Ask: "List every user who has access to AWS and isn't in the Engineering group."
+Ask: "What apps do we manage in ShiftControl, and what's our Notion record look like?"
 
-The AI typically composes this from `list_apps` (to find the AWS app ID), `get_app` (to get the assigned users and groups), `list_groups` with filter (to identify Engineering members), then synthesizes the answer.
+The AI calls `list_apps` to enumerate your managed application catalog, finds Notion, then calls `get_subscription` for the subscription detail (cost, billing cycle, renewal). Useful for SaaS spend reviews and renewal prep.
 
-**Update a subscription**
+**Find people in a department or team**
 
-Ask: "Bump the Notion subscription to $1,400 per year starting next renewal."
+Ask: "Who's in the Engineering department?" or "Who's on the Sales team?"
 
-The AI calls `update_subscription` without `confirm: true` first to show you the diff, then asks for explicit approval. Only after you say "yes" does it call again with `confirm: true`. This is the gating model — destructive actions are always two-step.
+For a department, the AI calls `list_users` with a department filter. For a team, the AI calls `list_teams` to find the team ID, then either `list_users` filtered to that team or `get_group` on the auto-created team group (teams generate matching dynamic groups during onboarding). Same shape works for locations and roles.
+
+**Audit third-party OAuth apps in your Workspace**
+
+Ask: "What third-party apps have access to our Google Workspace, and which have admin scopes?"
+
+The AI calls `list_oauth_apps` to enumerate every OAuth app users have granted access to, then `get_oauth_app` on any one for the full scope list and the users who granted it. This is the OAuth Permissions Dashboard data via MCP.
+
+**Update a subscription from an invoice**
+
+Ask: "I just got the Notion renewal invoice — they bumped us to $1,400/year. Update the subscription record."
+
+If you have an email-search MCP (Gmail, etc.) connected alongside the ShiftControl MCP, the [`refresh-subscription-info` Skill](/ai-assistants/Skills/) automates the whole flow: it pulls the invoice, computes the diff against your current `get_subscription` data, and proposes an `update_subscription` call. Without the Skill, you can still walk through it manually — the AI calls `update_subscription` without `confirm: true` first to show you the diff, then asks for explicit approval. Only after you say "yes" does it call again with `confirm: true`. This is the gating model — destructive actions are always two-step.
+
+## What MCP doesn't cover
+
+The v1 tool surface is intentionally focused. A few common-feeling questions that the current tools can't answer:
+
+- **"Which users haven't logged in for 30 days?"** — Login activity isn't exposed via MCP. Use the Users screen in the product or the Reports section for activity audits.
+- **"Which apps haven't been used since March?"** — App usage timestamps aren't on the tool surface yet. The App Spend dashboard in the product has this view.
+- **"Which groups have access to AWS?"** — Cross-app access lookups (start from an app, find groups assigned) aren't a direct tool yet. You can get there by listing all groups, then `get_group` to check each one's app assignments — slow for a large org.
+
+These are tracked for future tool additions. Watch [journey.shiftcontrol.io](https://journey.shiftcontrol.io) for new-tool announcements.
 
 ## Authentication and scope
 
