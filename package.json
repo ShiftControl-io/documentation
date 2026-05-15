@@ -1,6 +1,6 @@
 {
   "name": "shiftcontrol-docs",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "private": true,
   "scripts": {
     "docusaurus": "docusaurus",
@@ -16,8 +16,8 @@
     "check-images": "bash scripts/check-images.sh"
   },
   "dependencies": {
-    "@docusaurus/core": "^3.9.2",
-    "@docusaurus/preset-classic": "^3.9.2",
+    "@docusaurus/core": "^3.10.1",
+    "@docusaurus/preset-classic": "^3.10.1",
     "@iconify/react": "^6.0.2",
     "@mdx-js/react": "^3.1.1",
     "clsx": "^2.1.1",
@@ -26,14 +26,14 @@
     "lunr": "^2.3.9",
     "posthog-docusaurus": "^2.0.5",
     "prism-react-renderer": "^2.4.1",
-    "react": "^19.2.4",
-    "react-dom": "^19.2.4"
+    "react": "^19.2.6",
+    "react-dom": "^19.2.6"
   },
   "devDependencies": {
-    "@docusaurus/module-type-aliases": "^3.9.2",
-    "@docusaurus/tsconfig": "^3.9.2",
-    "@docusaurus/types": "^3.9.2",
-    "typescript": "~6.0.2"
+    "@docusaurus/module-type-aliases": "^3.10.1",
+    "@docusaurus/tsconfig": "^3.10.1",
+    "@docusaurus/types": "^3.10.1",
+    "typescript": "~6.0.3"
   },
   "browserslist": {
     "production": [
@@ -48,7 +48,7 @@
     ]
   },
   "engines": {
-    "node": ">=24.14.1"
+    "node": ">=24.15.0"
   },
   "overrides": {
     "serialize-javascript": "^7.0.3",
