@@ -24,13 +24,14 @@ You can set up ShiftControl yourself in a few minutes. Sign up with your Google 
 
 ## How It Works
 
-Setup is a five-step wizard. Most of the work happens behind the scenes while you click through:
+Setup is a six-step wizard. Most of the work happens behind the scenes while you click through:
 
 1. **Sign-up** — Sign in with your Google Workspace account. ShiftControl creates a user record for you and links it to your Google identity. Any Workspace user can do this step.
 2. **Domain validation** — ShiftControl confirms that your email's domain belongs to a Google Workspace, and that no other ShiftControl organization has already claimed it. This prevents two organizations from claiming the same workspace.
 3. **Authorization** — A Google Workspace Super Admin grants ShiftControl permission to manage your directory. If that's you, you'll see Google's approval screen right after domain validation. If it isn't, you can send your Super Admin a 48-hour authorization link and pause here until they approve it. The [Google Workspace OAuth flow](/using-shiftcontrol/Integrations/guides/Google-Workspace-OAuth-flow/) page has the technical detail on every permission requested.
-4. **Connect apps (optional)** — The wizard offers app connectors (HRIS, etc.). You can skip everything here and add them later from Settings.
-5. **Provisioning** — Once permissions are approved, ShiftControl reads your Google directory, creates the org records, sets Google Workspace as your primary directory, and imports your roles, groups, and users. You land on the Manage Users screen when it's done.
+4. **App discovery** — ShiftControl scans your Google Workspace to find the SaaS apps your team is already signed in to and imports them into your ShiftControl app catalog. You see your full SaaS surface on day one without having to enumerate it.
+5. **Departments and locations** — set up your org's departments (Engineering, Sales, Operations…) and office locations. Each one auto-creates a ShiftControl group with a dynamic membership rule, so as users get assigned a department or location, they flow into the matching group automatically.
+6. **Start your trial** — provisioning completes, Google Workspace is set as your primary directory, your users and groups are imported, and you land on the Manage Users screen. You're now in the trial. Additional connectors — HRIS, app-specific integrations, anything else — are added anytime after this from **Settings → Connectors**.
 
 Provisioning happens in a single transactional step — if anything fails partway, the system rolls back so you don't end up half-onboarded. Once it succeeds, completed organizations are gated from returning to the onboarding flow.
 
@@ -69,14 +70,14 @@ Your company is moving off another identity provider and consolidating on Google
 
         ShiftControl only asks for permissions it actually uses. If you want to see exactly what each one grants and why, the [Google Workspace OAuth flow](/using-shiftcontrol/Integrations/guides/Google-Workspace-OAuth-flow/) page has the full breakdown.
     </Step>
-    <Step title="Choose which app connectors to set up">
-        The Connect Apps step offers HRIS integrations and other connectors. Pick the ones you want now, skip the rest. None of these are required to finish setup — you can come back from **Settings → Connectors** anytime.
+    <Step title="Review discovered apps">
+        ShiftControl scans your Google Workspace and shows you the SaaS apps your team is already signed in to. Review the list — these become your starting app catalog, and you can edit, deactivate, or assign them once you're in the product.
     </Step>
-    <Step title="Watch provisioning complete">
-        ShiftControl reads your Google directory, creates the ShiftControl org, sets Google Workspace as your primary directory, and imports users, groups, and admin roles. Provisioning runs as a single atomic step — if anything fails, the system rolls back rather than leaving you in a half-state.
+    <Step title="Set up departments and locations">
+        Add your departments (Engineering, Sales, Operations…) and office locations (San Francisco, Singapore, Remote…). For each one, ShiftControl creates a group with a dynamic membership rule, so as users get assigned a department or location they flow into the matching group automatically. This is where a list of users becomes a structured org.
     </Step>
-    <Step title="Land on Manage Users">
-        Once provisioning succeeds, ShiftControl redirects you to **Users**. Your Google Workspace users, groups, departments, and admin roles are already there. From here, the [Users](/using-shiftcontrol/Users/) and [Groups](/using-shiftcontrol/Groups/) sections of the docs are your next stops.
+    <Step title="Start your trial">
+        ShiftControl finishes provisioning — Google Workspace is set as your primary directory, your users and groups are imported, and you land on the **Manage Users** screen. You're now in the trial. From here, browse your users, groups, and apps, and add HRIS or other connectors from **Settings → Connectors** whenever you're ready. The [Users](/using-shiftcontrol/Users/) and [Groups](/using-shiftcontrol/Groups/) sections of the docs are good next stops.
     </Step>
 </Steps>
 
