@@ -238,6 +238,14 @@ const config: Config = {
                         from: '/using-shiftcontrol/Integrations/guides/Google-Workspace-OAuth-flow',
                         to: '/using-shiftcontrol/Integrations/guides/Google-Workspace-App-Authorization',
                     },
+                    {
+                        // Removed 2026-05-15: the MCP tools reference page was created in
+                        // this same PR but pulled before merge — the v1 tool surface is
+                        // moving too fast to maintain a reference page right now. We'll
+                        // rebuild it once the surface stabilizes.
+                        from: '/ai-assistants/MCP-tools-reference',
+                        to: '/ai-assistants/Introduction',
+                    },
                 ],
             },
         ],

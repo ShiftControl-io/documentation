@@ -304,7 +304,6 @@ const sidebars: SidebarsConfig = {
             items: [
                 'ai-assistants/Introduction',
                 'ai-assistants/Connect-your-ai-tool',
-                'ai-assistants/MCP-tools-reference',
                 'ai-assistants/Skills',
             ],
         },
