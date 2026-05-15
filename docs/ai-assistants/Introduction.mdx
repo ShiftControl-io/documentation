@@ -1,0 +1,50 @@
+---
+title: 'AI Assistants — Introduction'
+description: 'Connect ShiftControl to Claude, Cursor, ChatGPT, and other AI assistants. Query your org, manage subscriptions, and run pre-built workflows from natural conversation.'
+keywords: ['ShiftControl', 'AI', 'MCP', 'Model Context Protocol', 'Claude', 'Cursor', 'ChatGPT', 'AI assistant', 'Skills']
+icon: 'sparkles'
+---
+
+import Admonition from '@theme/Admonition';
+
+<p style={{fontSize: "large"}}>Use ShiftControl from inside your AI assistant — Claude, Cursor, ChatGPT, Windsurf, and more.</p>
+
+## Overview
+
+ShiftControl exposes an [MCP server](https://modelcontextprotocol.io/) at `https://mcp.shiftcontrol.io/mcp`. Once you connect your AI assistant to it, you can talk to ShiftControl like you'd talk to a colleague:
+
+- "List all our apps."
+- "Show me everyone in the Engineering department."
+- "Who's on the Sales team?"
+- "I just got the Notion renewal invoice — update the subscription to $1,200 per year."
+
+The AI does the API calls behind the scenes using your existing ShiftControl permissions. There's no service account, no API key to manage, and no separate role — your AI sees exactly what you see. The tool surface is intentionally focused: read your org structure (users, groups, teams, apps, OAuth apps) and update subscription records.
+
+## What you get
+
+| Capability | What it is |
+|------------|------------|
+| **MCP server** | A remote server at `https://mcp.shiftcontrol.io/mcp` that exposes 11 tools (`list_users`, `get_app`, `update_subscription`, and more) to any MCP-aware AI client. |
+| **Skills** | Pre-built workflows you can install — instruction sets that combine MCP tools with multi-step logic for common SaaS-management tasks. |
+| **OAuth sign-in** | One browser sign-in per client. No API keys, no service accounts. Tokens are scoped to your ShiftControl user and respect your role. |
+
+## How permissions work
+
+Your AI assistant inherits your ShiftControl permissions exactly. If you're a viewer, the AI is a viewer. If you can edit subscriptions, the AI can edit subscriptions — but write tools require explicit confirmation in the call itself (for example, `update_subscription` only writes when you pass `confirm: true`). This makes destructive actions deliberate rather than accidental.
+
+Sessions are OAuth-authenticated against PropelAuth (the identity layer underneath ShiftControl). Your AI client stores the access token; ShiftControl validates it on every call. When it expires, your client silently refreshes — or, if the refresh fails, you'll see a one-line "sign in again" prompt in the AI tool.
+
+## Where to start
+
+<Admonition type="tip" title="New here">
+    If you've never connected an MCP server to your AI tool before, [Connect your AI tool](/ai-assistants/Connect-your-ai-tool/) walks through it for every supported client. If you have, the endpoint is `https://mcp.shiftcontrol.io/mcp` and OAuth discovery is at `/.well-known/oauth-authorization-server` — Dynamic Client Registration is supported.
+</Admonition>
+
+- **[Connect your AI tool](/ai-assistants/Connect-your-ai-tool/)** — install paths for Claude Desktop, Claude Code, Cursor, Windsurf, Cline, Continue.dev, ChatGPT, Gemini CLI, and any generic OAuth-MCP client
+- **[Skills](/ai-assistants/Skills/)** — pre-built workflows you can install on top of the MCP server, and the catalog of what's available today
+
+## Related Features
+
+- The full discovery file lives at [shiftcontrol.io/llms.txt](https://shiftcontrol.io/llms.txt) — AI clients can read this to learn what ShiftControl is and how to connect.
+- AI-assistant-friendly install commands live at [shiftcontrol.io/llms-install.txt](https://shiftcontrol.io/llms-install.txt) — copy-paste install paths an AI can execute on your behalf.
+- The Skills catalog and contribution process live at [github.com/ShiftControl-io/skills](https://github.com/ShiftControl-io/skills).

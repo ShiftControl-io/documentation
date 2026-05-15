@@ -194,6 +194,61 @@ const config: Config = {
                 enableInDevelopment: false,
             },
         ],
+        [
+            '@docusaurus/plugin-client-redirects',
+            {
+                // Preserve legacy /onboarding/* URLs after the May 2026 restructure that
+                // promoted Self-Service onboarding into Get Started and moved the
+                // JumpCloud guided-setup pages under Using ShiftControl → JumpCloud.
+                redirects: [
+                    {
+                        from: '/onboarding/Self-service-onboarding',
+                        to: '/getting-started/Onboarding',
+                    },
+                    {
+                        // Short-lived URL from the first restructure (2026-05-15); kept
+                        // for any inbound links that happened to capture the interim path.
+                        from: '/getting-started/Self-service-onboarding',
+                        to: '/getting-started/Onboarding',
+                    },
+                    {
+                        from: '/onboarding/Onboarding-intro',
+                        to: '/using-shiftcontrol/JumpCloud/Guided-setup/Onboarding-intro',
+                    },
+                    {
+                        from: '/onboarding/Before-onboarding',
+                        to: '/using-shiftcontrol/JumpCloud/Guided-setup/Before-onboarding',
+                    },
+                    {
+                        from: '/onboarding/During-onboarding',
+                        to: '/using-shiftcontrol/JumpCloud/Guided-setup/During-onboarding',
+                    },
+                    {
+                        from: '/onboarding/After-onboarding',
+                        to: '/using-shiftcontrol/JumpCloud/Guided-setup/After-onboarding',
+                    },
+                    {
+                        // The old generated-index category page
+                        from: '/onboarding',
+                        to: '/getting-started/Onboarding',
+                    },
+                    {
+                        // Renamed 2026-05-15: 'OAuth flow' was too jargon-heavy as a
+                        // page title; the page is now 'Google Workspace App Authorization'.
+                        from: '/using-shiftcontrol/Integrations/guides/Google-Workspace-OAuth-flow',
+                        to: '/using-shiftcontrol/Integrations/guides/Google-Workspace-App-Authorization',
+                    },
+                    {
+                        // Removed 2026-05-15: the MCP tools reference page was created in
+                        // this same PR but pulled before merge — the v1 tool surface is
+                        // moving too fast to maintain a reference page right now. We'll
+                        // rebuild it once the surface stabilizes.
+                        from: '/ai-assistants/MCP-tools-reference',
+                        to: '/ai-assistants/Introduction',
+                    },
+                ],
+            },
+        ],
     ],
 };
 

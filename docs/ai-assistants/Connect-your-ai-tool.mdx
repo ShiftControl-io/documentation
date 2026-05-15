@@ -1,0 +1,120 @@
+---
+title: 'Connect your AI tool'
+description: 'Step-by-step install instructions for connecting ShiftControl to Claude Desktop, Claude Code, Cursor, Windsurf, Cline, Continue.dev, ChatGPT, and Gemini CLI.'
+keywords: ['ShiftControl', 'MCP', 'install', 'Claude Desktop', 'Claude Code', 'Cursor', 'Windsurf', 'Cline', 'Continue.dev', 'ChatGPT', 'Gemini CLI']
+icon: 'plug'
+---
+
+import Admonition from '@theme/Admonition';
+import { Steps, Step } from "@site/src/components/Steps";
+
+<p style={{fontSize: "large"}}>Install paths for every supported AI client. Pick yours and follow the steps.</p>
+
+<Admonition type="info" title="Same endpoint for every client">
+    All AI clients connect to the same MCP server: <code>https://mcp.shiftcontrol.io/mcp</code>. OAuth discovery is at <code>https://mcp.shiftcontrol.io/.well-known/oauth-authorization-server</code>, and Dynamic Client Registration is supported. You'll be prompted to sign in to ShiftControl in your browser the first time the AI calls a tool.
+</Admonition>
+
+## Claude Desktop (macOS, Windows, Linux)
+
+<Steps>
+    <Step title="Open your Claude Desktop config">
+        | Platform | Path |
+        |----------|------|
+        | macOS | `~/Library/Application Support/Claude/claude_desktop_config.json` |
+        | Windows | `%APPDATA%\Claude\claude_desktop_config.json` |
+        | Linux | `~/.config/Claude/claude_desktop_config.json` |
+    </Step>
+    <Step title="Add ShiftControl to the mcpServers block">
+        ```json
+        {
+          "mcpServers": {
+            "shiftcontrol": {
+              "command": "npx",
+              "args": ["mcp-remote", "https://mcp.shiftcontrol.io/mcp"]
+            }
+          }
+        }
+        ```
+    </Step>
+    <Step title="Restart Claude Desktop">
+        The first tool call opens ShiftControl in your browser to sign in. Approve, and the tool call completes.
+    </Step>
+</Steps>
+
+## Claude AI (Chat, CoWork, Code)
+
+1. Open Claude → **Customize** → **Connectors**
+2. Click the **+** button and select **Add custom connector**
+3. Name: `shiftcontrol`. Remote MCP Server URL: `https://mcp.shiftcontrol.io/mcp`
+4. Click **Add**
+
+## Claude Code
+
+```bash
+claude mcp add shiftcontrol --transport http https://mcp.shiftcontrol.io/mcp
+```
+
+## Cursor
+
+1. **Settings → MCP → Add new MCP Server**
+2. Name: `shiftcontrol`. URL: `https://mcp.shiftcontrol.io/mcp`
+3. Save and restart Cursor
+
+## Windsurf
+
+1. **Settings → MCP Servers → Add server**
+2. URL: `https://mcp.shiftcontrol.io/mcp`
+3. Restart Windsurf
+
+## Cline (VS Code extension)
+
+1. **Settings → MCP Servers → Add server**
+2. Name: `shiftcontrol`. URL: `https://mcp.shiftcontrol.io/mcp`
+
+## Continue.dev
+
+Edit `~/.continue/config.json`:
+
+```json
+{
+  "experimental": {
+    "modelContextProtocolServers": [
+      {
+        "transport": { "type": "http", "url": "https://mcp.shiftcontrol.io/mcp" },
+        "name": "shiftcontrol"
+      }
+    ]
+  }
+}
+```
+
+## ChatGPT
+
+ChatGPT's native MCP support is rolling out. Until it lands:
+
+- **Custom GPTs** — use the ShiftControl OpenAPI as an Action: `https://api.shiftcontrol.io/api-docs/openapi.json`
+- **ChatGPT Desktop** — check OpenAI's release notes for current MCP status
+
+## Gemini CLI
+
+```bash
+gemini mcp add shiftcontrol --url https://mcp.shiftcontrol.io/mcp
+```
+
+## Generic OAuth-MCP client
+
+If your client implements the Model Context Protocol with OAuth, point it at:
+
+| Setting | Value |
+|---------|-------|
+| Endpoint | `https://mcp.shiftcontrol.io/mcp` |
+| OAuth discovery | `https://mcp.shiftcontrol.io/.well-known/oauth-authorization-server` |
+| Dynamic Client Registration | Supported |
+
+## Verify the connection
+
+After install, ask the AI to run `list_apps`. You should see your ShiftControl apps come back. If you don't, the troubleshooting section in the [skills repo INSTALL.md](https://github.com/ShiftControl-io/skills/blob/main/INSTALL.md) is the authoritative source.
+
+## What's next
+
+- **[Skills](/ai-assistants/Skills/)** — install pre-built workflows on top of the MCP server

@@ -8,7 +8,7 @@ import Admonition from '@theme/Admonition';
 import { Steps, Step } from "@site/src/components/Steps";
 import ConditionalContent from '@site/src/components/ConditionalContent';
 
-<p style={{fontSize: "large"}}>Get ShiftControl connected to your directories and start managing your organization in minutes.</p>
+<p style={{fontSize: "large"}}>Get ShiftControl connected to your Google Workspace and start managing your organization in minutes.</p>
 
 <Admonition type="tip">
     Want to explore before setting up? Try the <a href="https://demo.shiftcontrol.io" target="_blank">live demo</a> — no login required. You can see every feature in action before connecting your own directories.
@@ -117,15 +117,44 @@ With JumpCloud trusted (if you use Google Workspace) and ShiftControl connected 
 
 <ConditionalContent modes={["google-only"]}>
 
-## Getting Started with Google Workspace
+## Step 1: Sign Up With Google Workspace
 
-ShiftControl is launching a **self-service onboarding flow** for Google Workspace-only organizations. This will walk you through connecting your Google Workspace directory, setting up users and groups, and configuring app access — all without needing JumpCloud.
+If you run on Google Workspace, you can set up your ShiftControl org in a few minutes. Sign up with your Google Workspace account, validate your domain, authorize the directory, and land on a working org — no setup call required.
 
-<Admonition type="info">
-    The Google Workspace self-service setup is coming soon. In the meantime, <a href="mailto:support@shiftcontrol.io">contact our team</a> and we'll get you set up directly.
+<Steps>
+    <Step title="Start your sign-up">
+        Go to <a href="https://app.shiftcontrol.io/signup" target="_blank">app.shiftcontrol.io/signup</a> and choose **Sign up with Google**. Any Google Workspace user can start sign-up — you don't need to be a Super Admin at this step. The Super Admin requirement comes later, when ShiftControl asks to authorize the Google directory in Step 3. If you're not the Super Admin yourself, you can delegate that step.
+    </Step>
+    <Step title="Validate your domain">
+        ShiftControl checks that the email you signed in with belongs to a Google Workspace domain you administer, and that the domain isn't already claimed by another ShiftControl org. If you hit a validation error here, see [Onboarding](/getting-started/Onboarding/#domain-validation) for what each error means.
+    </Step>
+    <Step title="Approve permissions for ShiftControl (Super Admin required)">
+        Google will show a screen asking you to grant ShiftControl permission to manage users, groups, and admin roles in your Workspace. Click **Allow** to connect the two systems.
+
+        This is the step that needs a Google Workspace **Super Admin** — other admin roles can't grant the permissions ShiftControl needs. If you're not the Super Admin, send them a [48-hour authorization link](/using-shiftcontrol/Integrations/guides/Google-Workspace-App-Authorization/#delegated-oauth) — they can approve the connection without needing a ShiftControl account of their own.
+
+        If you want the technical detail on exactly what ShiftControl is being granted (and why), the [Google Workspace App Authorization](/using-shiftcontrol/Integrations/guides/Google-Workspace-App-Authorization/) page lists every permission with rationale.
+    </Step>
+    <Step title="Review discovered apps">
+        ShiftControl scans your Workspace and shows you the SaaS apps your team is already signed in to. Review the list — they become your starting app catalog.
+    </Step>
+    <Step title="Set up departments and locations">
+        Add your departments and office locations. Each one auto-creates a group with a dynamic membership rule, so users flow into the right group based on their department or location.
+    </Step>
+    <Step title="Start your trial">
+        ShiftControl finishes provisioning and redirects you to the **Manage Users** screen. You're now in the trial. HRIS and other connectors are added anytime from **Settings → Connectors** — they're not part of onboarding.
+    </Step>
+</Steps>
+
+<Admonition type="tip">
+    Don't have your Google Workspace Super Admin in front of you right now? You can [send them a 48-hour authorization link](/using-shiftcontrol/Integrations/guides/Google-Workspace-App-Authorization/#delegated-oauth) — they'll approve the connection without needing a ShiftControl account.
 </Admonition>
 
-While you wait, explore the [live demo](https://demo.shiftcontrol.io) to see how ShiftControl works with Google Workspace.
+Once setup finishes, you'll see your Google Workspace data in:
+- **Users** — your full Google directory with status badges showing who needs a password reset, who's never logged in, and who hasn't accepted the Google terms of service
+- **Groups** — Google Groups with automatic syncing, dynamic membership rules, and drift detection
+- **Dashboards** — a view of every third-party app that has access to your Workspace and what permissions they have
+- **Settings → Google Admins** — manage who holds each Google Workspace admin role
 
 </ConditionalContent>
 
