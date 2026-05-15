@@ -50,7 +50,7 @@ const sidebars: SidebarsConfig = {
             items: [
                 'introduction',
                 'getting-started/quickstart',
-                'getting-started/Self-service-onboarding',
+                'getting-started/Onboarding',
             ],
         },
         {
@@ -234,7 +234,7 @@ const sidebars: SidebarsConfig = {
                                             ],
                                         },
                                         'using-shiftcontrol/Integrations/guides/Google-Workspace',
-                                        'using-shiftcontrol/Integrations/guides/Google-Workspace-OAuth-flow',
+                                        'using-shiftcontrol/Integrations/guides/Google-Workspace-App-Authorization',
                                         'using-shiftcontrol/Integrations/guides/JumpCloud',
                                         'using-shiftcontrol/Integrations/guides/Slack',
                                     ],

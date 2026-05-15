@@ -203,7 +203,13 @@ const config: Config = {
                 redirects: [
                     {
                         from: '/onboarding/Self-service-onboarding',
-                        to: '/getting-started/Self-service-onboarding',
+                        to: '/getting-started/Onboarding',
+                    },
+                    {
+                        // Short-lived URL from the first restructure (2026-05-15); kept
+                        // for any inbound links that happened to capture the interim path.
+                        from: '/getting-started/Self-service-onboarding',
+                        to: '/getting-started/Onboarding',
                     },
                     {
                         from: '/onboarding/Onboarding-intro',
@@ -224,7 +230,13 @@ const config: Config = {
                     {
                         // The old generated-index category page
                         from: '/onboarding',
-                        to: '/getting-started/Self-service-onboarding',
+                        to: '/getting-started/Onboarding',
+                    },
+                    {
+                        // Renamed 2026-05-15: 'OAuth flow' was too jargon-heavy as a
+                        // page title; the page is now 'Google Workspace App Authorization'.
+                        from: '/using-shiftcontrol/Integrations/guides/Google-Workspace-OAuth-flow',
+                        to: '/using-shiftcontrol/Integrations/guides/Google-Workspace-App-Authorization',
                     },
                 ],
             },
