@@ -194,6 +194,41 @@ const config: Config = {
                 enableInDevelopment: false,
             },
         ],
+        [
+            '@docusaurus/plugin-client-redirects',
+            {
+                // Preserve legacy /onboarding/* URLs after the May 2026 restructure that
+                // promoted Self-Service onboarding into Get Started and moved the
+                // JumpCloud guided-setup pages under Using ShiftControl → JumpCloud.
+                redirects: [
+                    {
+                        from: '/onboarding/Self-service-onboarding',
+                        to: '/getting-started/Self-service-onboarding',
+                    },
+                    {
+                        from: '/onboarding/Onboarding-intro',
+                        to: '/using-shiftcontrol/JumpCloud/Guided-setup/Onboarding-intro',
+                    },
+                    {
+                        from: '/onboarding/Before-onboarding',
+                        to: '/using-shiftcontrol/JumpCloud/Guided-setup/Before-onboarding',
+                    },
+                    {
+                        from: '/onboarding/During-onboarding',
+                        to: '/using-shiftcontrol/JumpCloud/Guided-setup/During-onboarding',
+                    },
+                    {
+                        from: '/onboarding/After-onboarding',
+                        to: '/using-shiftcontrol/JumpCloud/Guided-setup/After-onboarding',
+                    },
+                    {
+                        // The old generated-index category page
+                        from: '/onboarding',
+                        to: '/getting-started/Self-service-onboarding',
+                    },
+                ],
+            },
+        ],
     ],
 };
 

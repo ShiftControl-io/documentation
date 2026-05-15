@@ -50,6 +50,7 @@ const sidebars: SidebarsConfig = {
             items: [
                 'introduction',
                 'getting-started/quickstart',
+                'getting-started/Self-service-onboarding',
             ],
         },
         {
@@ -269,6 +270,23 @@ const sidebars: SidebarsConfig = {
                     },
                     items: [
                         'using-shiftcontrol/JumpCloud/Use-Google-Workspace-as-an-IdP',
+                        {
+                            type: 'category',
+                            label: 'Guided Setup (JumpCloud customers)',
+                            link: {
+                                type: 'generated-index',
+                                title: 'Guided Setup (JumpCloud customers)',
+                                description: 'The white-glove onboarding path for organizations setting up ShiftControl on JumpCloud — what to prepare, what we cover together, and what to do after.',
+                                slug: '/using-shiftcontrol/JumpCloud/Guided-setup',
+                                keywords: ['onboarding', 'guided setup', 'JumpCloud'],
+                            },
+                            items: [
+                                'using-shiftcontrol/JumpCloud/Guided-setup/Onboarding-intro',
+                                'using-shiftcontrol/JumpCloud/Guided-setup/Before-onboarding',
+                                'using-shiftcontrol/JumpCloud/Guided-setup/During-onboarding',
+                                'using-shiftcontrol/JumpCloud/Guided-setup/After-onboarding',
+                            ],
+                        },
                     ],
                 },
             ],
@@ -293,24 +311,6 @@ const sidebars: SidebarsConfig = {
                         'partnerships/Google-Workspace-Reseller/Managing-Google-Workspace-licenses'
                     ],
                 },
-            ],
-        },
-        {
-            type: 'category',
-            label: 'Onboarding to ShiftControl',
-            link: {
-                type: 'generated-index',
-                title: 'Onboarding to ShiftControl',
-                description: 'Set up ShiftControl for your organization — what to prepare, how to onboard, and what to do after.',
-                slug: '/onboarding',
-                keywords: ['onboarding', 'setup'],
-            },
-            items: [
-                'onboarding/Onboarding-intro',
-                'onboarding/Self-service-onboarding',
-                'onboarding/Before-onboarding',
-                'onboarding/During-onboarding',
-                'onboarding/After-onboarding',
             ],
         },
     ],
