@@ -66,9 +66,10 @@ html[data-theme='dark'] {
   --ifm-color-primary-lighter: #f5f6f7;
   --ifm-color-primary-lightest: #ffffff;
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
-  --ifm-background-color: #08090a;
-  --ifm-footer-background-color: #08090a;
-  --ifm-navbar-background-color: #08090a;
+  /* Match shiftcontrol.io marketing body background exactly */
+  --ifm-background-color: #090909;
+  --ifm-footer-background-color: #090909;
+  --ifm-navbar-background-color: #090909;
   --ifm-navbar-link-color: #f7f8f8;
   --ifm-navbar-link-active-color: #ffffff;
   --ifm-font-color-base: #d0d6e0;
@@ -101,8 +102,11 @@ html[data-theme='dark'] .menu__link:hover {
   color: #e8eaed;
 }
 
+/* Prose color matches the marketing-site body text token (#d0d6e0).
+   Previously this was overridden to a darker #b0b6c0, which made paragraph
+   text look noticeably more washed-out than the marketing pages. */
 html[data-theme='dark'] p {
-  color: #b0b6c0;
+  color: var(--ifm-font-color-base);
 }
 
 /* ─── Typography Refinements ─── */
@@ -218,6 +222,26 @@ html[data-theme='dark'] .footer {
 /* ─── Admonitions ─── */
 .alert {
   border-radius: 10px;
+}
+
+/* Brand-tinted "tip" admonitions: use the ShiftControl teal accent instead of
+   Docusaurus's default forest green, which clashes with the marketing palette. */
+html[data-theme='dark'] .alert--success,
+html[data-theme='dark'] .theme-admonition-tip {
+  --ifm-alert-background-color: rgba(0, 193, 191, 0.10);
+  --ifm-alert-background-color-highlight: rgba(0, 193, 191, 0.18);
+  --ifm-alert-foreground-color: var(--ifm-font-color-base);
+  --ifm-alert-border-color: rgba(0, 193, 191, 0.45);
+  border: 1px solid rgba(0, 193, 191, 0.45);
+}
+
+html[data-theme='light'] .alert--success,
+html[data-theme='light'] .theme-admonition-tip {
+  --ifm-alert-background-color: rgba(0, 193, 191, 0.06);
+  --ifm-alert-background-color-highlight: rgba(0, 193, 191, 0.10);
+  --ifm-alert-foreground-color: var(--ifm-font-color-base);
+  --ifm-alert-border-color: rgba(0, 193, 191, 0.35);
+  border: 1px solid rgba(0, 193, 191, 0.35);
 }
 
 /* ─── Images ─── */
