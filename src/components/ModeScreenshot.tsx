@@ -17,6 +17,13 @@ interface ModeScreenshotProps {
   path: string;
   alt: string;
   width?: string | number;
+  /**
+   * Optional whitelist of modes this screenshot applies to. When set and the
+   * current mode is not in the list, the component renders nothing — used for
+   * screenshots that only exist in some configuration modes (e.g. JumpCloud
+   * admin pages don't exist in google-only mode).
+   */
+  modes?: ConfigMode[];
 }
 
 function buildSources(section: string, name: string, folder: string) {
@@ -31,7 +38,7 @@ function buildSources(section: string, name: string, folder: string) {
  * Renders a ThemedImage (SSR-safe) that updates to the correct mode on the client.
  * Does NOT fall back silently — broken images indicate missing screenshots that need capture.
  */
-export default function ModeScreenshot({ path, alt, width }: ModeScreenshotProps) {
+export default function ModeScreenshot({ path, alt, width, modes }: ModeScreenshotProps) {
   const section = path.substring(0, path.indexOf('/'));
   const name = path.substring(path.indexOf('/') + 1);
   const { mode } = useConfigMode();
@@ -40,6 +47,8 @@ export default function ModeScreenshot({ path, alt, width }: ModeScreenshotProps
   useEffect(() => {
     setFolder(MODE_FOLDERS[mode] || FALLBACK_FOLDER);
   }, [mode]);
+
+  if (modes && !modes.includes(mode)) return null;
 
   return (
     <ThemedImage
