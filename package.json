@@ -1,6 +1,6 @@
 {
   "name": "shiftcontrol-docs",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "private": true,
   "scripts": {
     "docusaurus": "docusaurus",
@@ -27,8 +27,8 @@
     "lunr": "^2.3.9",
     "posthog-docusaurus": "^2.0.5",
     "prism-react-renderer": "^2.4.1",
-    "react": "^19.2.6",
-    "react-dom": "^19.2.6"
+    "react": "^19.2.7",
+    "react-dom": "^19.2.7"
   },
   "devDependencies": {
     "@docusaurus/module-type-aliases": "^3.10.1",
@@ -54,5 +54,9 @@
   "overrides": {
     "serialize-javascript": "^7.0.3",
     "minimatch": "^10.0.3"
+  },
+  "allowScripts": {
+    "core-js@3.40.0": true,
+    "fsevents@2.3.3": true
   }
 }

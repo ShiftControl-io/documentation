@@ -32,7 +32,7 @@ The AI does the API calls behind the scenes using your existing ShiftControl per
 
 Your AI assistant inherits your ShiftControl permissions exactly. If you're a viewer, the AI is a viewer. If you can edit subscriptions, the AI can edit subscriptions — but write tools require explicit confirmation in the call itself (for example, `update_subscription` only writes when you pass `confirm: true`). This makes destructive actions deliberate rather than accidental.
 
-Sessions are OAuth-authenticated against PropelAuth (the identity layer underneath ShiftControl). Your AI client stores the access token; ShiftControl validates it on every call. When it expires, your client silently refreshes — or, if the refresh fails, you'll see a one-line "sign in again" prompt in the AI tool.
+Sessions are OAuth-authenticated against ShiftControl's platform. Your AI client stores the access token; ShiftControl validates it on every call. When it expires, your client silently refreshes — or, if the refresh fails, you'll see a one-line "sign in again" prompt in the AI tool.
 
 ## Where to start
 
