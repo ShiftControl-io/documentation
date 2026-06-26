@@ -66,7 +66,7 @@ Your company is moving off another identity provider and consolidating on Google
     <Step title="Approve permissions for ShiftControl (Super Admin required)">
         Google will show a screen asking you to grant ShiftControl permission to manage users, groups, and admin roles in your Workspace. This is the step that requires a Google Workspace **Super Admin** — other admin roles can't grant the permissions ShiftControl needs.
 
-        If you're the Super Admin, review the list and click **Allow**. If you aren't, send a [48-hour authorization link](/using-shiftcontrol/Integrations/guides/Google-Workspace-App-Authorization/#delegated-oauth) to a Super Admin in your organization — they can approve the connection without needing a ShiftControl account.
+        If you're the Super Admin, review the list and click **Allow**. If you aren't, send a [48-hour authorization link](/using-shiftcontrol/Integrations/guides/Google-Workspace-App-Authorization/#delegated-authorization) to a Super Admin in your organization — they can approve the connection without needing a ShiftControl account.
 
         ShiftControl only asks for permissions it actually uses. If you want to see exactly what each one grants and why, the [Google Workspace App Authorization](/using-shiftcontrol/Integrations/guides/Google-Workspace-App-Authorization/) page has the full breakdown.
     </Step>
@@ -98,7 +98,7 @@ Domain validation is where most onboarding errors surface. Here's what each one 
 - **Google Workspace is set as your primary directory automatically.** When provisioning runs, ShiftControl promotes Google to primary. You don't need to configure anything in **Settings → Directories** afterward — it's already done.
 - **Provisioning is atomic.** If the Google API hits an error mid-flow, ShiftControl rolls back the partial state rather than leaving you with a half-onboarded org. Just retry.
 - **You can add JumpCloud as an additional directory later.** Onboarding makes Google your primary. If you ever need to connect JumpCloud too, do it from **Settings → Connectors → Directories** after the trial starts.
-- **You don't need to be the Super Admin to start onboarding.** Sign up with your own Google Workspace account. At the permissions step, send a [48-hour authorization link](/using-shiftcontrol/Integrations/guides/Google-Workspace-App-Authorization/#delegated-oauth) to your Super Admin — they can approve the connection without needing a ShiftControl account.
+- **You don't need to be the Super Admin to start onboarding.** Sign up with your own Google Workspace account. At the permissions step, send a [48-hour authorization link](/using-shiftcontrol/Integrations/guides/Google-Workspace-App-Authorization/#delegated-authorization) to your Super Admin — they can approve the connection without needing a ShiftControl account.
 - **Wizard copy can shift slightly between releases.** This page describes the intended flow; minor UI label changes may land between releases.
 
 ## Related Features

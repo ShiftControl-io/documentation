@@ -1,0 +1,75 @@
+---
+title: 'Device Details'
+description: 'Everything a single device’s page tells you in ShiftControl — hardware, OS and encryption, battery health, assignment, local accounts, and network.'
+keywords: ['ShiftControl', 'device details', 'JumpCloud', 'FileVault', 'BitLocker', 'encryption', 'recovery key', 'hardware']
+icon: 'info'
+---
+
+import ModeScreenshot from '@site/src/components/ModeScreenshot';
+import ConditionalContent from '@site/src/components/ConditionalContent';
+import Admonition from '@theme/Admonition';
+
+<p style={{fontSize: "large"}}>One device, everything about it — and the place you take action when you need to.</p>
+
+## Overview
+
+Click any device in the [inventory](/using-shiftcontrol/Devices/Viewing-devices) (or on a [user's profile](/using-shiftcontrol/Users/Viewing-a-user)) to open its detail page. This is the single source of truth for that machine: its specs, whether it's encrypted and recoverable, who it belongs to, and the [actions](/using-shiftcontrol/Devices/Device-actions) you can take on it.
+
+<ModeScreenshot path="Devices/Device-details" modes={["jc-only", "jc-google", "google-jc"]} alt="A device detail page showing hardware, OS and encryption, battery health, assignment, and network information" />
+
+## What the page tells you
+
+### Hardware
+
+Model, serial number, processor, memory, and storage — plus the device hostname. Beyond asset tracking, this is how you answer "is this machine due for replacement?" or "does this person have enough disk/RAM for their role?" at a glance.
+
+### OS & encryption
+
+This block is the one security cares about most:
+
+- **OS version** — how current the machine is.
+- **Encryption** — whether the disk is encrypted (FileVault on macOS, BitLocker on Windows).
+- **Method** — the encryption scheme in use (for example, FileVault AES-256-XTS).
+- **Recovery key** — whether the disk-encryption recovery key is **escrowed to JumpCloud**. This is the difference between "we can get this user back into their machine if they're locked out" and "we can't."
+- **Management channel** — how JumpCloud manages the device (for example, the JumpCloud agent).
+
+<Admonition type="warning" title="Encrypted isn't the whole story — escrow is">
+  A device can be encrypted but have **no recovery key held by JumpCloud** (for example, if it was encrypted outside of a JumpCloud policy). In that case a locked-out user or a forgotten password may be **unrecoverable**. Treat "encrypted *with* an escrowed recovery key" as the goal, not just "encrypted."
+</Admonition>
+
+### Battery health (laptops)
+
+Capacity, health rating, cycle count, and current charge. A battery at low health with a high cycle count is a concrete, defensible reason to approve a replacement — no guesswork.
+
+### Assignment
+
+Who the device is bound to in JumpCloud. A device can be **Unassigned** (no owner), which is exactly what you'd want to catch before it gets lost track of — the inventory has an Unassigned filter for this.
+
+### Local accounts
+
+The local OS accounts present on the device — useful for spotting an unexpected admin account, or confirming the right person actually has access to the machine.
+
+### Groups & network
+
+The JumpCloud groups and policies applied to the device, plus network details (recent IP, Wi-Fi MAC) and when it was last seen. This is where you confirm a device is actually receiving the policies you think it is.
+
+## Common Scenarios
+
+### Scenario: A user is locked out of their Mac
+
+Open their device, check **OS & encryption**. If the recovery key is escrowed to JumpCloud, you can [reveal it](/using-shiftcontrol/Devices/Device-actions) and get them back in. If it isn't, you've just learned why this matters — and you can fix the policy going forward.
+
+### Scenario: Approving a laptop replacement
+
+Someone says their laptop is "slow and the battery dies by lunch." Open the device: an aging OS, a battery at 70% health with 800 cycles, and 8 GB of RAM make the case for you.
+
+## Things to Know
+
+- **Everything here is live from JumpCloud.** If a spec looks wrong, it reflects what JumpCloud currently reports for the device.
+- **Recovery-key escrow only happens under a JumpCloud encryption policy.** No policy, no escrowed key — see the warning above.
+- **Actions live on this page.** The destructive ones have their own safeguards — see [Device actions](/using-shiftcontrol/Devices/Device-actions) before you use them.
+
+## Related Features
+
+- [Device actions](/using-shiftcontrol/Devices/Device-actions) — lock, restart, un-manage, reveal recovery key, and erase.
+- [Viewing devices](/using-shiftcontrol/Devices/Viewing-devices) — the inventory and coverage views.

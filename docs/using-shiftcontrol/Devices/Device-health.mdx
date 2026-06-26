@@ -1,0 +1,56 @@
+---
+title: 'Device Health'
+description: 'A graded health view of every JumpCloud device — Critical, Warning, or Healthy across battery, disk, encryption, secure boot/TPM, stability, and reachability.'
+keywords: ['ShiftControl', 'devices', 'JumpCloud', 'device health', 'battery', 'disk', 'encryption', 'TPM', 'secure boot', 'fleet health']
+icon: 'activity'
+---
+
+import ModeScreenshot from '@site/src/components/ModeScreenshot';
+import ConditionalContent from '@site/src/components/ConditionalContent';
+import Admonition from '@theme/Admonition';
+
+<p style={{fontSize: "large"}}>One health grade per device, so you can see the state of the whole fleet at a glance — and know which machines to look at first.</p>
+
+## Overview
+
+Where [Needs Attention](/using-shiftcontrol/Devices/Needs-attention) groups devices by a single problem, **Device Health** gives every device an overall grade — **Critical**, **Warning**, or **Healthy** — rolled up from several signals. It's the view for the bigger question: *how is the fleet doing overall, and which machines are trending toward trouble before they actually fail?*
+
+<ModeScreenshot path="Devices/Device-health" modes={["jc-only", "jc-google", "google-jc"]} alt="The Device Health view with Critical, Warning, and Healthy counts and a per-device table scoring battery, disk, encryption, secure boot/TPM, stability, and reachability" />
+
+## How It Works
+
+Three cards at the top count how many devices are **Critical**, **Warning**, and **Healthy**, and the tabs let you filter to just one grade. The table then scores each device across the dimensions that make up its overall grade:
+
+| Dimension | What it measures | Why it matters |
+|-----------|------------------|----------------|
+| **Overall** | The rolled-up grade for the device | Your at-a-glance priority — sort by this to put the worst devices on top |
+| **Battery** | Battery health (laptops) | A failing battery is a support ticket and a replacement waiting to happen |
+| **Disk** | Free disk space | A nearly-full disk causes slowdowns, failed updates, and crashes |
+| **Encryption** | Whether the disk is encrypted and a recovery key is held | The single most important security signal — see [Device details](/using-shiftcontrol/Devices/Device-details) |
+| **Secure boot / TPM** | Hardware security (Secure Boot, TPM) is on | Confirms the machine's firmware-level protections are active |
+| **Stability** | Uptime / restart behaviour | Frequent crashes or never-restarting both show up here |
+| **Reachability** | How recently the device checked in | A device you can't reach is one you can't protect or fix |
+
+A device lands in **Critical** when one or more of these is in a bad state (for example, an unencrypted disk or a nearly-full drive), **Warning** when something is trending the wrong way, and **Healthy** when everything's in range.
+
+## Common Scenarios
+
+### Scenario: Triage before a hardware budget request
+
+Filter to **Critical** and **Warning**, sort by Overall, and you have a defensible, evidence-backed list of the machines that need attention or replacement — with the specific reason (battery, disk, encryption) next to each one.
+
+### Scenario: Proving the fleet is in good shape
+
+Before a security review or board update, the three counts at the top — *X Healthy, Y Warning, Z Critical* — are a one-glance summary of fleet posture, with the detail to back it up if anyone asks.
+
+## Things to Know
+
+- **Health is computed from live JumpCloud signals**, so grades reflect the current state of each device.
+- **Encryption shows up in two places on purpose** — here as a health dimension, and in [Needs Attention](/using-shiftcontrol/Devices/Needs-attention) as its own triage group. They're the same underlying fact viewed two ways.
+- **Use it to get ahead of failures**, not just react to them — Warning is your chance to act before a device becomes Critical.
+
+## Related Features
+
+- [Needs Attention](/using-shiftcontrol/Devices/Needs-attention) — devices grouped by a specific, actionable problem.
+- [Viewing devices](/using-shiftcontrol/Devices/Viewing-devices) — the full inventory and filters.
+- [Device details](/using-shiftcontrol/Devices/Device-details) — open any device to see the specifics behind its grade.

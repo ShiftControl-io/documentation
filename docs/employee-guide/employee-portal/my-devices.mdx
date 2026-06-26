@@ -1,0 +1,55 @@
+---
+title: 'My Devices'
+description: 'See the devices assigned to you in the ShiftControl employee portal — the same details your IT team sees, scoped to just you.'
+keywords: ['ShiftControl', 'employee portal', 'my devices', 'JumpCloud', 'device', 'encryption']
+---
+
+import ConditionalContent from '@site/src/components/ConditionalContent';
+import Admonition from '@theme/Admonition';
+import ModeScreenshot from '@site/src/components/ModeScreenshot';
+
+<p style={{fontSize: "large"}}>The hardware assigned to you, in plain sight — because you should be able to see what your company can see about your devices.</p>
+
+<Admonition type="info" title="Don't see My Devices?">
+  My Devices is an optional feature your IT team can switch on or off for the whole organization. If it isn't in your employee-portal sidebar, your admin has it turned off — reach out to them if you think you should have access.
+</Admonition>
+
+## Why this exists
+
+Most IT tools are a one-way mirror: your company can see your devices, but you can't. ShiftControl does it the other way around. **My Devices** shows you the same device information your IT team sees — just limited to *your* devices. Nothing hidden, nothing to request.
+
+<ModeScreenshot path="EmployeePortal/My-devices" modes={["jc-only", "jc-google", "google-jc"]} alt="The My Devices page in the employee portal showing a person's assigned laptop and phone with OS, encryption status, and last check-in" />
+
+## What you'll see
+
+If your organization manages devices and you have one assigned, **My Devices** appears in your employee-portal sidebar. Each device shows:
+
+- **Name and type** — for example, your MacBook Pro or your phone.
+- **Operating system** — what it's running, and the version.
+- **Encryption status** — whether the disk is encrypted (which protects your data if the device is lost or stolen).
+- **Last check-in** — the last time the device reported in.
+
+Click a device to see more detail, like its model, serial number, and storage.
+
+## What you can (and can't) do here
+
+My Devices is **read-only**. You can look at everything about your own devices, but actions like locking or wiping a device stay with your IT team — this page is about visibility, not control.
+
+<Admonition type="info" title="Only your devices">
+  You only ever see devices assigned to you — never anyone else's. If a device you use is missing here, it may not be assigned to you yet; let your IT team know and they can fix the assignment.
+</Admonition>
+
+## Common questions
+
+### Why does it say my device isn't encrypted?
+
+Encryption protects the data on your device if it's lost or stolen. If yours shows as not encrypted, that's worth flagging to IT — they can help turn it on.
+
+### A device I use isn't listed
+
+The list shows devices **assigned to you** in your company's system. A shared or newly issued machine might not be linked to you yet. Ask IT to assign it to you.
+
+## Related
+
+- [Your Apps](/employee-guide/employee-portal/your-apps) — the apps you have access to.
+- [Account Security](/employee-guide/employee-portal/account-security) — manage your own login and security settings.
