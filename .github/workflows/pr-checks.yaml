@@ -1,0 +1,49 @@
+name: Docs PR Checks
+run-name: Run PR checks on PR ${{ github.event.pull_request.number }} - "${{ github.event.pull_request.title }}" by @${{ github.actor }}
+
+on:
+  pull_request:
+    branches:
+      - main
+
+# Cancel superseded runs when a PR is pushed to again
+concurrency:
+  group: pr-checks-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+# Minimal permissions — these checks need no secrets, so fork PRs work too
+permissions:
+  contents: read
+
+jobs:
+  build-and-validate:
+    name: Build & Validate
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version-file: .node-version
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      # Fails if any <ModeScreenshot> / image reference points at a missing file
+      - name: Validate image references
+        run: npm run check-images
+
+      # Docusaurus build — fails on broken internal links and MDX/compile errors
+      - name: Build site
+        run: npm run build
+
+      - name: Summary
+        if: always()
+        run: |
+          echo "### Docs PR checks" >> "$GITHUB_STEP_SUMMARY"
+          echo "" >> "$GITHUB_STEP_SUMMARY"
+          echo "- Image references validated (\`check-images\`)" >> "$GITHUB_STEP_SUMMARY"
+          echo "- Site built — broken links and MDX errors caught (\`build\`)" >> "$GITHUB_STEP_SUMMARY"
