@@ -1,0 +1,149 @@
+---
+title: 'Device Actions'
+description: 'Lock, restart, shut down, un-manage, reveal recovery keys, and erase JumpCloud devices from ShiftControl — and how to use the destructive actions safely.'
+keywords: ['ShiftControl', 'device actions', 'JumpCloud', 'erase device', 'wipe', 'un-manage', 'recovery key', 'FileVault', 'BitLocker', 'offboarding', 'device admin']
+icon: 'shield'
+---
+
+import ModeScreenshot from '@site/src/components/ModeScreenshot';
+import ConditionalContent from '@site/src/components/ConditionalContent';
+import Admonition from '@theme/Admonition';
+
+<p style={{fontSize: "large"}}>Take control of a device when you need to — from a quick restart to a full offboarding wipe — with guardrails on the actions you can't undo.</p>
+
+## Overview
+
+Every action lives on a device's [detail page](/using-shiftcontrol/Devices/Device-details), under the **Actions** menu. These range from harmless (restart) to permanent (erase), so they're controlled by a dedicated role and every one of them is written to an audit log.
+
+This page explains what each action does, how it differs by platform, and — most importantly — how to run the destructive ones without losing data you can't get back.
+
+<Admonition type="warning" title="Two different command paths underneath">
+  JumpCloud carries out these actions two different ways, and the same word can mean different things on different platforms:
+  <ul>
+    <li><strong>macOS and iOS/iPadOS</strong> use native <strong>Apple MDM</strong> commands.</li>
+    <li><strong>Windows and Linux</strong> use <strong>JumpCloud agent</strong> commands, which depend on the agent and some OS prerequisites.</li>
+  </ul>
+  Agent-based actions are inherently a bit less predictable than MDM (they can require things like Windows Recovery Environment to be enabled), so verify prerequisites before relying on a destructive agent action.
+</Admonition>
+
+## Who can take actions: the device-admin role
+
+Viewing devices and *acting* on them are deliberately separate. Most people can see the inventory; only the people you grant the **device-admin** role can take actions — and you control how far that goes, per action, across four escalating tiers:
+
+| Tier | Covers | Example |
+|------|--------|---------|
+| **View** | Seeing devices and their details | Help desk checking a serial number |
+| **Control** | Non-destructive actions | Lock, restart, shut down, assign owner |
+| **Destructive** | Actions that remove or destroy | Un-manage, erase |
+| **Recovery-key access** | Revealing disk-encryption keys | Reading a FileVault/BitLocker key |
+
+Grant each tier to the right people. A help-desk technician might get **Control** so they can lock a lost laptop, while only senior IT gets **Destructive** and **Recovery-key access**. Recovery-key access is its own tier on purpose — a recovery key fully decrypts the disk, so it's the most sensitive thing on the page.
+
+## Everything is audited
+
+Every action — who ran it, on which device, when, and how it turned out — is written to an **append-only audit log**. Revealing a recovery key is logged too. The log doubles as the live status tracker for in-flight commands, so you can see whether an action was issued, acknowledged by the device, and completed.
+
+<Admonition type="info" title="Actions are asynchronous">
+  Commands are sent to the device and run when it next checks in. ShiftControl reports a command as complete only when the device confirms it — not the moment you click. If a device is offline, the command waits and runs when it reconnects (this matters most for erase — see below).
+</Admonition>
+
+## Non-destructive actions
+
+### Assign owner
+
+Bind a device to the person who actually uses it. Keeping ownership accurate is what makes per-user device lists and the [coverage view](/using-shiftcontrol/Devices/Viewing-devices) trustworthy.
+
+### Lock
+
+Remotely locks the screen so the device can't be used.
+
+- **macOS:** you set a **6-digit PIN**; the Mac restarts and shows a PIN-entry screen, and it can't be unlocked without that PIN. **Record the PIN** — if it's lost, the device stays locked.
+- **Windows / Linux:** locks the screen only; any bound user gets back in by logging in again. No PIN, no data loss, open work preserved.
+
+### Restart / Shut down
+
+Sends a reboot or powers the device off.
+
+<Admonition type="warning" title="Unsaved work is lost">
+  Restart and shut down don't prompt the person using the device. Any unsaved work is lost — warn the user first. Status can also lag in the inventory for several minutes after the device acts, so don't be alarmed if "online" takes a moment to update.
+</Admonition>
+
+## Recovery keys
+
+### Reveal recovery key
+
+Shows the disk-encryption recovery key JumpCloud escrowed for the device, so you can get a locked-out user back in or decrypt a disk.
+
+- The key exists **only if the device was encrypted under a JumpCloud encryption policy**. No policy, no escrowed key — there's nothing to reveal.
+- A recovery key bypasses disk encryption entirely, so revealing one is a **privileged, logged action** gated behind the recovery-key tier. Treat a revealed key like a password: copy it only when you need it, and don't paste it where it'll linger.
+- **macOS** uses the FileVault recovery key; **Windows** uses the BitLocker recovery key.
+
+<Admonition type="warning" title="Recovery keys disappear after a device is removed">
+  FileVault recovery keys are only retrievable for about **30 days after a device is deleted from JumpCloud**. If you're offboarding, **reveal and save the key before you un-manage or erase** — afterward it may be gone for good.
+</Admonition>
+
+## Destructive actions
+
+These remove a device from management or destroy its data. They're gated behind the **Destructive** tier, audited, and — for erase — protected by a type-to-confirm step.
+
+### Un-manage
+
+Removes the device from JumpCloud management.
+
+- **Data is left intact.** Un-managing is *not* a wipe — local files, user accounts, and the user's profile all remain on the machine. Only JumpCloud's policies are pulled.
+- On an **active** device, the JumpCloud agent uninstalls itself automatically. To manage the device again, it has to be **re-enrolled** from scratch.
+- Removing the device record can't be undone — you'd re-add the device as if it were new.
+
+<Admonition type="warning" title="Inactive devices need a manual cleanup">
+  If a device isn't checking in when you un-manage it, the agent and policies **can't be removed remotely** — someone has to uninstall the agent on the machine itself. Otherwise you've removed the record while an agent keeps running on the endpoint.
+</Admonition>
+
+### Erase device
+
+Wipes all data and returns the device toward factory state. This is the most destructive action in ShiftControl.
+
+<Admonition type="danger" title="Erase is permanent and cannot be undone">
+  Once an erase is sent it <strong>cannot be cancelled</strong>, and the data <strong>cannot be recovered</strong>. If the device is offline, the command <strong>queues and fires the moment it reconnects</strong> — possibly much later. Be certain before you confirm.
+</Admonition>
+
+ShiftControl adds guardrails on top of JumpCloud:
+
+- **Type the device name to confirm.** Erase won't proceed on a misclick — you have to type the exact device name.
+- **Capture the recovery key first.** Reveal and save the FileVault/BitLocker key *before* erasing; the wipe destroys it. ShiftControl prompts you toward this, but it's on you to actually save it.
+- **macOS PIN.** Erase surfaces a 6-digit PIN. On Intel Macs without a T2 chip, that PIN is required to recover the device and **cannot be recovered if lost** — record it. On Apple Silicon and T2 Macs, recovery is protected by Activation Lock instead, and the PIN may be ignored — that's expected.
+- **No bulk erase.** You erase one device at a time, on purpose.
+- **Warn the user.** The erase doesn't warn the person using the device — you do.
+
+Platform behavior differs:
+
+- **macOS:** modern Macs perform "Erase All Content and Settings" back to out-of-box; older hardware does a full obliteration that needs a macOS reinstall.
+- **Windows:** a protected wipe that requires the **Windows Recovery Environment** to be enabled — verify it first, or the wipe can fail or, if interrupted, leave the device unbootable.
+- **Linux:** a wipe can take **hours** on some hardware and may not report a confirmation back.
+
+## Offboarding: the safe order of operations
+
+When someone leaves, do device steps in this order so you never destroy something you needed:
+
+1. **Reveal and save the recovery key** while the device still exists in JumpCloud (keys vanish ~30 days after deletion).
+2. **For a macOS erase, record the 6-digit PIN** — JumpCloud can't recover it.
+3. **Warn the user** (or confirm the device is already collected/returned).
+4. **Hand off any data** that should be preserved.
+5. **Then erase and/or un-manage** the device.
+6. If the device was **inactive**, plan a manual agent uninstall — remote removal won't reach it.
+
+<Admonition type="info">
+  Handling a person's devices is part of the user-offboarding checklist — see [Editing a user](/using-shiftcontrol/Users/Editing-a-user). Doing it from the leaver's profile keeps device cleanup tied to the person you're actually offboarding.
+</Admonition>
+
+## Things to Know
+
+- **Permissions are per action.** Someone with Control can lock and restart but not erase, unless you also grant Destructive.
+- **Everything is logged**, including recovery-key reveals, in an append-only audit trail.
+- **Erase queues when offline** and runs on reconnect — treat a queued erase as already committed.
+- **Un-manage ≠ erase.** Un-manage leaves data intact; erase destroys it. Choose deliberately.
+
+## Related Features
+
+- [Device details](/using-shiftcontrol/Devices/Device-details) — where the Actions menu lives.
+- [Viewing devices](/using-shiftcontrol/Devices/Viewing-devices) — find the device (and its owner) first.
+- [Editing a user](/using-shiftcontrol/Users/Editing-a-user) — device handling as part of offboarding.

@@ -1,0 +1,72 @@
+---
+title: 'Device Management'
+description: 'See and manage every JumpCloud-managed device in your organization from ShiftControl — live inventory, encryption coverage, per-user devices, and offboarding actions.'
+keywords: ['ShiftControl', 'device management', 'JumpCloud', 'MDM', 'devices', 'inventory', 'encryption', 'offboarding']
+icon: 'monitor'
+---
+
+import ModeScreenshot from '@site/src/components/ModeScreenshot';
+import ConditionalContent from '@site/src/components/ConditionalContent';
+import Admonition from '@theme/Admonition';
+
+<p style={{fontSize: "large"}}>Your whole fleet — every Mac, Windows, and Linux machine, plus phones and tablets — in the same place you already manage people and apps.</p>
+
+<ConditionalContent modes={["google-only"]}>
+
+<Admonition type="info" title="Requires JumpCloud">
+  Device Management reads device data from JumpCloud, so it's available to organizations that use JumpCloud as their identity provider. If you're on Google Workspace only, this section won't appear in your sidebar. The rest of this page explains what JumpCloud customers get.
+</Admonition>
+
+</ConditionalContent>
+
+## Overview
+
+Before this, your laptops and phones lived in a different tool than your users and apps. Device Management brings them together: a dedicated **Devices** section, peer to Users and Apps, where you can see what hardware your team is running, confirm it's encrypted and checking in, find people who don't have a managed device yet, and take action on a device when someone leaves or a laptop goes missing.
+
+It's built for the questions IT actually asks — *Who has an unencrypted laptop? Which devices haven't checked in for weeks? Does this new hire have a machine yet? This person is leaving — how do I hand off or wipe their Mac safely?* — rather than dumping JumpCloud's raw device table on the screen.
+
+<ModeScreenshot path="Devices/Device-inventory" modes={["jc-only", "jc-google", "google-jc"]} alt="The Devices inventory in ShiftControl showing managed devices with owner, OS, serial, encryption status, and last check-in" />
+
+## How It Works
+
+**Device data is live from JumpCloud.** ShiftControl does not copy your devices into its own database and sync them on a schedule. Every time you open the Devices section, ShiftControl asks JumpCloud for the current state and shows you what's true *right now* — online status, last check-in, encryption, specs. There's no "last synced 6 hours ago" staleness to second-guess.
+
+Because the data is live, two things follow:
+
+- **Latency is normal.** A list of your whole fleet is a real API call, so you'll occasionally see a brief loading state — especially the coverage view that compares every user against every device. That's expected, not a bug.
+- **ShiftControl stores only its own metadata.** The few things that *are* ShiftControl's to remember — which users you've marked as "no device expected," who has the device-admin role, and an audit log of every action taken — live in ShiftControl. The device facts themselves always come from JumpCloud.
+
+The section has three views:
+
+| View | What it answers |
+|------|-----------------|
+| **Device Inventory** | Everything you manage — browse, filter, and search the full fleet. |
+| **Needs attention** | The devices that need a look — unencrypted, dormant, or unassigned. |
+| **Device Health** | A higher-level read on the health of the fleet. |
+
+## Enabling Device Management
+
+Device Management is **automatically enabled for all JumpCloud customers** — there's nothing to install or turn on. If you'd prefer to hide it, go to **Settings → Features** and toggle Devices off.
+
+## Common Scenarios
+
+### Scenario: Closing an encryption gap
+
+Your security review asks, "Is every company laptop encrypted?" Open **Devices → Needs attention** (or filter the inventory by **Unencrypted**). You get the exact list of machines without disk encryption, who they belong to, and when they last checked in — so you can follow up with those people directly instead of guessing.
+
+### Scenario: Confirming a new hire has a machine
+
+A developer started Monday. Open the [coverage view](/using-shiftcontrol/Devices/Viewing-devices) to see whether they have a managed device bound to them yet. If they don't, you know to chase the laptop shipment before their first standup.
+
+## Things to Know
+
+- **JumpCloud is required.** Device data comes from JumpCloud; there's no device coverage for Google-Workspace-only organizations.
+- **The data is live, not synced.** What you see is JumpCloud's current state. Expect occasional loading states on fleet-wide views.
+- **Powerful actions are gated.** Viewing devices and taking action on them are controlled separately by the [device-admin role](/using-shiftcontrol/Devices/Device-actions). Most people see devices; only the people you choose can lock, un-manage, or erase them.
+
+## Related Features
+
+- [Viewing devices](/using-shiftcontrol/Devices/Viewing-devices) — the inventory, filters, per-user devices, and the users-without-a-device coverage view.
+- [Device details](/using-shiftcontrol/Devices/Device-details) — everything a single device's page tells you.
+- [Device actions](/using-shiftcontrol/Devices/Device-actions) — lock, restart, un-manage, recovery keys, and erase — and how to use the destructive ones safely.
+- [My Devices (employee portal)](/employee-guide/employee-portal/my-devices) — what your team sees about their own hardware.

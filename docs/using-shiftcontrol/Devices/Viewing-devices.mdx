@@ -1,0 +1,81 @@
+---
+title: 'Viewing Devices'
+description: 'Browse and filter your JumpCloud device inventory, see each person’s devices on their profile, and find users without a managed device.'
+keywords: ['ShiftControl', 'device inventory', 'JumpCloud', 'devices', 'encryption', 'coverage', 'users without devices', 'filters']
+icon: 'list'
+---
+
+import ModeScreenshot from '@site/src/components/ModeScreenshot';
+import ConditionalContent from '@site/src/components/ConditionalContent';
+import Admonition from '@theme/Admonition';
+
+<p style={{fontSize: "large"}}>Find any device, spot the ones that need attention, and see who doesn't have a machine yet.</p>
+
+## Overview
+
+The **Device Inventory** is your browsable view of every device JumpCloud manages for your organization. It's designed so the answer to a question is one filter away — *show me the unencrypted machines*, *show me what hasn't checked in*, *show me the Windows fleet* — rather than scrolling a giant table.
+
+<ModeScreenshot path="Devices/Device-inventory" modes={["jc-only", "jc-google", "google-jc"]} alt="Device Inventory with summary cards for online, offline, unencrypted, and unassigned devices, plus a filterable table" />
+
+## How It Works
+
+### The summary cards
+
+Across the top, four cards give you the fleet at a glance: how many devices are **Online**, **Offline**, **Unencrypted**, and **Unassigned**. They're the fastest way to see whether anything needs attention before you even touch a filter.
+
+### The device table
+
+Each row shows the fields IT actually uses to make decisions:
+
+- **Device** — the device name and hostname.
+- **Owner** — the person (or people) the device is bound to in JumpCloud.
+- **OS** — operating system and version, so you can spot machines that are behind.
+- **Serial** — the hardware serial number, for asset tracking and support.
+- **Encryption** — whether the disk is encrypted, and whether a recovery key is held (see [Device details](/using-shiftcontrol/Devices/Device-details)).
+- **Last check-in** — when JumpCloud last heard from the device. A long gap usually means the machine is off, lost, or no longer in use.
+
+Click any row to open the [device's detail page](/using-shiftcontrol/Devices/Device-details).
+
+### Filtering and search
+
+Filter the list by **status** (online, offline, dormant), **platform** (macOS, Windows, Linux, iPadOS), **encryption** (encrypted / unencrypted), and **assignment** (assigned / unassigned). Combine filters to narrow quickly — for example, *unencrypted* + *macOS* — and use search to jump to a specific name, hostname, or serial.
+
+The **Needs attention** view is a pre-built filter for the devices most likely to need action — unencrypted, dormant, or unassigned — so you don't have to assemble it yourself.
+
+## Devices on a user's profile
+
+You don't have to start from the inventory. Open any person in [Users](/using-shiftcontrol/Users/Viewing-a-user) and you'll see the devices bound to them right on their profile. This is the natural place to check someone's hardware while you're already looking at their account — for example, while offboarding them.
+
+## Who doesn't have a managed device?
+
+The coverage view answers a question the raw device list can't: *which of my people have no managed device at all?* ShiftControl computes it as **all users − users with at least one bound device − the people you've marked as not needing one.**
+
+### Ignoring users who don't need a device
+
+Not everyone should have a managed laptop — contractors on their own hardware, service accounts, shared logins. Mark those people as **ignored** and they drop out of the coverage gap so the list stays meaningful. The ignore flag is per-user and reversible, and ShiftControl records who set it and when.
+
+<Admonition type="info">
+  The coverage view compares your entire user directory against your entire device fleet, so it's the most likely place to see a brief "computing" state while the live data loads. That's expected.
+</Admonition>
+
+## Common Scenarios
+
+### Scenario: Quarterly encryption audit
+
+Filter the inventory by **Unencrypted**. Export or work down the list, contacting each owner or pushing an encryption policy in JumpCloud. Re-check the **Unencrypted** card next quarter to confirm the number dropped.
+
+### Scenario: Finding the coverage gaps before an audit
+
+Open the coverage view, mark your contractors and service accounts as **ignored**, and you're left with the real list of employees who should have a managed device but don't — exactly what an auditor (or your own security team) wants to see closed.
+
+## Things to Know
+
+- **The list is live.** Counts and statuses reflect JumpCloud right now; there's no manual refresh-and-wait sync.
+- **"Last check-in" is your staleness signal.** A device that hasn't checked in for weeks may be powered off, lost, or retired — worth confirming before you rely on it.
+- **Ignoring a user is reversible** and is recorded with who/when, so coverage decisions stay auditable.
+
+## Related Features
+
+- [Device details](/using-shiftcontrol/Devices/Device-details) — open a single device to see full specs, encryption, and assignment.
+- [Device actions](/using-shiftcontrol/Devices/Device-actions) — what you can do to a device, and how to do the destructive actions safely.
+- [Users](/using-shiftcontrol/Users/Viewing-a-user) — see a person's devices on their profile.

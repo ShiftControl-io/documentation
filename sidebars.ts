@@ -129,6 +129,23 @@ const sidebars: SidebarsConfig = {
                 },
                 {
                     type: 'category',
+                    label: 'Devices',
+                    link: {
+                        type: 'generated-index',
+                        title: 'Devices',
+                        description: 'See and manage every JumpCloud-managed device — live inventory, encryption coverage, per-user devices, and offboarding actions. Requires JumpCloud.',
+                        slug: '/using-shiftcontrol/Devices',
+                        keywords: ['devices','device-management','jumpcloud','mdm'],
+                    },
+                    items: [
+                        'using-shiftcontrol/Devices/Device-management',
+                        'using-shiftcontrol/Devices/Viewing-devices',
+                        'using-shiftcontrol/Devices/Device-details',
+                        'using-shiftcontrol/Devices/Device-actions',
+                    ],
+                },
+                {
+                    type: 'category',
                     label: 'Reports',
                     link: {
                         type: 'generated-index',
@@ -365,6 +382,7 @@ const sidebars: SidebarsConfig = {
                     items: [
                         'employee-guide/employee-portal/your-apps',
                         'employee-guide/employee-portal/org-chart',
+                        'employee-guide/employee-portal/my-devices',
                         'employee-guide/employee-portal/account-security',
                     ],
                 },
