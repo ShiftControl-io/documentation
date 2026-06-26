@@ -1,0 +1,57 @@
+---
+title: 'App Permissions'
+description: 'See every third-party app connected to your account and revoke the ones you no longer use — right from the ShiftControl employee portal.'
+keywords: ['ShiftControl', 'employee portal', 'app permissions', 'OAuth', 'third-party apps', 'revoke access', 'security']
+---
+
+import ConditionalContent from '@site/src/components/ConditionalContent';
+import Admonition from '@theme/Admonition';
+import ModeScreenshot from '@site/src/components/ModeScreenshot';
+
+<p style={{fontSize: "large"}}>Every third-party app you've connected to your account, in one place — and a one-click way to cut off the ones you don't use anymore.</p>
+
+## Why this exists
+
+Over time you click "Sign in with Google" or "Allow access" on a lot of tools — a scheduling app here, a one-off PDF converter there. Each of those keeps a standing connection to your account, often long after you've stopped using it. Google does let you review these, but it's buried deep in your account settings and gives you no sense of which ones actually matter.
+
+**App Permissions** brings that list into the employee portal, in plain language, with a sense of how much access each app has — so cleaning up is something you'll actually do.
+
+<ModeScreenshot path="EmployeePortal/App-permissions" modes={["google-only", "jc-google", "google-jc"]} alt="The App Permissions page in the employee portal listing connected third-party apps with their access scopes" />
+
+## What you'll see
+
+The page lists every third-party app you've granted access to. For each one you'll see:
+
+- **The app** — its name and icon.
+- **What it can access** — the scopes you granted, like reading your email or managing your calendar.
+- **How sensitive that access is** — an at-a-glance indicator of whether an app has light read-only access or broad control over your account.
+- **When you authorized it** — so you can spot connections you don't even remember making.
+
+## Revoking access
+
+If you see an app you no longer use — or one you don't recognize — you can disconnect it yourself:
+
+1. Find the app in the list.
+2. Click **Revoke**.
+3. Confirm by typing **revoke**.
+
+That's it — the app immediately loses access to your account. There's a deliberate type-to-confirm step so you never cut off a tool you rely on by accident.
+
+<Admonition type="info" title="Revoking is safe to do">
+  Revoking only removes an app's standing connection to your account. If you need that app again later, you can simply sign in and re-authorize it. When in doubt, revoking anything you don't actively use is good security hygiene.
+</Admonition>
+
+## Common questions
+
+### Will revoking an app break my sign-in to ShiftControl?
+
+No. This page is about *third-party* apps you've connected to your Google account. Your ShiftControl and core work-app access is managed by your IT team and isn't affected.
+
+### Does my IT team see this too?
+
+Yes — admins have an organization-wide view of app permissions from their dashboard. This page simply gives you the power to clean up your own connections without waiting on anyone.
+
+## Related
+
+- [Your Apps](/employee-guide/employee-portal/your-apps) — the work apps your company has given you.
+- [Account Security](/employee-guide/employee-portal/account-security) — manage your own login and security settings.

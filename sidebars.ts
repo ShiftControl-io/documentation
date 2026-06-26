@@ -140,6 +140,8 @@ const sidebars: SidebarsConfig = {
                     items: [
                         'using-shiftcontrol/Devices/Device-management',
                         'using-shiftcontrol/Devices/Viewing-devices',
+                        'using-shiftcontrol/Devices/Needs-attention',
+                        'using-shiftcontrol/Devices/Device-health',
                         'using-shiftcontrol/Devices/Device-details',
                         'using-shiftcontrol/Devices/Device-actions',
                     ],
@@ -382,6 +384,7 @@ const sidebars: SidebarsConfig = {
                     items: [
                         'employee-guide/employee-portal/your-apps',
                         'employee-guide/employee-portal/org-chart',
+                        'employee-guide/employee-portal/app-permissions',
                         'employee-guide/employee-portal/my-devices',
                         'employee-guide/employee-portal/account-security',
                     ],

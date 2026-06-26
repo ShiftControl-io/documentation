@@ -7,6 +7,7 @@ icon: 'grid'
 
 import ModeScreenshot from '@site/src/components/ModeScreenshot';
 import ConditionalContent from '@site/src/components/ConditionalContent';
+import Admonition from '@theme/Admonition';
 
 
 <p style={{fontSize: "large"}}>Your central view of every SaaS application in your organization — what you have, who has access, and what it costs.</p>
@@ -92,6 +93,7 @@ Click any app name in the list to open its [detail page](/using-shiftcontrol/App
 Click the **⋮ menu** on any app row:
 
 - **Edit** — Open the app for editing
+- **Archive** — Retire the app while keeping its cost and subscription history (see below)
 - **Delete** — Permanently remove the app and all its assignments (disabled for the ShiftControl app itself)
 
 <ConditionalContent modes={["jc-only", "jc-google", "google-jc"]}>
@@ -104,7 +106,26 @@ Additional actions available for JumpCloud-managed apps:
 
 </ConditionalContent>
 
-**Bulk actions:** Select multiple apps and choose **Delete** to remove them in bulk.
+**Bulk actions:** Select multiple apps and choose **Archive** or **Delete** to retire or remove them in bulk.
+
+## Archiving vs. Deleting an App
+
+When you stop using an app, you have two ways to retire it — and the difference is what happens to its cost history.
+
+**Archiving** retires an app while keeping its record. Use this for almost every app you stop using:
+
+- The app is removed from your live setup — assignments are pulled and it's no longer provisioned, so it stops appearing in your team's app launcher.
+- Its **subscription and cost history are preserved**, so your spend totals stay honest and you can still answer "what did we used to pay for that?"
+- Archived apps are **excluded from every total and report**, so they don't inflate your numbers.
+- Flip on the admin-only **Archived** filter to browse retired apps along with their cost and sign-on details.
+- **Un-archive** at any time to bring an app back — it returns unassigned, so you'll re-assign who gets access.
+- Every archive is stamped with who did it and when.
+
+**Deleting** permanently removes the app *and its entire cost history*. Reserve it for apps added by mistake or duplicates — anything where the historical spend record has no value.
+
+<Admonition type="info" title="When in doubt, archive">
+  Archiving is almost always the right choice for an app you're actually retiring. Deleting throws away the subscription and cost history along with the app — exactly the data you'll wish you had at your next budget review.
+</Admonition>
 
 ## Things to Know
 

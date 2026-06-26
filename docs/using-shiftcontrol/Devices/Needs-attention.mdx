@@ -1,0 +1,64 @@
+---
+title: 'Needs Attention'
+description: 'A triage view of the JumpCloud devices that need a look — unencrypted disks, missing recovery keys, devices gone quiet, and unassigned machines.'
+keywords: ['ShiftControl', 'devices', 'JumpCloud', 'needs attention', 'unencrypted', 'recovery key', 'device triage', 'security']
+icon: 'alert-triangle'
+---
+
+import ModeScreenshot from '@site/src/components/ModeScreenshot';
+import ConditionalContent from '@site/src/components/ConditionalContent';
+import Admonition from '@theme/Admonition';
+
+<p style={{fontSize: "large"}}>The short list of devices that actually need you — grouped by exactly what's wrong with each one.</p>
+
+## Overview
+
+The full [inventory](/using-shiftcontrol/Devices/Viewing-devices) shows you everything. **Needs Attention** shows you only the devices with a problem worth acting on, and — crucially — it groups them by *which* problem, so you're not eyeballing a table trying to figure out what's wrong. It's the view to open on a Monday morning to see if anything across the fleet needs a hand.
+
+<ModeScreenshot path="Devices/Needs-attention" modes={["jc-only", "jc-google", "google-jc"]} alt="The Needs Attention view grouping devices by issue: unencrypted, recovery key not escrowed, gone quiet, and unassigned" />
+
+## How It Works
+
+Devices are sorted into issue groups, each with a count and a one-line explanation of why it matters. The tabs at the top let you jump to a single category, and every device has an **Open** button that takes you straight to its [detail page](/using-shiftcontrol/Devices/Device-details) to act.
+
+### Unencrypted
+
+Disk encryption is off, which means anything on the drive is readable if the device is lost or stolen. These are usually your highest-priority items — an unencrypted laptop is a data-breach waiting to happen. Push an encryption policy in JumpCloud, or follow up with the owner.
+
+### Recovery key not escrowed
+
+The disk *is* encrypted, but JumpCloud isn't holding a recovery key for it. That's a quiet trap: the device looks secure, but if the user forgets their password or gets locked out, **you have no way to unlock or safely reset it**. Getting these devices under a JumpCloud encryption policy (so the key is escrowed) closes the gap.
+
+<Admonition type="warning">
+  "Encrypted" and "recoverable" are not the same thing. A device in this group is encrypted but **not recoverable by you** — which is often worse than unencrypted, because it's easy to assume it's fine. See [Device details](/using-shiftcontrol/Devices/Device-details) for how escrow works.
+</Admonition>
+
+### Gone quiet
+
+The device hasn't checked in for a while — it could be powered off, lost, or simply no longer in use. A machine that's gone quiet is worth confirming: if someone left and their laptop is still "out there," that's both a security and an asset-tracking question.
+
+### Unassigned
+
+A managed device with no bound user. That's usually one of two things: a freshly enrolled machine waiting to be handed to someone, or a departed employee's device still reporting in. Either way it's worth resolving — assign it to its owner, or [retire it](/using-shiftcontrol/Devices/Device-actions).
+
+## Common Scenarios
+
+### Scenario: The weekly fleet check
+
+Open Needs Attention. Clear the **Unencrypted** group first (highest risk), then **Recovery key not escrowed**, then sweep **Gone quiet** for anything that should have come back by now. Five minutes, and you know the fleet is in good shape.
+
+### Scenario: Catching a missed offboarding
+
+Someone left last month, but their MacBook shows up under **Unassigned** and **Gone quiet**. That's your signal the device offboarding never happened — open it and follow the [offboarding steps](/using-shiftcontrol/Devices/Device-actions).
+
+## Things to Know
+
+- **The groups are live** from JumpCloud's device data — counts reflect the current state.
+- **A device can appear in more than one group** (for example, gone quiet *and* unassigned) — that's usually a stronger signal, not a duplicate.
+- **Every item links to action.** Needs Attention tells you what's wrong; the [device detail page](/using-shiftcontrol/Devices/Device-details) is where you fix it.
+
+## Related Features
+
+- [Viewing devices](/using-shiftcontrol/Devices/Viewing-devices) — the full inventory and filters.
+- [Device Health](/using-shiftcontrol/Devices/Device-health) — a graded, per-dimension health view of every device.
+- [Device actions](/using-shiftcontrol/Devices/Device-actions) — resolve what Needs Attention surfaces.
