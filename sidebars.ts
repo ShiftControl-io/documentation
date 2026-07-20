@@ -125,6 +125,7 @@ const sidebars: SidebarsConfig = {
                         'using-shiftcontrol/Apps/Adding-an-app',
                         'using-shiftcontrol/Apps/Editing-an-app',
                         'using-shiftcontrol/Apps/App-discovery',
+                        'using-shiftcontrol/Apps/Blocking-apps',
                     ],
                 },
                 {

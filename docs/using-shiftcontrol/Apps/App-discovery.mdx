@@ -83,10 +83,11 @@ Select multiple apps using the checkboxes, then click **Bulk Actions** to apply 
 - Discovery is automatic and periodic. You do not need to trigger scans manually.
 - Discovered apps are not managed apps. They appear in App Discovery only -- they are not shown to employees and have no assignments until you add them.
 - The activity counts (users, grants, scopes) help you prioritize which apps to review first. An app with many users and broad scopes deserves more attention than one with a single user.
-- Dismissing an app does not revoke OAuth access. It only removes the app from the Pending view. To revoke access, you would need to do so in the source platform (e.g., Google Workspace Admin).
+- Dismissing an app does not revoke OAuth access. It only removes the app from the Pending view. To actually revoke access, [block the app](/using-shiftcontrol/Apps/Blocking-apps) — that pulls existing grants and keeps new ones from sticking.
 
 ## Related Features
 
+- [Blocking Apps](/using-shiftcontrol/Apps/Blocking-apps) -- block a discovered app across your Google Workspace and revoke everyone's access to it.
 - [App Management](/using-shiftcontrol/Apps/App-management) -- manage all your officially added apps.
 - [Adding an App](/using-shiftcontrol/Apps/Adding-an-app) -- add a discovered app to your managed list.
 - [Editing an App](/using-shiftcontrol/Apps/Editing-an-app) -- configure app details after adding it.
