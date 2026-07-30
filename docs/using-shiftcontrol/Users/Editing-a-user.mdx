@@ -29,6 +29,37 @@ To view a user's security posture, app permissions, and SaaS costs without editi
 - **Primary Email** — The user's SSO login identity. **Changing this affects all connected services** — do so with caution
 - **Personal Email** — Non-work email for activation emails and recovery
 
+<ConditionalContent modes={["jc-google", "google-jc", "google-only"]}>
+
+### Profile Photo
+
+You can set a user's **Google Workspace profile picture** directly from ShiftControl. Hover the avatar beside their name at the top of their record and click the pencil badge, then pick an image.
+
+<ModeScreenshot path="Users/User-avatar-upload" alt="The pencil badge on a user's avatar, used to upload their Google Workspace profile picture" modes={["jc-google", "google-jc", "google-only"]} />
+
+The image is written straight to that person's Google Workspace profile, so it appears wherever Google shows them — Gmail, Calendar, Drive, Chat, and the Google directory. There's no separate ShiftControl-only photo to keep in sync.
+
+This matters more than it sounds. A directory full of blank grey initials is the normal state at most companies, because setting a profile picture is a task nobody assigns to anyone. Being able to do it from the same screen where you manage everything else about a person is what makes it actually happen — particularly during onboarding, while you're already in their record.
+
+**Requirements:**
+
+- Your organization has a **Google Workspace directory** connected, and
+- the user is **linked in that Google directory**, and
+- you have permission to update users.
+
+<Admonition type="note" title="JumpCloud-only users can't have a picture set">
+    If your org has Google connected but this particular user isn't linked in it, the control is visible but disabled, with a tooltip explaining why. That's because JumpCloud has no profile-picture surface for ShiftControl to write to — there's nowhere to put the image. If your organization has no Google directory at all, the control doesn't appear.
+</Admonition>
+
+**Things to know:**
+
+- **Images only, up to 10 MB.** Anything larger or non-image is rejected before it reaches Google.
+- **Google resizes the image.** It's stored as a small square thumbnail, so upload something square and reasonably tight on the face — a wide group photo will crop badly.
+- **Save the user first.** The control isn't available while you're still creating a new user; add them, then set their picture.
+- **This is the same photo digital cards start from.** A card's photo defaults to the person's directory picture, so setting it here gives them a proper [digital card](/using-shiftcontrol/DigitalCards/Digital-cards-overview) photo too.
+
+</ConditionalContent>
+
 ### Organizational Details
 
 These fields drive dynamic group memberships and therefore app access:

@@ -58,7 +58,11 @@
     "app_discovery": "/admin/org/apps/discovery",
     "dashboard_oauth": "/admin/dashboards/oauth",
     "dashboard_spend": "/admin/dashboards/app-spend",
-    "reports_assignments": "/admin/org/reports/apps/assignments"
+    "reports_assignments": "/admin/org/reports/apps/assignments",
+    "digital_cards_settings": "/settings/digital-cards",
+    "employee_my_card": "/my-card",
+    "user_detail_digital_card": "/admin/org/users/view/{user_id}?tab=digitalCard",
+    "device_inventory": "/admin/org/devices"
   },
   "modes": {
     "jc_gws": { "folder": "jc-google", "params": "?mode=jc_gws", "label": "JumpCloud + Google Workspace" },
@@ -463,6 +467,93 @@
       "modes": ["jc_gws", "jc_only", "gws_only"],
       "component": "Screenshot",
       "usedIn": ["docs/using-shiftcontrol/task-management.mdx"]
+    },
+    "DigitalCards/Card-template": {
+      "route": "/settings/digital-cards",
+      "tab": "Template",
+      "description": "Digital cards designer, Template sub-tab. Tab state is component-local — click the tab, there is no URL param. Panel is identical across modes; only the settings sidebar differs.",
+      "modes": ["jc_gws", "jc_only", "gws_only"],
+      "component": "ModeScreenshot",
+      "usedIn": ["docs/using-shiftcontrol/DigitalCards/Card-template.mdx", "docs/using-shiftcontrol/DigitalCards/Digital-cards-overview.mdx"]
+    },
+    "DigitalCards/Card-fields": {
+      "route": "/settings/digital-cards",
+      "tab": "Fields",
+      "description": "Digital cards designer, Fields sub-tab — per-field mode, sync toggles, and the employee self-service switches. Click the tab; there is no URL param.",
+      "modes": ["jc_gws", "jc_only", "gws_only"],
+      "component": "ModeScreenshot",
+      "usedIn": ["docs/using-shiftcontrol/DigitalCards/Card-fields.mdx"]
+    },
+    "DigitalCards/Card-offboarding": {
+      "route": "/settings/digital-cards",
+      "tab": "Offboarding",
+      "description": "Digital cards designer, Offboarding sub-tab — Generic card / Redirect / Hard 404 plus the grace-period stepper. Click the tab; there is no URL param.",
+      "modes": ["jc_gws", "jc_only", "gws_only"],
+      "component": "ModeScreenshot",
+      "usedIn": ["docs/using-shiftcontrol/DigitalCards/Card-offboarding.mdx"]
+    },
+    "DigitalCards/Card-domain": {
+      "route": "/settings/digital-cards",
+      "tab": "Domain",
+      "description": "Digital cards designer, Domain sub-tab — the always-on ShiftControl hostname and the custom-domain form. Click the tab; there is no URL param.",
+      "modes": ["jc_gws", "jc_only", "gws_only"],
+      "component": "ModeScreenshot",
+      "usedIn": ["docs/using-shiftcontrol/DigitalCards/Card-domain.mdx"]
+    },
+    "DigitalCards/User-card-panel": {
+      "route": "/admin/org/users/view/{user}?tab=digitalCard",
+      "description": "Digital card tab on a user record (admin-on-behalf). Sub-tabs are Edit card / QR code / Manage — no My card tab on this surface. Demo mock renders a different person on the card than in the record header, so keep alt text generic.",
+      "modes": ["jc_gws", "jc_only", "gws_only"],
+      "component": "ModeScreenshot",
+      "usedIn": ["docs/using-shiftcontrol/DigitalCards/Managing-a-users-card.mdx"]
+    },
+    "EmployeePortal/My-card": {
+      "route": "/my-card",
+      "tab": "My card",
+      "description": "Employee portal My card tab — live card, QR, copy link, and QR download sizes. Sidebar label is 'My digital card'. Click the tab; there is no URL param.",
+      "modes": ["jc_gws", "jc_only", "gws_only"],
+      "component": "ModeScreenshot",
+      "usedIn": ["docs/employee-guide/employee-portal/my-card.mdx"]
+    },
+    "EmployeePortal/My-card-edit": {
+      "route": "/my-card",
+      "tab": "Edit my card",
+      "description": "Employee portal Edit my card tab — photo controls and card details with locked / synced / customized field states.",
+      "modes": ["jc_gws", "jc_only", "gws_only"],
+      "component": "ModeScreenshot",
+      "usedIn": ["docs/employee-guide/employee-portal/my-card.mdx"]
+    },
+    "EmployeePortal/My-card-qr": {
+      "route": "/my-card",
+      "tab": "My QR code",
+      "description": "Employee portal My QR code tab — centre medallion picker (Company logo / None / My photo / Custom image).",
+      "modes": ["jc_gws", "jc_only", "gws_only"],
+      "component": "ModeScreenshot",
+      "usedIn": ["docs/employee-guide/employee-portal/my-card.mdx"]
+    },
+    "EmployeePortal/My-card-manage": {
+      "route": "/my-card",
+      "tab": "Manage",
+      "description": "Employee portal Manage tab — card status with publish/unpublish and the card PIN. Link regeneration only appears when the org allows it.",
+      "modes": ["jc_gws", "jc_only", "gws_only"],
+      "component": "ModeScreenshot",
+      "usedIn": ["docs/employee-guide/employee-portal/my-card.mdx"]
+    },
+    "Devices/Device-bulk-unmanage": {
+      "route": "/admin/org/devices",
+      "action": "Select 2+ device rows, then open the Bulk Actions toolbar button (4th icon after the search box). AG Grid checkboxes are NOT in the accessibility tree — click them by coordinate. The trigger is disabled below 2 selected rows. Close the Columns panel if a stray click opened it.",
+      "description": "Device Inventory with devices selected and the Bulk Actions menu open on Un-manage. Requires JumpCloud, so no gws_only variant.",
+      "modes": ["jc_gws", "jc_only"],
+      "component": "ModeScreenshot",
+      "usedIn": ["docs/using-shiftcontrol/Devices/Device-actions.mdx", "docs/using-shiftcontrol/Devices/Viewing-devices.mdx"]
+    },
+    "Users/User-avatar-upload": {
+      "route": "/admin/org/users/view/{user}",
+      "action": "Cropped region around the record-header avatar. The pencil badge is visible without hovering. Note interceptor --region coordinates are in 2x CSS space, not CSS pixels.",
+      "description": "Avatar edit affordance that writes a user's Google Workspace profile photo. Requires a Google directory, so no jc_only variant.",
+      "modes": ["jc_gws", "gws_only"],
+      "component": "ModeScreenshot",
+      "usedIn": ["docs/using-shiftcontrol/Users/Editing-a-user.mdx"]
     }
   }
 }
