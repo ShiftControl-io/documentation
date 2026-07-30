@@ -25,6 +25,8 @@
     "_comment": "Direct-navigable IDs from mock data. Use these in URLs instead of clicking AG Grid rows.",
     "user": "66b42ef6693525dd6b48d7ed",
     "user_first_in_list": "66b417c8b170fe888e997f27",
+    "_note_user_ids_are_mode_specific": "The `user` ids above are JumpCloud Mongo ids and are only valid in jc_gws / jc_only. In gws_only, directory users are keyed by Google numeric ids (see mocks/data/gws_only/api/user/) — use 100000000000000000001. Reusing a JumpCloud id in gws_only silently resolves a record with no Google directory linkage, which hides Google-dependent affordances such as the avatar pencil badge.",
+    "user_gws_only": "100000000000000000001",
     "group": "01912fd8-6663-7e31-b98b-9355bcc868be",
     "group_with_dynamic": "01912fd8-c595-7dbf-b18d-bd9ea9f17574",
     "app_aws": "01912fe5-9dd5-754c-9bfa-4d5f3a160ceb",
@@ -549,7 +551,7 @@
     },
     "Users/User-avatar-upload": {
       "route": "/admin/org/users/view/{user}",
-      "action": "Cropped region around the record-header avatar. The pencil badge is visible without hovering. Note interceptor --region coordinates are in 2x CSS space, not CSS pixels.",
+      "action": "Cropped region around the record-header avatar. The pencil badge renders ONLY when the user is linked in an enabled Google directory (AddOrEditUser.tsx gates it on isEligibleForAvatarUpload) — so you MUST use a mode-appropriate user id: a JumpCloud Mongo id such as 66b42ef6693525dd6b48d7ed for jc_gws, and a Google numeric id such as 100000000000000000001 for gws_only. Using the jc_gws id in gws_only resolves a record with no Google linkage: initials, no photo, no pencil. Note interceptor --region coordinates are in 2x CSS space, not CSS pixels.",
       "description": "Avatar edit affordance that writes a user's Google Workspace profile photo. Requires a Google directory, so no jc_only variant.",
       "modes": ["jc_gws", "gws_only"],
       "component": "ModeScreenshot",
