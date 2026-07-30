@@ -36,6 +36,16 @@ Each row shows the fields IT actually uses to make decisions:
 
 Click any row to open the [device's detail page](/using-shiftcontrol/Devices/Device-details).
 
+### Selecting several devices
+
+Each row has a checkbox, and the header checkbox selects everything currently showing. With a selection made, a **Bulk Actions** menu appears in the toolbar.
+
+The only bulk action today is **Un-manage** — the batch version of retiring a device from JumpCloud management. It's the lowest-risk, highest-volume thing admins actually need to do to many devices at once; the destructive actions like erase stay deliberately one-at-a-time. See [bulk un-manage](/using-shiftcontrol/Devices/Device-actions#un-managing-several-devices-at-once) for how the batch behaves and what to save first.
+
+<Admonition type="tip" title="Filter first, then select">
+  Combine the filters and search to get exactly the devices you mean — say <em>Dormant</em> plus <em>Windows</em> for a batch of retired machines — then use the header checkbox. It's faster and safer than hunting rows by hand.
+</Admonition>
+
 ### Filtering and search
 
 Filter the list by **status** (online, offline, dormant), **platform** (macOS, Windows, Linux, iPadOS), **encryption** (encrypted / unencrypted), and **assignment** (assigned / unassigned). Combine filters to narrow quickly — for example, *unencrypted* + *macOS* — and use search to jump to a specific name, hostname, or serial.

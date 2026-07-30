@@ -149,6 +149,25 @@ const sidebars: SidebarsConfig = {
                 },
                 {
                     type: 'category',
+                    label: 'Digital Cards',
+                    link: {
+                        type: 'generated-index',
+                        title: 'Digital Cards',
+                        description: 'Company-managed digital business cards — design one branded template, let employees activate their own card, and retire cards automatically when people leave.',
+                        slug: '/using-shiftcontrol/DigitalCards',
+                        keywords: ['digital cards','business cards','vcard','qr code'],
+                    },
+                    items: [
+                        'using-shiftcontrol/DigitalCards/Digital-cards-overview',
+                        'using-shiftcontrol/DigitalCards/Card-template',
+                        'using-shiftcontrol/DigitalCards/Card-fields',
+                        'using-shiftcontrol/DigitalCards/Card-offboarding',
+                        'using-shiftcontrol/DigitalCards/Card-domain',
+                        'using-shiftcontrol/DigitalCards/Managing-a-users-card',
+                    ],
+                },
+                {
+                    type: 'category',
                     label: 'Reports',
                     link: {
                         type: 'generated-index',
@@ -387,6 +406,7 @@ const sidebars: SidebarsConfig = {
                         'employee-guide/employee-portal/org-chart',
                         'employee-guide/employee-portal/app-permissions',
                         'employee-guide/employee-portal/my-devices',
+                        'employee-guide/employee-portal/my-card',
                         'employee-guide/employee-portal/account-security',
                     ],
                 },

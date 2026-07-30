@@ -98,6 +98,33 @@ Removes the device from JumpCloud management.
   If a device isn't checking in when you un-manage it, the agent and policies **can't be removed remotely** — someone has to uninstall the agent on the machine itself. Otherwise you've removed the record while an agent keeps running on the endpoint.
 </Admonition>
 
+#### Un-managing several devices at once
+
+Retiring a batch of devices — a hardware refresh, a closed office, a stack of returned laptops — used to mean repeating the single-device flow once per machine. You can now do it in one pass from the [Device Inventory](/using-shiftcontrol/Devices/Viewing-devices).
+
+Select the devices with the checkboxes on the inventory grid, then open **Bulk Actions** in the toolbar and choose **Un-manage**.
+
+<ModeScreenshot path="Devices/Device-bulk-unmanage" modes={["jc-only", "jc-google", "google-jc"]} alt="The Device Inventory grid with several devices selected and the Bulk Actions menu open showing Un-manage" />
+
+Un-manage is deliberately the **only** bulk device action. Lock, restart, shut down, and erase all carry too much blast radius to expose behind a single click on a multi-row selection — those stay one device at a time, on the device's own page.
+
+**How the batch behaves:**
+
+- **Type-to-confirm.** Like the single-device flow, you type `unmanage` to enable the confirm button. A misclick can't retire your fleet.
+- **Per-device results.** When the batch settles you get a list naming which devices were un-managed and which failed, with a reason for each failure. One error doesn't abort the rest and doesn't hide what happened.
+- **Throttled.** ShiftControl works through the selection a few at a time rather than firing everything at JumpCloud at once, so a large selection takes a little longer but doesn't get rate-limited.
+- **Same permission as single un-manage.** Anyone who can un-manage one device can un-manage several — there's no separate bulk permission. That's worth knowing when you grant the **Destructive** tier.
+
+Everything in [Un-manage](#un-manage) above still applies to every device in the batch: data is left intact, active devices uninstall the agent themselves, inactive devices need a manual agent removal, and re-managing means re-enrolling from scratch.
+
+<Admonition type="warning" title="Capture recovery keys before a bulk un-manage">
+  Recovery keys are only retrievable for about <strong>30 days after a device is deleted from JumpCloud</strong>, and there's no bulk reveal. If you might need the FileVault or BitLocker key for any device in your selection, reveal and save it <strong>before</strong> you run the batch — afterward the clock is already running on all of them at once.
+</Admonition>
+
+<Admonition type="info" title="Available on the Device Inventory only">
+  Multi-select and bulk actions live on the Device Inventory grid. The <strong>Needs Attention</strong> and <strong>Device Health</strong> views are read-only triage surfaces — filter or search the inventory to build the selection you want.
+</Admonition>
+
 ### Erase device
 
 Wipes all data and returns the device toward factory state. This is the most destructive action in ShiftControl.
@@ -111,7 +138,7 @@ ShiftControl adds guardrails on top of JumpCloud:
 - **Type the device name to confirm.** Erase won't proceed on a misclick — you have to type the exact device name.
 - **Capture the recovery key first.** Reveal and save the FileVault/BitLocker key *before* erasing; the wipe destroys it. ShiftControl prompts you toward this, but it's on you to actually save it.
 - **macOS PIN.** Erase surfaces a 6-digit PIN. On Intel Macs without a T2 chip, that PIN is required to recover the device and **cannot be recovered if lost** — record it. On Apple Silicon and T2 Macs, recovery is protected by Activation Lock instead, and the PIN may be ignored — that's expected.
-- **No bulk erase.** You erase one device at a time, on purpose.
+- **No bulk erase.** You erase one device at a time, on purpose — [bulk un-manage](#un-managing-several-devices-at-once) exists, bulk erase does not.
 - **Warn the user.** The erase doesn't warn the person using the device — you do.
 
 Platform behavior differs:
@@ -141,6 +168,7 @@ When someone leaves, do device steps in this order so you never destroy somethin
 - **Everything is logged**, including recovery-key reveals, in an append-only audit trail.
 - **Erase queues when offline** and runs on reconnect — treat a queued erase as already committed.
 - **Un-manage ≠ erase.** Un-manage leaves data intact; erase destroys it. Choose deliberately.
+- **Un-manage is the only bulk action**, and it uses the same permission as the single-device version. Every other action stays one device at a time.
 
 ## Related Features
 
