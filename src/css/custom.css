@@ -347,7 +347,7 @@ html[data-theme='dark'] .accordion-button:hover {
   width: 1rem;
   height: 1rem;
   background-color: #4a4a4a;
-  mask: url('https://mintlify.b-cdn.net/v6.6.0/solid/caret-right.svg') no-repeat center center;
+  mask: url('/img/icons/caret-right.svg') no-repeat center center;
   transition: transform 0.2s;
 }
 
