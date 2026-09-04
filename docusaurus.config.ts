@@ -176,6 +176,7 @@ const config: Config = {
         }
     } satisfies Preset.ThemeConfig,
     clientModules: [
+        require.resolve('./src/clientModules/posthogReferrer.ts'),
         require.resolve('./src/clientModules/zoomReattach.ts'),
     ],
     plugins: [
@@ -192,6 +193,9 @@ const config: Config = {
                 apiKey: "phc_gx4HhxsAs4ycvgq2uOlG6Q2sAgUBgvUm7OGrOOpXZcO",
                 appUrl: "https://velocity.shiftcontrol.io",
                 enableInDevelopment: false,
+                // The plugin's own onRouteUpdate fires the pageview, and it runs after every
+                // client module, so posthogReferrer.ts installs its filter before the first event.
+                capture_pageview: false,
             },
         ],
         [
