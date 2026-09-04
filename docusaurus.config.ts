@@ -2,6 +2,66 @@ import {themes as prismThemes} from 'prism-react-renderer';
 import type {Config} from '@docusaurus/types';
 import type * as Preset from '@docusaurus/preset-classic';
 
+const POSTHOG_KEY = "phc_gx4HhxsAs4ycvgq2uOlG6Q2sAgUBgvUm7OGrOOpXZcO";
+const POSTHOG_HOST = "https://velocity.shiftcontrol.io";
+
+/** A dev server shares the production project, so an `npm start` pageview is indistinguishable
+ * from a real visit. This is what posthog-docusaurus gave us as `enableInDevelopment: false`. */
+const POSTHOG_ENABLED = process.env.NODE_ENV === "production";
+
+/** PostHog compares the referrer's exact hostname, so arriving from another shiftcontrol.io
+ * subdomain is recorded as an external referral from our own site. `before_send` cannot be a
+ * plugin option because posthog-docusaurus JSON-encodes its init options, which drops a
+ * function, so the snippet is inlined here to install the filter at init. */
+const POSTHOG_SNIPPET = `
+!function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="capture identify alias people.set people.set_once set_config register register_once unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled onFeatureFlags getFeatureFlag getFeatureFlagPayload reloadFeatureFlags group updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures getActiveMatchingSurveys getSurveys onSessionId".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+(function () {
+  var SELF_HOST = 'shiftcontrol.io';
+  // Session attribution reads the $session_entry_ copies rather than $referrer, so every
+  // variant has to be rewritten or the Referral channel stays inflated.
+  var REFERRER_PROPERTY = /^\\$(?:session_entry_|initial_)?referr(?:er|ing_domain)$/;
+
+  function hostOf(value) {
+    var parsed = '';
+    try { parsed = new URL(value).hostname; } catch (err) { parsed = ''; }
+    // A bare host:port does not throw: it parses as a scheme with an opaque path, so an empty
+    // hostname is the signal that the value was a host rather than a URL.
+    var host = parsed === '' ? String(value).replace(/:\\d+$/, '') : parsed;
+    return host.toLowerCase().replace(/\\.$/, '');
+  }
+
+  function isSelfReferral(value) {
+    var host = hostOf(value);
+    return host === SELF_HOST || host.endsWith('.' + SELF_HOST);
+  }
+
+  function rewrite(bag) {
+    if (!bag) return;
+    Object.keys(bag).forEach(function (key) {
+      var value = bag[key];
+      if (typeof value === 'string' && REFERRER_PROPERTY.test(key) && isSelfReferral(value)) {
+        bag[key] = '$direct';
+      }
+    });
+  }
+
+  // A throw here escapes into posthog.capture() rather than dropping one event, so every
+  // branch stays total.
+  function normalizeSelfReferral(event) {
+    if (!event) return event;
+    rewrite(event.properties);
+    rewrite(event.$set);
+    rewrite(event.$set_once);
+    return event;
+  }
+
+  posthog.init('${POSTHOG_KEY}', {
+    api_host: '${POSTHOG_HOST}',
+    before_send: normalizeSelfReferral,
+  });
+})();
+`;
+
 const config: Config = {
     title: 'ShiftControl Documentation',
     tagline: 'Manage identities, groups, and SaaS applications from one platform.',
@@ -29,6 +89,19 @@ const config: Config = {
     },
 
     headTags: [
+        ...(POSTHOG_ENABLED
+            ? [
+                  {
+                      tagName: 'link',
+                      attributes: { rel: 'preconnect', href: POSTHOG_HOST },
+                  },
+                  {
+                      tagName: 'script',
+                      attributes: {},
+                      innerHTML: POSTHOG_SNIPPET,
+                  },
+              ]
+            : []),
         {
             tagName: 'script',
             attributes: {
@@ -176,6 +249,7 @@ const config: Config = {
         }
     } satisfies Preset.ThemeConfig,
     clientModules: [
+        require.resolve('./src/clientModules/posthogPageview.ts'),
         require.resolve('./src/clientModules/zoomReattach.ts'),
     ],
     plugins: [
@@ -185,14 +259,6 @@ const config: Config = {
             indexBaseUrl: true,
             maxHits: 5,
         }
-        ],
-        [
-            "posthog-docusaurus",
-            {
-                apiKey: "phc_gx4HhxsAs4ycvgq2uOlG6Q2sAgUBgvUm7OGrOOpXZcO",
-                appUrl: "https://velocity.shiftcontrol.io",
-                enableInDevelopment: false,
-            },
         ],
         [
             '@docusaurus/plugin-client-redirects',
