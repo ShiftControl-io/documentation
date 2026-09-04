@@ -5,6 +5,10 @@ import type * as Preset from '@docusaurus/preset-classic';
 const POSTHOG_KEY = "phc_gx4HhxsAs4ycvgq2uOlG6Q2sAgUBgvUm7OGrOOpXZcO";
 const POSTHOG_HOST = "https://velocity.shiftcontrol.io";
 
+/** A dev server shares the production project, so an `npm start` pageview is indistinguishable
+ * from a real visit. This is what posthog-docusaurus gave us as `enableInDevelopment: false`. */
+const POSTHOG_ENABLED = process.env.NODE_ENV === "production";
+
 /** PostHog compares the referrer's exact hostname, so arriving from another shiftcontrol.io
  * subdomain is recorded as an external referral from our own site. `before_send` cannot be a
  * plugin option because posthog-docusaurus JSON-encodes its init options, which drops a
@@ -85,15 +89,19 @@ const config: Config = {
     },
 
     headTags: [
-        {
-            tagName: 'link',
-            attributes: { rel: 'preconnect', href: POSTHOG_HOST },
-        },
-        {
-            tagName: 'script',
-            attributes: {},
-            innerHTML: POSTHOG_SNIPPET,
-        },
+        ...(POSTHOG_ENABLED
+            ? [
+                  {
+                      tagName: 'link',
+                      attributes: { rel: 'preconnect', href: POSTHOG_HOST },
+                  },
+                  {
+                      tagName: 'script',
+                      attributes: {},
+                      innerHTML: POSTHOG_SNIPPET,
+                  },
+              ]
+            : []),
         {
             tagName: 'script',
             attributes: {
