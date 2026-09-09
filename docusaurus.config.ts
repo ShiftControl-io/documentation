@@ -26,6 +26,14 @@ const POSTHOG_ENABLED = process.env.NODE_ENV === "production";
 const CONSENT_BANNER_SRC =
     "https://api-prod.cptn.co/banner/script?accessToken=06237770-9831-4cf1-ae21-e8e10d172915";
 
+/** Mirrors the site's light/dark mode onto the banner's `cc-light` hook. Inlined for the
+ * same reason as the snippet below — it has to be watching before the banner can paint —
+ * and gated alongside the banner it serves, since nothing else reads the class. */
+const CONSENT_COLOR_MODE_SNIPPET = readFileSync(
+    path.join(__dirname, 'src/analytics/consentColorMode.js'),
+    'utf8',
+);
+
 /** PostHog is inlined from a real .js file rather than written here as a template literal: it
  * needs `before_send` and a Captain Compliance consent bridge, both of which are functions, and
  * its referrer regex uses backslashes a template literal would consume. The replacement is a
@@ -69,6 +77,15 @@ const config: Config = {
                   {
                       tagName: 'link',
                       attributes: { rel: 'preconnect', href: POSTHOG_HOST },
+                  },
+                  // Colour-mode bridge. Ahead of the banner script so the observers are
+                  // installed before it can render, and ahead of Docusaurus's own theme
+                  // script, which is a preBodyTag — the first `data-theme` value therefore
+                  // reaches this snippet as a mutation rather than an initial read.
+                  {
+                      tagName: 'script',
+                      attributes: {},
+                      innerHTML: CONSENT_COLOR_MODE_SNIPPET,
                   },
                   // Consent authority. `async` because Docusaurus emits headTags ahead of the
                   // stylesheets and only defers its own bundles, so without it a slow
