@@ -4,7 +4,12 @@ import {themes as prismThemes} from 'prism-react-renderer';
 import type {Config} from '@docusaurus/types';
 import type * as Preset from '@docusaurus/preset-classic';
 
-const POSTHOG_KEY = "phc_gx4HhxsAs4ycvgq2uOlG6Q2sAgUBgvUm7OGrOOpXZcO";
+/** The shared public-web project, alongside the marketing site, journey and the demo app.
+ * One key across those hostnames means PostHog's `.shiftcontrol.io` cookie carries a single
+ * distinct_id between them, so a visit that starts on marketing and continues here is one
+ * visitor rather than two. Docs previously had its own project (`phc_gx4Hhx...`), kept
+ * read-only for the history that cannot be migrated. */
+const POSTHOG_KEY = "phc_BaztqckWNqJJhY0vFFlNgTqOr6D7kMb5z55ZVH20rJs";
 const POSTHOG_HOST = "https://velocity.shiftcontrol.io";
 
 /** A dev server shares the production project, so an `npm start` pageview is indistinguishable
@@ -13,8 +18,11 @@ const POSTHOG_ENABLED = process.env.NODE_ENV === "production";
 
 /** Every ShiftControl hostname is a separate Captain Compliance site with its own banner and
  * transparency report, so this access token belongs to docs.shiftcontrol.io alone and must not
- * be reused on the other domains. Unlike PostHog the banner also loads outside production, so
- * a local build shows the same consent surface a visitor sees. */
+ * be reused on the other domains. Gated on production alongside PostHog: the banner has
+ * nothing to gate when PostHog is absent, and a dev server would otherwise file its clicks
+ * as real consent decisions against the live docs site's records. The banner draws only on
+ * docs.shiftcontrol.io anyway — measured 2026-09-09 on both localhost and a pages.dev
+ * preview, where it fetches its configuration and renders nothing. */
 const CONSENT_BANNER_SRC =
     "https://api-prod.cptn.co/banner/script?accessToken=06237770-9831-4cf1-ae21-e8e10d172915";
 
@@ -56,18 +64,20 @@ const config: Config = {
     },
 
     headTags: [
-        // Consent authority. Ordering against the PostHog tag does not matter: PostHog holds
-        // its own storage and events until the bridge reports a decision, so a banner that
-        // loads second still gates everything.
-        {
-            tagName: 'script',
-            attributes: { src: CONSENT_BANNER_SRC },
-        },
         ...(POSTHOG_ENABLED
             ? [
                   {
                       tagName: 'link',
                       attributes: { rel: 'preconnect', href: POSTHOG_HOST },
+                  },
+                  // Consent authority. `async` because Docusaurus emits headTags ahead of the
+                  // stylesheets and only defers its own bundles, so without it a slow
+                  // api-prod.cptn.co blocks the parser and white-screens every page. Nothing
+                  // needs it to win a race: PostHog holds its own storage and events until
+                  // the bridge reports a decision, whenever the banner arrives.
+                  {
+                      tagName: 'script',
+                      attributes: { src: CONSENT_BANNER_SRC, async: true },
                   },
                   {
                       tagName: 'script',
