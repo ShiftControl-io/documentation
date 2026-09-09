@@ -1,3 +1,5 @@
+import {readFileSync} from 'node:fs';
+import path from 'node:path';
 import {themes as prismThemes} from 'prism-react-renderer';
 import type {Config} from '@docusaurus/types';
 import type * as Preset from '@docusaurus/preset-classic';
@@ -9,58 +11,23 @@ const POSTHOG_HOST = "https://velocity.shiftcontrol.io";
  * from a real visit. This is what posthog-docusaurus gave us as `enableInDevelopment: false`. */
 const POSTHOG_ENABLED = process.env.NODE_ENV === "production";
 
-/** PostHog compares the referrer's exact hostname, so arriving from another shiftcontrol.io
- * subdomain is recorded as an external referral from our own site. `before_send` cannot be a
- * plugin option because posthog-docusaurus JSON-encodes its init options, which drops a
- * function, so the snippet is inlined here to install the filter at init. */
-const POSTHOG_SNIPPET = `
-!function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="capture identify alias people.set people.set_once set_config register register_once unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled onFeatureFlags getFeatureFlag getFeatureFlagPayload reloadFeatureFlags group updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures getActiveMatchingSurveys getSurveys onSessionId".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
-(function () {
-  var SELF_HOST = 'shiftcontrol.io';
-  // Session attribution reads the $session_entry_ copies rather than $referrer, so every
-  // variant has to be rewritten or the Referral channel stays inflated.
-  var REFERRER_PROPERTY = /^\\$(?:session_entry_|initial_)?referr(?:er|ing_domain)$/;
+/** Every ShiftControl hostname is a separate Captain Compliance site with its own banner and
+ * transparency report, so this access token belongs to docs.shiftcontrol.io alone and must not
+ * be reused on the other domains. Unlike PostHog the banner also loads outside production, so
+ * a local build shows the same consent surface a visitor sees. */
+const CONSENT_BANNER_SRC =
+    "https://api-prod.cptn.co/banner/script?accessToken=06237770-9831-4cf1-ae21-e8e10d172915";
 
-  function hostOf(value) {
-    var parsed = '';
-    try { parsed = new URL(value).hostname; } catch (err) { parsed = ''; }
-    // A bare host:port does not throw: it parses as a scheme with an opaque path, so an empty
-    // hostname is the signal that the value was a host rather than a URL.
-    var host = parsed === '' ? String(value).replace(/:\\d+$/, '') : parsed;
-    return host.toLowerCase().replace(/\\.$/, '');
-  }
-
-  function isSelfReferral(value) {
-    var host = hostOf(value);
-    return host === SELF_HOST || host.endsWith('.' + SELF_HOST);
-  }
-
-  function rewrite(bag) {
-    if (!bag) return;
-    Object.keys(bag).forEach(function (key) {
-      var value = bag[key];
-      if (typeof value === 'string' && REFERRER_PROPERTY.test(key) && isSelfReferral(value)) {
-        bag[key] = '$direct';
-      }
-    });
-  }
-
-  // A throw here escapes into posthog.capture() rather than dropping one event, so every
-  // branch stays total.
-  function normalizeSelfReferral(event) {
-    if (!event) return event;
-    rewrite(event.properties);
-    rewrite(event.$set);
-    rewrite(event.$set_once);
-    return event;
-  }
-
-  posthog.init('${POSTHOG_KEY}', {
-    api_host: '${POSTHOG_HOST}',
-    before_send: normalizeSelfReferral,
-  });
-})();
-`;
+/** PostHog is inlined from a real .js file rather than written here as a template literal: it
+ * needs `before_send` and a Captain Compliance consent bridge, both of which are functions, and
+ * its referrer regex uses backslashes a template literal would consume. The replacement is a
+ * function so a `$` in the key or host cannot be read as a replacement pattern. */
+const POSTHOG_SNIPPET = readFileSync(
+    path.join(__dirname, 'src/analytics/posthog.js'),
+    'utf8',
+)
+    .replaceAll('__POSTHOG_KEY__', () => POSTHOG_KEY)
+    .replaceAll('__POSTHOG_HOST__', () => POSTHOG_HOST);
 
 const config: Config = {
     title: 'ShiftControl Documentation',
@@ -89,6 +56,13 @@ const config: Config = {
     },
 
     headTags: [
+        // Consent authority. Ordering against the PostHog tag does not matter: PostHog holds
+        // its own storage and events until the bridge reports a decision, so a banner that
+        // loads second still gates everything.
+        {
+            tagName: 'script',
+            attributes: { src: CONSENT_BANNER_SRC },
+        },
         ...(POSTHOG_ENABLED
             ? [
                   {

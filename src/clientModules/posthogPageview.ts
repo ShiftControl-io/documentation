@@ -12,6 +12,10 @@ const POSTHOG_ENABLED = process.env.NODE_ENV === 'production';
 
 export function onRouteUpdate({ location, previousLocation }): void {
     if (!POSTHOG_ENABLED || !ExecutionEnvironment.canUseDOM) return;
-    if (location.pathname === previousLocation?.pathname) return;
+    // Docusaurus dispatches onRouteUpdate on first mount with previousLocation null. That
+    // pageview belongs to the consent bridge in src/analytics/posthog.js, which fires it once
+    // the visitor has decided; firing it here as well would either double-count the landing
+    // page or emit it while capture is still held.
+    if (!previousLocation || location.pathname === previousLocation.pathname) return;
     window.posthog?.capture?.('$pageview');
 }
