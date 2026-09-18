@@ -267,7 +267,7 @@ const sidebars: SidebarsConfig = {
                                                 'using-shiftcontrol/Integrations/guides/BambooHR',
                                                 'using-shiftcontrol/Integrations/guides/Box',
                                                 'using-shiftcontrol/Integrations/guides/Deel',
-                                                'using-shiftcontrol/Integrations/guides/DreamTeam',
+                                                'using-shiftcontrol/Integrations/guides/Shapes',
                                                 'using-shiftcontrol/Integrations/guides/HiBob',
                                                 'using-shiftcontrol/Integrations/guides/OmniHR',
                                             ],
