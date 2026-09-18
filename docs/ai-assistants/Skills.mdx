@@ -1,13 +1,14 @@
 ---
 title: 'Skills'
-description: 'Pre-built AI workflows that combine the ShiftControl MCP server with multi-step instructions. Install with a URL, run from natural conversation.'
-keywords: ['ShiftControl', 'Skills', 'MCP', 'workflows', 'AI', 'automation']
+description: 'Pre-built AI workflows that combine the ShiftControl MCP server with multi-step instructions. Install the plugin in Claude, or one command in any other AI tool.'
+keywords: ['ShiftControl', 'Skills', 'MCP', 'workflows', 'AI', 'automation', 'plugin', 'marketplace']
 icon: 'wand-magic-sparkles'
 ---
 
 import Admonition from '@theme/Admonition';
+import { Steps, Step } from "@site/src/components/Steps";
 
-<p style={{fontSize: "large"}}>Pre-built AI workflows for common SaaS-management tasks. Install with a URL, run with a sentence.</p>
+<p style={{fontSize: "large"}}>Pre-built AI workflows for common SaaS-management tasks. Install once, run with a sentence.</p>
 
 ## What Skills are
 
@@ -21,19 +22,88 @@ Skills are open source and live at [github.com/ShiftControl-io/skills](https://g
 
 ## How Skills work with the MCP server
 
-Skills don't replace the MCP server — they're layered on top of it. The MCP server gives your AI the raw tools (`list_users`, `update_subscription`, etc.); a Skill gives it the instructions for how to use those tools to accomplish a specific goal.
+Skills don't replace the MCP server — they're layered on top of it. The MCP server gives your AI the raw tools (`list_apps`, `list_groups`, `update_app_subscription`, and so on); a Skill gives it the instructions for how to use those tools to accomplish a specific goal.
 
-You can run ShiftControl from your AI without installing any Skill — the MCP server alone is enough for ad-hoc questions like "list every disabled user." Skills become useful when you have a repeatable, multi-step task you want your AI to handle the same way every time.
+You can run ShiftControl from your AI without installing any Skill. The MCP server alone is enough for ad-hoc questions like "which apps has nobody been assigned to?" Skills become useful when you have a repeatable, multi-step task you want your AI to handle the same way every time.
 
-## Installing a Skill
+Skills carry no permissions of their own. Every tool call still runs as you, under your ShiftControl role, and a Skill that writes still asks before it writes.
 
-The exact install steps depend on your AI client. The general shape:
+## Installing Skills
 
-1. **Connect the MCP server first** — see [Connect your AI tool](/ai-assistants/Connect-your-ai-tool/). Skills assume MCP is already wired up.
-2. **Add the Skill** to your client. For Claude Code, that's `/skill add <url>`. For Claude Desktop, you'd drop the Skill folder into your skills directory. For other clients, follow their Skill / agent / extension docs.
-3. **Verify** by asking the AI to run the Skill by name.
+Connect the MCP server first — see [Connect your AI tool](/ai-assistants/Connect-your-ai-tool/). Skills assume it is already wired up, because a Skill is only instructions: without the MCP server there are no ShiftControl tools for it to call.
 
-The authoritative per-client install steps live in [INSTALL.md](https://github.com/ShiftControl-io/skills/blob/main/INSTALL.md) in the Skills repo — that's the file that gets updated when AI clients change their installation paths.
+After that, pick the route that matches the tool you use. They all install from the same repository, so you get the same Skills whichever one you take.
+
+### Claude: install the plugin
+
+Our Skills repository is also a Claude plugin marketplace. Adding it once gives you the whole catalog, and every Skill we publish later arrives through the normal plugin update rather than a fresh install. This is the route we recommend for anyone using Claude Code, the Claude desktop app, or claude.ai.
+
+<Steps>
+    <Step title="Add the marketplace">
+        In **Claude Code**:
+
+        ```
+        /plugin marketplace add ShiftControl-io/skills
+        ```
+
+        In the **Claude desktop app** or on **claude.ai**: open **Customize → Plugins**, then in **Personal plugins** click **+ → Add marketplace → Add from a repository** and enter `https://github.com/ShiftControl-io/skills`.
+    </Step>
+    <Step title="Install the ShiftControl plugin">
+        In **Claude Code**:
+
+        ```
+        /plugin install shiftcontrol@shiftcontrol-skills
+        ```
+
+        In the desktop app or on claude.ai, click **Install** on **ShiftControl**.
+    </Step>
+    <Step title="Check that it loaded">
+        Start a new conversation and type `/`, or click **+ → Plugins**. The Skills appear grouped under **ShiftControl**. Ask for one by name to confirm the AI can see it.
+    </Step>
+</Steps>
+
+To pick up new Skills later, run `/plugin update` in Claude Code, or update the plugin from the Plugins tab in the desktop app and on claude.ai.
+
+### Claude: upload a zip
+
+If you would rather not connect a GitHub repository, every release ships one zip per Skill. This pins you to a published version instead of tracking the repository.
+
+1. Download the Skill zip from the [latest release](https://github.com/ShiftControl-io/skills/releases/latest)
+2. Open **Customize → Skills** in the Claude desktop app or on claude.ai
+3. Click **Upload skill**, or drag the zip onto the panel
+
+The Skill is available in new conversations straight away. Repeat the download when we publish a new version, since an uploaded zip does not update itself.
+
+### Codex, Cursor, Copilot, Cline, Windsurf and others: one command
+
+`SKILL.md` is an open format, and most AI coding tools now read it. The community `skills` installer knows where each of them keeps its Skills, so one command covers all of them:
+
+```bash
+# Into the current project
+npx skills add ShiftControl-io/skills
+
+# Or for every project you work on
+npx skills add ShiftControl-io/skills --global
+```
+
+Add `--list` to see the catalog without installing anything, `--skill <name>` to take a single Skill, and `--agent <agent>` to target one tool rather than every one it finds.
+
+### Gemini CLI and Antigravity
+
+```bash
+gemini skills install https://github.com/ShiftControl-io/skills.git \
+  --path skills/refresh-subscription-info --consent
+```
+
+`--scope workspace` limits it to the current project; the default is your user scope.
+
+### Devin, Codex and anything reading `.agents/skills/`
+
+`.agents/skills/` is the cross-vendor convention: commit a Skill there and the agent finds it whenever it opens that repository. Copy the Skill folder from our repository into `.agents/skills/` and commit it, or use `~/.agents/skills/` to install it for yourself rather than for the team.
+
+<Admonition type="tip" title="Per-client steps stay current in the repo">
+    [INSTALL.md](https://github.com/ShiftControl-io/skills/blob/main/INSTALL.md) in the Skills repository is the authoritative copy, and it is what we update when an AI client changes its install path.
+</Admonition>
 
 ## Current catalog
 
@@ -43,14 +113,14 @@ Finds recent SaaS invoices in your email and proposes ShiftControl subscription 
 
 **What it does, step by step:**
 
-1. Searches your email for recent invoices from SaaS vendors
+1. Gathers invoices from whichever source you have: your email, your Xero bills, or a file a colleague collected on your behalf
 2. Cross-references each vendor with your ShiftControl app catalog via `list_apps`
-3. For each match, reads the current subscription state via `get_subscription`
-4. Computes a diff between what your invoice says and what ShiftControl has on record
+3. For each match, reads the current record via `get_app`
+4. Computes a diff between what the invoice says and what ShiftControl has on record
 5. Shows you the proposed updates and asks for explicit approval
-6. Calls `update_subscription` (with `confirm: true`) for each update you approve
+6. Calls `update_app_subscription` for each update you approve, recording a short note on where the figures came from
 
-**Requirements:** the `shiftcontrol` MCP server plus an email-search MCP (Gmail, Microsoft Graph, or your AI client's built-in email integration).
+**Requirements:** the `shiftcontrol` MCP server, plus at least one invoice source. That can be an email MCP (Gmail, Microsoft Graph, or your AI client's built-in email integration), a Xero connection, or a file from whoever does hold the invoices — a bookkeeper or your finance team never needs a ShiftControl login for that last route.
 
 **Skill folder:** [skills/refresh-subscription-info](https://github.com/ShiftControl-io/skills/blob/main/skills/refresh-subscription-info/SKILL.md)
 
@@ -62,7 +132,7 @@ Finds recent SaaS invoices in your email and proposes ShiftControl subscription 
 
 If you've built a repeatable AI workflow that hits ShiftControl, you can publish it as a Skill — either privately for your team, or as a contribution to the public catalog.
 
-A Skill at minimum is a folder with a `SKILL.md` file. The `SKILL.md` has frontmatter (`name`, `description`, trigger phrases) and a body that explains the task to the AI: when to use it, what the right MCP tool sequence is, and what guardrails to apply (especially around write tools).
+A Skill at minimum is a folder with a `SKILL.md` file. The `SKILL.md` has frontmatter carrying a `name` and a `description` (the description is what tells the AI when to reach for the Skill, so it earns the care), and a body that explains the task: when to use it, what the right MCP tool sequence is, and what guardrails to apply, especially around write tools.
 
 Contributing to the public catalog: open a PR at [github.com/ShiftControl-io/skills](https://github.com/ShiftControl-io/skills). The repo README has the contribution checklist.
 
