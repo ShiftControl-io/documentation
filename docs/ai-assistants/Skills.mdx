@@ -30,13 +30,13 @@ Skills carry no permissions of their own. Every tool call still runs as you, und
 
 ## Installing Skills
 
-Connect the MCP server first — see [Connect your AI tool](/ai-assistants/Connect-your-ai-tool/). Skills assume it is already wired up, because a Skill is only instructions: without the MCP server there are no ShiftControl tools for it to call.
+A Skill is only instructions, so it needs the MCP server underneath it: without the server there are no ShiftControl tools for it to call. In Claude, the plugin below carries both, so installing it is the whole job. In every other AI tool, connect the server first — see [Connect your AI tool](/ai-assistants/Connect-your-ai-tool/).
 
-After that, pick the route that matches the tool you use. They all install from the same repository, so you get the same Skills whichever one you take.
+Pick the route that matches the tool you use. They all install from the same repository, so you get the same Skills whichever one you take.
 
 ### Claude: install the plugin
 
-Our Skills repository is also a Claude plugin marketplace. Adding it once gives you the whole catalog, and every Skill we publish later arrives through the normal plugin update rather than a fresh install. This is the route we recommend for anyone using Claude Code, the Claude desktop app, or claude.ai.
+Our Skills repository is also a Claude plugin marketplace. Adding it once gives you the whole catalog, and every Skill we publish later arrives through the normal plugin update rather than a fresh install. The plugin also carries the ShiftControl MCP server, so there is no server URL to find or paste anywhere. This is the route we recommend for anyone using Claude Code, the Claude desktop app, or claude.ai.
 
 <Steps>
     <Step title="Add the marketplace">
@@ -56,6 +56,11 @@ Our Skills repository is also a Claude plugin marketplace. Adding it once gives 
         ```
 
         In the desktop app or on claude.ai, click **Install** on **ShiftControl**.
+    </Step>
+    <Step title="Connect ShiftControl">
+        In **Claude Code** the server arrives with the plugin and needs no click. Run `/mcp` to see `shiftcontrol` listed and sign in up front, or let the browser open the first time a Skill reaches for your data.
+
+        In the **Claude desktop app** and on **claude.ai**, open the plugin's **Connectors** tab. ShiftControl is listed there as **Not added**: click **Connect** and approve the ShiftControl sign-in. The apps ask before they let a plugin reach an outside service, so until you click it the Skills have nothing to call.
     </Step>
     <Step title="Check that it loaded">
         Start a new conversation and type `/`, or click **+ → Plugins**. The Skills appear grouped under **ShiftControl**. Ask for one by name to confirm the AI can see it.

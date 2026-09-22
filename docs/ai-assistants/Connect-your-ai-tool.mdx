@@ -14,6 +14,10 @@ import { Steps, Step } from "@site/src/components/Steps";
     All AI clients connect to the same MCP server: <code>https://mcp.shiftcontrol.io/mcp</code>. OAuth discovery is at <code>https://mcp.shiftcontrol.io/.well-known/oauth-authorization-server</code>, and Dynamic Client Registration is supported. You'll be prompted to sign in to ShiftControl in your browser the first time the AI calls a tool.
 </Admonition>
 
+<Admonition type="tip" title="Using Claude? The plugin brings the server with it">
+    The ShiftControl plugin carries the MCP server alongside the Skills, so there is nothing to configure here. In Claude Code, installing the plugin installs the server. In the Claude desktop app and on claude.ai, the plugin lists ShiftControl on its <strong>Connectors</strong> tab and one click on <strong>Connect</strong> finishes it. <a href="/ai-assistants/Skills/">Skills</a> has that route. Everything below is for setting the server up by hand, which is what you need in every other tool.
+</Admonition>
+
 ## Claude Desktop (macOS, Windows, Linux)
 
 <Steps>
@@ -43,12 +47,16 @@ import { Steps, Step } from "@site/src/components/Steps";
 
 ## Claude AI (Chat, CoWork, Code)
 
+Installing the plugin is easier: it brings the connector with it, and you click **Connect** on its Connectors tab rather than filling this form in. To add it by hand anyway:
+
 1. Open Claude → **Customize** → **Connectors**
 2. Click the **+** button and select **Add custom connector**
 3. Name: `shiftcontrol`. Remote MCP Server URL: `https://mcp.shiftcontrol.io/mcp`
 4. Click **Add**
 
 ## Claude Code
+
+Only needed if you are not installing the plugin. The plugin brings the server with it, and adding it here as well leaves you with two copies of the same tools.
 
 ```bash
 claude mcp add shiftcontrol --transport http https://mcp.shiftcontrol.io/mcp
