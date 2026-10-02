@@ -99,6 +99,9 @@
     // advanced_disable_flags, which also withholds that config and leaves session recording
     // stuck at awaiting_config (measured on Journey, 2026-09-05).
     advanced_disable_feature_flags: true,
+    // The Production project autocaptures exceptions for the app; this site opts out so
+    // third-party script errors stay out of the app's error tracking.
+    capture_exceptions: false,
   });
 
   // Captain Compliance is the consent authority; this turns its decision into PostHog
