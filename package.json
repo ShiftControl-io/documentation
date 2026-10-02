@@ -1,6 +1,6 @@
 {
   "name": "shiftcontrol-docs",
-  "version": "1.3.6",
+  "version": "1.3.7",
   "private": true,
   "scripts": {
     "docusaurus": "docusaurus",
@@ -55,7 +55,7 @@
     "minimatch": "^10.0.3"
   },
   "allowScripts": {
-    "core-js@3.40.0": true,
+    "core-js@3.50.0": true,
     "fsevents@2.3.3": true
   }
 }
