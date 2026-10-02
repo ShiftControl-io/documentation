@@ -4,12 +4,13 @@ import {themes as prismThemes} from 'prism-react-renderer';
 import type {Config} from '@docusaurus/types';
 import type * as Preset from '@docusaurus/preset-classic';
 
-/** The shared public-web project, alongside the marketing site, journey and the demo app.
- * One key across those hostnames means PostHog's `.shiftcontrol.io` cookie carries a single
- * distinct_id between them, so a visit that starts on marketing and continues here is one
- * visitor rather than two. Docs previously had its own project (`phc_gx4Hhx...`), kept
- * read-only for the history that cannot be migrated. */
-const POSTHOG_KEY = "phc_BaztqckWNqJJhY0vFFlNgTqOr6D7kMb5z55ZVH20rJs";
+/** The Production project, shared with the marketing site (shiftcontrol.io), journey and the app
+ * (app.shiftcontrol.io). One key across those hostnames means the `.shiftcontrol.io` cookie
+ * carries one distinct_id from the first marketing page to signup. Marketing and app traffic
+ * are separated by `$host`. The demo deliberately stays on the separate Marketing project, so
+ * mock identities never reach Production. Docs previously had its own project
+ * (`phc_gx4Hhx...`), kept read-only for the history that cannot be migrated. */
+const POSTHOG_KEY = "phc_yQZZBywymfBd8QpwnsG7vxkIKKb6akeQXN3a2ymyqCO";
 const POSTHOG_HOST = "https://velocity.shiftcontrol.io";
 
 /** A dev server shares the production project, so an `npm start` pageview is indistinguishable
