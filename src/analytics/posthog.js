@@ -91,6 +91,10 @@
     // capture() calls, zero requests to /i/v0/e/, and zero cookies or storage keys.
     // Visitors who reject are still counted, through a server-side daily-salted hash.
     cookieless_mode: 'on_reject',
+    // Keep the accept/reject record in a .shiftcontrol.io cookie rather than per-site
+    // localStorage. The SDK deletes the shared identity cookie at init on any site where it
+    // finds no opt-in, so a per-site record splits one visitor across the marketing sites.
+    opt_out_capturing_persistence_type: 'cookie',
     // Replay waits for the Performance category; the bridge below starts it on accept.
     disable_session_recording: true,
     // Stops feature-flag evaluation; this site evaluates none. Measured 2026-09-09 against
