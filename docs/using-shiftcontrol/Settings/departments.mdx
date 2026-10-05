@@ -16,6 +16,21 @@ Departments can be synced automatically through an HRIS integration or added man
 
 <ModeScreenshot path="Settings/Settings-departments" alt="Departments list view" />
 
+### Each row shows its group and its headcount
+
+Departments, locations, and teams each have a group quietly doing the work behind them. The icon next to a name means that entry has a group linked to it, and the number beside it is how many people currently match. This turns two common checks into a glance:
+
+- **Spot the gaps.** A department with people and no icon is one that never got its group created.
+- **Spot dead rules.** A department with a group and a count of zero means the rule isn't matching anyone.
+
+### Nested departments
+
+Departments can sit inside other departments — a parent and its children, two levels deep, which is what HR systems actually expose. Child departments are indented under their parent in the list, and when you create or edit one you pick its parent from a dropdown.
+
+- **The group nests too.** The group behind a child department automatically nests inside its parent's group, so anyone in *Backend* is also counted in *Engineering* with no extra rule.
+- **Downstream names are composed.** Department names sent to Google Workspace and JumpCloud are composed as `Parent - Child` — "Backend" shows up as "Engineering - Backend" everywhere downstream. Top-level departments are unchanged.
+- **Siblings can share a name.** "Finance → Ops" and "Product → Ops" no longer collide.
+
 ## Syncing with HRIS Integrations
 
 If your organization has an **HRIS integration** active, departments are automatically created and kept in sync with your HR system of record.
@@ -46,12 +61,15 @@ To add or modify departments manually:
 
 1. Click **Add Department** at the top right of the page.
 2. Enter a **Department Name** (e.g., *Marketing*, *Engineering*, *Finance*).
-3. Click **Save** to confirm.
+3. To nest it, pick a **Parent** from the dropdown — or leave it top-level.
+4. Choose whether to **create a group for this** department or **link an existing group** you already have.
+5. Click **Save** to confirm.
 
 <ModeScreenshot path="Settings/Settings-create-edit-a-department" alt="Add or edit a department" />
 
-You can also edit existing departments using the **⋮ menu** next to each entry.
-When renamed, any linked users, apps, or dynamic groups remain connected automatically.
+You can also edit existing departments using the **⋮ menu** next to each entry — including linking, unlinking, or relinking the group behind it. The quick-add dialog when editing a user offers the same create-or-link choices as the full screen.
+
+When renamed, any linked users, apps, or dynamic groups remain connected automatically — and the group's **email address is updated to match** the new name, so distribution lists never drift out of step with the display name.
 
 <Admonition type="tip">
     Department-linked groups are dynamic — changes to a department’s user assignments automatically reflect in the related group.
@@ -62,7 +80,7 @@ When renamed, any linked users, apps, or dynamic groups remain connected automat
 To delete a department:
 1. Open the **⋮ menu** next to the department name.
 2. Select **Delete Department**.
-3. Confirm the action. The associated department group will also be removed unless manually retained for record purposes.
+3. Confirm the action. ShiftControl tells you which group is attached and offers to remove it at the same time — delete the group first and the same choice runs the other way.
 
 <Admonition type="note">
     Deleting a department does not delete users. It only removes the department association and related dynamic group.

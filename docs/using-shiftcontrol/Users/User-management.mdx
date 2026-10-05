@@ -33,13 +33,19 @@ Each row in the users table shows:
 |--------|------------------|
 | **User** | Name, email, and avatar — this is the identity used across all connected systems |
 | **Directory** | Icons showing which directories the user exists in |
-| **Status** | Active (can authenticate) or Inactive (access suspended) |
+| **Status** | Active (can authenticate) or Inactive (access suspended). A small calendar marker beside the status means a scheduled change is pending — hover it to see when it runs |
+| **Last sign-in** | How recently the person signed in — hover to see the exact timestamp. The surest way to spot dormant accounts |
+| **Admin roles** | Which Google admin role and ShiftControl role each person holds, so privileges are visible without opening every record |
 | **Groups & Apps** | How many groups they belong to and how many apps they can access |
 
-Use the filters to narrow down what you're looking at:
+Use the filters to narrow down what you're looking at. The 2SV, last sign-in, Google admin role, and ShiftControl role filters live together in one **Filters** panel with a count badge showing how many are active, alongside the directory and status filters and search:
+
 - **Directory filter** — Show users from a specific directory only
 - **Status filter** — Active, Inactive, or all
+- **Filters panel** — 2-Step Verification, last sign-in (including **dormant** accounts), Google admin role, and ShiftControl role. Role lists only offer roles someone actually holds, so you never pick an option that matches nobody. A **Reset** button clears the panel's filters without touching your status selection
 - **Search** — Find users by name, email, or other attributes
+
+Both admin-role columns and the exact last sign-in timestamp are included when you export the table.
 
 ## Common Scenarios
 
@@ -50,6 +56,10 @@ Your security team needs a list of everyone with active access. Filter to **Acti
 ### Finding inactive users who still have app access
 
 Filter by **Inactive** status. If any inactive user still shows a non-zero Apps count, their deprovisioning didn't complete fully. Click in to investigate and revoke remaining access. This is a common finding during security audits.
+
+### Hunting dormant accounts
+
+Open the **Filters** panel and filter **Last sign-in** to dormant accounts — people who haven't signed in within the dormancy window. Sort or export the list, then work down it: suspend, archive, or confirm the account is still needed. The **Super Admin** and ShiftControl-role filters in the same panel let you run the complementary check — everyone holding elevated access — in one pass.
 
 ### Bulk onboarding a new team
 
@@ -108,6 +118,31 @@ Actions vary by the user's current status (active, suspended, or archived):
 
 Actions are context-sensitive — only actions that apply to the user's current status and your permissions are shown. For example, you won't see "Suspend" on an already-suspended user, or "Delete" if you don't have delete permissions.
 
+### Add to group and Assign to app
+
+Every row's menu also offers **Add to group** and **Assign to app**, and the same two actions appear in the bulk menu when you select several people — so granting access doesn't require opening each person's record. The related row actions live on the other lists too: **Groups** rows offer **Add users**, and **Apps** rows offer **Assign users** and **Assign groups**.
+
+- **Additive only.** These actions add; they never remove. Taking someone out still happens on the group or app detail screen, where the full membership is in front of you.
+- **Several targets at once.** Add three users to two groups in one go. A message confirms what happened, and names any target that couldn't be updated.
+- **Directory-aware.** In workspaces running both JumpCloud and Google, each directory's submenu carries its own **Add to group**, filtered to that directory's groups.
+- **No accidental duplicates.** The picker shows existing members and assignments greyed out and labelled, so you see current state instead of guessing — and nobody can be picked twice.
+
+### Scheduled activation and deactivation (Google Workspace)
+
+Any Google Workspace user can be scheduled for **suspension** or **activation** — from the row menu or in bulk — so offboardings land on time and people returning from leave come back on the right morning. Pick the date, time, and time zone, and confirm.
+
+- A **calendar marker** appears beside the user's status while the change is pending — hover it to see when it runs, in UTC and your local time.
+- **Cancel from the same menu**, right up until the change runs.
+- Changes run within a minute of the time you set — not at the next nightly sync.
+- Everything downstream still happens: a scheduled suspension follows the same path as a manual one, so offboarding work items, group re-evaluation, and the audit trail behave exactly as they do today. Scheduling an activation on an archived account un-archives it as well.
+- Deleting a user quietly cancels their schedule. If Google refuses a scheduled change after retries, your org's Owners and Admins get an email so nothing is silently skipped.
+
+<ConditionalContent modes={["jc-google", "google-jc"]}>
+
+For JumpCloud users, **Schedule deactivation** was already available and works the same way — see the JumpCloud actions above.
+
+</ConditionalContent>
+
 ## Bulk Actions
 
 Select multiple users with the checkboxes, then choose an action from the bulk menu. This is how you handle operations at scale — seasonal onboarding, department-wide password resets, or end-of-contract offboarding.
@@ -120,7 +155,7 @@ The bulk menu shows a **directory sub-menu** — select **JumpCloud** or **Googl
 Activate, Send activation instructions, Cancel scheduled activation, Schedule deactivation, Cancel scheduled deactivation, Disable, Enable, Send password reset, Force password reset, Set password, Delete
 
 **Google Workspace bulk actions:**
-Suspend, Restore, Delete
+Suspend, Restore, Delete — including the option to delete the Google account entirely when removing several users at once
 
 </ConditionalContent>
 
@@ -137,6 +172,15 @@ Suspend, Restore, Delete
 </ConditionalContent>
 
 Each action is only enabled when at least one selected user is eligible. For example, "Activate" is disabled if all selected users are already active.
+
+## Working with Tables
+
+These behaviors apply to the data grids across ShiftControl — Users, Groups, Apps, Devices, and reports:
+
+- **Export to PDF, Excel, or CSV.** Exports copy the same text you see on screen — readable dates instead of raw timestamps, the MFA method instead of an empty cell, **Active**/**Disabled** instead of status codes, and **Never** for keys with no expiry. Where you can choose columns, export either the visible ones or all of them. PDFs are laid out to be read: landscape pages, wrapped text, and a move up to A3 when a table is too wide for A4.
+- **Filenames that say what they are.** Downloads are named for the page and date — like `users-2026-09-25.csv` — instead of `export.csv`.
+- **Reset table.** Changed the columns, sort, filters, or page size? A **Reset table** button appears and puts everything back to the defaults.
+- **Previous/next follows your list.** The prev/next arrows on a record follow the filtered, searched, and sorted list you opened it from — and the list keeps your filters when you come back.
 
 ## Things to Know
 

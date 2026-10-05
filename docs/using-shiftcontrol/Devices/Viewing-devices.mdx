@@ -31,7 +31,7 @@ Each row shows the fields IT actually uses to make decisions:
 - **Owner** — the person (or people) the device is bound to in JumpCloud.
 - **OS** — operating system and version, so you can spot machines that are behind.
 - **Serial** — the hardware serial number, for asset tracking and support.
-- **Encryption** — whether the disk is encrypted, and whether a recovery key is held (see [Device details](/using-shiftcontrol/Devices/Device-details)).
+- **Encryption** — whether the disk is encrypted, and whether a recovery key is held (see [Device details](/using-shiftcontrol/Devices/Device-details)). Android devices report their real encryption status too, with the actions JumpCloud MDM actually supports.
 - **Last check-in** — when JumpCloud last heard from the device. A long gap usually means the machine is off, lost, or no longer in use.
 
 Click any row to open the [device's detail page](/using-shiftcontrol/Devices/Device-details).
@@ -48,7 +48,11 @@ The only bulk action today is **Un-manage** — the batch version of retiring a 
 
 ### Filtering and search
 
-Filter the list by **status** (online, offline, dormant), **platform** (macOS, Windows, Linux, iPadOS), **encryption** (encrypted / unencrypted), and **assignment** (assigned / unassigned). Combine filters to narrow quickly — for example, *unencrypted* + *macOS* — and use search to jump to a specific name, hostname, or serial.
+The toolbar fits on one row. Filter the list from the **Status** menu (online, offline, dormant) and the **Filters** panel — which groups the remaining filters together with a count badge — covering **platform** (macOS, Windows, Linux, iPadOS, Android), **encryption** (encrypted / unencrypted), **assignment** (assigned / unassigned), and **owner**. Combine filters to narrow quickly — for example, *unencrypted* + *macOS* — and use search to jump to a specific name, hostname, or serial.
+
+<Admonition type="tip">
+  Hover any status dot for a tooltip that explains what the status means — no legend required.
+</Admonition>
 
 The [**Needs Attention**](/using-shiftcontrol/Devices/Needs-attention) view is a ready-made triage of the devices most likely to need action — unencrypted, missing a recovery key, gone quiet, or unassigned — so you don't have to assemble it yourself. For a graded, per-dimension read on the whole fleet, see [**Device Health**](/using-shiftcontrol/Devices/Device-health).
 

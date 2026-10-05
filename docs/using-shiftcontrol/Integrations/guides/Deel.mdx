@@ -30,6 +30,10 @@ The Deel connector allows you to connect Deel as your HR system of record to Shi
 
 ShiftControl polls Deel hourly for new hires, role changes, and departures. The connector processes these changes automatically, ensuring user data stays up-to-date across connected systems.
 
+Where your Deel account provides it, ShiftControl uses **Deel's own employment status** to drive a person's state — so the lifecycle decisions match what HR sees in Deel.
+
+Offboardings honour the **exact last-day time recorded in Deel** rather than a generic end-of-day cutoff — access ends at the moment Deel says the person's last day ends, not at an arbitrary hour.
+
 ## Getting Started
 
 ### Step 1: Generate a Deel API Token

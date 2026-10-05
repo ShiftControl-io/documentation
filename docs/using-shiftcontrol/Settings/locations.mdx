@@ -16,6 +16,10 @@ Locations can be automatically synced from your HRIS integration or added manual
 
 <ModeScreenshot path="Settings/Settings-locations" alt="Locations list view" />
 
+<Admonition type="tip">
+    Each row shows its group and its headcount — the icon next to a name means a group is linked to that location, and the number beside it is how many people currently match. A location with people and no icon never got its group; a group with a count of zero has a rule that isn't matching anyone.
+</Admonition>
+
 ## Syncing with HRIS Integrations
 
 When an **HRIS integration** is active, locations are automatically created and synced from your HR system.
@@ -45,12 +49,13 @@ To add or modify locations manually:
 
 1. Click **Add Location** at the top right of the page.
 2. Enter a **Location Name** (e.g., *Singapore*, *United States*, *Germany*).
-3. Click **Save** to confirm.
+3. Choose whether to **create a group for this** location or **link an existing group** you already have.
+4. Click **Save** to confirm.
 
 <ModeScreenshot path="Settings/Settings-create-edit-a-location" alt="Add or edit a location" />
 
-You can also edit existing locations using the **⋮ menu** next to each entry.
-When renamed, any linked users or dynamic groups remain associated automatically.
+You can also edit existing locations using the **⋮ menu** next to each entry — including linking, unlinking, or relinking the group behind it.
+When renamed, any linked users or dynamic groups remain associated automatically, and the group's **email address updates to match** the new name.
 
 <Admonition type="tip">
     Location-based groups are dynamic — users are automatically added or removed as their assigned location changes.
@@ -61,7 +66,7 @@ When renamed, any linked users or dynamic groups remain associated automatically
 To delete a location:
 1. Open the **⋮ menu** beside the location name.
 2. Select **Delete Location**.
-3. Confirm the deletion. The associated location group will also be removed unless manually retained.
+3. Confirm the deletion. ShiftControl shows which group is attached and offers to remove it at the same time — delete the group first and the same choice runs the other way.
 
 <Admonition type="note">
     Deleting a location will not remove users — it only unassigns them from that location and deletes the related dynamic group.

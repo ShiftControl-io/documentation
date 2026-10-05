@@ -11,7 +11,7 @@ import { Steps, Step } from "@site/src/components/Steps";
 <p style={{fontSize: "large"}}>Install paths for every supported AI client. Pick yours and follow the steps.</p>
 
 <Admonition type="info" title="Same endpoint for every client">
-    All AI clients connect to the same MCP server: <code>https://mcp.shiftcontrol.io/mcp</code>. OAuth discovery is at <code>https://mcp.shiftcontrol.io/.well-known/oauth-authorization-server</code>, and Dynamic Client Registration is supported. You'll be prompted to sign in to ShiftControl in your browser the first time the AI calls a tool.
+    All AI clients connect to the same MCP server: <code>https://mcp.shiftcontrol.io/mcp</code>. OAuth discovery is at <code>https://mcp.shiftcontrol.io/.well-known/oauth-authorization-server</code>, and both Dynamic Client Registration and Client ID Metadata Documents are supported for client registration. You'll be prompted to sign in to ShiftControl in your browser the first time the AI calls a tool.
 </Admonition>
 
 <Admonition type="tip" title="Using Claude? The plugin brings the server with it">
@@ -117,7 +117,7 @@ If your client implements the Model Context Protocol with OAuth, point it at:
 |---------|-------|
 | Endpoint | `https://mcp.shiftcontrol.io/mcp` |
 | OAuth discovery | `https://mcp.shiftcontrol.io/.well-known/oauth-authorization-server` |
-| Dynamic Client Registration | Supported |
+| Client registration | Dynamic Client Registration and Client ID Metadata Documents |
 
 ## Verify the connection
 
