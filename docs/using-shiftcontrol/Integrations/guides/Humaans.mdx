@@ -1,0 +1,60 @@
+---
+title: 'Humaans'
+description: 'Integrate Humaans with ShiftControl to sync HR data — department fields or Org units — and automate onboarding and offboarding.'
+keywords: ['ShiftControl', 'Humaans', 'connector', 'integration', 'setup guide', 'HRIS', 'user management']
+icon: 'users-gear'
+---
+import { Steps, Step } from "@site/src/components/Steps";
+import Admonition from '@theme/Admonition';
+
+<p style={{fontSize: "large"}}>Connect Humaans to ShiftControl and make HR data your single source of truth for user management — whichever way you organise people in Humaans.</p>
+
+## Overview
+
+The Humaans connector connects Humaans as your HR system of record to ShiftControl, so hires, role changes, and departures flow automatically into user management. Humaans lets you organise people two ways — a plain department field, or a full **Org units** hierarchy — and ShiftControl detects which one you use when you connect, and remembers it. If you are on Org units with nesting, your parent departments come through and land as matching nested groups (see [Departments](/using-shiftcontrol/Settings/departments/)).
+
+## Why It Matters
+
+- **Single Source of Truth**: Consolidate HR data from Humaans into ShiftControl for consistent identity management
+- **Automated Lifecycle Management**: Handle onboarding, role changes, and offboarding without manual intervention
+- **Your structure, respected**: Whether you use the department field or Org units, ShiftControl detects it — and warns you rather than silently flipping if your setup ever changes
+- **Leavers don't slip through**: Humaans hides offboarded people from its default list; ShiftControl keeps them in the roster so they get properly disabled
+
+## How It Works
+
+- **One API access token** with the `private:read` scope, created by an owner or admin. A token made by a regular user can only read its own profile, so ShiftControl checks the scope at connect time and tells you if it is too narrow.
+- **Syncs hourly**: preferred and legal names, work email, employee ID, job title, department, location, team, manager, contract type, and start and end dates.
+- **Offboarded people stay in the roster** so they get properly disabled — exactly the case that slips through unnoticed otherwise.
+- **New hires imported from your ATS** flow in automatically once they have a work email.
+- **Remote workers** get their city and country instead of an office they never sit in.
+- **We never silently flip your department model.** If your Humaans setup changes, we warn you and leave the call to you.
+
+## Getting Started
+
+<Steps>
+    <Step title="Create an API access token in Humaans">
+        Have an **owner or admin** create an API access token with the `private:read` scope.
+    </Step>
+    <Step title="Open Integrations in ShiftControl">
+        Go to **Integrations → Directory** and pick **Humaans**.
+    </Step>
+    <Step title="Paste the token">
+        Paste the token and save. ShiftControl checks the scope immediately and tells you if it is short.
+    </Step>
+    <Step title="Let the first sync run">
+        The first sync runs within the hour. Preview it before anything changes.
+    </Step>
+</Steps>
+
+## Things to Know
+
+- **Sync runs hourly.** Faster-than-hourly updates via webhooks are on the roadmap.
+- **Who creates the token matters.** A token created by a regular user can only read their own profile — use an owner or admin.
+- **Offboardings are driven by the HR record.** When someone leaves in Humaans, the change flows through ShiftControl to your connected directories.
+
+## Benefits
+
+- **Hands-Off User Management**: Eliminate manual HR-driven user creation and updates
+- **Smoother Onboarding**: Employees have access to required apps from their first day
+- **Tighter Security**: Automatic deprovisioning when employees leave
+- **Accurate Structure**: Org units hierarchies are reflected as nested groups

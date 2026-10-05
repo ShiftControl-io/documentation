@@ -1,0 +1,76 @@
+---
+title: 'Rippling'
+description: 'Integrate Rippling with ShiftControl to sync HR data — including your real department hierarchy — and automate onboarding and offboarding.'
+keywords: ['ShiftControl', 'Rippling', 'connector', 'integration', 'setup guide', 'HRIS', 'user management']
+icon: 'users-gear'
+---
+import { Steps, Step } from "@site/src/components/Steps";
+import Admonition from '@theme/Admonition';
+
+<p style={{fontSize: "large"}}>Connect Rippling to ShiftControl and make HR data your single source of truth for user management — nested departments included.</p>
+
+## Overview
+
+The Rippling connector connects Rippling as your HR system of record to ShiftControl, so hires, role changes, and departures flow automatically into user management. Rippling is also the first connector that feeds ShiftControl your real department hierarchy — if you nest departments under parents in Rippling, ShiftControl builds matching nested groups instead of flattening everything into one list.
+
+## Why It Matters
+
+- **Single Source of Truth**: Consolidate HR data from Rippling into ShiftControl for consistent identity management
+- **Automated Lifecycle Management**: Handle onboarding, role changes, and offboarding without manual intervention
+- **Real Department Hierarchy**: Parent departments come through and land as properly nested groups (see [Departments](/using-shiftcontrol/Settings/departments/))
+- **Pre-Start Provisioning**: New hires arrive early and activate on your schedule — 7 days before their start date by default
+
+## How It Works
+
+- **One API token**, created in Rippling under **Tools → Developer → API Tokens**. No OAuth app to install and no admin consent screen.
+- **Syncs every hour**: names (including preferred names), work email, employee ID, job title, department, work location, team, manager, employment type, and start and end dates.
+- **Nested departments**: "Platform Engineering" under "Engineering" arrives as a properly nested group, not a flat entry.
+- **Remote workers** are handled as remote — no phantom office assignment.
+- **Missing permissions are named**: if your token is missing a permission, ShiftControl tells you the exact fields it cannot read instead of quietly syncing partial data.
+
+## Getting Started
+
+### Step 1: Create an API token in Rippling
+
+<Steps>
+    <Step title="Open API Tokens">
+        In Rippling, go to **Tools → Developer → API Tokens**.
+    </Step>
+    <Step title="Create a token">
+        Create a token with read access to **workers**, **work locations**, and **departments**.
+    </Step>
+    <Step title="Copy the token">
+        Keep it somewhere safe to paste into ShiftControl.
+
+        <Admonition type="warning">
+            Rippling revokes an API token if it goes unused for 30 days, or if the person who created it is terminated. Have an admin who is sticking around create it.
+        </Admonition>
+    </Step>
+</Steps>
+
+### Step 2: Add Rippling in ShiftControl
+
+<Steps>
+    <Step title="Open Integrations">
+        In ShiftControl, open **Integrations → Directory** and pick **Rippling**.
+    </Step>
+    <Step title="Paste the token">
+        Paste the API token and save. ShiftControl validates it on the spot and tells you if any permission is missing.
+    </Step>
+    <Step title="Let the first sync run">
+        The first sync runs within the hour — or start one manually and preview it before anything changes.
+    </Step>
+</Steps>
+
+## Things to Know
+
+- **Sync runs hourly.** You can also trigger an on-demand sync from the connector's actions menu.
+- **Offboardings are driven by the HR record.** When someone is terminated in Rippling, the change flows through ShiftControl to your connected directories.
+- **Preview before you trust it.** Run a manual sync and preview the changes before the first automatic run alters anything.
+
+## Benefits
+
+- **Hands-Off User Management**: Eliminate manual HR-driven user creation and updates
+- **Smoother Onboarding**: Employees have access to required apps from their first day
+- **Tighter Security**: Automatic deprovisioning when employees leave
+- **Accurate Structure**: Your nested department tree in Rippling is reflected in ShiftControl groups

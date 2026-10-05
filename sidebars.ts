@@ -58,6 +58,7 @@ const sidebars: SidebarsConfig = {
             collapsed: false,
             label: 'Using ShiftControl (Admins)',
             items: [
+                'using-shiftcontrol/Hub',
                 {
                     type: 'category',
                     label: 'Dashboards',
@@ -220,6 +221,7 @@ const sidebars: SidebarsConfig = {
                             },
                             items: [
                                 'using-shiftcontrol/Settings/org-details',
+                                'using-shiftcontrol/Settings/billing',
                                 'using-shiftcontrol/Settings/group-tags',
                                 'using-shiftcontrol/Settings/user-roles',
                                 'using-shiftcontrol/Settings/org-api-keys',
@@ -269,7 +271,9 @@ const sidebars: SidebarsConfig = {
                                                 'using-shiftcontrol/Integrations/guides/Deel',
                                                 'using-shiftcontrol/Integrations/guides/Shapes',
                                                 'using-shiftcontrol/Integrations/guides/HiBob',
+                                                'using-shiftcontrol/Integrations/guides/Humaans',
                                                 'using-shiftcontrol/Integrations/guides/OmniHR',
+                                                'using-shiftcontrol/Integrations/guides/Rippling',
                                             ],
                                         },
                                         'using-shiftcontrol/Integrations/guides/Google-Workspace',
