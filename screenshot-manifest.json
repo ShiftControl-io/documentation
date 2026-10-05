@@ -2,10 +2,7 @@
   "$schema": "Screenshot manifest for ShiftControl documentation. Used by AI agents to recapture screenshots.",
   "baseUrl": "https://demo.shiftcontrol.io",
   "localUrl": "http://localhost:8005",
-  "viewport": {
-    "width": 1440,
-    "height": 900
-  },
+  "viewport": { "width": 1440, "height": 900 },
   "format": "webp",
   "quality": 90,
   "pathPattern": "{section}/{mode_folder}/{theme_folder}/{name}.webp",
@@ -13,29 +10,33 @@
   "localStartCommand": "cd ~/WebstormProjects/shiftcontrol-saas/services/frontend && npm run dev:test-demo-screenshot",
   "notes": [
     "IMPORTANT: Run dev:test-demo-screenshot (not dev:test-demo) to hide TanStack devtools logo.",
-    "Every product screenshot varies by mode \u2014 even subtle differences like dropdown arrows on Add buttons in dual-directory modes.",
-    "All screenshots are captured per mode \u00d7 per theme (light + dark).",
+    "Every product screenshot varies by mode — even subtle differences like dropdown arrows on Add buttons in dual-directory modes.",
+    "All screenshots are captured per mode × per theme (light + dark).",
     "The 'modes' array on each screenshot controls which mode variants to capture.",
     "Use the localUrl during development, baseUrl for production recaptures.",
-    "NAVIGATION: Use direct URLs, NOT clicking. AG Grid rows don't have standard <tr> elements \u2014 click navigation fails silently.",
-    "MODAL SUPPRESSION: The mode= param triggers a welcome modal. Suppress it BEFORE navigation with: page.addInitScript(() => localStorage.setItem('SC_DEMO_WELCOME_LAST_SHOWN', new Date().toISOString()))",
+    "NAVIGATION: Use direct URLs, NOT clicking. AG Grid rows don't have standard <tr> elements — click navigation fails silently.",
+    "MODAL SUPPRESSION: The mode= param triggers a welcome modal. Suppress it BEFORE navigation with: page.addInitScript(() => localStorage.setItem('SC_DEMO_WELCOME_LAST_SHOWN', Date.now().toString()))",
+    "COOKIE BANNER: A cookie-consent banner renders inside a shadow-DOM host (div.captain-compliance-modal-container) and can re-mount after navigation or delay. CSS display:none does not reach inside shadow DOM — remove the element with page.evaluate right before each screenshot, and repeat the removal if captures are far apart.",
+    "EMPLOYEE PORTAL ROUTES: the portal apps page is / (not /apps) and the org chart is /orgchart (not /org-chart). Wrong paths 404 silently and produce blank duplicate screenshots.",
+    "DEVICE DETAIL: device detail lives at /admin/org/devices/view/{device_id} but direct navigation renders the inventory instead — you must open /admin/org/devices and click a row. Demo device id: 6700a1b2c3d4e5f600000037.",
     "TABS (Users): Use ?tab=security|appPermissions|saasCost URL param. Set mode/theme first, suppress modal, THEN navigate to tab URL.",
-    "TABS (Groups/Apps): No URL param support yet \u2014 must click Radix UI tabs after page load. Use position-based clicking or [role='tab'] selectors.",
+    "TABS (Groups/Apps): No URL param support yet — must click Radix UI tabs after page load. Use position-based clicking or [role='tab'] selectors.",
     "SIDEBAR TABS: Right sidebar tabs require clicking after page load. Use position-based x>900 disambiguation.",
-    "VERIFICATION: After each capture batch, run duplicate detection to catch navigation failures immediately."
+    "VERIFICATION: After each capture batch, run duplicate detection to catch navigation failures immediately.",
+    "PLAYWRIGHT VERSION: the installed playwright version must match the browser build in ~/.cache/ms-playwright (e.g. chromium-1228 needs playwright@1.61.x). Check the directory name first, then install the playwright release that ships that build — do not assume the latest release matches."
   ],
   "knownIds": {
     "_comment": "Direct-navigable IDs from mock data. Use these in URLs instead of clicking AG Grid rows.",
     "user": "66b42ef6693525dd6b48d7ed",
     "user_first_in_list": "66b417c8b170fe888e997f27",
-    "_note_user_ids_are_mode_specific": "The `user` ids above are JumpCloud Mongo ids and are only valid in jc_gws / jc_only. In gws_only, directory users are keyed by Google numeric ids (see mocks/data/gws_only/api/user/) \u2014 use 100000000000000000001. Reusing a JumpCloud id in gws_only silently resolves a record with no Google directory linkage, which hides Google-dependent affordances such as the avatar pencil badge.",
+    "_note_user_ids_are_mode_specific": "The `user` ids above are JumpCloud Mongo ids and are only valid in jc_gws / jc_only. In gws_only, directory users are keyed by Google numeric ids (see mocks/data/gws_only/api/user/) — use 100000000000000000001. Reusing a JumpCloud id in gws_only silently resolves a record with no Google directory linkage, which hides Google-dependent affordances such as the avatar pencil badge.",
     "user_gws_only": "100000000000000000001",
     "group": "01912fd8-6663-7e31-b98b-9355bcc868be",
     "group_with_dynamic": "01912fd8-c595-7dbf-b18d-bd9ea9f17574",
     "app_aws": "01912fe5-9dd5-754c-9bfa-4d5f3a160ceb",
     "app_google_workspace": "01912fe7-7048-7e3d-986d-ce18f1e0ea33",
     "app_bamboohr_sso": "0191dac9-e6a4-7d6d-97c4-229ea0c61592",
-    "_note_sso": "Use app_bamboohr_sso for SSO tab screenshots \u2014 it has actual SAML config. AWS doesn't always have SSO configured in the demo."
+    "_note_sso": "Use app_bamboohr_sso for SSO tab screenshots — it has actual SAML config. AWS doesn't always have SSO configured in the demo."
   },
   "directUrls": {
     "_comment": "Use these URLs to navigate directly instead of clicking through the UI.",
@@ -67,930 +68,551 @@
     "digital_cards_settings": "/settings/digital-cards",
     "employee_my_card": "/my-card",
     "user_detail_digital_card": "/admin/org/users/view/{user_id}?tab=digitalCard",
-    "device_inventory": "/admin/org/devices"
+    "device_inventory": "/admin/org/devices",
+    "employee_apps": "/",
+    "employee_orgchart": "/orgchart"
   },
   "modes": {
-    "jc_gws": {
-      "folder": "jc-google",
-      "params": "?mode=jc_gws",
-      "label": "JumpCloud + Google Workspace"
-    },
-    "jc_only": {
-      "folder": "jc-only",
-      "params": "?mode=jc_only",
-      "label": "JumpCloud Only"
-    },
-    "gws_only": {
-      "folder": "gws-only",
-      "params": "?mode=gws_only",
-      "label": "Google Workspace Only"
-    }
+    "jc_gws": { "folder": "jc-google", "params": "?mode=jc_gws", "label": "JumpCloud + Google Workspace" },
+    "jc_only": { "folder": "jc-only", "params": "?mode=jc_only", "label": "JumpCloud Only" },
+    "gws_only": { "folder": "gws-only", "params": "?mode=gws_only", "label": "Google Workspace Only" }
   },
   "themes": {
-    "light": {
-      "folder": "light",
-      "params": "&theme=light"
-    },
-    "dark": {
-      "folder": "dark",
-      "params": "&theme=dark"
-    }
+    "light": { "folder": "light", "params": "&theme=light" },
+    "dark": { "folder": "dark", "params": "&theme=dark" }
   },
   "screenshots": {
-    "_comment": "All paths relative to static/img/ShiftControl/. All captured per mode \u00d7 per theme unless 'modes' restricts it.",
+    "_comment": "All paths relative to static/img/ShiftControl/. All captured per mode × per theme unless 'modes' restricts it.",
+
     "Users/User-management": {
       "route": "/admin/org/users",
-      "description": "Users list \u2014 directory icons, status, group/app counts. In jc_gws mode, Add User has a dropdown arrow for Google user option.",
-      "modes": [
-        "jc_gws",
-        "jc_only",
-        "gws_only"
-      ],
+      "description": "Users list — directory icons, status, group/app counts. In jc_gws mode, Add User has a dropdown arrow for Google user option.",
+      "modes": ["jc_gws", "jc_only", "gws_only"],
       "component": "ModeScreenshot",
-      "usedIn": [
-        "docs/using-shiftcontrol/Users/User-management.mdx"
-      ]
+      "usedIn": ["docs/using-shiftcontrol/Users/User-management.mdx"]
     },
     "Users/User-detail-info": {
       "route": "/admin/org/users/view/{first_user}",
       "tab": "Details",
-      "description": "User detail \u2014 profile fields, directory status icons in header. jc_gws shows Google Workspace section below standard fields.",
-      "modes": [
-        "jc_gws",
-        "jc_only",
-        "gws_only"
-      ],
+      "description": "User detail — profile fields, directory status icons in header. jc_gws shows Google Workspace section below standard fields.",
+      "modes": ["jc_gws", "jc_only", "gws_only"],
       "component": "ModeScreenshot",
-      "usedIn": [
-        "docs/using-shiftcontrol/Users/Editing-a-user.mdx"
-      ]
+      "usedIn": ["docs/using-shiftcontrol/Users/Editing-a-user.mdx"]
     },
     "Users/User-detail-google-section": {
       "route": "/admin/org/users/view/{first_user}",
       "tab": "Details",
       "action": "Scroll down to Google Workspace section",
       "description": "Google Workspace fields: recovery email, recovery phone, directory toggle, email aliases",
-      "modes": [
-        "jc_gws"
-      ],
+      "modes": ["jc_gws"],
       "component": "ModeScreenshot",
-      "usedIn": [
-        "docs/using-shiftcontrol/Users/Editing-a-user.mdx"
-      ]
+      "usedIn": ["docs/using-shiftcontrol/Users/Editing-a-user.mdx"]
     },
     "Users/User-detail-security": {
       "route": "/admin/org/users/view/{first_user}",
       "tab": "Security",
       "description": "Security tab. jc_gws: Google 2SV + JumpCloud MFA side by side. jc_only: JumpCloud MFA only. gws_only: Google security only.",
-      "modes": [
-        "jc_gws",
-        "jc_only",
-        "gws_only"
-      ],
+      "modes": ["jc_gws", "jc_only", "gws_only"],
       "component": "ModeScreenshot",
-      "usedIn": [
-        "docs/using-shiftcontrol/Users/Editing-a-user.mdx"
-      ]
+      "usedIn": ["docs/using-shiftcontrol/Users/Editing-a-user.mdx"]
     },
     "Users/User-detail-app-permissions": {
       "route": "/admin/org/users/view/{first_user}",
       "tab": "App Permissions",
       "description": "Active OAuth permissions and history. Tab only exists with Google connected. In jc_only this tab is replaced by SaaS Cost.",
-      "modes": [
-        "jc_gws",
-        "jc_only"
-      ],
+      "modes": ["jc_gws", "jc_only"],
       "component": "ModeScreenshot",
-      "usedIn": [
-        "docs/using-shiftcontrol/Users/Editing-a-user.mdx"
-      ]
+      "usedIn": ["docs/using-shiftcontrol/Users/Editing-a-user.mdx"]
     },
     "Users/User-detail-saas-cost": {
       "route": "/admin/org/users/view/{first_user}",
       "tab": "SaaS Cost",
       "description": "Per-user SaaS spend breakdown by app",
-      "modes": [
-        "jc_gws"
-      ],
+      "modes": ["jc_gws"],
       "component": "ModeScreenshot",
-      "usedIn": [
-        "docs/using-shiftcontrol/Users/Editing-a-user.mdx"
-      ]
+      "usedIn": ["docs/using-shiftcontrol/Users/Editing-a-user.mdx"]
     },
     "Users/Add-a-user": {
       "route": "/admin/org/users",
       "action": "Click 'Add User' button. In jc_gws mode, button has dropdown arrow with Google user option.",
-      "description": "New user creation form \u2014 Details tab with identity and org fields",
-      "modes": [
-        "jc_gws",
-        "jc_only",
-        "gws_only"
-      ],
+      "description": "New user creation form — Details tab with identity and org fields",
+      "modes": ["jc_gws", "jc_only", "gws_only"],
       "component": "Screenshot",
-      "usedIn": [
-        "docs/using-shiftcontrol/Users/Adding-a-user.mdx"
-      ]
+      "usedIn": ["docs/using-shiftcontrol/Users/Adding-a-user.mdx"]
     },
     "Users/User-sidebar-groups": {
       "route": "/admin/org/users/view/{first_user}",
       "action": "Right sidebar > Groups tab",
       "description": "User sidebar showing group memberships with assignment method icons (JC/Google/sync indicators vary by mode)",
-      "modes": [
-        "jc_gws",
-        "jc_only",
-        "gws_only"
-      ],
+      "modes": ["jc_gws", "jc_only", "gws_only"],
       "component": "Screenshot",
-      "usedIn": [
-        "docs/using-shiftcontrol/Users/Editing-a-user.mdx"
-      ]
+      "usedIn": ["docs/using-shiftcontrol/Users/Editing-a-user.mdx"]
     },
     "Users/User-sidebar-apps": {
       "route": "/admin/org/users/view/{first_user}",
       "action": "Right sidebar > Apps tab",
       "description": "User sidebar showing app access with group source",
-      "modes": [
-        "jc_gws",
-        "jc_only",
-        "gws_only"
-      ],
+      "modes": ["jc_gws", "jc_only", "gws_only"],
       "component": "Screenshot",
-      "usedIn": [
-        "docs/using-shiftcontrol/Users/Editing-a-user.mdx"
-      ]
+      "usedIn": ["docs/using-shiftcontrol/Users/Editing-a-user.mdx"]
     },
+
     "Groups/Group-management": {
       "route": "/admin/org/groups",
-      "description": "Groups list \u2014 tags, directory icons, sync status, member counts. In jc_gws, Add Group has dropdown arrow for Google group option.",
-      "modes": [
-        "jc_gws",
-        "jc_only",
-        "gws_only"
-      ],
+      "description": "Groups list — tags, directory icons, sync status, member counts. In jc_gws, Add Group has dropdown arrow for Google group option.",
+      "modes": ["jc_gws", "jc_only", "gws_only"],
       "component": "ModeScreenshot",
-      "usedIn": [
-        "docs/using-shiftcontrol/Groups/Group-management.mdx"
-      ]
+      "usedIn": ["docs/using-shiftcontrol/Groups/Group-management.mdx"]
     },
     "Groups/Group-detail": {
       "route": "/admin/org/groups/view/{group}",
       "group": "Use 'All Departments' for gws_only. Any group for others.",
-      "description": "Group detail \u2014 membership rules, sidebar with users/apps/rules. Directory icons in header vary by mode.",
-      "modes": [
-        "jc_gws",
-        "jc_only",
-        "gws_only"
-      ],
+      "description": "Group detail — membership rules, sidebar with users/apps/rules. Directory icons in header vary by mode.",
+      "modes": ["jc_gws", "jc_only", "gws_only"],
       "component": "ModeScreenshot",
-      "usedIn": [
-        "docs/using-shiftcontrol/Groups/Editing-a-group.mdx"
-      ]
+      "usedIn": ["docs/using-shiftcontrol/Groups/Editing-a-group.mdx"]
     },
     "Groups/Add-a-group": {
       "route": "/admin/org/groups",
       "action": "Click 'Add Group' button (has dropdown in jc_gws mode)",
       "description": "New group creation form",
-      "modes": [
-        "jc_gws",
-        "jc_only",
-        "gws_only"
-      ],
+      "modes": ["jc_gws", "jc_only", "gws_only"],
       "component": "Screenshot",
-      "usedIn": [
-        "docs/using-shiftcontrol/Groups/Adding-a-group.mdx"
-      ]
+      "usedIn": ["docs/using-shiftcontrol/Groups/Adding-a-group.mdx"]
     },
     "Groups/Edit-a-group-details": {
       "route": "/admin/org/groups/view/{group}",
       "tab": "Details",
-      "description": "Group General tab \u2014 name, description, tag, Google Sync toggle",
-      "modes": [
-        "jc_gws",
-        "jc_only",
-        "gws_only"
-      ],
+      "description": "Group General tab — name, description, tag, Google Sync toggle",
+      "modes": ["jc_gws", "jc_only", "gws_only"],
       "component": "Screenshot",
-      "usedIn": [
-        "docs/using-shiftcontrol/Groups/Editing-a-group.mdx"
-      ]
+      "usedIn": ["docs/using-shiftcontrol/Groups/Editing-a-group.mdx"]
     },
     "Groups/Edit-a-group-assignments": {
       "route": "/admin/org/groups/view/{group}",
       "tab": "Individual",
       "description": "Group Individual assignments tab",
-      "modes": [
-        "jc_gws",
-        "jc_only",
-        "gws_only"
-      ],
+      "modes": ["jc_gws", "jc_only", "gws_only"],
       "component": "Screenshot",
-      "usedIn": [
-        "docs/using-shiftcontrol/Groups/Editing-a-group.mdx"
-      ]
+      "usedIn": ["docs/using-shiftcontrol/Groups/Editing-a-group.mdx"]
     },
     "Groups/Group-dynamic-assignments": {
       "route": "/admin/org/groups/view/{group_with_dynamic_rules}",
       "tab": "Dynamic",
-      "description": "Dynamic membership rules \u2014 When [attribute] equals [value]",
-      "modes": [
-        "jc_gws",
-        "jc_only",
-        "gws_only"
-      ],
+      "description": "Dynamic membership rules — When [attribute] equals [value]",
+      "modes": ["jc_gws", "jc_only", "gws_only"],
       "component": "Screenshot",
-      "usedIn": [
-        "docs/using-shiftcontrol/Groups/Editing-a-group.mdx"
-      ]
+      "usedIn": ["docs/using-shiftcontrol/Groups/Editing-a-group.mdx"]
     },
     "Groups/Group-nested-assignments": {
       "route": "/admin/org/groups/view/{group_with_nested}",
       "tab": "Nested",
       "description": "Nested group inclusion rules",
-      "modes": [
-        "jc_gws",
-        "jc_only",
-        "gws_only"
-      ],
+      "modes": ["jc_gws", "jc_only", "gws_only"],
       "component": "Screenshot",
-      "usedIn": [
-        "docs/using-shiftcontrol/Groups/Editing-a-group.mdx"
-      ]
+      "usedIn": ["docs/using-shiftcontrol/Groups/Editing-a-group.mdx"]
     },
     "Groups/Group-individual-assignments": {
       "route": "/admin/org/groups/view/{group}",
       "tab": "Individual",
       "description": "Individual user assignments to group",
-      "modes": [
-        "jc_gws",
-        "jc_only",
-        "gws_only"
-      ],
+      "modes": ["jc_gws", "jc_only", "gws_only"],
       "component": "Screenshot",
-      "usedIn": [
-        "docs/using-shiftcontrol/Groups/Editing-a-group.mdx"
-      ]
+      "usedIn": ["docs/using-shiftcontrol/Groups/Editing-a-group.mdx"]
     },
     "Groups/Group-sidebar-rules": {
       "route": "/admin/org/groups/view/{group}",
       "action": "Right sidebar > Rules tab",
-      "description": "Group sidebar \u2014 rule counts (Dynamic, Nested, Individual)",
-      "modes": [
-        "jc_gws",
-        "jc_only",
-        "gws_only"
-      ],
+      "description": "Group sidebar — rule counts (Dynamic, Nested, Individual)",
+      "modes": ["jc_gws", "jc_only", "gws_only"],
       "component": "Screenshot",
-      "usedIn": [
-        "docs/using-shiftcontrol/Groups/Editing-a-group.mdx"
-      ]
+      "usedIn": ["docs/using-shiftcontrol/Groups/Editing-a-group.mdx"]
     },
     "Groups/Group-sidebar-users": {
       "route": "/admin/org/groups/view/{group}",
       "action": "Right sidebar > Users tab",
-      "description": "Group sidebar \u2014 member list with assignment method and directory icons",
-      "modes": [
-        "jc_gws",
-        "jc_only",
-        "gws_only"
-      ],
+      "description": "Group sidebar — member list with assignment method and directory icons",
+      "modes": ["jc_gws", "jc_only", "gws_only"],
       "component": "Screenshot",
-      "usedIn": [
-        "docs/using-shiftcontrol/Groups/Editing-a-group.mdx"
-      ]
+      "usedIn": ["docs/using-shiftcontrol/Groups/Editing-a-group.mdx"]
     },
     "Groups/Group-sidebar-apps": {
       "route": "/admin/org/groups/view/{group}",
       "action": "Right sidebar > Apps tab",
-      "description": "Group sidebar \u2014 assigned applications",
-      "modes": [
-        "jc_gws",
-        "jc_only",
-        "gws_only"
-      ],
+      "description": "Group sidebar — assigned applications",
+      "modes": ["jc_gws", "jc_only", "gws_only"],
       "component": "Screenshot",
-      "usedIn": [
-        "docs/using-shiftcontrol/Groups/Editing-a-group.mdx"
-      ]
+      "usedIn": ["docs/using-shiftcontrol/Groups/Editing-a-group.mdx"]
     },
+
     "Apps/App-management": {
       "route": "/admin/org/apps",
-      "description": "Installed apps list \u2014 type, spend, group/user counts",
-      "modes": [
-        "jc_gws",
-        "jc_only",
-        "gws_only"
-      ],
+      "description": "Installed apps list — type, spend, group/user counts",
+      "modes": ["jc_gws", "jc_only", "gws_only"],
       "component": "ModeScreenshot",
-      "usedIn": [
-        "docs/using-shiftcontrol/Apps/App-management.mdx"
-      ]
+      "usedIn": ["docs/using-shiftcontrol/Apps/App-management.mdx"]
     },
     "Apps/App-catalog": {
       "route": "/admin/org/apps/catalog",
-      "description": "App catalog \u2014 search, 900+ apps with functionality badges",
-      "modes": [
-        "jc_gws",
-        "jc_only",
-        "gws_only"
-      ],
+      "description": "App catalog — search, 900+ apps with functionality badges",
+      "modes": ["jc_gws", "jc_only", "gws_only"],
       "component": "ModeScreenshot",
       "usedIn": []
     },
     "Apps/App-discovery": {
       "route": "/admin/org/apps/discovery",
-      "description": "Shadow IT detection \u2014 discovered OAuth apps with activity counts",
-      "modes": [
-        "jc_gws",
-        "jc_only"
-      ],
+      "description": "Shadow IT detection — discovered OAuth apps with activity counts",
+      "modes": ["jc_gws", "jc_only"],
       "component": "ModeScreenshot",
-      "usedIn": [
-        "docs/using-shiftcontrol/Apps/App-discovery.mdx"
-      ]
+      "usedIn": ["docs/using-shiftcontrol/Apps/App-discovery.mdx"]
     },
     "Apps/App-detail": {
       "route": "/admin/org/apps/view/{app}",
       "app": "Google Workspace or AWS",
-      "description": "App detail \u2014 General tab with ownership, sidebar. SSO tab varies by app type.",
-      "modes": [
-        "jc_gws",
-        "jc_only",
-        "gws_only"
-      ],
+      "description": "App detail — General tab with ownership, sidebar. SSO tab varies by app type.",
+      "modes": ["jc_gws", "jc_only", "gws_only"],
       "component": "ModeScreenshot",
-      "usedIn": [
-        "docs/using-shiftcontrol/Apps/Editing-an-app.mdx"
-      ]
+      "usedIn": ["docs/using-shiftcontrol/Apps/Editing-an-app.mdx"]
     },
     "Apps/Edit-app-general-info": {
       "route": "/admin/org/apps/view/{app}",
       "tab": "General",
       "app": "AWS or any SSO app",
-      "description": "App General tab \u2014 name, admin, budget owner, department, description",
-      "modes": [
-        "jc_gws",
-        "jc_only",
-        "gws_only"
-      ],
+      "description": "App General tab — name, admin, budget owner, department, description",
+      "modes": ["jc_gws", "jc_only", "gws_only"],
       "component": "Screenshot",
-      "usedIn": [
-        "docs/using-shiftcontrol/Apps/Editing-an-app.mdx"
-      ]
+      "usedIn": ["docs/using-shiftcontrol/Apps/Editing-an-app.mdx"]
     },
     "Apps/Edit-app-groups": {
       "route": "/admin/org/apps/view/{app}",
       "tab": "Assignments > Groups",
       "description": "App group assignments",
-      "modes": [
-        "jc_gws",
-        "jc_only",
-        "gws_only"
-      ],
+      "modes": ["jc_gws", "jc_only", "gws_only"],
       "component": "Screenshot",
-      "usedIn": [
-        "docs/using-shiftcontrol/Apps/Editing-an-app.mdx"
-      ]
+      "usedIn": ["docs/using-shiftcontrol/Apps/Editing-an-app.mdx"]
     },
     "Apps/Edit-app-individual-assignments": {
       "route": "/admin/org/apps/view/{app}",
       "tab": "Assignments > Individual",
       "description": "App individual user assignments",
-      "modes": [
-        "jc_gws",
-        "jc_only",
-        "gws_only"
-      ],
+      "modes": ["jc_gws", "jc_only", "gws_only"],
       "component": "Screenshot",
-      "usedIn": [
-        "docs/using-shiftcontrol/Apps/Editing-an-app.mdx"
-      ]
+      "usedIn": ["docs/using-shiftcontrol/Apps/Editing-an-app.mdx"]
     },
     "Apps/Edit-app-sso": {
       "route": "/admin/org/apps/view/{app_bamboohr_sso}?tab=sso",
       "tab": "Single Sign-On",
-      "app": "BambooHR (0191dac9-e6a4-7d6d-97c4-229ea0c61592) \u2014 has actual SAML SSO config. Do NOT use AWS or non-SSO apps.",
-      "description": "SSO configuration \u2014 IdP certificate, metadata, SAML settings. Tab only exists with JumpCloud connected.",
-      "modes": [
-        "jc_gws",
-        "jc_only"
-      ],
+      "app": "BambooHR (0191dac9-e6a4-7d6d-97c4-229ea0c61592) — has actual SAML SSO config. Do NOT use AWS or non-SSO apps.",
+      "description": "SSO configuration — IdP certificate, metadata, SAML settings. Tab only exists with JumpCloud connected.",
+      "modes": ["jc_gws", "jc_only"],
       "component": "Screenshot",
-      "usedIn": [
-        "docs/using-shiftcontrol/Apps/Editing-an-app.mdx"
-      ]
+      "usedIn": ["docs/using-shiftcontrol/Apps/Editing-an-app.mdx"]
     },
     "Apps/App-sidebar-groups": {
       "route": "/admin/org/apps/view/{app}",
       "action": "Right sidebar > Groups tab",
-      "description": "App sidebar \u2014 assigned groups with directory icons",
-      "modes": [
-        "jc_gws",
-        "jc_only",
-        "gws_only"
-      ],
+      "description": "App sidebar — assigned groups with directory icons",
+      "modes": ["jc_gws", "jc_only", "gws_only"],
       "component": "Screenshot",
-      "usedIn": [
-        "docs/using-shiftcontrol/Apps/Editing-an-app.mdx"
-      ]
+      "usedIn": ["docs/using-shiftcontrol/Apps/Editing-an-app.mdx"]
     },
     "Apps/App-sidebar-users": {
       "route": "/admin/org/apps/view/{app}",
       "action": "Right sidebar > Users tab",
-      "description": "App sidebar \u2014 users with access and directory icons",
-      "modes": [
-        "jc_gws",
-        "jc_only",
-        "gws_only"
-      ],
+      "description": "App sidebar — users with access and directory icons",
+      "modes": ["jc_gws", "jc_only", "gws_only"],
       "component": "Screenshot",
-      "usedIn": [
-        "docs/using-shiftcontrol/Apps/Editing-an-app.mdx"
-      ]
+      "usedIn": ["docs/using-shiftcontrol/Apps/Editing-an-app.mdx"]
     },
+
     "Dashboards/Dashboard-overview": {
       "route": "/admin/dashboards/oauth",
-      "description": "OAuth permissions dashboard \u2014 metrics, trend chart, app list, user grants",
-      "modes": [
-        "jc_gws",
-        "jc_only",
-        "gws_only"
-      ],
+      "description": "OAuth permissions dashboard — metrics, trend chart, app list, user grants",
+      "modes": ["jc_gws", "jc_only", "gws_only"],
       "component": "ModeScreenshot",
-      "usedIn": [
-        "docs/using-shiftcontrol/Dashboards/app-permissions.mdx"
-      ]
+      "usedIn": ["docs/using-shiftcontrol/Dashboards/app-permissions.mdx"]
     },
     "Dashboards/App-spend-dashboard": {
       "route": "/admin/dashboards/app-spend",
-      "description": "SaaS spend dashboard \u2014 costs by department, renewals, top spend",
-      "modes": [
-        "jc_gws",
-        "jc_only",
-        "gws_only"
-      ],
+      "description": "SaaS spend dashboard — costs by department, renewals, top spend",
+      "modes": ["jc_gws", "jc_only", "gws_only"],
       "component": "ModeScreenshot",
-      "usedIn": [
-        "docs/using-shiftcontrol/Dashboards/app-spend.mdx"
-      ]
+      "usedIn": ["docs/using-shiftcontrol/Dashboards/app-spend.mdx"]
     },
+
     "Reports/App-assignment-reports": {
       "route": "/admin/org/reports/apps/assignments",
-      "description": "App assignment report \u2014 pivot by app or user, expandable rows",
-      "modes": [
-        "jc_gws",
-        "jc_only",
-        "gws_only"
-      ],
+      "description": "App assignment report — pivot by app or user, expandable rows",
+      "modes": ["jc_gws", "jc_only", "gws_only"],
       "component": "ModeScreenshot",
-      "usedIn": [
-        "docs/using-shiftcontrol/Reports/App-assignment-reports.mdx"
-      ]
+      "usedIn": ["docs/using-shiftcontrol/Reports/App-assignment-reports.mdx"]
     },
+
     "Settings/Directories": {
       "route": "/settings/connectors/directories",
-      "description": "Directory connectors \u2014 IdPs and HRIS with status, health, primary indicator. Row composition varies per mode.",
-      "modes": [
-        "jc_gws",
-        "jc_only",
-        "gws_only"
-      ],
+      "description": "Directory connectors — IdPs and HRIS with status, health, primary indicator. Row composition varies per mode.",
+      "modes": ["jc_gws", "jc_only", "gws_only"],
       "component": "ModeScreenshot",
-      "usedIn": [
-        "docs/using-shiftcontrol/Settings/directories.mdx"
-      ]
+      "usedIn": ["docs/using-shiftcontrol/Settings/directories.mdx"]
     },
     "Settings/Google-admins": {
       "route": "/settings/google/admins",
       "description": "Google Workspace admin accounts with roles and scope",
-      "modes": [
-        "jc_gws",
-        "gws_only"
-      ],
+      "modes": ["jc_gws", "gws_only"],
       "component": "ModeScreenshot",
-      "usedIn": [
-        "docs/using-shiftcontrol/Settings/google-admins.mdx"
-      ]
+      "usedIn": ["docs/using-shiftcontrol/Settings/google-admins.mdx"]
     },
     "Settings/JumpCloud-admins": {
       "route": "/settings/jumpcloud/admins",
       "description": "JumpCloud admin accounts with MFA status and API access",
-      "modes": [
-        "jc_gws",
-        "jc_only"
-      ],
+      "modes": ["jc_gws", "jc_only"],
       "component": "ModeScreenshot",
-      "usedIn": [
-        "docs/using-shiftcontrol/Settings/jumpcloud-admins.mdx"
-      ]
+      "usedIn": ["docs/using-shiftcontrol/Settings/jumpcloud-admins.mdx"]
     },
     "Settings/Org-details": {
       "route": "/settings/org/view",
       "description": "Organization name, domain, currency, feature toggles",
-      "modes": [
-        "jc_gws",
-        "jc_only",
-        "gws_only"
-      ],
+      "modes": ["jc_gws", "jc_only", "gws_only"],
       "component": "ModeScreenshot",
-      "usedIn": [
-        "docs/using-shiftcontrol/Settings/org-details.mdx"
-      ]
+      "usedIn": ["docs/using-shiftcontrol/Settings/org-details.mdx"]
     },
     "Settings/Account-settings": {
       "route": "/settings/account",
-      "description": "Personal profile \u2014 name, email, security methods",
-      "modes": [
-        "jc_gws",
-        "jc_only",
-        "gws_only"
-      ],
+      "description": "Personal profile — name, email, security methods",
+      "modes": ["jc_gws", "jc_only", "gws_only"],
       "component": "ModeScreenshot",
-      "usedIn": [
-        "docs/using-shiftcontrol/Settings/account-settings.mdx"
-      ]
+      "usedIn": ["docs/using-shiftcontrol/Settings/account-settings.mdx"]
     },
     "Settings/Settings-account-settings": {
       "route": "/settings/account",
-      "description": "Account settings \u2014 profile and security methods (detail view)",
-      "modes": [
-        "jc_gws",
-        "jc_only",
-        "gws_only"
-      ],
+      "description": "Account settings — profile and security methods (detail view)",
+      "modes": ["jc_gws", "jc_only", "gws_only"],
       "component": "Screenshot",
-      "usedIn": [
-        "docs/using-shiftcontrol/Settings/account-settings.mdx"
-      ]
+      "usedIn": ["docs/using-shiftcontrol/Settings/account-settings.mdx"]
     },
     "Settings/Settings-departments": {
       "route": "/settings/departments",
       "description": "Departments list",
-      "modes": [
-        "jc_gws",
-        "jc_only",
-        "gws_only"
-      ],
+      "modes": ["jc_gws", "jc_only", "gws_only"],
       "component": "Screenshot",
-      "usedIn": [
-        "docs/using-shiftcontrol/Settings/departments.mdx"
-      ]
+      "usedIn": ["docs/using-shiftcontrol/Settings/departments.mdx"]
     },
     "Settings/Settings-group-tags": {
       "route": "/settings/group-tags",
       "description": "Group tags with color codes",
-      "modes": [
-        "jc_gws",
-        "jc_only",
-        "gws_only"
-      ],
+      "modes": ["jc_gws", "jc_only", "gws_only"],
       "component": "Screenshot",
-      "usedIn": [
-        "docs/using-shiftcontrol/Settings/group-tags.mdx"
-      ]
+      "usedIn": ["docs/using-shiftcontrol/Settings/group-tags.mdx"]
     },
     "Settings/Settings-locations": {
       "route": "/settings/locations",
       "description": "Locations list",
-      "modes": [
-        "jc_gws",
-        "jc_only",
-        "gws_only"
-      ],
+      "modes": ["jc_gws", "jc_only", "gws_only"],
       "component": "Screenshot",
-      "usedIn": [
-        "docs/using-shiftcontrol/Settings/locations.mdx"
-      ]
+      "usedIn": ["docs/using-shiftcontrol/Settings/locations.mdx"]
     },
     "Settings/Settings-user-roles": {
       "route": "/settings/user-roles",
       "description": "ShiftControl admin role assignments",
-      "modes": [
-        "jc_gws",
-        "jc_only",
-        "gws_only"
-      ],
+      "modes": ["jc_gws", "jc_only", "gws_only"],
       "component": "Screenshot",
-      "usedIn": [
-        "docs/using-shiftcontrol/Settings/user-roles.mdx"
-      ]
+      "usedIn": ["docs/using-shiftcontrol/Settings/user-roles.mdx"]
     },
     "Settings/Settings-org-api-keys": {
       "route": "/settings/org/keys",
       "description": "Organization API keys",
-      "modes": [
-        "jc_gws",
-        "jc_only",
-        "gws_only"
-      ],
+      "modes": ["jc_gws", "jc_only", "gws_only"],
       "component": "Screenshot",
-      "usedIn": [
-        "docs/using-shiftcontrol/Settings/org-api-keys.mdx"
-      ]
+      "usedIn": ["docs/using-shiftcontrol/Settings/org-api-keys.mdx"]
     },
     "Settings/Settings-user-api-keys": {
       "route": "/settings/user/keys",
       "description": "Personal user API keys",
-      "modes": [
-        "jc_gws",
-        "jc_only",
-        "gws_only"
-      ],
+      "modes": ["jc_gws", "jc_only", "gws_only"],
       "component": "Screenshot",
-      "usedIn": [
-        "docs/using-shiftcontrol/Settings/user-api-keys.mdx"
-      ]
+      "usedIn": ["docs/using-shiftcontrol/Settings/user-api-keys.mdx"]
     },
     "Settings/Settings-org-details": {
       "route": "/settings/org/view",
       "description": "Org name, domain, currency, feature toggles",
-      "modes": [
-        "jc_gws",
-        "jc_only",
-        "gws_only"
-      ],
+      "modes": ["jc_gws", "jc_only", "gws_only"],
       "component": "Screenshot",
-      "usedIn": [
-        "docs/using-shiftcontrol/Settings/org-details.mdx"
-      ]
+      "usedIn": ["docs/using-shiftcontrol/Settings/org-details.mdx"]
     },
     "Settings/Settings-app-connectors": {
       "route": "/settings/connectors/apps",
       "description": "App data connectors (Box, HubSpot, Slack)",
-      "modes": [
-        "jc_gws",
-        "jc_only",
-        "gws_only"
-      ],
+      "modes": ["jc_gws", "jc_only", "gws_only"],
       "component": "Screenshot",
-      "usedIn": [
-        "docs/using-shiftcontrol/Settings/app-connectors.mdx"
-      ]
+      "usedIn": ["docs/using-shiftcontrol/Settings/app-connectors.mdx"]
+    },
+    "Settings/Billing": {
+      "route": "/settings/billing",
+      "description": "Billing settings — plan, payment method, invoices, seats.",
+      "modes": ["jc_gws", "jc_only", "gws_only"],
+      "component": "ModeScreenshot",
+      "usedIn": ["docs/using-shiftcontrol/Settings/billing.mdx"]
     },
     "Settings/Settings-appearance": {
       "route": "/settings/appearance",
       "description": "Theme and display preferences",
-      "modes": [
-        "jc_gws",
-        "jc_only",
-        "gws_only"
-      ],
+      "modes": ["jc_gws", "jc_only", "gws_only"],
       "component": "Screenshot",
-      "usedIn": [
-        "docs/using-shiftcontrol/Settings/appearance.mdx"
-      ]
+      "usedIn": ["docs/using-shiftcontrol/Settings/appearance.mdx"]
     },
+
     "Reports/App-Assignment-report": {
       "route": "/admin/org/reports/apps/assignments",
       "description": "App assignment report detail view",
-      "modes": [
-        "jc_gws",
-        "jc_only",
-        "gws_only"
-      ],
+      "modes": ["jc_gws", "jc_only", "gws_only"],
       "component": "Screenshot",
-      "usedIn": [
-        "docs/using-shiftcontrol/Reports/App-assignment-reports.mdx"
-      ]
+      "usedIn": ["docs/using-shiftcontrol/Reports/App-assignment-reports.mdx"]
     },
+
     "Command-bar": {
       "action": "Press Cmd+K to open command bar overlay",
       "description": "Command bar search/action palette",
-      "modes": [
-        "jc_gws",
-        "jc_only",
-        "gws_only"
-      ],
+      "modes": ["jc_gws", "jc_only", "gws_only"],
       "component": "Screenshot",
-      "usedIn": [
-        "docs/using-shiftcontrol/using-the-command-bar.mdx"
-      ]
-    },
-    "Task-management": {
-      "route": "/admin/tasks",
-      "description": "Task management list with pending tasks",
-      "modes": [
-        "jc_gws",
-        "jc_only",
-        "gws_only"
-      ],
-      "component": "Screenshot",
-      "usedIn": [
-        "docs/using-shiftcontrol/task-management.mdx"
-      ]
-    },
-    "DigitalCards/Card-template": {
-      "route": "/settings/digital-cards",
-      "tab": "Template",
-      "description": "Digital cards designer, Template sub-tab. Tab state is component-local \u2014 click the tab, there is no URL param. Panel is identical across modes; only the settings sidebar differs.",
-      "modes": [
-        "jc_gws",
-        "jc_only",
-        "gws_only"
-      ],
-      "component": "ModeScreenshot",
-      "usedIn": [
-        "docs/using-shiftcontrol/DigitalCards/Card-template.mdx",
-        "docs/using-shiftcontrol/DigitalCards/Digital-cards-overview.mdx"
-      ]
-    },
-    "DigitalCards/Card-fields": {
-      "route": "/settings/digital-cards",
-      "tab": "Fields",
-      "description": "Digital cards designer, Fields sub-tab \u2014 per-field mode, sync toggles, and the employee self-service switches. Click the tab; there is no URL param.",
-      "modes": [
-        "jc_gws",
-        "jc_only",
-        "gws_only"
-      ],
-      "component": "ModeScreenshot",
-      "usedIn": [
-        "docs/using-shiftcontrol/DigitalCards/Card-fields.mdx"
-      ]
-    },
-    "DigitalCards/Card-offboarding": {
-      "route": "/settings/digital-cards",
-      "tab": "Offboarding",
-      "description": "Digital cards designer, Offboarding sub-tab \u2014 Generic card / Redirect / Hard 404 plus the grace-period stepper. Click the tab; there is no URL param.",
-      "modes": [
-        "jc_gws",
-        "jc_only",
-        "gws_only"
-      ],
-      "component": "ModeScreenshot",
-      "usedIn": [
-        "docs/using-shiftcontrol/DigitalCards/Card-offboarding.mdx"
-      ]
-    },
-    "DigitalCards/Card-domain": {
-      "route": "/settings/digital-cards",
-      "tab": "Domain",
-      "description": "Digital cards designer, Domain sub-tab \u2014 the always-on ShiftControl hostname and the custom-domain form. Click the tab; there is no URL param.",
-      "modes": [
-        "jc_gws",
-        "jc_only",
-        "gws_only"
-      ],
-      "component": "ModeScreenshot",
-      "usedIn": [
-        "docs/using-shiftcontrol/DigitalCards/Card-domain.mdx"
-      ]
-    },
-    "DigitalCards/User-card-panel": {
-      "route": "/admin/org/users/view/{user}?tab=digitalCard",
-      "description": "Digital card tab on a user record (admin-on-behalf). Sub-tabs are Edit card / QR code / Manage \u2014 no My card tab on this surface. Demo mock renders a different person on the card than in the record header, so keep alt text generic.",
-      "modes": [
-        "jc_gws",
-        "jc_only",
-        "gws_only"
-      ],
-      "component": "ModeScreenshot",
-      "usedIn": [
-        "docs/using-shiftcontrol/DigitalCards/Managing-a-users-card.mdx"
-      ]
-    },
-    "EmployeePortal/My-card": {
-      "route": "/my-card",
-      "tab": "My card",
-      "description": "Employee portal My card tab \u2014 live card, QR, copy link, and QR download sizes. Sidebar label is 'My digital card'. Click the tab; there is no URL param.",
-      "modes": [
-        "jc_gws",
-        "jc_only",
-        "gws_only"
-      ],
-      "component": "ModeScreenshot",
-      "usedIn": [
-        "docs/employee-guide/employee-portal/my-card.mdx"
-      ]
-    },
-    "EmployeePortal/My-card-edit": {
-      "route": "/my-card",
-      "tab": "Edit my card",
-      "description": "Employee portal Edit my card tab \u2014 photo controls and card details with locked / synced / customized field states.",
-      "modes": [
-        "jc_gws",
-        "jc_only",
-        "gws_only"
-      ],
-      "component": "ModeScreenshot",
-      "usedIn": [
-        "docs/employee-guide/employee-portal/my-card.mdx"
-      ]
-    },
-    "EmployeePortal/My-card-qr": {
-      "route": "/my-card",
-      "tab": "My QR code",
-      "description": "Employee portal My QR code tab \u2014 centre medallion picker (Company logo / None / My photo / Custom image).",
-      "modes": [
-        "jc_gws",
-        "jc_only",
-        "gws_only"
-      ],
-      "component": "ModeScreenshot",
-      "usedIn": [
-        "docs/employee-guide/employee-portal/my-card.mdx"
-      ]
-    },
-    "EmployeePortal/My-card-manage": {
-      "route": "/my-card",
-      "tab": "Manage",
-      "description": "Employee portal Manage tab \u2014 card status with publish/unpublish and the card PIN. Link regeneration only appears when the org allows it.",
-      "modes": [
-        "jc_gws",
-        "jc_only",
-        "gws_only"
-      ],
-      "component": "ModeScreenshot",
-      "usedIn": [
-        "docs/employee-guide/employee-portal/my-card.mdx"
-      ]
-    },
-    "Devices/Device-bulk-unmanage": {
-      "route": "/admin/org/devices",
-      "action": "Select 2+ device rows, then open the Bulk Actions toolbar button (4th icon after the search box). AG Grid checkboxes are NOT in the accessibility tree \u2014 click them by coordinate. The trigger is disabled below 2 selected rows. Close the Columns panel if a stray click opened it.",
-      "description": "Device Inventory with devices selected and the Bulk Actions menu open on Un-manage. Requires JumpCloud, so no gws_only variant.",
-      "modes": [
-        "jc_gws",
-        "jc_only"
-      ],
-      "component": "ModeScreenshot",
-      "usedIn": [
-        "docs/using-shiftcontrol/Devices/Device-actions.mdx",
-        "docs/using-shiftcontrol/Devices/Viewing-devices.mdx"
-      ]
-    },
-    "Users/User-avatar-upload": {
-      "route": "/admin/org/users/view/{user}",
-      "action": "Cropped region around the record-header avatar. The pencil badge renders ONLY when the user is linked in an enabled Google directory (AddOrEditUser.tsx gates it on isEligibleForAvatarUpload) \u2014 so you MUST use a mode-appropriate user id: a JumpCloud Mongo id such as 66b42ef6693525dd6b48d7ed for jc_gws, and a Google numeric id such as 100000000000000000001 for gws_only. Using the jc_gws id in gws_only resolves a record with no Google linkage: initials, no photo, no pencil. Note interceptor --region coordinates are in 2x CSS space, not CSS pixels.",
-      "description": "Avatar edit affordance that writes a user's Google Workspace profile photo. Requires a Google directory, so no jc_only variant.",
-      "modes": [
-        "jc_gws",
-        "gws_only"
-      ],
-      "component": "ModeScreenshot",
-      "usedIn": [
-        "docs/using-shiftcontrol/Users/Editing-a-user.mdx"
-      ]
+      "usedIn": ["docs/using-shiftcontrol/using-the-command-bar.mdx"]
     },
     "General/Hub": {
       "route": "/admin/dashboards/home",
-      "description": "The Hub home page \u2014 workspace counts, findings, and doors into the product.",
-      "modes": [
-        "jc_gws",
-        "jc_only",
-        "gws_only"
-      ]
-    },
-    "Settings/Billing": {
-      "route": "/settings/billing",
-      "description": "Billing settings \u2014 plan, payment method, invoices, seats.",
-      "modes": [
-        "jc_gws",
-        "jc_only",
-        "gws_only"
-      ]
-    },
-    "Devices/Device-inventory": {
-      "route": "/admin/org/devices",
-      "description": "Device Inventory \u2014 summary cards, Status menu and Filters panel toolbar.",
-      "modes": [
-        "jc_gws",
-        "jc_only"
-      ]
-    },
-    "Devices/Device-details": {
-      "route": "/admin/org/devices \u2192 click first row \u2192 /admin/org/devices/view/6700a1b2c3d4e5f600000037",
-      "description": "Device detail \u2014 hardware, OS & encryption, Assigned to card. NOTE: direct URL renders inventory; must click a device row to reach it.",
-      "modes": [
-        "jc_gws",
-        "jc_only"
-      ]
+      "description": "The Hub home page — workspace counts, findings, and doors into the product.",
+      "modes": ["jc_gws", "jc_only", "gws_only"],
+      "component": "ModeScreenshot",
+      "usedIn": ["docs/using-shiftcontrol/Hub.mdx"]
     },
     "General/Command-bar-devices": {
       "route": "/admin/org/users",
       "action": "Press Ctrl+K, type a device name/hostname/serial",
-      "description": "Command bar showing Device results group. Devices require JumpCloud \u2014 no gws_only variant.",
-      "modes": [
-        "jc_gws",
-        "jc_only"
-      ]
+      "description": "Command bar showing Device results group. Devices require JumpCloud — no gws_only variant.",
+      "modes": ["jc_gws", "jc_only"],
+      "component": "ModeScreenshot",
+      "usedIn": ["docs/using-shiftcontrol/using-the-command-bar.mdx"]
+    },
+    "Task-management": {
+      "route": "/admin/tasks",
+      "description": "Task management list with pending tasks",
+      "modes": ["jc_gws", "jc_only", "gws_only"],
+      "component": "Screenshot",
+      "usedIn": ["docs/using-shiftcontrol/task-management.mdx"]
+    },
+    "DigitalCards/Card-template": {
+      "route": "/settings/digital-cards",
+      "tab": "Template",
+      "description": "Digital cards designer, Template sub-tab. Tab state is component-local — click the tab, there is no URL param. Panel is identical across modes; only the settings sidebar differs.",
+      "modes": ["jc_gws", "jc_only", "gws_only"],
+      "component": "ModeScreenshot",
+      "usedIn": ["docs/using-shiftcontrol/DigitalCards/Card-template.mdx", "docs/using-shiftcontrol/DigitalCards/Digital-cards-overview.mdx"]
+    },
+    "DigitalCards/Card-fields": {
+      "route": "/settings/digital-cards",
+      "tab": "Fields",
+      "description": "Digital cards designer, Fields sub-tab — per-field mode, sync toggles, and the employee self-service switches. Click the tab; there is no URL param.",
+      "modes": ["jc_gws", "jc_only", "gws_only"],
+      "component": "ModeScreenshot",
+      "usedIn": ["docs/using-shiftcontrol/DigitalCards/Card-fields.mdx"]
+    },
+    "DigitalCards/Card-offboarding": {
+      "route": "/settings/digital-cards",
+      "tab": "Offboarding",
+      "description": "Digital cards designer, Offboarding sub-tab — Generic card / Redirect / Hard 404 plus the grace-period stepper. Click the tab; there is no URL param.",
+      "modes": ["jc_gws", "jc_only", "gws_only"],
+      "component": "ModeScreenshot",
+      "usedIn": ["docs/using-shiftcontrol/DigitalCards/Card-offboarding.mdx"]
+    },
+    "DigitalCards/Card-domain": {
+      "route": "/settings/digital-cards",
+      "tab": "Domain",
+      "description": "Digital cards designer, Domain sub-tab — the always-on ShiftControl hostname and the custom-domain form. Click the tab; there is no URL param.",
+      "modes": ["jc_gws", "jc_only", "gws_only"],
+      "component": "ModeScreenshot",
+      "usedIn": ["docs/using-shiftcontrol/DigitalCards/Card-domain.mdx"]
+    },
+    "DigitalCards/User-card-panel": {
+      "route": "/admin/org/users/view/{user}?tab=digitalCard",
+      "description": "Digital card tab on a user record (admin-on-behalf). Sub-tabs are Edit card / QR code / Manage — no My card tab on this surface. Demo mock renders a different person on the card than in the record header, so keep alt text generic.",
+      "modes": ["jc_gws", "jc_only", "gws_only"],
+      "component": "ModeScreenshot",
+      "usedIn": ["docs/using-shiftcontrol/DigitalCards/Managing-a-users-card.mdx"]
+    },
+    "EmployeePortal/My-card": {
+      "route": "/my-card",
+      "tab": "My card",
+      "description": "Employee portal My card tab — live card, QR, copy link, and QR download sizes. Sidebar label is 'My digital card'. Click the tab; there is no URL param.",
+      "modes": ["jc_gws", "jc_only", "gws_only"],
+      "component": "ModeScreenshot",
+      "usedIn": ["docs/employee-guide/employee-portal/my-card.mdx"]
+    },
+    "EmployeePortal/My-card-edit": {
+      "route": "/my-card",
+      "tab": "Edit my card",
+      "description": "Employee portal Edit my card tab — photo controls and card details with locked / synced / customized field states.",
+      "modes": ["jc_gws", "jc_only", "gws_only"],
+      "component": "ModeScreenshot",
+      "usedIn": ["docs/employee-guide/employee-portal/my-card.mdx"]
+    },
+    "EmployeePortal/My-card-qr": {
+      "route": "/my-card",
+      "tab": "My QR code",
+      "description": "Employee portal My QR code tab — centre medallion picker (Company logo / None / My photo / Custom image).",
+      "modes": ["jc_gws", "jc_only", "gws_only"],
+      "component": "ModeScreenshot",
+      "usedIn": ["docs/employee-guide/employee-portal/my-card.mdx"]
+    },
+    "EmployeePortal/My-card-manage": {
+      "route": "/my-card",
+      "tab": "Manage",
+      "description": "Employee portal Manage tab — card status with publish/unpublish and the card PIN. Link regeneration only appears when the org allows it.",
+      "modes": ["jc_gws", "jc_only", "gws_only"],
+      "component": "ModeScreenshot",
+      "usedIn": ["docs/employee-guide/employee-portal/my-card.mdx"]
     },
     "EmployeePortal/Org-chart": {
       "route": "/orgchart",
-      "description": "Employee portal org chart \u2014 Show unlinked people checkbox and export control.",
-      "modes": [
-        "jc_gws",
-        "jc_only",
-        "gws_only"
-      ]
+      "description": "Employee portal org chart — Show unlinked people checkbox and export control.",
+      "modes": ["jc_gws", "jc_only", "gws_only"],
+      "component": "ModeScreenshot",
+      "usedIn": ["docs/employee-guide/employee-portal/org-chart.mdx"]
     },
     "EmployeePortal/App-dashboard": {
       "route": "/",
-      "description": "Employee portal apps page \u2014 Pinned section above the app grid.",
-      "modes": [
-        "jc_gws",
-        "jc_only",
-        "gws_only"
-      ]
+      "description": "Employee portal apps page — Pinned section above the app grid.",
+      "modes": ["jc_gws", "jc_only", "gws_only"],
+      "component": "ModeScreenshot",
+      "usedIn": ["docs/employee-guide/employee-portal/your-apps.mdx"]
+    },
+    "Devices/Device-inventory": {
+      "route": "/admin/org/devices",
+      "description": "Device Inventory — summary cards, Status menu and Filters panel toolbar.",
+      "modes": ["jc_gws", "jc_only"],
+      "component": "ModeScreenshot",
+      "usedIn": ["docs/using-shiftcontrol/Devices/Viewing-devices.mdx"]
+    },
+    "Devices/Device-details": {
+      "route": "/admin/org/devices",
+      "action": "Click first device row to reach /admin/org/devices/view/6700a1b2c3d4e5f600000037 — the direct URL renders the inventory instead.",
+      "description": "Device detail — hardware, OS & encryption, Assigned to card.",
+      "modes": ["jc_gws", "jc_only"],
+      "component": "ModeScreenshot",
+      "usedIn": ["docs/using-shiftcontrol/Devices/Device-details.mdx"]
+    },
+    "Devices/Device-bulk-unmanage": {
+      "route": "/admin/org/devices",
+      "action": "Select 2+ device rows, then open the Bulk Actions toolbar button (4th icon after the search box). AG Grid checkboxes are NOT in the accessibility tree — click them by coordinate. The trigger is disabled below 2 selected rows. Close the Columns panel if a stray click opened it.",
+      "description": "Device Inventory with devices selected and the Bulk Actions menu open on Un-manage. Requires JumpCloud, so no gws_only variant.",
+      "modes": ["jc_gws", "jc_only"],
+      "component": "ModeScreenshot",
+      "usedIn": ["docs/using-shiftcontrol/Devices/Device-actions.mdx", "docs/using-shiftcontrol/Devices/Viewing-devices.mdx"]
+    },
+    "Users/User-avatar-upload": {
+      "route": "/admin/org/users/view/{user}",
+      "action": "Cropped region around the record-header avatar. The pencil badge renders ONLY when the user is linked in an enabled Google directory (AddOrEditUser.tsx gates it on isEligibleForAvatarUpload) — so you MUST use a mode-appropriate user id: a JumpCloud Mongo id such as 66b42ef6693525dd6b48d7ed for jc_gws, and a Google numeric id such as 100000000000000000001 for gws_only. Using the jc_gws id in gws_only resolves a record with no Google linkage: initials, no photo, no pencil. Note interceptor --region coordinates are in 2x CSS space, not CSS pixels.",
+      "description": "Avatar edit affordance that writes a user's Google Workspace profile photo. Requires a Google directory, so no jc_only variant.",
+      "modes": ["jc_gws", "gws_only"],
+      "component": "ModeScreenshot",
+      "usedIn": ["docs/using-shiftcontrol/Users/Editing-a-user.mdx"]
     }
   }
 }
