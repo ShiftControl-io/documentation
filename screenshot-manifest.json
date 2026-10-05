@@ -15,11 +15,15 @@
     "The 'modes' array on each screenshot controls which mode variants to capture.",
     "Use the localUrl during development, baseUrl for production recaptures.",
     "NAVIGATION: Use direct URLs, NOT clicking. AG Grid rows don't have standard <tr> elements — click navigation fails silently.",
-    "MODAL SUPPRESSION: The mode= param triggers a welcome modal. Suppress it BEFORE navigation with: page.addInitScript(() => localStorage.setItem('SC_DEMO_WELCOME_LAST_SHOWN', new Date().toISOString()))",
+    "MODAL SUPPRESSION: The mode= param triggers a welcome modal. Suppress it BEFORE navigation with: page.addInitScript(() => localStorage.setItem('SC_DEMO_WELCOME_LAST_SHOWN', Date.now().toString()))",
+    "COOKIE BANNER: A cookie-consent banner renders inside a shadow-DOM host (div.captain-compliance-modal-container) and can re-mount after navigation or delay. CSS display:none does not reach inside shadow DOM — remove the element with page.evaluate right before each screenshot, and repeat the removal if captures are far apart.",
+    "EMPLOYEE PORTAL ROUTES: the portal apps page is / (not /apps) and the org chart is /orgchart (not /org-chart). Wrong paths 404 silently and produce blank duplicate screenshots.",
+    "DEVICE DETAIL: device detail lives at /admin/org/devices/view/{device_id} but direct navigation renders the inventory instead — you must open /admin/org/devices and click a row. Demo device id: 6700a1b2c3d4e5f600000037.",
     "TABS (Users): Use ?tab=security|appPermissions|saasCost URL param. Set mode/theme first, suppress modal, THEN navigate to tab URL.",
     "TABS (Groups/Apps): No URL param support yet — must click Radix UI tabs after page load. Use position-based clicking or [role='tab'] selectors.",
     "SIDEBAR TABS: Right sidebar tabs require clicking after page load. Use position-based x>900 disambiguation.",
-    "VERIFICATION: After each capture batch, run duplicate detection to catch navigation failures immediately."
+    "VERIFICATION: After each capture batch, run duplicate detection to catch navigation failures immediately.",
+    "PLAYWRIGHT VERSION: the installed playwright version must match the browser build in ~/.cache/ms-playwright (e.g. chromium-1228 needs playwright@1.61.x). Check the directory name first, then install the playwright release that ships that build — do not assume the latest release matches."
   ],
   "knownIds": {
     "_comment": "Direct-navigable IDs from mock data. Use these in URLs instead of clicking AG Grid rows.",
@@ -64,7 +68,9 @@
     "digital_cards_settings": "/settings/digital-cards",
     "employee_my_card": "/my-card",
     "user_detail_digital_card": "/admin/org/users/view/{user_id}?tab=digitalCard",
-    "device_inventory": "/admin/org/devices"
+    "device_inventory": "/admin/org/devices",
+    "employee_apps": "/",
+    "employee_orgchart": "/orgchart"
   },
   "modes": {
     "jc_gws": { "folder": "jc-google", "params": "?mode=jc_gws", "label": "JumpCloud + Google Workspace" },
@@ -363,6 +369,14 @@
       "component": "ModeScreenshot",
       "usedIn": ["docs/using-shiftcontrol/Settings/jumpcloud-admins.mdx"]
     },
+    "Settings/JumpCloud-admins-menu": {
+      "route": "/settings/jumpcloud/admins",
+      "action": "Click the row's actions button to open the menu, then remove the cookie banner right before capture",
+      "description": "Actions menu for a JumpCloud admin: edit, disable, password reset, delete",
+      "modes": ["jc_gws", "jc_only"],
+      "component": "ModeScreenshot",
+      "usedIn": ["docs/using-shiftcontrol/Settings/jumpcloud-admins.mdx"]
+    },
     "Settings/Org-details": {
       "route": "/settings/org/view",
       "description": "Organization name, domain, currency, feature toggles",
@@ -440,6 +454,13 @@
       "component": "Screenshot",
       "usedIn": ["docs/using-shiftcontrol/Settings/app-connectors.mdx"]
     },
+    "Settings/Billing": {
+      "route": "/settings/billing",
+      "description": "Billing settings — plan, payment method, invoices, seats.",
+      "modes": ["jc_gws", "jc_only", "gws_only"],
+      "component": "ModeScreenshot",
+      "usedIn": ["docs/using-shiftcontrol/Settings/billing.mdx"]
+    },
     "Settings/Settings-appearance": {
       "route": "/settings/appearance",
       "description": "Theme and display preferences",
@@ -461,6 +482,21 @@
       "description": "Command bar search/action palette",
       "modes": ["jc_gws", "jc_only", "gws_only"],
       "component": "Screenshot",
+      "usedIn": ["docs/using-shiftcontrol/using-the-command-bar.mdx"]
+    },
+    "General/Hub": {
+      "route": "/admin/dashboards/home",
+      "description": "The Hub home page — workspace counts, findings, and doors into the product.",
+      "modes": ["jc_gws", "jc_only", "gws_only"],
+      "component": "ModeScreenshot",
+      "usedIn": ["docs/using-shiftcontrol/Hub.mdx"]
+    },
+    "General/Command-bar-devices": {
+      "route": "/admin/org/users",
+      "action": "Press Ctrl+K, type a device name/hostname/serial",
+      "description": "Command bar showing Device results group. Devices require JumpCloud — no gws_only variant.",
+      "modes": ["jc_gws", "jc_only"],
+      "component": "ModeScreenshot",
       "usedIn": ["docs/using-shiftcontrol/using-the-command-bar.mdx"]
     },
     "Task-management": {
@@ -540,6 +576,35 @@
       "modes": ["jc_gws", "jc_only", "gws_only"],
       "component": "ModeScreenshot",
       "usedIn": ["docs/employee-guide/employee-portal/my-card.mdx"]
+    },
+    "EmployeePortal/Org-chart": {
+      "route": "/orgchart",
+      "description": "Employee portal org chart — Show unlinked people checkbox and export control.",
+      "modes": ["jc_gws", "jc_only", "gws_only"],
+      "component": "ModeScreenshot",
+      "usedIn": ["docs/employee-guide/employee-portal/org-chart.mdx"]
+    },
+    "EmployeePortal/App-dashboard": {
+      "route": "/",
+      "description": "Employee portal apps page — Pinned section above the app grid.",
+      "modes": ["jc_gws", "jc_only", "gws_only"],
+      "component": "ModeScreenshot",
+      "usedIn": ["docs/employee-guide/employee-portal/your-apps.mdx"]
+    },
+    "Devices/Device-inventory": {
+      "route": "/admin/org/devices",
+      "description": "Device Inventory — summary cards, Status menu and Filters panel toolbar.",
+      "modes": ["jc_gws", "jc_only"],
+      "component": "ModeScreenshot",
+      "usedIn": ["docs/using-shiftcontrol/Devices/Viewing-devices.mdx"]
+    },
+    "Devices/Device-details": {
+      "route": "/admin/org/devices",
+      "action": "Click first device row to reach /admin/org/devices/view/6700a1b2c3d4e5f600000037 — the direct URL renders the inventory instead.",
+      "description": "Device detail — hardware, OS & encryption, Assigned to card.",
+      "modes": ["jc_gws", "jc_only"],
+      "component": "ModeScreenshot",
+      "usedIn": ["docs/using-shiftcontrol/Devices/Device-details.mdx"]
     },
     "Devices/Device-bulk-unmanage": {
       "route": "/admin/org/devices",

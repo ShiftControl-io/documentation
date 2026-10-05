@@ -64,8 +64,12 @@ To create a new JumpCloud admin:
 
 You can manage each admin using the **⋮ menu** beside their name:
 - **Edit** – Update the admin’s role or API access status.
+- **Send password reset email** – Email the admin a JumpCloud password reset link — useful when a new admin never finished setup or an existing one is locked out.
+- **Send TOTP reset email** – Shown when the admin has a TOTP authenticator enrolled. Emails the admin a link to re-enroll it — the fix for a lost or replaced phone when MFA is blocking their sign-in.
 - **Disable JumpCloud Admin** – Temporarily suspend the account’s access without deleting it.
 - **Delete JumpCloud Admin** – Permanently remove the account from the list.
+
+<ModeScreenshot path="Settings/JumpCloud-admins-menu" modes={["jc-google", "jc-only"]} alt="The actions menu for a JumpCloud admin, with Edit, Disable, Send password reset email, and Delete" />
 
 ## Best Practices
 

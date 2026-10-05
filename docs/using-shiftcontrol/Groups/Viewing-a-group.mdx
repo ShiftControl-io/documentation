@@ -24,21 +24,25 @@ Click any group name in the [Group Management](/using-shiftcontrol/Groups/Group-
 
 ## Membership Tabs
 
-The group detail page has tabs showing how members are added:
+Membership on the group detail page is split across four tabs — **Dynamic**, **Nested**, **Individual**, and **External** — each with a count, so you can see at a glance where a group's members actually come from. The distinction matters when you go to change something: you don't remove a dynamic member, you edit the rule; you don't remove someone who's there through a nested group, you remove the group. The lightbulb beside the **Assignments** label explains all four in plain language.
 
-### Dynamic Rules
+### Dynamic
 
-Shows rules that automatically add/remove users based on profile attributes. For example: "When Department equals Engineering" adds everyone in the Engineering department. When someone transfers out, they're automatically removed.
+Shows rules that automatically add/remove users based on profile attributes, and the members they currently match. For example: "When Department equals Engineering" adds everyone in the Engineering department. When someone transfers out, they're automatically removed.
 
 <ModeScreenshot path="Groups/Group-dynamic-assignments" alt="Dynamic membership rules" />
 
-### Nested Groups
+### Nested
 
 Shows other groups whose members are included in this group. If you nest the "Engineering" group inside "All Technical Staff", every engineer becomes a member of both.
 
-### Individual Assignments
+### Individual
 
 Shows users who were manually added to the group — useful for one-off exceptions or contractors who don't match any dynamic rule.
+
+### External
+
+Shows members who belong to the group in a connected directory but aren't part of your ShiftControl user list — for example, addresses added directly in Google Workspace.
 
 ## The Sidebar
 

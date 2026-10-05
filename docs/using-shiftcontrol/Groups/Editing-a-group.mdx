@@ -24,7 +24,7 @@ Any combination of these three rule types can be active on a single group. Users
 
 ## How It Works
 
-When you edit a group, you see two tabs: **General** and **Group Rules**.
+When you edit a group, you see two tabs: **General** and **Group Rules**. Within the rules area, membership is shown across the same four tabs you see when viewing the group — **Dynamic**, **Nested**, **Individual**, and **External** — each with a live count.
 
 The General tab holds the group's name, description, tag, and Google Sync settings. The Group Rules tab is where you configure membership. A right sidebar shows live group information including the current count of users, apps, and rules.
 
@@ -124,6 +124,8 @@ The right sidebar on the group detail page shows live information about the grou
 ## Things to Know
 
 - **Rule changes take effect immediately.** When you save updated rules, group membership and app access are recalculated right away. There is no delay or approval step.
+- **If the user list fails to load, Save stays disabled.** When a group's member list can't be fetched, ShiftControl won't let you save a group whose membership it couldn't fully read — that's how individually added members could otherwise get dropped. You'll see a **Retry** option; once the list loads, saving works normally.
+- **"Who can leave a group" includes Owners only.** On Google-synced groups, the *Who can leave a group* setting can be set to **Owners only**, so ordinary members can't remove themselves from a group they should stay in.
 - **Dynamic rules are the most powerful option.** They keep groups accurate as your organization changes. When someone joins a department, changes locations, or gets a new title, dynamic rules automatically adjust their group membership.
 - **Nesting supports up to 3 levels.** Groups can be nested up to 3 levels deep. ShiftControl prevents circular dependencies and warns you if adding a group would exceed the depth limit.
 - **Individual assignments override nothing.** A user can be in a group through a dynamic rule, a nested group, and an individual assignment simultaneously. Removing one path does not remove the user if another path still applies.
