@@ -369,6 +369,14 @@
       "component": "ModeScreenshot",
       "usedIn": ["docs/using-shiftcontrol/Settings/jumpcloud-admins.mdx"]
     },
+    "Settings/JumpCloud-admins-menu": {
+      "route": "/settings/jumpcloud/admins",
+      "action": "Click the row's actions button to open the menu, then remove the cookie banner right before capture",
+      "description": "Actions menu for a JumpCloud admin: edit, disable, password reset, delete",
+      "modes": ["jc_gws", "jc_only"],
+      "component": "ModeScreenshot",
+      "usedIn": ["docs/using-shiftcontrol/Settings/jumpcloud-admins.mdx"]
+    },
     "Settings/Org-details": {
       "route": "/settings/org/view",
       "description": "Organization name, domain, currency, feature toggles",
