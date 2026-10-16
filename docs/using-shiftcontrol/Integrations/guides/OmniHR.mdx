@@ -39,8 +39,9 @@ Before setting up the connector in ShiftControl, you need to create a report in 
 
 <Steps>
     <Step title="Prepare a user account for API access">
-        - You'll need a user account to access the Omni HR API
-        - The connector leverages Omni HR's access control system to retrieve data
+        - We recommend a dedicated Omni HR user that can run the report you create below
+        - The user must sign in to Omni HR with a username and password: accounts that only sign in through SSO or one-time codes cannot be used
+        - ShiftControl signs in once with these credentials to create a Personal Access Token named "ShiftControl", then uses only that token
     </Step>
 
     <Step title="Navigate to Reports in Omni HR">
@@ -109,14 +110,14 @@ Once you have created the report in Omni HR and have obtained the report ID, you
     </Step>
 
     <Step title="Provide Credentials">
-        Enter the following lightweight credentials:
-        - Username & Password – an Omni HR account with read access
-        - Omni HR Domain – e.g., acme.omnihr.co
+        Enter the following credentials:
+        - Username & Password: the dedicated Omni HR user you prepared
+        - Omni HR Domain: the subdomain only, e.g. `acme` if your URL is https://acme.omnihr.co
         - Custom Report ID – the ID of the report you created in the previous step
     </Step>
 
     <Step title="Authorize the Connector">
-        Click "Authorize" to complete the setup
+        Click "Authorize". ShiftControl signs in once, creates a Personal Access Token named "ShiftControl" with no expiry, checks the report, and stores only the token. Your password is not stored.
     </Step>
 
     <Step title="Monitor Synchronization">
@@ -124,9 +125,21 @@ Once you have created the report in Omni HR and have obtained the report ID, you
     </Step>
 </Steps>
 
+## How Authorization Works
+
+- **One-time sign-in**: When you connect, ShiftControl signs in with the username and password once to create a Personal Access Token named "ShiftControl"
+- **Token-only sync**: Hourly and on-demand syncs use only the token. The password is never stored
+- **No expiry**: The token is created without an expiry date
+
+## Revoking Access
+
+To disconnect ShiftControl from Omni HR, delete the token named "ShiftControl" in the user's Personal Access Tokens settings in Omni HR.
+
+Once the token is revoked, syncing stops and ShiftControl shows a "Reconnect Omni HR" task. Reconnecting signs in again, creates a fresh token, and removes the old one.
+
 ## Benefits
 
 - **Hands-Off User Management**: Eliminate manual user creation and management tasks
 - **Smoother Onboarding**: New employees have access to necessary systems before their start date
-- **Tighter Security**: Proper deprovisioning when employees leave
+- **Tighter Security**: Proper deprovisioning when employees leave, and a revocable access token instead of a stored password
 - **Data Accuracy**: Ensure consistent user information across all systems
