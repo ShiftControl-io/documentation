@@ -19,7 +19,7 @@ import { Steps, Step } from "@site/src/components/Steps";
 Onboarding takes a few minutes. Sign up with your Google Workspace account, validate your domain, approve the permissions ShiftControl asks for, set up your departments and locations, and land on a working org with your users, groups, and admin roles already imported. No call, no waitlist, no sales gate.
 
 <Admonition type="info" title="What you'll need">
-    Three things: (1) a Google Workspace account in the organization you want to manage, (2) a Google Workspace **Super Admin** who can approve the permissions — that can be you, or someone you send a 48-hour authorization link to, and (3) a domain that isn't already claimed by another ShiftControl organization.
+    Three things: (1) a Google Workspace account in the organization you want to manage, (2) a Google Workspace **Super Admin** who can install the ShiftControl app or approve the permissions — that can be you, or someone you send a 48-hour request to, and (3) a domain that isn't already claimed by another ShiftControl organization.
 </Admonition>
 
 ## How It Works
@@ -28,7 +28,7 @@ Onboarding is a six-step wizard. Most of the work happens behind the scenes whil
 
 1. **Sign-up** — Sign in with your Google Workspace account. ShiftControl creates a user record for you and links it to your Google identity. Any Workspace user can do this step.
 2. **Domain validation** — ShiftControl confirms that your email's domain belongs to a Google Workspace, and that no other ShiftControl organization has already claimed it. This prevents two organizations from claiming the same workspace.
-3. **Authorization** — A Google Workspace Super Admin grants ShiftControl permission to manage your directory. If that's you, you'll see Google's approval screen right after domain validation. If it isn't, you can send your Super Admin a 48-hour authorization link and pause here until they approve it. The [Google Workspace App Authorization](/using-shiftcontrol/Integrations/guides/Google-Workspace-App-Authorization/) page has the technical detail on every permission requested.
+3. **Authorization** — Connect Google Workspace. Select **Install from Google Workspace Marketplace** to install the ShiftControl app for your whole organization (recommended), or **Connect with OAuth instead** to approve ShiftControl on Google's approval screen. Both need a Google Workspace Super Admin. If that isn't you, you can ask one and pause here until they're done. The [Google Workspace App Authorization](/using-shiftcontrol/Integrations/guides/Google-Workspace-App-Authorization/) page has the technical detail on every permission requested.
 4. **App discovery** — ShiftControl scans your Google Workspace to find the SaaS apps your team is already signed in to and imports them into your ShiftControl app catalog. You see your full SaaS surface on day one without having to enumerate it.
 5. **Departments and locations** — set up your org's departments (Engineering, Sales, Operations…) and office locations. Each one auto-creates a ShiftControl group with a dynamic membership rule, so as users get assigned a department or location, they flow into the matching group automatically.
 6. **Start your trial** — provisioning completes, Google Workspace is set as your primary directory, your users and groups are imported, and you land on the Manage Users screen. You're now in the trial. Additional connectors — HRIS, app-specific integrations, anything else — are added anytime after this from **Settings → Connectors**.
@@ -63,10 +63,13 @@ Your company is moving off another identity provider and consolidating on Google
 
         See the [Domain validation](#domain-validation) section below for what to do if you hit a validation error.
     </Step>
-    <Step title="Approve permissions for ShiftControl (Super Admin required)">
-        Google will show a screen asking you to grant ShiftControl permission to manage users, groups, and admin roles in your Workspace. This is the step that requires a Google Workspace **Super Admin** — other admin roles can't grant the permissions ShiftControl needs.
+    <Step title="Connect Google Workspace (Super Admin required)">
+        ShiftControl offers two ways to connect. Both need a Google Workspace **Super Admin** — other admin roles can't grant the permissions ShiftControl needs.
 
-        If you're the Super Admin, review the list and click **Allow**. If you aren't, send a [48-hour authorization link](/using-shiftcontrol/Integrations/guides/Google-Workspace-App-Authorization/#delegated-authorization) to a Super Admin in your organization — they can approve the connection without needing a ShiftControl account.
+        - **Install from Google Workspace Marketplace (recommended).** The Marketplace opens in a new tab. Install the ShiftControl app for everyone in your organization, then come back: the page keeps checking and continues on its own once Google confirms the install. If the account you signed up with isn't a Super Admin, ShiftControl asks for a Super Admin's email and connects as them. See [Google Workspace: Marketplace App or OAuth](/using-shiftcontrol/Settings/directories/#google-workspace-marketplace-app-or-oauth).
+        - **Connect with OAuth instead.** Google shows a screen asking you to grant ShiftControl permission to manage users, groups, and admin roles in your Workspace. Review the list and click **Allow**.
+
+        If you aren't a Super Admin, select **Not an admin? Ask one to install it** and send the request to a Super Admin in your organization. The request expires in 48 hours, and they don't need a ShiftControl account. For OAuth, see [delegated authorization](/using-shiftcontrol/Integrations/guides/Google-Workspace-App-Authorization/#delegated-authorization).
 
         ShiftControl only asks for permissions it actually uses. If you want to see exactly what each one grants and why, the [Google Workspace App Authorization](/using-shiftcontrol/Integrations/guides/Google-Workspace-App-Authorization/) page has the full breakdown.
     </Step>

@@ -4,6 +4,7 @@ description: 'The ShiftControl Hub — your workspace in numbers, what needs you
 keywords: ['ShiftControl', 'hub', 'home', 'dashboard', 'insights', 'unused seats', 'dormant accounts']
 icon: 'house'
 ---
+import ConditionalContent from '@site/src/components/ConditionalContent';
 import ModeScreenshot from "@site/src/components/ModeScreenshot";
 import ThemedImage from '@theme/ThemedImage';
 
@@ -30,6 +31,8 @@ There's nothing to set up — the Hub is where you land when you sign in, and it
 - **Every figure is clickable.** A flagged count takes you straight to the filtered list behind it — for example, the dormant accounts view in [User Management](/using-shiftcontrol/Users/User-management/) — instead of leaving you to rebuild the query yourself.
 - **Cards for admins link through too.** Rows that name people — like your admins — open that person's record directly.
 
+<ConditionalContent modes={["jc-google", "google-jc", "google-only"]}>
+
 ### Recommendations about your connection
 
 When something about your setup deserves attention, the Hub shows a card about it at the top of the page. For example, if Google Workspace connects through one admin's OAuth authorization, the Hub recommends upgrading to the Google Workspace Marketplace app, so the connection belongs to your organization instead of one person.
@@ -47,6 +50,8 @@ The card follows the upgrade from start to finish:
 <ThemedImage sources={{ light: "/img/ShiftControl/General/gws-only/light/Hub-Marketplace-super-admin.webp", dark: "/img/ShiftControl/General/gws-only/dark/Hub-Marketplace-super-admin.webp" }} alt="The Hub card offering to install the Marketplace app with a Super Admin account, or to ask an admin" />
 
 If you dismiss the card, you can still upgrade from **Settings → Directories**.
+
+</ConditionalContent>
 
 ## Common Scenarios
 
