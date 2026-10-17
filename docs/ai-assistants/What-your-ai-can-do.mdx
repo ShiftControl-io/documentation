@@ -1,0 +1,140 @@
+---
+title: 'What your AI can do'
+description: 'The day-to-day ShiftControl admin work your AI assistant can do through the MCP server: people, groups, apps and access, requests, and org structure, across Google Workspace and JumpCloud.'
+keywords: ['ShiftControl', 'MCP', 'AI assistant', 'Claude', 'Cursor', 'onboarding', 'offboarding', 'groups', 'app access', 'work items', 'automation']
+icon: 'list-check'
+---
+
+import Admonition from '@theme/Admonition';
+import ConditionalContent from '@site/src/components/ConditionalContent';
+
+<p style={{fontSize: "large"}}>Most of the admin work you do in the ShiftControl web app, done from one message to your AI assistant.</p>
+
+## Overview
+
+Once your AI tool is [connected](/ai-assistants/Connect-your-ai-tool/), you can hand it the routine parts of running your workspace: onboarding a new hire, offboarding someone who is leaving, tidying up groups, giving people access to apps, and working through pending requests. You describe the outcome in plain words. Your AI works out which steps it needs, tells you what it is about to change, and waits for your go-ahead.
+
+- *"Onboard Priya Sharma. Create her account, add her to Sales and the all-staff group, give her Salesforce and Slack, and send her the sign-in email."*
+- *"Marcus leaves Friday at 5pm. Schedule his suspension, and when we delete the account, hand his Google files to his manager."*
+- *"Who has access to Figma, and how did they get it?"*
+- *"Make the finance group invitation-only."*
+- *"Approve the pending access requests for Notion."*
+- *"Dana is locked out of JumpCloud. Unlock her and send a fresh sign-in email."*
+
+You don't need to know which tool does what. Ask for the result, and your AI picks the tools.
+
+## How It Works
+
+- **It acts as you.** Your AI signs in with your ShiftControl account and has exactly your permissions. If your role can't do something in the web app, your AI can't do it either. There is no service account and no separate AI role.
+- **It asks before it changes anything.** Looking things up never changes anything. Every tool that makes a change needs an explicit confirmation, so your AI describes the exact change and the records it touches, then waits for you to say yes. One yes covers one change. A request such as "remove Sam from Sales" is not the approval: your AI still shows you the change first.
+- **It works in your real directories.** Changes go to Google Workspace, JumpCloud, or both, the same as when you make them in the web app. When a change touches more than one directory, your AI tells you what happened in each one.
+- **It's on the record.** Changes made through your AI appear in the audit log like any other change, marked as made through an AI assistant (MCP), so you can always see who changed what and how.
+- **Answers you can read.** Lists come back as tables, with people and groups shown by name instead of IDs. When something can't be done, your AI says why in plain words and tells you that nothing was changed.
+
+<Admonition type="info" title="Plan and billing">
+    If your organization's ShiftControl access is paused because of its plan or billing, your AI tells you so and changes nothing. Whoever manages billing can turn access back on from [Billing](/using-shiftcontrol/Settings/billing/).
+</Admonition>
+
+## Common Scenarios
+
+### Scenario: A new hire starts on Monday
+
+Ask your AI to onboard them in one sentence: name, email, department, team, manager, the groups they belong in and the apps they need. It checks which directories you have connected and, if you have more than one, asks which one the account belongs in. Then it shows you the plan (the account, the group memberships, the app access, the sign-in email) and makes each change once you approve it. If you use dynamic group rules on department or team, setting those fields is often enough for most of the access to follow automatically.
+
+### Scenario: Someone is leaving on Friday
+
+Ask your AI to schedule the suspension for their last day and time, so their access stops when they leave. When you're ready to delete the account, tell it who should receive their files and who takes over their direct reports.
+
+<ConditionalContent modes={["google-only", "jc-google", "google-jc"]}>
+
+For a Google Workspace account, your AI asks which data to transfer before it deletes the account. With a transfer, Google deletes the account after the data has moved, and your AI can check on progress until the deletion finishes.
+
+</ConditionalContent>
+
+Deletion is permanent. Your AI suggests suspending instead unless you clearly ask for a deletion.
+
+### Scenario: An access review
+
+Ask *"Who has access to Figma, and how did they get it?"* Your AI lists every person who can reach the app and why: added individually, through a group, through a nested group, or through a dynamic rule. Follow up with *"Take Jamie off Figma"* and it shows you exactly what would change before it does anything.
+
+## What's Covered
+
+### People
+
+- Find people and read their profile, groups and apps, with how they got each one.
+- Create accounts, and update names, emails, department, location, team, job title and manager.
+- Suspend and reactivate accounts, now or at a scheduled date and time, and cancel a scheduled change.
+- Send password resets and sign-in (activation) emails, unlock locked accounts, and sign someone out of all their sessions.
+- Delete accounts, choosing who takes over their direct reports.
+- See and change a person's ShiftControl roles. Owner and SuperAdmin can't be changed this way. See [User Roles](/using-shiftcontrol/Settings/user-roles/).
+
+<ConditionalContent modes={["google-only", "jc-google", "google-jc"]}>
+
+**With Google Workspace:** hand a leaver's Google data (Drive files, calendar and other Google apps) to a colleague as part of the deletion, and follow the deletion until it completes.
+
+</ConditionalContent>
+
+<ConditionalContent modes={["jc-only", "jc-google", "google-jc"]}>
+
+**With JumpCloud:** require someone to set a new JumpCloud password at their next sign-in. When a person has a JumpCloud account, a scheduled suspension or activation is set in JumpCloud.
+
+</ConditionalContent>
+
+### Groups
+
+- List groups and their members, with why each person is in the group.
+- Create, rename and delete groups, change a group's email address, and update its description.
+- Add and remove members, put groups inside other groups (nesting), and set or clear dynamic rules. Your AI reports who joined and who left after each change.
+- Create group tags, and tag or untag many groups at once.
+
+<ConditionalContent modes={["google-only", "jc-google", "google-jc"]}>
+
+**With Google Workspace:** add and remove email aliases, add outside people as external members, and change Google Groups settings (who can join, post, and see members). Apply a settings preset to one group or many at once.
+
+</ConditionalContent>
+
+See [Group Management](/using-shiftcontrol/Groups/Group-management/) and [Group Tags](/using-shiftcontrol/Settings/group-tags/).
+
+### Apps and access
+
+- List your apps with their costs and contract terms, and read one app's full record.
+- Add apps from the catalog as a bookmark or a SAML app, or add a custom app. OIDC apps are still added in the web app.
+- Update an app's details, owners, department and subscription costs.
+- Give people and groups access to an app, or take it away, and see who has access and why.
+<ConditionalContent modes={["google-only", "jc-google", "google-jc"]}>
+
+**With Google Workspace:**
+
+- Work through [App Discovery](/using-shiftcontrol/Apps/App-discovery/): snooze, dismiss, or add the apps ShiftControl has detected.
+- Find a risky third-party Google app that people have authorized and block it, and pause, resume or remove a block. Blocking removes the app's access to your Google data for everyone. It doesn't end sign-in sessions the app already has open. See [Blocking Apps](/using-shiftcontrol/Apps/Blocking-apps/).
+
+</ConditionalContent>
+
+### Requests
+
+- See pending work items for the whole organization, or just the ones you're involved in.
+- Approve or deny the stage that's waiting on you, comment on an item, and change its status or notes.
+
+These need Work Items to be turned on for your organization.
+
+### Org structure
+
+- Create, rename and delete [departments](/using-shiftcontrol/Settings/departments/), teams and [locations](/using-shiftcontrol/Settings/locations/). Departments and teams can sit one level under a parent.
+- Each one can come with a group that people join automatically by rule. Your AI can create that group for you, or link one you already have.
+
+### For everyone, not just admins
+
+Because your AI has your permissions, employees can use it too. They can ask which apps they have, and request access to an app through your organization's usual approval flow. Requests need Work Items and app access requests to be turned on.
+
+## Things to Know
+
+- **Not everything is here yet.** Some tasks still live only in the web app, such as device management and the [Hub](/using-shiftcontrol/Hub/) security checks. If there's something you'd like to hand to your AI next, [tell us](mailto:support@shiftcontrol.io).
+- **Already connected?** Start a new chat so your AI picks up the latest tools.
+- **Directory changes can take a moment to show.** Google Workspace sometimes takes a minute to reflect a change, for example a new group's aliases. Your AI tells you when to try again.
+- **Review before you say yes.** Some changes reach many people at once, such as a new dynamic rule or blocking an app. Your AI lists who is affected first. Read that list before you approve.
+
+## Related Features
+
+- **[Introduction to AI Assistants](/ai-assistants/Introduction/)**: how the MCP server and Skills fit together
+- **[Connect your AI tool](/ai-assistants/Connect-your-ai-tool/)**: setup steps for Claude, Cursor, Windsurf, Gemini CLI and others
+- **[Skills](/ai-assistants/Skills/)**: pre-built workflows for tasks you want done the same way every time

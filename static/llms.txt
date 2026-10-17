@@ -36,6 +36,10 @@ ShiftControl connects to identity providers (JumpCloud, Google Workspace) and HR
 - [API](https://docs.shiftcontrol.io/using-shiftcontrol/API/): REST API for automation and integrations
 - [Command Bar](https://docs.shiftcontrol.io/using-shiftcontrol/using-the-command-bar/): Keyboard-driven search and navigation
 - [Task Management](https://docs.shiftcontrol.io/using-shiftcontrol/task-management/): Track and manage IT tasks
+- [AI Assistants](https://docs.shiftcontrol.io/ai-assistants/Introduction/): Connect Claude, Cursor and other AI tools to ShiftControl through the MCP server at https://mcp.shiftcontrol.io/mcp
+- [What your AI can do](https://docs.shiftcontrol.io/ai-assistants/What-your-ai-can-do/): Day-to-day admin through the MCP server: people, groups, apps and access, requests, org structure. Every change needs the user's explicit confirmation
+- [Connect your AI tool](https://docs.shiftcontrol.io/ai-assistants/Connect-your-ai-tool/): Setup steps for each AI client
+- [Skills](https://docs.shiftcontrol.io/ai-assistants/Skills/): Pre-built AI workflows on top of the MCP server
 
 ## Directory Modes
 
