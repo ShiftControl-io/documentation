@@ -8,6 +8,8 @@ icon: 'grid'
 import Admonition from '@theme/Admonition';
 import ConditionalContent from '@site/src/components/ConditionalContent';
 import ModeScreenshot from '@site/src/components/ModeScreenshot';
+import ThemedImage from '@theme/ThemedImage';
+import { Steps, Step } from '@site/src/components/Steps';
 
 
 <p style={{fontSize: "large"}}>Connect your identity providers and HR systems so ShiftControl can manage your entire organization from one place.</p>
@@ -39,6 +41,7 @@ Each directory row shows at a glance whether the integration is healthy:
 | **Status** | Enabled (actively syncing) or Disabled (paused) |
 | **Health** | Healthy (sync working), Unhealthy (sync issues), or N/A |
 | **Auth Status** | Whether the integration has valid credentials |
+| **Connection** | How ShiftControl connects. For Google Workspace this is **OAuth** (with the admin who authorized it) or the **Marketplace app**. An **Upgrade** badge means the Marketplace app is recommended for this connection |
 | **Primary** | Which IdP is the authoritative source for identity data |
 
 ## Connecting a Directory
@@ -49,7 +52,7 @@ Each directory row shows at a glance whether the integration is healthy:
 4. Once authenticated, the Status changes to **Enabled** and Health shows **Healthy** when the first sync completes.
 
 <Admonition type="tip" title="Connecting Google Workspace?">
-    The [Google Workspace App Authorization](/using-shiftcontrol/Integrations/guides/Google-Workspace-App-Authorization/) page explains every scope ShiftControl requests, the consent screen, and how to delegate authorization to a Google Workspace Super Admin via a 48-hour link if you're not the Super Admin yourself.
+    The [Google Workspace App Authorization](/using-shiftcontrol/Integrations/guides/Google-Workspace-App-Authorization/) page explains every scope ShiftControl requests, the consent screen, and how to delegate authorization to a Google Workspace Super Admin via a 48-hour link if you're not the Super Admin yourself. During onboarding, new organizations can also connect through the Marketplace app — see [Google Workspace: Marketplace App or OAuth](#google-workspace-marketplace-app-or-oauth).
 </Admonition>
 
 <Admonition type="note">
@@ -67,6 +70,62 @@ Step-by-step setup guides for each HR system:
 - [OmniHR](/using-shiftcontrol/Integrations/guides/OmniHR/)
 - [Rippling](/using-shiftcontrol/Integrations/guides/Rippling/)
 - [Shapes](/using-shiftcontrol/Integrations/guides/Shapes/)
+
+<ConditionalContent modes={["jc-google", "google-jc", "google-only"]}>
+
+## Google Workspace: Marketplace App or OAuth
+
+ShiftControl can connect to Google Workspace in two ways:
+
+- **The Google Workspace Marketplace app (recommended).** A Google Super Admin installs the ShiftControl app once, for everyone in your organization. The connection belongs to your organization, not to one person. ShiftControl connects as one of your Super Admins, and if that admin leaves or is suspended, it switches to another Super Admin on its own. Sync keeps working.
+- **OAuth.** One admin signs in and approves ShiftControl's permissions. The connection depends on that admin's authorization. If they leave or are suspended, the authorization stops working and Google Workspace stops syncing until someone authorizes again. OAuth is still available as the fallback.
+
+### Connect for the first time
+
+New organizations choose how to connect Google Workspace during [onboarding](/getting-started/Onboarding/). Select **Install from Google Workspace Marketplace** to install the app, or **Connect with OAuth instead**. If the account you signed up with isn't a Super Admin, ShiftControl asks for a Super Admin's email once the app is installed and connects as them. You can also select **Not an admin? Ask one to install it** to send the request to a Super Admin.
+
+### Why upgrade
+
+With OAuth, your whole Google Workspace connection rests on one person's login. People change roles, leave, and get suspended, and each of those can silently break user and group sync. The Marketplace app removes that single point of failure, so offboarding the admin who first connected ShiftControl doesn't disconnect your organization.
+
+### Upgrade an existing OAuth connection
+
+If your Google Workspace connects through OAuth, the **Connection** column shows an **Upgrade** badge, and the [Hub](/using-shiftcontrol/Hub/) shows a card that recommends the upgrade.
+
+<Steps>
+    <Step title="Open the upgrade">
+        Select the **Upgrade** badge, or open the Google connector's **⋮ menu** and select **Upgrade to Marketplace app**. You can also start from the card on the Hub.
+    </Step>
+    <Step title="Review what changes">
+        ShiftControl shows what changes and what stays the same before you install anything. Your users, groups, sync history, sync schedule, and settings stay the same.
+    </Step>
+    <Step title="Install the app">
+        Select **Install from Google Workspace Marketplace**. Sign in to Google with a Super Admin account and install the app for everyone in your organization.
+    </Step>
+    <Step title="Come back to ShiftControl">
+        You can leave the page while you wait. ShiftControl switches the connection on its own once Google confirms the install. Google says this can take up to 24 hours. If the account you signed in to ShiftControl with isn't a Super Admin — for example, you installed with a separate Super Admin account — ShiftControl first asks for the email of the Super Admin it should connect as. See [If you aren't a Google Super Admin](#if-you-arent-a-google-super-admin).
+    </Step>
+</Steps>
+
+<ThemedImage sources={{ light: "/img/ShiftControl/Settings/gws-only/light/Directories-Marketplace-upgrade.webp", dark: "/img/ShiftControl/Settings/gws-only/dark/Directories-Marketplace-upgrade.webp" }} alt="The upgrade window listing what changes and what stays the same when you move Google Workspace to the Marketplace app" />
+
+After the switch, ShiftControl stops using the old OAuth authorization. It deletes that authorization after the app has kept working for a day. To see how Google Workspace connects at any time, open the Google connector's **⋮ menu** and select **View connection**.
+
+### If you aren't a Google Super Admin
+
+Installing the app takes a Google **Super Admin** account. ShiftControl checks whether the account you signed in with is a Super Admin. If it can't confirm that, you have two options:
+
+- **Install the app yourself with a Super Admin account.** Many admins hold Super Admin rights on a separate Google account. Select **Upgrade to Marketplace app** and install with that account. Afterwards, ShiftControl asks for the email of the Super Admin it should connect as. Enter that email, and ShiftControl connects as them.
+- **Ask an admin.** Select **Ask an admin** (or **Not a Super Admin? Ask an admin to install it**) and enter a Super Admin's email. ShiftControl sends them the request for you. The email names you and your organization, links to the app on the Google Workspace Marketplace, and expires in 48 hours. It also tells them how to check that the request is genuine.
+
+### Things to know about the Marketplace app
+
+- **There's no going back to OAuth while the app works.** Once the switch is done, ShiftControl uses only the app connection.
+- **Waiting is safe.** While ShiftControl waits for the install, your OAuth connection keeps syncing as before. If you stop waiting, the request is withdrawn, but ShiftControl still switches on its own if the app gets installed.
+- **ShiftControl only connects as a Super Admin.** If no Super Admin is left in your Google Workspace, the connection stops rather than falling back to a less privileged account.
+- **Uninstalling the app disconnects ShiftControl.** If someone removes the app in the Google Admin console, Google Workspace stops syncing until the app is installed again.
+
+</ConditionalContent>
 
 ## Managing Directories
 
@@ -107,4 +166,6 @@ Google Workspace is your primary (and only) Identity Provider. ShiftControl mana
 
 - [Connector Management](/using-shiftcontrol/Integrations/Connector-management/) — Detailed guide to setting up and managing connectors
 - [Google Workspace Connector Guide](/using-shiftcontrol/Integrations/connector-guides/) — Step-by-step Google Workspace setup
+- [Google Workspace App Authorization](/using-shiftcontrol/Integrations/guides/Google-Workspace-App-Authorization/) — How each connection method is authorized, and every permission explained
+- [The Hub](/using-shiftcontrol/Hub/) — Where ShiftControl recommends the upgrade to the Marketplace app
 - [Settings Overview](/using-shiftcontrol/Settings/settings-overview/) — Navigate all settings sections

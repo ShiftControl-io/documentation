@@ -355,6 +355,13 @@
       "component": "ModeScreenshot",
       "usedIn": ["docs/using-shiftcontrol/Settings/directories.mdx"]
     },
+    "Settings/Directories-Marketplace-upgrade": {
+      "route": "/settings/connectors/directories?demoState=directoriesOAuth",
+      "description": "Upgrade window for the Google Workspace Marketplace app. Add &demoState=directoriesOAuth, then click the Upgrade badge in the Google row Connection column and capture the dialog. Only mocked in gws_only.",
+      "modes": ["gws_only"],
+      "component": "ThemedImage",
+      "usedIn": ["docs/using-shiftcontrol/Settings/directories.mdx"]
+    },
     "Settings/Google-admins": {
       "route": "/settings/google/admins",
       "description": "Google Workspace admin accounts with roles and scope",
@@ -489,6 +496,20 @@
       "description": "The Hub home page — workspace counts, findings, and doors into the product.",
       "modes": ["jc_gws", "jc_only", "gws_only"],
       "component": "ModeScreenshot",
+      "usedIn": ["docs/using-shiftcontrol/Hub.mdx"]
+    },
+    "General/Hub-Marketplace-upgrade": {
+      "route": "/admin/dashboards/home?demoState=directoriesOAuth",
+      "description": "Hub card recommending the upgrade of an OAuth Google Workspace connection to the Marketplace app. Only mocked in gws_only.",
+      "modes": ["gws_only"],
+      "component": "ThemedImage",
+      "usedIn": ["docs/using-shiftcontrol/Hub.mdx"]
+    },
+    "General/Hub-Marketplace-super-admin": {
+      "route": "/admin/dashboards/home?demoState=upgradeNeedsSuperAdmin",
+      "description": "Hub card when ShiftControl can't confirm the viewer is a Google Super Admin: install with a Super Admin account, or ask an admin. Only mocked in gws_only.",
+      "modes": ["gws_only"],
+      "component": "ThemedImage",
       "usedIn": ["docs/using-shiftcontrol/Hub.mdx"]
     },
     "General/Command-bar-devices": {

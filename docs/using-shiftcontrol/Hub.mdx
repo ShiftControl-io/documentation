@@ -4,7 +4,9 @@ description: 'The ShiftControl Hub — your workspace in numbers, what needs you
 keywords: ['ShiftControl', 'hub', 'home', 'dashboard', 'insights', 'unused seats', 'dormant accounts']
 icon: 'house'
 ---
+import ConditionalContent from '@site/src/components/ConditionalContent';
 import ModeScreenshot from "@site/src/components/ModeScreenshot";
+import ThemedImage from '@theme/ThemedImage';
 
 <p style={{fontSize: "large"}}>Sign in and you land here: your workspace in numbers, what we found that's worth your attention, and a door into every part of the product.</p>
 
@@ -29,6 +31,28 @@ There's nothing to set up — the Hub is where you land when you sign in, and it
 - **Every figure is clickable.** A flagged count takes you straight to the filtered list behind it — for example, the dormant accounts view in [User Management](/using-shiftcontrol/Users/User-management/) — instead of leaving you to rebuild the query yourself.
 - **Cards for admins link through too.** Rows that name people — like your admins — open that person's record directly.
 
+<ConditionalContent modes={["jc-google", "google-jc", "google-only"]}>
+
+### Recommendations about your connection
+
+When something about your setup deserves attention, the Hub shows a card about it at the top of the page. For example, if Google Workspace connects through one admin's OAuth authorization, the Hub recommends upgrading to the Google Workspace Marketplace app, so the connection belongs to your organization instead of one person.
+
+<ThemedImage sources={{ light: "/img/ShiftControl/General/gws-only/light/Hub-Marketplace-upgrade.webp", dark: "/img/ShiftControl/General/gws-only/dark/Hub-Marketplace-upgrade.webp" }} alt="The Hub card recommending the upgrade of Google Workspace to the Marketplace app" />
+
+The card follows the upgrade from start to finish:
+
+- **Upgrade Google Workspace to the Marketplace app** — select **Upgrade to Marketplace app** to start. See [Upgrade an existing OAuth connection](/using-shiftcontrol/Settings/directories/#upgrade-an-existing-oauth-connection).
+- **Install the Marketplace app with a Super Admin account** — ShiftControl couldn't confirm that you're a Google Super Admin. Install the app with a Super Admin account, or select **Ask an admin** to send the request to one.
+- **Waiting for the install in Google** — the request is open. You can leave the page, or reopen the Marketplace listing.
+- **Finish upgrading to the Marketplace app** — the app is installed, and ShiftControl needs the email of the Super Admin it should connect as.
+- **Google Workspace now runs on the Marketplace app** — the switch is done. Select **View connection** to see the details.
+
+<ThemedImage sources={{ light: "/img/ShiftControl/General/gws-only/light/Hub-Marketplace-super-admin.webp", dark: "/img/ShiftControl/General/gws-only/dark/Hub-Marketplace-super-admin.webp" }} alt="The Hub card offering to install the Marketplace app with a Super Admin account, or to ask an admin" />
+
+If you dismiss the card, you can still upgrade from **Settings → Directories**.
+
+</ConditionalContent>
+
 ## Common Scenarios
 
 ### Scenario: A Monday-morning security sweep
@@ -49,4 +73,5 @@ The Hub flags apps with unused seats. Click through to the affected apps, check 
 
 - [User Management](/using-shiftcontrol/Users/User-management/) — act on the people the Hub flags
 - [App Spend Dashboard](/using-shiftcontrol/Dashboards/app-spend/) — dig into the cost numbers behind unused seats
+- [Directories](/using-shiftcontrol/Settings/directories/#google-workspace-marketplace-app-or-oauth) — connect Google Workspace through the Marketplace app
 - [The Command Bar](/using-shiftcontrol/using-the-command-bar/) — the fastest way to jump from the Hub to anywhere
