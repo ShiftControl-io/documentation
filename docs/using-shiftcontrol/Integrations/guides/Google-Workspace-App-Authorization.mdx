@@ -12,7 +12,12 @@ import { Steps, Step } from "@site/src/components/Steps";
 
 ## Overview
 
-ShiftControl manages your Google Workspace by asking Google for permission, on your behalf, through Google's standard authorization flow. There's no agent installed in your tenant, no service account that bypasses Google's permission model, and no master credential. Every API call ShiftControl makes uses tokens issued through the screens described below, and every token is scoped to what you explicitly approved.
+ShiftControl manages your Google Workspace with permissions that Google grants and that you approve. There's no agent installed in your tenant and no master credential. You can grant those permissions in one of two ways:
+
+- **The Google Workspace Marketplace app (recommended).** A Super Admin installs the ShiftControl app from the Google Workspace Marketplace for everyone in your organization. Google grants the app's permissions as part of the install. The connection belongs to your organization: ShiftControl connects as one of your Super Admins and switches to another Super Admin if that admin leaves. See [Google Workspace: Marketplace App or OAuth](/using-shiftcontrol/Settings/directories/#google-workspace-marketplace-app-or-oauth).
+- **OAuth.** One admin signs in and approves ShiftControl through Google's standard authorization flow. Every API call ShiftControl makes uses tokens issued through the screens described below, and every token is scoped to what you explicitly approved. The connection depends on that admin's authorization.
+
+The rest of this page describes the OAuth flow.
 
 Understanding the authorization flow matters because:
 
@@ -167,5 +172,6 @@ The OAuth authorization request uses a standard OAuth 2.0 authorization-code flo
 - [Onboarding](/getting-started/Onboarding/) — the new-org flow that uses this authorization as Step 3
 - [Quickstart](/getting-started/quickstart/) — the high-level setup walkthrough
 - [Directories](/using-shiftcontrol/Settings/directories/) — manage primary, additional, and disconnected directories
+- [Google Workspace: Marketplace App or OAuth](/using-shiftcontrol/Settings/directories/#google-workspace-marketplace-app-or-oauth) — connect through the Marketplace app and upgrade an existing OAuth connection
 - [Google Workspace Connector Guide](/using-shiftcontrol/Integrations/guides/Google-Workspace/) — the day-to-day Google Workspace connector setup
 - [Google Admins](/using-shiftcontrol/Settings/google-admins/) — manage who holds each Google Workspace admin role inside ShiftControl
