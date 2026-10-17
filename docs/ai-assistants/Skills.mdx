@@ -22,9 +22,9 @@ Skills are open source and live at [github.com/ShiftControl-io/skills](https://g
 
 ## How Skills work with the MCP server
 
-Skills don't replace the MCP server — they're layered on top of it. The MCP server gives your AI the raw tools (`list_apps`, `list_groups`, `update_app_subscription`, and so on); a Skill gives it the instructions for how to use those tools to accomplish a specific goal.
+Skills don't replace the MCP server — they're layered on top of it. The MCP server gives your AI the raw tools (`list_apps`, `create_user`, `update_group_members`, `update_app_subscription`, and so on); a Skill gives it the instructions for how to use those tools to accomplish a specific goal.
 
-You can run ShiftControl from your AI without installing any Skill. The MCP server alone is enough for ad-hoc questions like "which apps has nobody been assigned to?" Skills become useful when you have a repeatable, multi-step task you want your AI to handle the same way every time.
+You can run ShiftControl from your AI without installing any Skill. The MCP server alone is enough for ad-hoc questions and one-off admin work, like "which apps has nobody been assigned to?" or "add Priya to the Sales group." Skills become useful when you have a repeatable, multi-step task you want your AI to handle the same way every time.
 
 Skills carry no permissions of their own. Every tool call still runs as you, under your ShiftControl role, and a Skill that writes still asks before it writes.
 
@@ -144,4 +144,5 @@ Contributing to the public catalog: open a PR at [github.com/ShiftControl-io/ski
 ## Related
 
 - **[Introduction to AI Assistants](/ai-assistants/Introduction/)** — start here if MCP is new to you
+- **[What your AI can do](/ai-assistants/What-your-ai-can-do/)** — the admin work the MCP server covers on its own
 - **[Connect your AI tool](/ai-assistants/Connect-your-ai-tool/)** — install paths for every supported client

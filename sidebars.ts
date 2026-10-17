@@ -346,6 +346,7 @@ const sidebars: SidebarsConfig = {
             },
             items: [
                 'ai-assistants/Introduction',
+                'ai-assistants/What-your-ai-can-do',
                 'ai-assistants/Connect-your-ai-tool',
                 'ai-assistants/Skills',
             ],

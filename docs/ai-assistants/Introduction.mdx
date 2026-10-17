@@ -1,6 +1,6 @@
 ---
 title: 'AI Assistants — Introduction'
-description: 'Connect ShiftControl to Claude, Cursor, ChatGPT, and other AI assistants. Query your org, manage subscriptions, and run pre-built workflows from natural conversation.'
+description: 'Connect ShiftControl to Claude, Cursor, ChatGPT, and other AI assistants. Run day-to-day admin work (people, groups, apps and access, requests, org structure) and pre-built workflows from natural conversation.'
 keywords: ['ShiftControl', 'AI', 'MCP', 'Model Context Protocol', 'Claude', 'Cursor', 'ChatGPT', 'AI assistant', 'Skills']
 icon: 'sparkles'
 ---
@@ -11,26 +11,29 @@ import Admonition from '@theme/Admonition';
 
 ## Overview
 
-ShiftControl exposes an [MCP server](https://modelcontextprotocol.io/) at `https://mcp.shiftcontrol.io/mcp`. Once you connect your AI assistant to it, you can talk to ShiftControl like you'd talk to a colleague:
+ShiftControl exposes an [MCP server](https://modelcontextprotocol.io/) at `https://mcp.shiftcontrol.io/mcp`. Once you connect your AI assistant to it, you can hand it most of the day-to-day admin work you'd do in the web app, across Google Workspace and JumpCloud:
 
-- "List all our apps."
-- "Show me everyone in the Engineering department."
-- "Who's on the Sales team?"
-- "I just got the Notion renewal invoice — update the subscription to $1,200 per year."
+- "Onboard Priya Sharma. Create her account, add her to Sales and the all-staff group, give her Salesforce and Slack, and send her the sign-in email."
+- "Marcus leaves Friday at 5pm. Schedule his suspension."
+- "Who has access to Figma, and how did they get it?"
+- "Approve the pending access requests for Notion."
+- "I just got the Notion renewal invoice. Update the subscription to $1,200 per year."
 
-The AI does the API calls behind the scenes using your existing ShiftControl permissions. There's no service account, no API key to manage, and no separate role — your AI sees exactly what you see. The tool surface is intentionally focused: read your org structure (users, groups, teams, apps, OAuth apps) and update subscription records.
+The AI does the API calls behind the scenes using your existing ShiftControl permissions. There's no service account, no API key to manage, and no separate role: your AI sees and can change exactly what you can. It covers people, groups, apps and access, requests, and org structure. [What your AI can do](/ai-assistants/What-your-ai-can-do/) lists it all, area by area.
 
 ## What you get
 
 | Capability | What it is |
 |------------|------------|
-| **MCP server** | A remote server at `https://mcp.shiftcontrol.io/mcp` that exposes 11 tools (`list_users`, `get_app`, `update_subscription`, and more) to any MCP-aware AI client. |
+| **MCP server** | A remote server at `https://mcp.shiftcontrol.io/mcp` that exposes more than 70 tools (`list_users`, `create_user`, `update_group_members`, `assign_to_app`, `approve_work_item`, and more) to any MCP-aware AI client. |
 | **Skills** | Pre-built workflows you can install — instruction sets that combine MCP tools with multi-step logic for common SaaS-management tasks. In Claude they arrive as one plugin that carries the MCP server with them. |
 | **OAuth sign-in** | One browser sign-in per client. No API keys, no service accounts. Tokens are scoped to your ShiftControl user and respect your role. |
 
 ## How permissions work
 
-Your AI assistant inherits your ShiftControl permissions exactly. If you're a viewer, the AI is a viewer. If you can edit subscriptions, the AI can edit subscriptions — but write tools require explicit confirmation in the call itself (for example, `update_subscription` only writes when you pass `confirm: true`). This makes destructive actions deliberate rather than accidental.
+Your AI assistant inherits your ShiftControl permissions exactly. If you're a viewer, the AI is a viewer. If you can edit groups, the AI can edit groups. Employees without an admin role can use it too, for things like seeing their own apps and requesting access.
+
+Every tool that changes something requires an explicit confirmation in the call itself: the tool only runs with `confirm: true`, and your AI is told to describe the exact change and wait for your yes before it sets it. Looking things up never changes anything. Changes made this way are recorded in the audit log, marked as made through an AI assistant (MCP).
 
 Sessions are OAuth-authenticated against ShiftControl's platform. Your AI client stores the access token; ShiftControl validates it on every call. When it expires, your client silently refreshes — or, if the refresh fails, you'll see a one-line "sign in again" prompt in the AI tool.
 
@@ -40,6 +43,7 @@ Sessions are OAuth-authenticated against ShiftControl's platform. Your AI client
     If you've never connected an MCP server to your AI tool before, [Connect your AI tool](/ai-assistants/Connect-your-ai-tool/) walks through it for every supported client. If you have, the endpoint is `https://mcp.shiftcontrol.io/mcp` and OAuth discovery is at `/.well-known/oauth-authorization-server` — Dynamic Client Registration and Client ID Metadata Documents are both supported.
 </Admonition>
 
+- **[What your AI can do](/ai-assistants/What-your-ai-can-do/)** — the admin work your AI can do, area by area, with example requests
 - **[Connect your AI tool](/ai-assistants/Connect-your-ai-tool/)** — install paths for Claude Desktop, Claude Code, Cursor, Windsurf, Cline, Continue.dev, ChatGPT, Gemini CLI, and any generic OAuth-MCP client
 - **[Skills](/ai-assistants/Skills/)** — pre-built workflows you can install on top of the MCP server, and the catalog of what's available today
 
