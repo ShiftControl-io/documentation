@@ -160,6 +160,7 @@ Google Workspace is your primary (and only) Identity Provider. ShiftControl mana
 
 - **Changing the Primary directory is significant.** The Primary IdP determines whose data wins in conflicts and which system handles authentication. Don't change this casually — understand the implications for your user accounts first.
 - **Disabling a directory doesn't delete data.** Users imported from a disabled directory remain in ShiftControl. They just won't receive updates until the directory is re-enabled.
+- **HRIS offboarding runs on local time.** When a termination date syncs from your HR system, the deactivation is scheduled in the person's time zone, then their location's, then your organization's. See [Locations](/using-shiftcontrol/Settings/locations#time-zones-and-hris-offboarding).
 - **HRIS and IdP serve different roles.** Don't try to use an HRIS as your IdP or vice versa. The HRIS knows about people (hiring, departures, transfers). The IdP knows about access (authentication, permissions, app provisioning). ShiftControl connects the two.
 
 ## Related Features
