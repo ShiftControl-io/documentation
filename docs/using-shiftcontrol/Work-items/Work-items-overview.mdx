@@ -28,7 +28,7 @@ The five statuses define the item's current state. **Done** and **Canceled** are
 | **Done** | The work is complete. |
 | **Canceled** | The work is no longer needed. |
 
-ShiftControl creates work automatically for lifecycle events such as onboarding, offboarding, account changes, app and group access changes, and handing over ownership when an app owner leaves. A parent item can group smaller account, app, and group steps. Employees can request app access, app removal, and group membership; admins can create access-review, renewal, contact-check, policy, reconnect, and general tasks.
+ShiftControl creates work automatically for lifecycle events such as onboarding, offboarding, account changes, app and group access changes, handing over ownership when an app owner leaves, and reconnecting a directory or HR integration whose authorization was revoked or stopped working. A parent item can group smaller account, app, and group steps. Employees can request app access, app removal, and group membership; admins can also create access-review, renewal, contact-check, policy, reconnect, and general tasks.
 
 When an automatically created item has no other owner, ShiftControl assigns it to the app's primary admin when one is available, then falls back to the organization's **Default admin**. Set that person in Work Items settings so unassigned work has a clear owner.
 
@@ -52,14 +52,14 @@ The type describes what a work item is for. Titles below show the standard wordi
 | Employee requests | Remove from group request | Alex asked to leave the Engineering group | Employee request | **Default admin**. |
 | Maintenance | Review access | Check who still needs Salesforce | Admin-created | Assignee chosen by the admin. |
 | Maintenance | Acknowledge policy | Title entered by the creator | Admin-created | Assignee chosen by the admin. |
-| Maintenance | Reconnect | Reconnect ShiftControl to Salesforce | Admin-created | Assignee chosen by the admin. |
+| Maintenance | Reconnect | Reconnect Google Workspace | Automatically when a connection breaks, or admin-created | **Default admin** for automatic items; otherwise the assignee chosen by the admin. |
 | Maintenance | Review renewal | Decide whether to renew Salesforce | Admin-created | Assignee chosen by the admin. |
 | Maintenance | Contact check | Check the billing contact for Salesforce | Admin-created | Assignee chosen by the admin. |
 | Maintenance | Hand over ownership | Choose a new owner for Salesforce | Automatically when an app owner leaves | Assigned automatically; falls back to the **Default admin** when nobody else owns it. |
 | Maintenance | Delete account | Delete Alex's Salesforce account | Automatically during account deletion work | Assigned automatically; falls back to the **Default admin** when nobody else owns it. |
 | Maintenance | Task | Title entered by the creator | Admin-created | Assignee chosen by the admin. |
 
-An admin-created item uses the assignee selected in **New work item**. Automatically created items without another owner go to the app's primary admin when applicable, then to the organization's **Default admin**.
+An admin-created item uses the assignee selected in **New work item**. Automatically created items without another owner go to the app's primary admin when applicable, then to the organization's **Default admin**. While a reconnect item for a connection is still open, or after the connection is restored, ShiftControl does not open another one for the same break; the item's source shows as **OAuth broken**.
 
 ### Parent items and steps
 

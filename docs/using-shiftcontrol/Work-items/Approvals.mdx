@@ -53,6 +53,7 @@ The manager reviews the reason and approves. The Salesforce primary admin receiv
 - A requester cannot decide their own request. If the requester is the **Default admin** and no other approver is available, ShiftControl auto-approves the request and records that event in activity.
 - An organization role with approval access can decide requests across the organization. Otherwise, only the named approver for the current stage can decide.
 - App removal and group membership requests are tracked as work items too; an employee can follow them in My Work Items.
+- Each approved app request leads to one setup task. An employee can't request an app they already have or one whose access is already being set up. If a setup task for the same person and app is already open when a request is approved, ShiftControl doesn't create a second one: the request closes against the existing task.
 - **Email notifications** are configured at **Settings → Organization → Product configuration → Work Items**. The **Send work item email** switch controls digest delivery; **Minutes between emails** sets the per-person cooldown.
 
 ## Related Features
