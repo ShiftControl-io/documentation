@@ -30,8 +30,6 @@ An approver can choose **Approve** or **Deny** in the portal or use the email de
 
 Approval and fulfillment are separate work. An approved request remains visible to the requester while ShiftControl creates a fulfillment step. An approved app-removal request creates a separate access-revocation step, assigned to the app's primary admin or, if there is none, the organization's **Default admin**. The requester receives the decision outcome; the person assigned a step receives an action-required email. Some eligible SCIM-tracked access changes can close automatically after a matching sync confirms the change.
 
-When the person who approves an app access request is the requester's manager, ShiftControl automatically adds them as a watcher to the request and its grant-access task. If an open setup task already covers the same person and app, the manager watches that task instead. Both items appear in the manager's **My Work Items**, and they receive the usual watcher emails for status changes, comments, and completion. This does not delay setup or the access grant.
-
 ## Common Scenarios
 
 ### An employee without a manager requests an app
@@ -52,7 +50,6 @@ The manager reviews the reason and approves. The Salesforce primary admin receiv
 
 ## Things to Know
 
-- Only the requester's manager is added as a watcher this way. An admin who approves instead or a fallback approver is not added unless they are also the requester's manager. Requests approved before this behavior was added are unchanged.
 - A requester cannot decide their own request. If the requester is the **Default admin** and no other approver is available, ShiftControl auto-approves the request and records that event in activity.
 - An organization role with approval access can decide requests across the organization. Otherwise, only the named approver for the current stage can decide.
 - App removal and group membership requests are tracked as work items too; an employee can follow them in My Work Items.

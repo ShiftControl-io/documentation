@@ -72,7 +72,6 @@ When every child reaches a terminal status, the parent closes as **Done** if at 
 The **Waiting on** value reflects the work that is currently waiting:
 
 - **Pending access request:** **Waiting on** names the approver or approvers. The current approver sees **You, to approve**; other readers see an approver's name followed by **, to approve** (for example, **Amara Singh, to approve**). In the Approval block, approvers appear under **Approvers**, and the setup assignment is labeled **Access task goes to**. If no approver is available, it says **Nobody yet, needs an approver**.
-- **After approval:** **Waiting on** comes from the open setup task and names the person responsible for granting access. It falls back to the requester only when no setup task is open.
 - **No owner:** **Nobody yet, needs an owner**.
 - **Blocked:** the owner is shown with “to unblock a step.”
 - **Done:** **Nobody, this is finished**. **Canceled:** **Nobody, this was canceled**.
@@ -83,10 +82,6 @@ The **Waiting on** value reflects the work that is currently waiting:
 ### Tracking a new starter
 
 An onboarding item can group account setup and app or group assignments. The owner can see which steps remain, while other admins can follow progress without coordinating through a separate checklist.
-
-When an HR system sync adds a new hire with a start date, the account work item, account-enabled work item, and each app access task opened for that person get a **Needed by** date matching the start date. The assignee gets the usual due-soon reminder the day before that date and an overdue reminder afterward while the item remains open. Reminders go only to items with an assignee.
-
-If the start date is already in the past when an item is created, or the HR system has no start date, the item has no due date. This keeps long-time employees loaded on a first sync and apps added after the start date from appearing overdue. Later changes to the start date in the HR system do not change open items' due dates. Admins can change or clear a due date at any time; the update appears in the item's activity.
 
 ### Completing an app request
 
@@ -130,7 +125,6 @@ The ShiftControl MCP connection can also list work items, approve or deny reques
 
 ## Things to Know
 
-- When the requester's manager approves an app access request, they are automatically added as a watcher on the request and its setup task (or the existing open task for the same person and app). Both items appear in the manager's **My Work Items**.
 - An approved request and its fulfillment step are related but distinct: the request records the employee's decision and the step records the work to grant or remove access. The request remains with the requester until fulfillment completes.
 - An app admin receives one action-required email for an approved app request's fulfillment step; the requester separately receives the decision outcome.
 - Some eligible access changes complete automatically when a connected directory or app confirms fulfillment, including supported SCIM-provisioned changes.
