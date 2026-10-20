@@ -663,7 +663,7 @@
       "description": "Work Item detail with its approval, comments, watchers, and activity.",
       "modes": ["jc_gws"],
       "component": "ModeScreenshot",
-      "usedIn": ["docs/using-shiftcontrol/Work-items/Work-item-details.mdx", "docs/using-shiftcontrol/Work-items/Approvals.mdx"]
+      "usedIn": ["docs/using-shiftcontrol/Work-items/Work-item-details.mdx"]
     },
     "WorkItems/My-work-items": {
       "route": "/my-work-items",
@@ -693,6 +693,136 @@
       "modes": ["jc_gws"],
       "component": "ModeScreenshot",
       "usedIn": ["docs/employee-guide/employee-portal/directory.mdx"]
+    },
+    "EmployeePortal/Directory-apps": {
+      "route": "/directory/apps",
+      "description": "Employee Directory Apps tab with the app list and access states.",
+      "modes": ["jc_gws"],
+      "component": "ModeScreenshot",
+      "usedIn": ["docs/employee-guide/employee-portal/directory.mdx"]
+    },
+    "EmployeePortal/Directory-person": {
+      "route": "/directory/people",
+      "action": "Open Aditya Shah's person profile from the People tab.",
+      "description": "Employee Directory person profile with contact and reporting details.",
+      "modes": ["jc_gws"],
+      "component": "ModeScreenshot",
+      "usedIn": ["docs/employee-guide/employee-portal/directory.mdx"]
+    },
+    "EmployeePortal/Directory-app-actions": {
+      "route": "/directory/apps",
+      "action": "Open More actions for Asana to show Request removal.",
+      "description": "Actions menu for an app assigned directly to the employee.",
+      "modes": ["jc_gws"],
+      "component": "ModeScreenshot",
+      "usedIn": ["docs/employee-guide/employee-portal/directory.mdx"]
+    },
+    "EmployeePortal/Directory-group-request": {
+      "route": "/directory/groups",
+      "action": "Open the Request to be added confirmation for Customer Support.",
+      "description": "Confirmation dialog for requesting membership in a group.",
+      "modes": ["jc_gws"],
+      "component": "ModeScreenshot",
+      "usedIn": ["docs/employee-guide/employee-portal/directory.mdx"]
+    },
+    "EmployeePortal/My-device-detail": {
+      "route": "/my-devices",
+      "action": "Open the MacBook Pro 16-inch from the My Devices list.",
+      "description": "Employee device detail showing model, serial number, and storage.",
+      "modes": ["jc_gws"],
+      "component": "ModeScreenshot",
+      "usedIn": ["docs/employee-guide/employee-portal/my-devices.mdx"]
+    },
+    "EmployeePortal/App-dashboard-search": {
+      "route": "/",
+      "action": "Search for Slack in the app grid.",
+      "description": "Employee app dashboard filtered by an app search term.",
+      "modes": ["jc_gws"],
+      "component": "ModeScreenshot",
+      "usedIn": ["docs/employee-guide/employee-portal/your-apps.mdx"]
+    },
+    "EmployeePortal/App-permissions-revoke": {
+      "route": "/app-permissions",
+      "action": "Open the revoke confirmation for Superhuman.",
+      "description": "Confirmation dialog for revoking a third-party app authorization.",
+      "modes": ["jc_gws", "gws_only"],
+      "component": "ModeScreenshot",
+      "usedIn": ["docs/employee-guide/employee-portal/app-permissions.mdx"]
+    },
+    "EmployeePortal/Org-chart-export": {
+      "route": "/orgchart",
+      "action": "Open the Export menu.",
+      "description": "Employee organization chart export menu with PNG and PDF options.",
+      "modes": ["jc_gws", "jc_only", "gws_only"],
+      "component": "ModeScreenshot",
+      "usedIn": ["docs/employee-guide/employee-portal/org-chart.mdx"]
+    },
+    "EmployeePortal/Account-security-mfa": {
+      "route": "/security",
+      "action": "Scroll to the multi-factor authentication section.",
+      "description": "Employee security page showing registered multi-factor authentication methods.",
+      "modes": ["jc_gws"],
+      "component": "ModeScreenshot",
+      "usedIn": ["docs/employee-guide/employee-portal/account-security.mdx"]
+    },
+    "WorkItems/My-work-item-approval": {
+      "route": "/my-work-items/SC-204",
+      "description": "Employee view of a Salesforce access request awaiting James Tan's approval, with comments and decision actions.",
+      "modes": ["jc_gws"],
+      "component": "ModeScreenshot",
+      "usedIn": ["docs/employee-guide/employee-portal/my-work-items.mdx"]
+    },
+    "WorkItems/My-work-item-task": {
+      "route": "/my-work-items/SC-209",
+      "description": "Employee view of an assigned laptop collection task with its status and Start action.",
+      "modes": ["jc_gws"],
+      "component": "ModeScreenshot",
+      "usedIn": ["docs/employee-guide/employee-portal/my-work-items.mdx"]
+    },
+    "WorkItems/Work-items-filters": {
+      "route": "/admin/work-items",
+      "action": "Open the Status filter dropdown.",
+      "description": "Admin Work Items queue with the Status filter options open.",
+      "modes": ["jc_gws"],
+      "component": "ModeScreenshot",
+      "usedIn": ["docs/using-shiftcontrol/Work-items/Managing-work-items.mdx"]
+    },
+    "WorkItems/Work-items-bulk": {
+      "route": "/admin/work-items",
+      "action": "Select SC-201 and SC-209, then open Bulk actions.",
+      "description": "Admin Work Items queue with multiple rows selected and bulk actions open.",
+      "modes": ["jc_gws"],
+      "component": "ModeScreenshot",
+      "usedIn": ["docs/using-shiftcontrol/Work-items/Managing-work-items.mdx"]
+    },
+    "WorkItems/Create-work-item": {
+      "route": "/admin/work-items",
+      "action": "Click New work item to open the creation form.",
+      "description": "Admin form for creating a Work Item with its type, assignee, due date, and parent.",
+      "modes": ["jc_gws"],
+      "component": "ModeScreenshot",
+      "usedIn": ["docs/using-shiftcontrol/Work-items/Managing-work-items.mdx"]
+    },
+    "WorkItems/Work-item-approval": {
+      "route": "/admin/work-items/SC-204",
+      "description": "Admin detail for a request pending approval with Approve and Deny actions.",
+      "modes": ["jc_gws"],
+      "component": "ModeScreenshot",
+      "usedIn": ["docs/using-shiftcontrol/Work-items/Approvals.mdx"]
+    },
+    "WorkItems/Work-item-settings": {
+      "route": "/settings/work-items",
+      "description": "Organization Work Items settings with key prefix, email notifications, and default admin.",
+      "modes": ["jc_gws"],
+      "component": "ModeScreenshot",
+      "usedIn": ["docs/using-shiftcontrol/Work-items/Work-items-overview.mdx"]
+    },
+    "WorkItems/Work-item-steps": {
+      "route": "/admin/work-items/SC-201",
+      "description": "Parent provisioning item with its app, group, and policy setup steps.",
+      "modes": ["jc_gws"],
+      "component": "ModeScreenshot",
+      "usedIn": ["docs/using-shiftcontrol/Work-items/Work-item-details.mdx"]
     }
   }
 }
