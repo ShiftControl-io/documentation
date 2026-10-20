@@ -104,6 +104,17 @@ When you change a group's rules and save, ShiftControl immediately recalculates 
 
 </Steps>
 
+## Assigning Apps to a Group
+
+Assign apps from the group detail page when you are setting up access for a team or updating the tools a group needs. This gives every group member access without opening each app's page.
+
+<ModeScreenshot path="Groups/Assign-group-to-apps" alt="Assign Group to Apps dialog with a searchable app list and checkboxes" />
+
+1. Open the group and choose the **Assign to apps** icon in the header.
+2. In **Assign Group to Apps**, search or page through the list, then select one or more apps.
+3. Apps the group already has are greyed out and labeled **Already assigned**. Existing assignments stay in place.
+4. Choose **Add**. The result is the same as adding the group from an app's page: access, provisioning, and app counts stay in step, and every group member gets access.
+
 ## Group Info Sidebar
 
 The right sidebar on the group detail page shows live information about the group across three tabs:
@@ -123,6 +134,8 @@ The right sidebar on the group detail page shows live information about the grou
 
 ## Things to Know
 
+- You need permission to view and update apps to assign them to a group.
+- The built-in all-users group, an app's own access group, and a Google-only group when JumpCloud is the primary directory cannot be assigned apps.
 - **Rule changes take effect immediately.** When you save updated rules, group membership and app access are recalculated right away. There is no delay or approval step.
 - **If the user list fails to load, Save stays disabled.** When a group's member list can't be fetched, ShiftControl won't let you save a group whose membership it couldn't fully read — that's how individually added members could otherwise get dropped. You'll see a **Retry** option; once the list loads, saving works normally.
 - **"Who can leave a group" includes Owners only.** On Google-synced groups, the *Who can leave a group* setting can be set to **Owners only**, so ordinary members can't remove themselves from a group they should stay in.

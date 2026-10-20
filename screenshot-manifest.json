@@ -244,6 +244,14 @@
       "component": "Screenshot",
       "usedIn": ["docs/using-shiftcontrol/Groups/Editing-a-group.mdx"]
     },
+    "Groups/Assign-group-to-apps": {
+      "route": "/admin/org/groups/view/{group}",
+      "action": "Click the Assign to apps icon in the group header",
+      "description": "Assign Group to Apps dialog — searchable, paged app list with checkboxes",
+      "modes": ["jc_gws", "jc_only", "gws_only"],
+      "component": "ModeScreenshot",
+      "usedIn": ["docs/using-shiftcontrol/Groups/Editing-a-group.mdx"]
+    },
 
     "Apps/App-management": {
       "route": "/admin/org/apps",
