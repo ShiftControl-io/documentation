@@ -75,6 +75,16 @@ const sidebars: SidebarsConfig = {
                     ],
                 },
                 'using-shiftcontrol/using-the-command-bar',
+                {
+                    type: 'category',
+                    label: 'Work Items',
+                    items: [
+                        'using-shiftcontrol/Work-items/Work-items-overview',
+                        'using-shiftcontrol/Work-items/Managing-work-items',
+                        'using-shiftcontrol/Work-items/Work-item-details',
+                        'using-shiftcontrol/Work-items/Approvals',
+                    ],
+                },
                 'using-shiftcontrol/task-management',
                 {
                     type: 'category',
@@ -402,12 +412,14 @@ const sidebars: SidebarsConfig = {
                     link: {
                         type: 'generated-index',
                         title: 'Employee Portal',
-                        description: 'Your app dashboard, org chart, and account security — everything you see as an employee.',
+                        description: 'Your apps, directory, requests, and account security — everything you see as an employee.',
                         slug: '/employee-guide/employee-portal',
                         keywords: ['employee', 'portal', 'apps'],
                     },
                     items: [
                         'employee-guide/employee-portal/your-apps',
+                        'employee-guide/employee-portal/directory',
+                        'employee-guide/employee-portal/my-work-items',
                         'employee-guide/employee-portal/org-chart',
                         'employee-guide/employee-portal/app-permissions',
                         'employee-guide/employee-portal/my-devices',

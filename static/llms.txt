@@ -35,7 +35,13 @@ ShiftControl connects to identity providers (JumpCloud, Google Workspace) and HR
 - [Google Workspace Admins](https://docs.shiftcontrol.io/using-shiftcontrol/Settings/google-admins/): Manage Google admin roles
 - [API](https://docs.shiftcontrol.io/using-shiftcontrol/API/): REST API for automation and integrations
 - [Command Bar](https://docs.shiftcontrol.io/using-shiftcontrol/using-the-command-bar/): Keyboard-driven search and navigation
-- [Task Management](https://docs.shiftcontrol.io/using-shiftcontrol/task-management/): Track and manage IT tasks
+- [Task Management](https://docs.shiftcontrol.io/using-shiftcontrol/task-management/): Review the separate App Discovery Tasks queue
+- [Work Items Overview](https://docs.shiftcontrol.io/using-shiftcontrol/Work-items/Work-items-overview/): Track approvals, access changes, onboarding work, and manual tasks
+- [Managing Work Items](https://docs.shiftcontrol.io/using-shiftcontrol/Work-items/Managing-work-items/): Filter, group, create, and update work in the admin queue
+- [Work Item Details](https://docs.shiftcontrol.io/using-shiftcontrol/Work-items/Work-item-details/): Update status, notes, steps, comments, and watchers
+- [Work Item Approvals](https://docs.shiftcontrol.io/using-shiftcontrol/Work-items/Approvals/): Review request decisions and fulfillment
+- [My Work Items](https://docs.shiftcontrol.io/employee-guide/employee-portal/my-work-items/): Follow employee requests and assigned work
+- [Employee Directory](https://docs.shiftcontrol.io/employee-guide/employee-portal/directory/): Find people, groups, and apps; submit access requests
 - [AI Assistants](https://docs.shiftcontrol.io/ai-assistants/Introduction/): Connect Claude, Cursor and other AI tools to ShiftControl through the MCP server at https://mcp.shiftcontrol.io/mcp
 - [What your AI can do](https://docs.shiftcontrol.io/ai-assistants/What-your-ai-can-do/): Day-to-day admin through the MCP server: people, groups, apps and access, requests, org structure. Every change needs the user's explicit confirmation
 - [Connect your AI tool](https://docs.shiftcontrol.io/ai-assistants/Connect-your-ai-tool/): Setup steps for each AI client

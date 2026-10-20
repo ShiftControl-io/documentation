@@ -1,0 +1,56 @@
+---
+title: 'Work Item Approvals'
+description: 'Understand who decides an access request, how to respond, and what happens after approval.'
+keywords: ['ShiftControl', 'work item approvals', 'access request', 'approver']
+---
+
+import ModeScreenshot from '@site/src/components/ModeScreenshot';
+
+<p style={{fontSize: "large"}}>Approvals keep access decisions visible and connect the decision to the person responsible for carrying it out.</p>
+
+## Overview
+
+When someone requests app access, app removal, or group membership, ShiftControl records the request as a work item. The approver can review the context, approve or deny it, and leave a comment. If approved, the request moves to fulfillment rather than disappearing from view.
+
+<ModeScreenshot path="WorkItems/Work-item-detail" modes={["jc-google"]} alt="Work item approval with the request, approver, and decision actions" />
+
+## How It Works
+
+For an app access request, the default approval route resolves the requester's manager first, then the app's primary admin, and then the organization's default admin. A step is skipped when it would make the requester their own approver. The request screen identifies the person expected to decide before the employee submits.
+
+Group requests go to the organization's default admin, if the group is configured to accept requests. App-removal requests are separate work items from app-access requests.
+
+Approvers can choose **Approve** or **Deny** from an email action or open the request in ShiftControl. When an app request is approved, it stays with the employee as a record of the decision and one fulfillment step is assigned to the person who will grant access. The app admin receives one action-required email for that step, and the employee receives a separate outcome email. Completing the fulfillment step closes the request.
+
+If the requester is the organization's default admin and no earlier approver is available, the request can be approved automatically rather than failing as a self-approval. Requests that resolve to another approver still wait for that person to decide.
+
+## Common Scenarios
+
+### An employee without a manager requests an app
+
+If the app has a primary admin, the request can route there. If not, it falls back to the organization's default admin, so the employee can still submit the request.
+
+### An admin approves an app request
+
+The approver reviews the reason and decides by email or in the portal. The app admin receives one action-required fulfillment task, and the employee's request stays visible until that task is complete.
+
+## Step-by-Step Guide
+
+1. Open the request from the approval email or the Work Items queue.
+2. Check the employee, requested app or group, justification, and current approver before deciding.
+3. Choose **Approve** or **Deny**. Add a comment if the requester or next assignee needs context.
+4. After approval, follow the fulfillment item and update it when the access change is complete.
+5. Set the **Default admin** in Work Items settings to provide a fallback when the requester's manager or the app's primary admin is unavailable.
+
+## Things to Know
+
+- Requesters cannot approve their own requests. The default route skips an approver who is also the requester.
+- An organization role with approval access can decide requests across the organization. Otherwise, only the named approver for the current stage can decide.
+- App removal and group membership requests are tracked as work items too; an employee can follow them in My Work Items.
+- Work Item email notifications can be enabled in Work Items settings. Those notifications batch assignments, approvals, status changes, outcomes, and comments.
+
+## Related Features
+
+- [Work Items Overview](/using-shiftcontrol/Work-items/Work-items-overview/) — enable the feature and set the default admin.
+- [Work Item Details](/using-shiftcontrol/Work-items/Work-item-details/) — review approval and fulfillment activity.
+- [Directory](/employee-guide/employee-portal/directory/) — employee app and group requests.

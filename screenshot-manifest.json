@@ -529,7 +529,7 @@
       "usedIn": ["docs/using-shiftcontrol/using-the-command-bar.mdx"]
     },
     "Task-management": {
-      "route": "/admin/tasks",
+      "route": "/admin/org/tasks",
       "description": "Task management list with pending tasks",
       "modes": ["jc_gws", "jc_only", "gws_only"],
       "component": "Screenshot",
@@ -650,6 +650,49 @@
       "modes": ["jc_gws", "gws_only"],
       "component": "ModeScreenshot",
       "usedIn": ["docs/using-shiftcontrol/Users/Editing-a-user.mdx"]
+    },
+    "WorkItems/Work-items-list": {
+      "route": "/admin/work-items",
+      "description": "Admin Work Items queue grouped by app.",
+      "modes": ["jc_gws"],
+      "component": "ModeScreenshot",
+      "usedIn": ["docs/using-shiftcontrol/Work-items/Work-items-overview.mdx", "docs/using-shiftcontrol/Work-items/Managing-work-items.mdx"]
+    },
+    "WorkItems/Work-item-detail": {
+      "route": "/admin/work-items/SC-204",
+      "description": "Work Item detail with its approval, comments, watchers, and activity.",
+      "modes": ["jc_gws"],
+      "component": "ModeScreenshot",
+      "usedIn": ["docs/using-shiftcontrol/Work-items/Work-item-details.mdx", "docs/using-shiftcontrol/Work-items/Approvals.mdx"]
+    },
+    "WorkItems/My-work-items": {
+      "route": "/my-work-items",
+      "description": "Employee My Work Items list with requests and assigned tasks.",
+      "modes": ["jc_gws"],
+      "component": "ModeScreenshot",
+      "usedIn": ["docs/employee-guide/employee-portal/my-work-items.mdx"]
+    },
+    "EmployeePortal/Directory-people": {
+      "route": "/directory/people",
+      "description": "Employee Directory People tab with searchable employee details.",
+      "modes": ["jc_gws"],
+      "component": "ModeScreenshot",
+      "usedIn": ["docs/employee-guide/employee-portal/directory.mdx"]
+    },
+    "EmployeePortal/Directory-groups": {
+      "route": "/directory/groups",
+      "description": "Employee Directory Groups tab with group tags and membership actions.",
+      "modes": ["jc_gws"],
+      "component": "ModeScreenshot",
+      "usedIn": ["docs/employee-guide/employee-portal/directory.mdx"]
+    },
+    "EmployeePortal/Directory-app-request": {
+      "route": "/directory/apps",
+      "action": "Open the first Request access action to show the app access request dialog.",
+      "description": "Employee Directory app access request dialog with approver and justification.",
+      "modes": ["jc_gws"],
+      "component": "ModeScreenshot",
+      "usedIn": ["docs/employee-guide/employee-portal/directory.mdx"]
     }
   }
 }
