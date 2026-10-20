@@ -38,26 +38,26 @@ The type describes what a work item is for. Titles below show the standard wordi
 
 | Group | Type | Example title | Created by | Default owner or approver |
 |---|---|---|---|---|
-| People lifecycle | Provisioning | Give Alex access | Automatic lifecycle event or admin-created | Applicable lifecycle admin; **Default admin** if there is no other owner. |
-| People lifecycle | Enabling | Give Alex access | Automatic lifecycle event or admin-created | Applicable lifecycle admin; otherwise **Default admin**. |
-| People lifecycle | Disabling | Remove Alex's access | Automatic lifecycle event or admin-created | Applicable lifecycle admin; otherwise **Default admin**. |
-| People lifecycle | Deprovisioning | Remove Alex's access | Automatic lifecycle event or admin-created | Applicable lifecycle admin; otherwise **Default admin**. |
+| People lifecycle | Provisioning | Give Alex access | Automatic lifecycle event or admin-created | Assigned automatically; falls back to the **Default admin** when nobody else owns it. |
+| People lifecycle | Enabling | Give Alex access | Automatic lifecycle event or admin-created | Assigned automatically; falls back to the **Default admin** when nobody else owns it. |
+| People lifecycle | Disabling | Remove Alex's access | Automatic lifecycle event or admin-created | Assigned automatically; falls back to the **Default admin** when nobody else owns it. |
+| People lifecycle | Deprovisioning | Remove Alex's access | Automatic lifecycle event or admin-created | Assigned automatically; falls back to the **Default admin** when nobody else owns it. |
 | Access steps | Grant access | Give Alex access to Salesforce | Lifecycle, approved request, or admin | App's primary admin when available; otherwise **Default admin**. |
 | Access steps | Revoke access | Remove Alex's access to Salesforce | Lifecycle, approved request, or admin | Request-generated removal steps start unassigned; an admin must assign an owner. |
 | Access steps | Add to group | Add Alex to the Engineering group | Lifecycle or admin | Admin selected for the work; otherwise **Default admin**. |
 | Access steps | Remove from group | Remove Alex from the Engineering group | Lifecycle or admin | Admin selected for the work; otherwise **Default admin**. |
 | Employee requests | Access request | Alex asked for access to Salesforce | Employee request or admin-created | Requester's manager, then app's primary admin, then **Default admin**. |
 | Employee requests | Removal request | Alex asked to be removed from Salesforce | Employee request | App's primary admin; **Default admin** if none can decide. |
-| Employee requests | Add to group request (`GROUP_ADD_REQUEST`) | Alex asked to join the Engineering group | Employee request | **Default admin**, if the group accepts requests. |
-| Employee requests | Remove from group request (`GROUP_REMOVAL_REQUEST`) | Alex asked to leave the Engineering group | Employee request | **Default admin**. |
-| Maintenance | Review access (`APP_REVIEW`) | Check who still needs Salesforce | Admin-created | Assignee chosen by the admin. |
-| Maintenance | Acknowledge policy (`COMPLIANCE_ACK`) | Title entered by the creator | Admin-created | Assignee chosen by the admin. |
-| Maintenance | Reconnect (`OAUTH_REPAIR`) | Reconnect ShiftControl to Salesforce | Admin-created | Assignee chosen by the admin. |
-| Maintenance | Review renewal (`SUBSCRIPTION_REVIEW`) | Decide whether to renew Salesforce | Admin-created | Assignee chosen by the admin. |
-| Maintenance | Contact check (`SEQUENCE_CONTACT_CHECK`) | Check the billing contact for Salesforce | Admin-created | Assignee chosen by the admin. |
-| Maintenance | Hand over ownership | Choose a new owner for Salesforce | Automatically when an app owner leaves | Applicable app admin; otherwise **Default admin**. |
-| Maintenance | Delete account | Delete Alex's Salesforce account | Automatically during account deletion work | Applicable admin; otherwise **Default admin**. |
-| Maintenance | Task (`GENERAL`) | Title entered by the creator | Admin-created | Assignee chosen by the admin. |
+| Employee requests | Add to group request | Alex asked to join the Engineering group | Employee request | **Default admin**, if the group accepts requests. |
+| Employee requests | Remove from group request | Alex asked to leave the Engineering group | Employee request | **Default admin**. |
+| Maintenance | Review access | Check who still needs Salesforce | Admin-created | Assignee chosen by the admin. |
+| Maintenance | Acknowledge policy | Title entered by the creator | Admin-created | Assignee chosen by the admin. |
+| Maintenance | Reconnect | Reconnect ShiftControl to Salesforce | Admin-created | Assignee chosen by the admin. |
+| Maintenance | Review renewal | Decide whether to renew Salesforce | Admin-created | Assignee chosen by the admin. |
+| Maintenance | Contact check | Check the billing contact for Salesforce | Admin-created | Assignee chosen by the admin. |
+| Maintenance | Hand over ownership | Choose a new owner for Salesforce | Automatically when an app owner leaves | Assigned automatically; falls back to the **Default admin** when nobody else owns it. |
+| Maintenance | Delete account | Delete Alex's Salesforce account | Automatically during account deletion work | Assigned automatically; falls back to the **Default admin** when nobody else owns it. |
+| Maintenance | Task | Title entered by the creator | Admin-created | Assignee chosen by the admin. |
 
 An admin-created item uses the assignee selected in **New work item**. Automatically created items without another owner go to the app's primary admin when applicable, then to the organization's **Default admin**.
 
