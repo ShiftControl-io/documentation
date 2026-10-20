@@ -28,7 +28,7 @@ The request screen shows the expected approver before submission. If the request
 
 An approver can choose **Approve** or **Deny** in the portal or use the email decision links without signing in. Decision links expire after 24 hours. Denying a request changes its status to **Canceled**, notifies the requester, may include the approver's comment, and cancels any pending child work.
 
-Approval and fulfillment are separate work. An approved request remains visible to the requester while ShiftControl creates a fulfillment step. An app-removal request creates a separate access-revocation step; that request-generated step starts unassigned until an admin assigns an owner. The requester receives the decision outcome; the person assigned a step receives an action-required email. Some eligible SCIM-tracked access changes can close automatically after a matching sync confirms the change.
+Approval and fulfillment are separate work. An approved request remains visible to the requester while ShiftControl creates a fulfillment step. An approved app-removal request creates a separate access-revocation step, assigned to the app's primary admin or, if there is none, the organization's **Default admin**. The requester receives the decision outcome; the person assigned a step receives an action-required email. Some eligible SCIM-tracked access changes can close automatically after a matching sync confirms the change.
 
 ## Common Scenarios
 
