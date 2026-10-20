@@ -1,7 +1,7 @@
 ---
 title: 'Locations'
-description: 'Define and manage office locations in ShiftControl. Sync from HRIS integrations and use locations for user and group assignments.'
-keywords: ['ShiftControl', 'settings', 'locations', 'HRIS', 'organization structure', 'configuration']
+description: 'Define and manage office locations in ShiftControl. Set a time zone per location, sync from HRIS integrations, and use locations for user and group assignments.'
+keywords: ['ShiftControl', 'settings', 'locations', 'time zone', 'offboarding', 'HRIS', 'organization structure', 'configuration']
 icon: 'map-pin'
 ---
 import ModeScreenshot from "@site/src/components/ModeScreenshot";
@@ -15,6 +15,8 @@ The **Locations** page under **Org Settings** allows administrators to define an
 Locations can be automatically synced from your HRIS integration or added manually. They are used throughout ShiftControl to associate users, apps, and groups with specific physical or operational sites.
 
 <ModeScreenshot path="Settings/Settings-locations" alt="Locations list view" />
+
+Each location also has a **Timezone** column. **Org default** means the location has no time zone of its own and uses your organization's time zone — see [Time Zones and HRIS Offboarding](#time-zones-and-hris-offboarding).
 
 <Admonition type="tip">
     Each row shows its group and its headcount — the icon next to a name means a group is linked to that location, and the number beside it is how many people currently match. A location with people and no icon never got its group; a group with a count of zero has a rule that isn't matching anyone.
@@ -47,19 +49,54 @@ You’ll find them in several key areas:
 
 To add or modify locations manually:
 
-1. Click **Add Location** at the top right of the page.
-2. Enter a **Location Name** (e.g., *Singapore*, *United States*, *Germany*).
-3. Choose whether to **create a group for this** location or **link an existing group** you already have.
-4. Click **Save** to confirm.
+1. Click **Add location** at the top right of the page.
+2. Enter a **Location name** (e.g., *Singapore*, *United States*, *Germany*).
+3. Leave **Time zone** on **Detect automatically** to let ShiftControl work it out from the location name, or pick a time zone from the list. The time zone decides when HRIS offboarding runs for people in this location.
+4. Under **Group for this location**, choose **Create a new group**, **Link an existing group**, or **No group**.
+5. Click **Save changes** to confirm.
 
-<ModeScreenshot path="Settings/Settings-create-edit-a-location" alt="Add or edit a location" />
+<ModeScreenshot path="Settings/Settings-create-edit-a-location" alt="New location form with the time zone set to detect automatically" />
 
-You can also edit existing locations using the **⋮ menu** next to each entry — including linking, unlinking, or relinking the group behind it.
+You can also edit existing locations using the **⋮ menu** next to each entry — including changing the time zone and linking, unlinking, or relinking the group behind it. The edit form shows the location's current time zone, or **Org default** with your organization's time zone in brackets when it has none.
 When renamed, any linked users or dynamic groups remain associated automatically, and the group's **email address updates to match** the new name.
 
 <Admonition type="tip">
     Location-based groups are dynamic — users are automatically added or removed as their assigned location changes.
 </Admonition>
+
+## Time Zones and HRIS Offboarding
+
+### Why location time zones matter
+
+When your HR system records someone's last day, ShiftControl deactivates their account at the end of that working day (18:00 local time by default). "The end of Friday" is a different moment in Tokyo, London, and San Francisco. If every office ran on one clock, someone in Tokyo could lose access on Thursday evening or keep it into Saturday. Giving each location its own time zone means offboarding happens on the right day in every office, without anyone doing time zone maths.
+
+### How ShiftControl picks the time zone
+
+When a termination date arrives from your HR system, ShiftControl schedules the account deactivation using the first time zone it finds:
+
+1. **The person's own time zone**, if their HR profile has one.
+2. **Their location's time zone**, if the location has one.
+3. **Your organization's time zone**, if neither of the above is set.
+
+Existing locations show **Org default** until you choose a time zone for them, so nothing changes for them until you do.
+
+### Where a location's time zone comes from
+
+- **Detected from the name.** With **Detect automatically**, ShiftControl looks for a country or city in the location name. *Singapore* or *Japan* resolve to a single time zone. A country that spans several time zones, such as *United States*, *Canada*, or *Australia*, can't be resolved from the name alone, so the location keeps using your organization's time zone — pick one yourself, or include the office's city in the location name.
+- **From your HR system.** If your HR system sends a time zone for a location, ShiftControl picks it up during sync. It fills in an empty time zone and replaces a detected one.
+- **Chosen by you.** A time zone you pick by hand is never overwritten by an HR sync.
+
+### Termination date changes and cancellations
+
+- If a termination date changes in your HR system, the scheduled deactivation moves to match.
+- Scheduled deactivations show that they came from your HR system, so you can tell them apart from ones an admin set.
+- If you cancel an HR-scheduled deactivation by hand, ShiftControl tells you it won't schedule it again unless the termination date changes in your HR system.
+
+### Common scenarios
+
+- **An office in a single-time-zone country.** You add a location called *Singapore* and leave **Detect automatically** selected. ShiftControl sets *Asia/Singapore*, and everyone there is offboarded at the end of their last day in Singapore time.
+- **A country with several time zones.** Your HR system has one location called *United States* for people on both coasts. Detection can't pick one zone, so the location uses your organization's time zone. Split it into locations such as *New York* and *San Francisco*, or set a time zone on each person's HR profile, so each person is offboarded on their own clock.
+- **A last day that moves.** HR extends someone's notice period by a week. ShiftControl moves the scheduled deactivation to the new date — you don't need to reschedule anything.
 
 ## Deleting a Location
 

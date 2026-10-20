@@ -426,6 +426,14 @@
       "component": "Screenshot",
       "usedIn": ["docs/using-shiftcontrol/Settings/locations.mdx"]
     },
+    "Settings/Settings-create-edit-a-location": {
+      "route": "/settings/locations",
+      "description": "New location form with the time zone set to Detect automatically",
+      "action": "Click 'Add location' button",
+      "modes": ["jc_gws", "jc_only", "gws_only"],
+      "component": "Screenshot",
+      "usedIn": ["docs/using-shiftcontrol/Settings/locations.mdx"]
+    },
     "Settings/Settings-user-roles": {
       "route": "/settings/user-roles",
       "description": "ShiftControl admin role assignments",

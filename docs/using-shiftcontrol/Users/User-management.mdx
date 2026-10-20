@@ -75,6 +75,7 @@ When both directories are connected, the context menu shows a **directory select
 
 **JumpCloud actions** (shown for users in JumpCloud):
 - **Edit** — Open the user's JumpCloud profile for editing
+- **Activate** — Activate the user now or on a schedule, optionally emailing activation instructions. Available for active users too — see [Activating JumpCloud users](#activating-jumpcloud-users)
 - **Send activation instructions** — Send setup email with login credentials and MFA instructions
 - **Set password** — Manually assign a password
 - **Schedule deactivation** — Set a future date to revoke access
@@ -95,6 +96,7 @@ When both directories are connected, the context menu shows a **directory select
 <ConditionalContent modes={["jc-only"]}>
 
 - **Edit** — Open the user's profile for editing
+- **Activate** — Activate the user now or on a schedule, optionally emailing activation instructions. Available for active users too — see [Activating JumpCloud users](#activating-jumpcloud-users)
 - **Send activation instructions** — Send the setup email with login credentials and MFA instructions
 - **Set password** — Manually assign a password
 - **Schedule deactivation** — Set a future date to revoke access
@@ -143,6 +145,21 @@ For JumpCloud users, **Schedule deactivation** was already available and works t
 
 </ConditionalContent>
 
+<ConditionalContent modes={["jc-google", "google-jc", "jc-only"]}>
+
+### Activating JumpCloud users
+
+**Activate** is available for every JumpCloud user — Staged, Suspended, and users who are already Active. Activating an active user again is how you send them their activation, welcome, or restore email at a time that suits them, for example on the morning they return from leave or on their first day.
+
+1. Open the **⋮ menu** on the user and choose **Activate** (or select several users and use **Activate** from the bulk menu).
+2. Choose **Activate now**, or open **Schedule activation** and pick the date, time, and time zone.
+3. Choose the email address to send the instructions to, and leave **Send activation instructions** switched on if the user should get the email.
+4. Click **Activate**.
+
+A user with a pending activation shows as **Activation scheduled**. Use **Manage Activation** to change it or **Cancel scheduled activation** to stop it before it runs.
+
+</ConditionalContent>
+
 ## Bulk Actions
 
 Select multiple users with the checkboxes, then choose an action from the bulk menu. This is how you handle operations at scale — seasonal onboarding, department-wide password resets, or end-of-contract offboarding.
@@ -171,7 +188,7 @@ Suspend, Restore, Delete
 
 </ConditionalContent>
 
-Each action is only enabled when at least one selected user is eligible. For example, "Activate" is disabled if all selected users are already active.
+Each action is only enabled when at least one selected user is eligible. For example, "Cancel scheduled activation" is disabled if none of the selected users has an activation scheduled.
 
 ## Working with Tables
 
@@ -194,6 +211,7 @@ These behaviors apply to the data grids across ShiftControl — Users, Groups, A
 
 - **Deactivation vs. disabling.** Deactivating suspends access but preserves the account and its data. Disabling is more aggressive — use it when someone needs to be locked out immediately and you don't need to preserve their state.
 - **Scheduled actions aren't instant.** A scheduled deactivation means the user keeps full access until that date. Double-check the date if timing is critical for security.
+- **HR-driven deactivations follow local time.** Deactivations scheduled from your HR system's termination dates run in the person's time zone, then their location's, then your organization's. See [Locations](/using-shiftcontrol/Settings/locations#time-zones-and-hris-offboarding).
 - **Pagination.** The list shows 10 users per page. The total count (e.g., "1 to 10 of 36 users") is always visible at the bottom.
 
 ## Related Features
