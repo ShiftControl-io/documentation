@@ -18,6 +18,36 @@ The Work Items list is the operational view for admins. Use **My Work Items** to
 
 Filter by status, type, source, assignee, watchers, approval state, or parent. Group the list by app or parent item to see individual steps alongside the larger request they support. The column chooser controls which details stay visible in the grid.
 
+**My Work Items** is scoped to items assigned to you; an approver-only item appears in **All Work Items**, not the assignee-only tab. Approval decisions are available to the current approver or an organization role with approval permission.
+
+### Filters and columns
+
+Type, Status, and Source are multi-select filters. Assignee and Watchers narrow the list to selected people. Approval filter values mean:
+
+| Value | Meaning |
+|---|---|
+| **Any approval** | Do not filter by approval state. |
+| **Pending** | An approval decision is waiting. |
+| **Approved** | The approval flow completed successfully. |
+| **N/A** | No approval state is attached to the item. |
+
+A denied request is **Canceled**; Denied is not a separate Approval filter value. Filters combine across fields, while multiple values within one field match any selected value.
+
+| Column | Meaning |
+|---|---|
+| **Title** | The work being requested or completed. |
+| **Key** | The item's copyable organization key. |
+| **Status** | To do, In progress, Blocked, Done, or Canceled. |
+| **Type** | The kind of work, such as Access request or Grant access. |
+| **Assignee** | The person responsible for the work. |
+| **Resource** | The app or group involved. |
+| **User** | The employee the work affects. |
+| **Source** | How the item entered Work Items, such as a portal request or system event. |
+| **Approval** | Pending, Approved, or N/A. |
+| **Created** / **Updated** | When the item was created and last updated. |
+
+When grouping rows, the grid also uses **Event**, **App**, **Action**, and **Person** group columns.
+
 Row actions depend on the item's current status and your permissions. You can move eligible items between statuses, reassign work, or approve or deny a request when you are its approver. Select two or more rows to use bulk actions for status changes, approval decisions, reassignment, adding watchers, or changing due dates. Ineligible rows are skipped rather than given an action they cannot take.
 
 ### Create an Admin Work Item
@@ -44,10 +74,11 @@ Select the items that need the same change and use a bulk action. Review the con
 ## Step-by-Step Guide
 
 1. Open **Work Items** in the admin navigation and choose **My Work Items** or **All Work Items**.
-2. Set filters before taking action so the list contains the requests or tasks you intend to review.
+2. Set Type, Status, Source, Assignee, Watchers, or Approval filters before taking action.
 3. Choose an app or parent grouping to see related steps together.
-4. Use a row action for one item, or select several rows and choose a bulk action. Only actions allowed by the current status and your role are available.
-5. Open an item to review its full details before changing ownership or making an approval decision.
+4. Use **Start** to move a To do item to In progress or **Mark done** when work is complete. To pause, set Status to **Blocked** and add a note; choose **Mark in progress** when you resume. Done and Canceled are terminal; there is no separate Re-open action.
+5. Use a row action for one item, or select several rows and choose a bulk action. Only actions allowed by the current status and your role are available.
+6. Open an item to review its full details before changing ownership or making an approval decision.
 
 ## Things to Know
 
