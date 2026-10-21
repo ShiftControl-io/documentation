@@ -69,9 +69,9 @@ When every child reaches a terminal status, the parent closes as **Done** if at 
 
 ### “Waiting on” and ownership
 
-The **Waiting on** value reflects approval and assignment:
+The **Waiting on** value reflects the work that is currently waiting:
 
-- **Pending approval:** the current approver sees **You, to approve**; other readers see the assigned person's name or email followed by “to approve.” If no approver is available, it says **Nobody yet, needs an approver**.
+- **Pending access request:** **Waiting on** names the approver or approvers. The current approver sees **You, to approve**; other readers see an approver's name followed by **, to approve** (for example, **Amara Singh, to approve**). In the Approval block, approvers appear under **Approvers**, and the setup assignment is labeled **Access task goes to**. If no approver is available, it says **Nobody yet, needs an approver**.
 - **No owner:** **Nobody yet, needs an owner**.
 - **Blocked:** the owner is shown with “to unblock a step.”
 - **Done:** **Nobody, this is finished**. **Canceled:** **Nobody, this was canceled**.

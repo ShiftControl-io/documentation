@@ -59,13 +59,17 @@ Lists all current members and shows *how* each was added (dynamic rule, nested g
 ### Apps Tab
 <ModeScreenshot path="Groups/Group-sidebar-apps" alt="Sidebar showing assigned apps" />
 
-Shows which applications are assigned to this group. Every member of this group gets access to these apps.
+Shows every application this group grants access to. In organizations connected to both directories, this also includes apps granted through a linked group in the other directory. Every member gets access to the apps listed here.
 
 ## Common Scenarios
 
 ### Access review — checking who has access to a sensitive app
 
 You need to verify who has access to AWS Production. Open the "AWS Production Access" group, check the **Users** sidebar tab to see every member, and the **Apps** sidebar to confirm which apps this group grants. Check the **Dynamic** tab to verify the membership rule hasn't been overly broadened.
+
+### Assigning apps after defining a group
+
+Your Engineering group is ready, and you need to give its members access to a new tool. Check the **Apps** sidebar to see the access the group already grants, then choose **Assign to apps** in the group header to add the new app. Every member of the group gets access.
 
 ### Understanding why a user has unexpected access
 

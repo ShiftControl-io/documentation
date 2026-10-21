@@ -130,18 +130,21 @@ You can apply a template to a group in two ways:
 
 ## Group Actions
 
-Click the **⋮ menu** on any group row:
+Click the **⋮ menu** on any group row. The same row menu is available in groups-by-tag views:
 
+- **Add users** — Add users to the group from the list
+- **Assign to apps** — Give the group access to apps without opening each app
 - **Change tag** — Reassign the group's category tag (Department, Team, Location, etc.)
 - **Apply template** — Apply a predefined group configuration template
-- **Edit** — Open the group for editing (requires CanUpdateGroups permission)
+- **Edit** — Open the group for editing
 - **Import to JumpCloud** — Import a Google-only group into JumpCloud (shown only when the group exists in Google but not JumpCloud)
-- **Delete** — Remove the group and revoke all its app access (requires CanDeleteGroups permission)
+- **Delete** — Remove the group and revoke all its app access
 
 **Bulk actions:** Select multiple groups and choose **Delete** to remove them in bulk.
 
 ## Things to Know
 
+- **App assignment uses app access permissions.** Admins who can view and update apps can use **Assign to apps** from a group row even if they cannot edit groups.
 - **Group changes take effect immediately.** Adding or removing a user from a group updates their app access right away. No delays, no manual propagation.
 - **Deleting a group revokes access.** Every user in that group loses access to its assigned apps. Always review app assignments before deleting.
 - **Users can belong to multiple groups.** A user's total app access is the combined set of all apps from every group they're in.
