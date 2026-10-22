@@ -22,18 +22,30 @@ Filter by status, type, source, assignee, watchers, approval state, or parent. G
 
 ### Filters and columns
 
-<ModeScreenshot path="WorkItems/Work-items-filters" alt="Work Items queue with the Status filter options open" />
+<ModeScreenshot path="WorkItems/Work-items-filters" alt="Work Items Filters menu open on the Status category" />
 
-Type, Status, and Source are multi-select filters. Assignee and Watchers narrow the list to selected people. Approval filter values mean:
+All Work Items filters live in one **Filters** menu, the same menu the Users and Devices lists use. Open **Filters**, pick a category on the left, and tick the values you want on the right. Each category has a search box and **Select all**. Click **Done** to close the menu.
+
+| Category | What it narrows |
+|---|---|
+| **Type** | The kind of work, such as Access request, Grant access, or Task. |
+| **Status** | To do, In progress, Blocked, Done, or Canceled. |
+| **Source** | How the item entered Work Items. |
+| **Assignee** | The people responsible for the work. |
+| **Watchers** | The people watching the item. |
+| **Approval** | Pending, Approved, or N/A. |
+
+The **Filters** button shows how many categories are active. Hover over it to list the active filters, for example "Status: To do, In progress, Blocked". Click **Reset** next to the button, or **Reset filters** inside the menu, to clear every filter at once.
+
+Approval values mean:
 
 | Value | Meaning |
 |---|---|
-| **Any approval** | Do not filter by approval state. |
 | **Pending** | An approval decision is waiting. |
 | **Approved** | The approval flow completed successfully. |
 | **N/A** | No approval state is attached to the item. |
 
-A denied request is **Canceled**; Denied is not a separate Approval filter value. Filters combine across fields, while multiple values within one field match any selected value.
+A denied request is **Canceled**; Denied is not a separate Approval value. Filters combine across categories, while multiple values within one category match any selected value. Grouping controls stay in the row below the toolbar.
 
 | Column | Meaning |
 |---|---|
@@ -80,7 +92,7 @@ Select the items that need the same change and use a bulk action. Review the con
 ## Step-by-Step Guide
 
 1. Open **Work Items** in the admin navigation and choose **My Work Items** or **All Work Items**.
-2. Set Type, Status, Source, Assignee, Watchers, or Approval filters before taking action.
+2. Open **Filters** and set the Type, Status, Source, Assignee, Watchers, or Approval values you need before taking action.
 3. Choose an app or parent grouping to see related steps together.
 4. Use **Start** to move a To do item to In progress or **Mark done** when work is complete. To pause, set Status to **Blocked** and add a note; choose **Mark in progress** when you resume. Done and Canceled are terminal; there is no separate Re-open action.
 5. Use a row action for one item, or select several rows and choose a bulk action. Only actions allowed by the current status and your role are available.
