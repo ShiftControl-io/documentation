@@ -789,8 +789,8 @@
     },
     "WorkItems/Work-items-filters": {
       "route": "/admin/work-items",
-      "action": "Open the Status filter dropdown.",
-      "description": "Admin Work Items queue with the Status filter options open.",
+      "action": "Click the Filters button, then select the Status category in the menu.",
+      "description": "Admin Work Items queue with the Filters menu open on the Status category.",
       "modes": ["jc_gws", "jc_only", "gws_only"],
       "component": "ModeScreenshot",
       "usedIn": ["docs/using-shiftcontrol/Work-items/Managing-work-items.mdx"]
