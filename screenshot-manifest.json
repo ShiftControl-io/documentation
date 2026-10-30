@@ -689,7 +689,15 @@
     },
     "EmployeePortal/Directory-groups": {
       "route": "/directory/groups",
-      "description": "Employee Directory Groups tab with group tags and membership actions.",
+      "description": "Employee Directory Groups tab with group tags, the All groups / My groups filter, and membership actions.",
+      "modes": ["jc_gws", "jc_only", "gws_only"],
+      "component": "ModeScreenshot",
+      "usedIn": ["docs/employee-guide/employee-portal/directory.mdx"]
+    },
+    "EmployeePortal/Directory-my-groups": {
+      "route": "/directory/groups",
+      "action": "Switch the All groups dropdown to My groups",
+      "description": "Employee Directory Groups tab filtered to My groups, listing only groups the employee belongs to.",
       "modes": ["jc_gws", "jc_only", "gws_only"],
       "component": "ModeScreenshot",
       "usedIn": ["docs/employee-guide/employee-portal/directory.mdx"]
@@ -827,7 +835,7 @@
     },
     "WorkItems/Work-item-steps": {
       "route": "/admin/work-items/SC-201",
-      "description": "Parent provisioning item with its app, group, and policy setup steps.",
+      "description": "Parent provisioning item with its completion bar and its app, group, and policy setup steps.",
       "modes": ["jc_gws", "jc_only", "gws_only"],
       "component": "ModeScreenshot",
       "usedIn": ["docs/using-shiftcontrol/Work-items/Work-item-details.mdx"]
