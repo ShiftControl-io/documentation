@@ -25,10 +25,12 @@ Departments, locations, and teams each have a group quietly doing the work behin
 
 ### Nested departments
 
-Departments can sit inside other departments — a parent and its children, two levels deep, which is what HR systems actually expose. Child departments are indented under their parent in the list, and when you create or edit one you pick its parent from a dropdown.
+Departments can sit inside other departments, up to three levels deep: a top-level department, its children, and their children. That covers structures like *Engineering → Platform → Infrastructure*, where a division is split into departments and those into specialist groups. Child departments are indented under their parent in the list, and when you create or edit one you pick its parent from a dropdown. The dropdown lists top-level and second-level departments by their full name (for example *Engineering - Backend*), so you can put a new department at any of the three levels. Teams nest the same way.
 
-- **The group nests too.** The group behind a child department automatically nests inside its parent's group, so anyone in *Backend* is also counted in *Engineering* with no extra rule.
-- **Downstream names are composed.** Department names sent to Google Workspace and JumpCloud are composed as `Parent - Child` — "Backend" shows up as "Engineering - Backend" everywhere downstream. Top-level departments are unchanged.
+- **The group nests too.** The group behind a child department automatically nests inside its parent's group, so anyone in *Infrastructure* is also counted in *Platform* and in *Engineering* with no extra rule.
+- **Downstream names are composed.** Department names sent to Google Workspace and JumpCloud are composed from the full path — "Backend" shows up as "Engineering - Backend", and a third-level "Infrastructure" as "Engineering - Platform - Infrastructure". Top-level departments are unchanged.
+- **Renames and moves carry down.** Rename a department or move it under a different parent and the composed names of everything below it update to match.
+- **Three levels is the limit.** A department that already sits at the third level cannot be picked as a parent, and you cannot move a department somewhere that would push its children past the third level.
 - **Siblings can share a name.** "Finance → Ops" and "Product → Ops" no longer collide.
 
 ## Syncing with HRIS Integrations
