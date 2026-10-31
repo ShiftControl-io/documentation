@@ -59,9 +59,15 @@ The **Manage** sub-tab shows the card's status and lets you take it live or offl
 
 ### The card PIN
 
-Also on **Manage**: an optional PIN that must be entered before the card shows its contents. It doesn't have to be numeric — a word or short phrase works, up to 24 characters. You can set, change, remove, and view the current value.
+Also on **Manage**: an optional PIN that must be entered before the card shows its contents. It doesn't have to be numeric — a word or short phrase works, 6 to 24 characters. You can set, change, remove, and view the current value.
 
 Use it for a card that needs to exist but shouldn't be readable by anyone who happens to get the link.
+
+A few things to know about how the PIN protects the card:
+
+- **New PINs need at least 6 characters.** A card that already has a shorter PIN keeps working with it, but any PIN you set or change from now on must meet the minimum. If a card is protected by a short numeric PIN, consider replacing it with a longer one.
+- **PIN attempts are limited.** Each card accepts 10 PIN attempts per minute, counted across everyone trying it. After that, even the correct PIN is refused until the minute is up, so nobody can work through every combination by script. Visitors who have already unlocked the card aren't affected.
+- **Changing the PIN locks the card again.** Anyone who unlocked the card with the old PIN has to enter the new one on their next visit. That makes a PIN change a quick way to cut off people you shared the old PIN with.
 
 ### Rotating the link
 

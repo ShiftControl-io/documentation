@@ -609,7 +609,7 @@
     "EmployeePortal/My-card-manage": {
       "route": "/my-card",
       "tab": "Manage",
-      "description": "Employee portal Manage tab — card status with publish/unpublish and the card PIN. Link regeneration only appears when the org allows it.",
+      "description": "Employee portal Manage tab — card status with publish/unpublish and the card PIN (hint reads '6 to 24 characters'). Link regeneration only appears when the org allows it.",
       "modes": ["jc_gws", "jc_only", "gws_only"],
       "component": "ModeScreenshot",
       "usedIn": ["docs/employee-guide/employee-portal/my-card.mdx"]
