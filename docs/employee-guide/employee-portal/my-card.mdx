@@ -94,7 +94,7 @@ Publishing and your card's PIN.
 <ModeScreenshot path="EmployeePortal/My-card-manage" alt="The Manage tab showing card status with an unpublish action and the card PIN section" />
 
 - **Card status** — whether your card is live, with a button to **publish** or **unpublish** it. Unpublishing takes the card off the internet without deleting anything, so you can publish again whenever you like. *(Your admin can turn this off, in which case they control publishing.)*
-- **Card PIN** — require a code before your card shows its contents. It doesn't have to be numbers; a word or short phrase works, up to 24 characters. You can change or remove it at any time, and you can see the current value.
+- **Card PIN** — require a code before your card shows its contents. It doesn't have to be numbers; a word or short phrase works, 6 to 24 characters. You can change or remove it at any time, and you can see the current value. When you change it, anyone who unlocked your card with the old PIN has to enter the new one.
 - **Your card link** — if your admin has allowed it, you can regenerate your link here. Most organizations keep this with admins.
 
 ## Common questions
@@ -104,6 +104,12 @@ Publishing and your card's PIN.
 Anyone with the link. Your card link is long and random, so nobody can guess it or find your colleagues by changing the URL — and cards aren't listed in any public directory or indexed by search engines. But treat the link as public: anyone you give it to can pass it on.
 
 If that's a concern, set a **PIN** on the **Manage** tab, or **unpublish** the card when you're not using it.
+
+### Someone says my PIN isn't working
+
+Check they have the current PIN first. If they do, wait a minute and try again: each card accepts 10 PIN attempts per minute from everyone combined, and after that even the correct PIN is refused until the minute is up. This is what stops someone with your link from guessing the PIN. People who already unlocked your card aren't affected.
+
+If you set a PIN of fewer than 6 characters before the minimum was introduced, it still works. You'll need at least 6 characters when you change it.
 
 ### Can I have more than one card?
 
