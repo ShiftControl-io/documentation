@@ -52,7 +52,9 @@
   },
   "overrides": {
     "serialize-javascript": "^7.0.3",
-    "minimatch": "^10.0.3"
+    "minimatch": "^11.0.4",
+    "tinypool": "^2.2.0",
+    "uuid": "^11.1.1"
   },
   "allowScripts": {
     "core-js@3.51.0": true,
