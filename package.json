@@ -19,7 +19,7 @@
     "@docusaurus/core": "^3.10.2",
     "@docusaurus/plugin-client-redirects": "^3.10.2",
     "@docusaurus/preset-classic": "^3.10.2",
-    "@iconify/react": "^6.0.3",
+    "@iconify/react": "^6.0.4",
     "@mdx-js/react": "^3.1.1",
     "clsx": "^2.1.1",
     "docusaurus-lunr-search": "^3.6.0",
@@ -48,14 +48,16 @@
     ]
   },
   "engines": {
-    "node": ">=24.22.1"
+    "node": ">=26.13.0"
   },
   "overrides": {
     "serialize-javascript": "^7.0.3",
-    "minimatch": "^10.0.3"
+    "minimatch": "^11.0.4",
+    "tinypool": "^2.2.0",
+    "uuid": "^11.1.1"
   },
   "allowScripts": {
-    "core-js@3.50.0": true,
+    "core-js@3.51.0": true,
     "fsevents@2.3.3": true
   }
 }
