@@ -91,6 +91,14 @@
       "component": "ModeScreenshot",
       "usedIn": ["docs/using-shiftcontrol/Users/User-management.mdx"]
     },
+    "Users/User-guests": {
+      "route": "/admin/org/users",
+      "action": "Open Filters → Account type, tick Guests, click Done.",
+      "description": "Users list filtered to Google Workspace guest accounts, showing the Guest badge. Guests only exist in Google modes.",
+      "modes": ["jc_gws", "gws_only"],
+      "component": "ModeScreenshot",
+      "usedIn": ["docs/using-shiftcontrol/Users/User-management.mdx"]
+    },
     "Users/User-detail-info": {
       "route": "/admin/org/users/view/{first_user}",
       "tab": "Details",
