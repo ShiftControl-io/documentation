@@ -33,7 +33,7 @@ Each row in the users table shows:
 |--------|------------------|
 | **User** | Name, email, and avatar — this is the identity used across all connected systems |
 | **Directory** | Icons showing which directories the user exists in |
-| **Status** | Active (can authenticate) or Inactive (access suspended). A small calendar marker beside the status means a scheduled change is pending — hover it to see when it runs |
+| **Status** | Active (can authenticate) or Inactive (access suspended). A small calendar marker beside the status means a scheduled change is pending — hover it to see when it runs. A grey **Guest** badge marks a Google Workspace guest account — see [Guest accounts](#guest-accounts) |
 | **Last sign-in** | How recently the person signed in — hover to see the exact timestamp. The surest way to spot dormant accounts |
 | **Admin roles** | Which Google admin role and ShiftControl role each person holds, so privileges are visible without opening every record |
 | **Groups & Apps** | How many groups they belong to and how many apps they can access |
@@ -42,10 +42,24 @@ Use the filters to narrow down what you're looking at. The 2SV, last sign-in, Go
 
 - **Directory filter** — Show users from a specific directory only
 - **Status filter** — Active, Inactive, or all
-- **Filters panel** — 2-Step Verification, last sign-in (including **dormant** accounts), Google admin role, and ShiftControl role. Role lists only offer roles someone actually holds, so you never pick an option that matches nobody. A **Reset** button clears the panel's filters without touching your status selection
+- **Filters panel** — 2-Step Verification, last sign-in (including **dormant** accounts), **Account type** (Guests or Members), Google admin role, and ShiftControl role. Role lists only offer roles someone actually holds, so you never pick an option that matches nobody. A **Reset** button clears the panel's filters without touching your status selection
 - **Search** — Find users by name, email, or other attributes
 
 Both admin-role columns and the exact last sign-in timestamp are included when you export the table.
+
+## Guest Accounts
+
+<ConditionalContent modes={["jc-google", "google-jc", "google-only"]}>
+
+Google Workspace creates a guest account when someone outside your organization is invited into your Workspace, for example to a Google Chat space. Guests are not your employees, so ShiftControl keeps them apart from your members:
+
+- **Guest badge** — A **Guest** badge appears next to the status in the users list and on the user's record, so you can tell an outside account from an employee at a glance. Guest email addresses end in **.guest.google**.
+- **Account type filter** — In **Filters**, choose **Account type** → **Guests** to list only guest accounts, or **Members** to hide them.
+- **Left out of your people count** — The user count on the [Hub](/using-shiftcontrol/Hub/) does not include guests, so it reflects the people who work for you.
+
+<ModeScreenshot path="Users/User-guests" alt="Users list filtered to Account type: Guests, showing a guest account with a Guest badge" modes={["jc-google", "google-jc", "google-only"]} />
+
+</ConditionalContent>
 
 ## Common Scenarios
 
