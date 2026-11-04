@@ -23,7 +23,7 @@ The Rippling connector connects Rippling as your HR system of record to ShiftCon
 ## How It Works
 
 - **One API token**, created in Rippling under **Tools → Developer → API Tokens**. No OAuth app to install and no admin consent screen.
-- **Syncs every hour**: names (including preferred names), work email, employee ID, job title, department, work location, team, manager, employment type, and start and end dates.
+- **Syncs every hour**: names (including preferred names), work and personal email, employee ID, job title, department, work location, team, manager, employment type, and start and end dates.
 - **Nested departments**: "Platform Engineering" under "Engineering" arrives as a properly nested group, not a flat entry.
 - **Remote workers** are handled as remote — no phantom office assignment.
 - **Missing permissions are named**: if your token is missing a permission, ShiftControl tells you the exact fields it cannot read instead of quietly syncing partial data.

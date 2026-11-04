@@ -22,7 +22,7 @@ The Omni HR connector allows you to connect your Omni HR system to ShiftControl,
 
 ## Key Features
 
-- **Full-Field Synchronization**: Manager, department, start date, and every other key attribute flow straight into ShiftControl
+- **Full-Field Synchronization**: Manager, department, start date, personal email, and every other key attribute flow straight into ShiftControl
 - **On-Demand Sync**: Don't want to wait for the hourly update? Simply go to the actions menu for the connector and click "Refresh data" to start a new sync
 - **Pre-Start Provisioning**: Five days before a new hire's start date, we silently enable the account so Gmail, Calendar, and Docs are ready without sending the welcome email
 - **Automatic Status Management**: Automatic disable/re-enable keeps your roster accurate and compliant
@@ -87,6 +87,10 @@ Before setting up the connector in ShiftControl, you need to create a report in 
 
         <Admonition type="info">
            Even though we don't map every field, we still require them to be present in the report so we can determine the appropriate actions to take for each user.
+        </Admonition>
+
+        <Admonition type="tip" title="Sync personal emails too">
+           Also add **Contacts - email->Email (Personal)** to the report. ShiftControl copies each person's personal email to their record, and to Google Workspace and JumpCloud. If the column is missing or empty for someone, ShiftControl keeps the personal email they already have.
         </Admonition>
 
     </Step>

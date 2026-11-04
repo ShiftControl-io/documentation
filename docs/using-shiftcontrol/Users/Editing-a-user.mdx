@@ -27,7 +27,7 @@ To view a user's security posture, app permissions, and SaaS costs without editi
 - **First Name / Last Name** — The user's legal name, reflected across all connected apps and directories
 - **Display Name** — How the name appears in ShiftControl and connected apps
 - **Primary Email** — The user's SSO login identity. **Changing this affects all connected services** — do so with caution
-- **Personal Email** — Non-work email for activation emails and recovery
+- **Personal Email** — Non-work email for activation emails and recovery. ShiftControl saves it as the standard **Home** email in Google Workspace and as the **Alternate email** in JumpCloud. If your HR system is connected, it fills this in for you (see [HRIS Integration](#hris-integration))
 
 <ConditionalContent modes={["jc-google", "google-jc", "google-only"]}>
 
@@ -95,6 +95,8 @@ Below the standard fields, you can manage Google-specific settings:
 ## HRIS Integration
 
 If your organization has an HRIS integration (like BambooHR), profile updates can happen automatically. When an employee's details change in your HR system — department transfer, title change, new manager — ShiftControl updates their profile automatically, which triggers dynamic group re-evaluation and can adjust app access in real time.
+
+Personal emails come across too. When a person in your HR system has a personal email, ShiftControl copies it to their **Personal Email**, and to Google Workspace and JumpCloud, on the next sync. New joiners arrive with it already filled in, and when someone changes it in your HR system, the next sync updates it everywhere. If your HR system has no personal email for someone, ShiftControl keeps the one already on their record, so a blank HR field never wipes it. This works with Deel, Gusto, Rippling, BambooHR, HiBob, Humaans, DreamTeam (Shapes) and Omni HR.
 
 Manual edits are still available for fields not managed by your HRIS.
 
