@@ -23,7 +23,7 @@ The Humaans connector connects Humaans as your HR system of record to ShiftContr
 ## How It Works
 
 - **One API access token** with the `private:read` scope, created by an owner or admin. A token made by a regular user can only read its own profile, so ShiftControl checks the scope at connect time and tells you if it is too narrow.
-- **Syncs hourly**: preferred and legal names, work email, employee ID, job title, department, location, team, manager, contract type, and start and end dates.
+- **Syncs hourly**: preferred and legal names, work and personal email, employee ID, job title, department, location, team, manager, contract type, and start and end dates.
 - **Offboarded people stay in the roster** so they get properly disabled — exactly the case that slips through unnoticed otherwise.
 - **New hires imported from your ATS** flow in automatically once they have a work email.
 - **Remote workers** get their city and country instead of an office they never sit in.
