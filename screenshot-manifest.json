@@ -267,6 +267,23 @@
       "component": "ModeScreenshot",
       "usedIn": ["docs/using-shiftcontrol/Apps/App-management.mdx"]
     },
+    "Apps/Free-of-charge-subscription": {
+      "route": "/admin/org/apps/view/019a3478-3c09-7f02-89df-e629d6e02716?tab=subscription",
+      "tab": "Subscription",
+      "action": "Open the free app's Subscription tab in view mode. Use the existing free subscription; demo saves do not persist.",
+      "description": "Subscription with Free of charge on — price fields hidden and estimates showing Free",
+      "modes": ["jc_gws", "jc_only", "gws_only"],
+      "component": "ModeScreenshot",
+      "usedIn": ["docs/using-shiftcontrol/Apps/Editing-an-app.mdx"]
+    },
+    "Apps/Free-of-charge-list": {
+      "route": "/admin/org/apps",
+      "action": "Show Free of charge from the Columns panel. Narrow the App column if needed so the full Est. total cost header and free app are visible without a filter or open menu.",
+      "description": "Installed apps with Free of charge column — Yes and Free distinguished from unset cost",
+      "modes": ["jc_gws", "jc_only", "gws_only"],
+      "component": "ModeScreenshot",
+      "usedIn": ["docs/using-shiftcontrol/Apps/App-management.mdx"]
+    },
     "Apps/App-catalog": {
       "route": "/admin/org/apps/catalog",
       "description": "App catalog — search, 900+ apps with functionality badges",
