@@ -56,7 +56,6 @@
     "app_detail_sso": "/admin/org/apps/view/{app_id}?tab=sso",
     "group_detail": "/admin/org/groups/view/{group_id}",
     "app_detail": "/admin/org/apps/view/{app_id}",
-    "tasks": "/admin/org/tasks",
     "users_list": "/admin/org/users",
     "groups_list": "/admin/org/groups",
     "apps_list": "/admin/org/apps",
@@ -560,13 +559,6 @@
       "modes": ["jc_gws", "jc_only"],
       "component": "ModeScreenshot",
       "usedIn": ["docs/using-shiftcontrol/using-the-command-bar.mdx"]
-    },
-    "Task-management": {
-      "route": "/admin/org/tasks",
-      "description": "Task management list with pending tasks",
-      "modes": ["jc_gws", "jc_only", "gws_only"],
-      "component": "Screenshot",
-      "usedIn": ["docs/using-shiftcontrol/task-management.mdx"]
     },
     "DigitalCards/Card-template": {
       "route": "/settings/digital-cards",

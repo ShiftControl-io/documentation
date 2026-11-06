@@ -270,6 +270,10 @@ const config: Config = {
                 // JumpCloud guided-setup pages under Using ShiftControl → JumpCloud.
                 redirects: [
                     {
+                        from: '/using-shiftcontrol/task-management',
+                        to: '/using-shiftcontrol/Apps/App-discovery',
+                    },
+                    {
                         from: '/using-shiftcontrol/Integrations/guides/DreamTeam',
                         to: '/using-shiftcontrol/Integrations/guides/Shapes',
                     },
