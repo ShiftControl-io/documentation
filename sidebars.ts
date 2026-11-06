@@ -85,7 +85,6 @@ const sidebars: SidebarsConfig = {
                         'using-shiftcontrol/Work-items/Approvals',
                     ],
                 },
-                'using-shiftcontrol/task-management',
                 {
                     type: 'category',
                     label: 'Users',
