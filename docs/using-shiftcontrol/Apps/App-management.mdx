@@ -26,9 +26,23 @@ The dashboard displays a table of all your installed apps with the following col
 - **Type** -- how the app is connected: SSO SAML, SSO OIDC, or Bookmark.
 - **Sync** -- whether automatic user sync is configured.
 - **Users & Groups** -- how many users and groups are assigned.
-- **Est. Total Cost** -- the estimated total cost based on the subscription you configured.
+- **Est. Total Cost** -- the estimated total cost based on the subscription you configured. **Free** means you explicitly marked the subscription as free of charge; **-** means no cost is shown, not that the app is necessarily free.
 
 You can search by name, paginate through the list, and click any app to edit its details. Search also matches the extra columns you choose to show, such as Owning department, Notes, or Archived by.
+
+### Finding free apps
+
+Before a budget review, distinguish apps that genuinely cost nothing from apps whose pricing still needs to be recorded. Mark the first group as [free of charge in their subscription settings](/using-shiftcontrol/Apps/Editing-an-app/#marking-an-app-as-free-of-charge), rather than leaving the price blank.
+
+<ModeScreenshot path="Apps/Free-of-charge-list" alt="Installed apps with the Free of charge column shown and a free app distinguished from apps with no cost displayed" />
+
+To focus on free subscriptions:
+
+1. Open the table's **Columns** panel and show **Free of charge**. The column is hidden by default.
+2. Open that column's menu and choose **Column Filter**.
+3. Select **Yes** to show apps explicitly marked free. The column shows **Yes** for those apps, and their estimated total cost reads **Free**.
+
+If a free tool moves to a paid plan, update its subscription instead of leaving it marked free. See [Editing an App](/using-shiftcontrol/Apps/Editing-an-app/#marking-an-app-as-free-of-charge) for the steps.
 
 ### App Types
 
