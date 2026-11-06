@@ -144,6 +144,23 @@ Click the **⋮ menu** on any group row. The same row menu is available in group
 
 **Bulk actions:** Select multiple groups and choose **Delete** to remove them in bulk.
 
+<ConditionalContent modes={["jc-google", "google-jc"]}>
+
+### Choosing what to delete from Google Workspace
+
+When removing several groups, review **Also delete from Google Workspace** before you confirm. It controls whether a JumpCloud group's synced Google copy is deleted too. The switch is off by default.
+
+- **Retiring a JumpCloud group but keeping its Google group:** leave the switch off. ShiftControl keeps the Google copy, even if your selection also contains Google-only groups.
+- **Retiring the group in both directories:** turn the switch on to delete the synced Google copy as well.
+
+<Admonition type="warning" title="Google-only groups are still deleted">
+  A Google-only group has no JumpCloud copy to remove. If you select it for deletion, it is deleted from Google Workspace regardless of this switch. The count beside the switch refers to synced groups, not every group in your selection.
+</Admonition>
+
+Select the groups, choose **Delete**, and review both the selection and the directory switches. Type **delete** only when you are ready, then use **Delete groups** to confirm. Cancel if a selected Google-only group must be kept.
+
+</ConditionalContent>
+
 ## Things to Know
 
 - **App assignment uses app access permissions.** Admins who can view and update apps can use **Assign to apps** from a group row even if they cannot edit groups.
