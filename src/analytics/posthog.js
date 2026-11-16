@@ -1,6 +1,6 @@
 /**
- * PostHog for docs.shiftcontrol.io, held until the visitor answers the Captain Compliance
- * banner. Inlined verbatim into <head> by docusaurus.config.ts, which substitutes the
+ * PostHog for docs.shiftcontrol.io, using Captain Compliance's regional settings until
+ * the visitor decides. Inlined verbatim into <head> by docusaurus.config.ts, which substitutes the
  * project key and API host into the two placeholders below.
  *
  * It is a plain .js file rather than a template literal in the config because the referrer
@@ -25,6 +25,12 @@
 (function () {
   var PH_KEY = '__POSTHOG_KEY__';
   var PH_HOST = '__POSTHOG_HOST__';
+  var REGION_KEY = '__ph_regional_' + PH_KEY;
+  function consentCookie(key, value) {
+    document.cookie = key + '=' + value + '; path=/; domain=.shiftcontrol.io; SameSite=Lax; Max-Age=' + (value ? 31536000 : 0);
+  }
+  if (document.cookie.split('; ').indexOf(REGION_KEY + '=1') !== -1)
+    consentCookie('__ph_opt_in_out_' + PH_KEY, '');
 
   // PostHog compares the referrer's exact hostname, so a hop from another shiftcontrol.io
   // subdomain is stored as an external referral from ourselves. Session attribution reads
@@ -125,8 +131,7 @@
   // when they answer the banner, so entry-page reporting stays honest on an SPA.
   var ENTRY_URL = window.location.href;
 
-  // The banner emits a granted `default` even while it sits open awaiting a choice, so a
-  // default is not consent. This is the vendor's own "has the visitor decided" answer.
+  // Explicit decisions override regional settings; Captain's early global default cannot grant consent.
   function hasDecision() {
     try {
       var cc = window.CaptainConsent;
@@ -166,11 +171,10 @@
   }
 
   var pageviewSent = false;
+  var decisionReceived = false;
 
-  // Drop every event except the pageview. Used once the visitor has REFUSED, so a refusal
-  // yields a visit count and nothing else. A visitor who ignores the banner never reaches
-  // this or any other branch, and is not counted at all. On this site the filter also
-  // covers the route-change pageviews from the posthogPageview client module.
+  // Drop every event except the pageview when regional settings or a decision deny tracking.
+  // This also covers route-change pageviews from the posthogPageview client module.
   function pageviewOnly(event) {
     if (!event) return event;
     return event.event === '$pageview' ? event : null;
@@ -190,6 +194,7 @@
 
   // Idempotent: the banner reports the same state more than once per page load.
   function applyConsent(granted) {
+    consentCookie(REGION_KEY, granted && !decisionReceived && !hasDecision() ? '1' : '');
     if (granted) {
       posthog.set_config({ before_send: withNormalized(null) });
       posthog.opt_in_capturing();
@@ -213,9 +218,7 @@
     clearStoredKeys();
   }
 
-  // A 'default' is the banner's pre-interaction baseline, emitted as granted even while
-  // the banner sits open, so it only counts once the visitor has actually decided. A
-  // returning visitor's stored choice arrives that way; otherwise wait for the 'update'.
+  // Defaults carry stored decisions, but the early global default precedes regional settings.
   function readConsentSignal(entry) {
     if (!entry || typeof entry !== 'object') return;
 
@@ -224,6 +227,7 @@
       var payload = entry[2];
       if (!payload || typeof payload.analytics_storage !== 'string') return;
       if (entry[1] === 'default' && !hasDecision()) return;
+      decisionReceived = true;
       applyConsent(payload.analytics_storage === 'granted');
       return;
     }
@@ -238,6 +242,7 @@
       typeof entry.CaptainPerformance === 'boolean' &&
       hasDecision()
     ) {
+      decisionReceived = true;
       applyConsent(entry.CaptainPerformance);
     }
   }
@@ -254,6 +259,7 @@
   }
 
   if (hasDecision() && window.__ccLastConsent && typeof window.__ccLastConsent.analytics_storage === 'string') {
+    decisionReceived = true;
     applyConsent(window.__ccLastConsent.analytics_storage === 'granted');
   }
 
@@ -270,4 +276,23 @@
     for (var i = 0; i < arguments.length; i++) read(arguments[i]);
     return result;
   };
+
+  function applyRegionalDefault(waitedMs) {
+    if (decisionReceived || (hasDecision() && !navigator.globalPrivacyControl)) return;
+    if (!window.__ccGeoInfo && waitedMs < 10000) {
+      setTimeout(function () { applyRegionalDefault(waitedMs + 200); }, 200);
+      return;
+    }
+    var granted = false;
+    try {
+      granted = navigator.globalPrivacyControl !== true && !!window.__ccGeoInfo && Object.keys(localStorage).some(function (key) {
+        return key.indexOf('cc_performance_active_by_default_') === 0 && localStorage.getItem(key) === '1';
+      });
+    } catch (err) {
+      // Unavailable storage keeps tracking denied.
+    }
+    applyConsent(granted);
+  }
+
+  applyRegionalDefault(0);
 })();
