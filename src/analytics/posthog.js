@@ -271,14 +271,14 @@
   };
 
   function applyRegionalDefault(waitedMs) {
-    if (decisionReceived || hasDecision()) return;
+    if (decisionReceived || (hasDecision() && !navigator.globalPrivacyControl)) return;
     if (!window.__ccGeoInfo && waitedMs < 10000) {
       setTimeout(function () { applyRegionalDefault(waitedMs + 200); }, 200);
       return;
     }
     var granted = false;
     try {
-      granted = !!window.__ccGeoInfo && Object.keys(localStorage).some(function (key) {
+      granted = navigator.globalPrivacyControl !== true && !!window.__ccGeoInfo && Object.keys(localStorage).some(function (key) {
         return key.indexOf('cc_performance_active_by_default_') === 0 && localStorage.getItem(key) === '1';
       });
     } catch (err) {
