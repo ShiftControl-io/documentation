@@ -18,7 +18,11 @@
   "dependencies": {
     "@docusaurus/core": "^3.10.2",
     "@docusaurus/plugin-client-redirects": "^3.10.2",
-    "@docusaurus/preset-classic": "^3.10.2",
+    "@docusaurus/plugin-content-docs": "^3.10.2",
+    "@docusaurus/plugin-content-pages": "^3.10.2",
+    "@docusaurus/plugin-debug": "^3.10.2",
+    "@docusaurus/plugin-sitemap": "^3.10.2",
+    "@docusaurus/theme-classic": "^3.10.2",
     "@iconify/react": "^6.0.4",
     "@mdx-js/react": "^3.1.1",
     "clsx": "^2.1.1",
@@ -48,7 +52,7 @@
     ]
   },
   "engines": {
-    "node": ">=26.13.0"
+    "node": ">=26.13.1"
   },
   "overrides": {
     "serialize-javascript": "^7.0.3",

@@ -2,7 +2,7 @@ import {readFileSync} from 'node:fs';
 import path from 'node:path';
 import {themes as prismThemes} from 'prism-react-renderer';
 import type {Config} from '@docusaurus/types';
-import type * as Preset from '@docusaurus/preset-classic';
+import type {ThemeConfig} from '@docusaurus/theme-classic';
 
 /** The Production project, shared with the marketing site (shiftcontrol.io), journey and the app
  * (app.shiftcontrol.io). One key across those hostnames means the `.shiftcontrol.io` cookie
@@ -135,27 +135,12 @@ const config: Config = {
         },
     ],
 
-    presets: [
+    themes: [
         [
-            'classic',
+            '@docusaurus/theme-classic',
             {
-                docs: {
-                    routeBasePath: '/',
-                    sidebarPath: './sidebars.ts',
-                    editUrl:
-                        'https://github.com/ShiftControl-io/documentation/edit/main',
-                },
-                blog: false,
-                sitemap: {
-                    lastmod: 'date',
-                    changefreq: 'weekly',
-                    priority: 0.5,
-                    filename: 'sitemap.xml',
-                },
-                theme: {
-                    customCss: './src/css/custom.css',
-                },
-            } satisfies Preset.Options,
+                customCss: './src/css/custom.css',
+            },
         ],
     ],
 
@@ -249,12 +234,32 @@ const config: Config = {
             },
             config: {}
         }
-    } satisfies Preset.ThemeConfig,
+    } satisfies ThemeConfig,
     clientModules: [
         require.resolve('./src/clientModules/posthogPageview.ts'),
         require.resolve('./src/clientModules/zoomReattach.ts'),
     ],
     plugins: [
+        [
+            '@docusaurus/plugin-content-docs',
+            {
+                routeBasePath: '/',
+                sidebarPath: './sidebars.ts',
+                editUrl: 'https://github.com/ShiftControl-io/documentation/edit/main',
+            },
+        ],
+        '@docusaurus/plugin-content-pages',
+        ...(process.env.NODE_ENV === 'production'
+            ? [[
+                  '@docusaurus/plugin-sitemap',
+                  {
+                      lastmod: 'date',
+                      changefreq: 'weekly',
+                      priority: 0.5,
+                      filename: 'sitemap.xml',
+                  },
+              ] as const]
+            : ['@docusaurus/plugin-debug']),
         'docusaurus-plugin-image-zoom',
         [
             require.resolve('docusaurus-lunr-search'), {
