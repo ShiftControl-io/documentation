@@ -1,8 +1,9 @@
 import {readFileSync} from 'node:fs';
 import path from 'node:path';
 import {themes as prismThemes} from 'prism-react-renderer';
-import type {Config} from '@docusaurus/types';
-import type {ThemeConfig} from '@docusaurus/theme-classic';
+import type {Config, PluginConfig} from '@docusaurus/types';
+import type {UserThemeConfig as ThemeConfig} from '@docusaurus/theme-common';
+import type {} from '@docusaurus/theme-classic';
 
 /** The Production project, shared with the marketing site (shiftcontrol.io), journey and the app
  * (app.shiftcontrol.io). One key across those hostnames means the `.shiftcontrol.io` cookie
@@ -234,7 +235,7 @@ const config: Config = {
             },
             config: {}
         }
-    } satisfies ThemeConfig,
+    } satisfies ThemeConfig & {zoom: Record<string, unknown>},
     clientModules: [
         require.resolve('./src/clientModules/posthogPageview.ts'),
         require.resolve('./src/clientModules/zoomReattach.ts'),
@@ -258,7 +259,7 @@ const config: Config = {
                       priority: 0.5,
                       filename: 'sitemap.xml',
                   },
-              ] as const]
+              ] satisfies PluginConfig]
             : ['@docusaurus/plugin-debug']),
         'docusaurus-plugin-image-zoom',
         [
