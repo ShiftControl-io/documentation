@@ -25,6 +25,12 @@
 (function () {
   var PH_KEY = '__POSTHOG_KEY__';
   var PH_HOST = '__POSTHOG_HOST__';
+  var REGION_KEY = '__ph_regional_' + PH_KEY;
+  function consentCookie(key, value) {
+    document.cookie = key + '=' + value + '; path=/; domain=.shiftcontrol.io; SameSite=Lax; Max-Age=' + (value ? 31536000 : 0);
+  }
+  if (document.cookie.split('; ').indexOf(REGION_KEY + '=1') !== -1)
+    consentCookie('__ph_opt_in_out_' + PH_KEY, '');
 
   // PostHog compares the referrer's exact hostname, so a hop from another shiftcontrol.io
   // subdomain is stored as an external referral from ourselves. Session attribution reads
@@ -188,6 +194,7 @@
 
   // Idempotent: the banner reports the same state more than once per page load.
   function applyConsent(granted) {
+    consentCookie(REGION_KEY, granted && !decisionReceived && !hasDecision() ? '1' : '');
     if (granted) {
       posthog.set_config({ before_send: withNormalized(null) });
       posthog.opt_in_capturing();
