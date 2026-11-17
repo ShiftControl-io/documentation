@@ -260,6 +260,14 @@
       "usedIn": ["docs/using-shiftcontrol/Groups/Editing-a-group.mdx"]
     },
 
+    "Apps/App-blocking-list": {
+      "route": "/admin/org/apps/blocked",
+      "action": "Expand the Zapier app row to show its two blocked client IDs and copy buttons.",
+      "description": "Blocked apps list with one app expanded into client ID rows",
+      "modes": ["jc_gws", "gws_only"],
+      "component": "ModeScreenshot",
+      "usedIn": ["docs/using-shiftcontrol/Apps/Blocking-apps.mdx"]
+    },
     "Apps/App-management": {
       "route": "/admin/org/apps",
       "description": "Installed apps list — type, spend, group/user counts",
@@ -439,7 +447,7 @@
     },
     "Settings/Settings-departments": {
       "route": "/settings/departments",
-      "description": "Departments list",
+      "description": "Departments list with top-level names aligned and nested departments indented with ↳ markers. Demo parent rows are expanded by default.",
       "modes": ["jc_gws", "jc_only", "gws_only"],
       "component": "Screenshot",
       "usedIn": ["docs/using-shiftcontrol/Settings/departments.mdx"]
