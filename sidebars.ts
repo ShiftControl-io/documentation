@@ -61,6 +61,24 @@ const sidebars: SidebarsConfig = {
                 'using-shiftcontrol/Hub',
                 {
                     type: 'category',
+                    label: 'Workspace Audit',
+                    link: {
+                        type: 'generated-index',
+                        title: 'Workspace Audit',
+                        description: 'Review Google Workspace security findings, permissions, fixes, and framework coverage.',
+                        slug: '/using-shiftcontrol/Workspace-audit',
+                        keywords: ['Workspace Audit'],
+                    },
+                    items: [
+                        'using-shiftcontrol/Workspace-audit/Workspace-audit-overview',
+                        'using-shiftcontrol/Workspace-audit/Google-permissions',
+                        'using-shiftcontrol/Workspace-audit/Fixing-findings',
+                        'using-shiftcontrol/Workspace-audit/Manual-checks',
+                        'using-shiftcontrol/Workspace-audit/Accepted-risks-alerts-and-compliance',
+                    ],
+                },
+                {
+                    type: 'category',
                     label: 'Dashboards',
                     link: {
                         type: 'generated-index',

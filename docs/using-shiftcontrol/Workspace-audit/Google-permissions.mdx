@@ -1,0 +1,82 @@
+---
+title: 'Google permissions for Workspace Audit'
+description: 'Understand the Google permissions Workspace Audit requests and when a group fix needs more access.'
+keywords: ['ShiftControl', 'Workspace Audit', 'Google Workspace', 'security']
+icon: 'google'
+---
+
+import Admonition from '@theme/Admonition';
+
+Workspace Audit needs permission to read your Google Workspace settings. Review this access before connecting, especially where Google combines viewing and editing in the same permission.
+
+## Overview
+
+Only a **Google Workspace super admin** can approve this access. This is a Google role, separate from an Admin or Workspace Audit Fixer role in ShiftControl.
+
+## How It Works
+
+Audit consent requests the permissions below. An existing Google connection or Marketplace installation may already provide access.
+
+| Permission | Google scope URL | What Workspace Audit reads |
+| --- | --- | --- |
+| Domains | `https://www.googleapis.com/auth/admin.directory.domain.readonly` | Your Workspace domains. |
+| Security policies | `https://www.googleapis.com/auth/cloud-identity.policies.readonly` | Security and policy settings. |
+| Single sign-on | `https://www.googleapis.com/auth/cloud-identity.inboundsso.readonly` | Inbound sign-in configuration for an outside identity provider. |
+| Users | `https://www.googleapis.com/auth/admin.directory.user.readonly` | Account details, suspension and archive status, and 2-Step Verification information. |
+| Groups | `https://www.googleapis.com/auth/admin.directory.group.readonly` | Group directory details. |
+| Group members | `https://www.googleapis.com/auth/admin.directory.group.member.readonly` | Who belongs to groups and their membership roles. |
+| Organizational units | `https://www.googleapis.com/auth/admin.directory.orgunit.readonly` | Your organizational units. |
+| Admin roles | `https://www.googleapis.com/auth/admin.directory.rolemanagement.readonly` | Admin roles and assignments. |
+| User aliases | `https://www.googleapis.com/auth/admin.directory.user.alias.readonly` | Alternative email addresses for users. |
+| Custom user fields | `https://www.googleapis.com/auth/admin.directory.userschema.readonly` | The definitions of custom user fields. |
+| Data transfers | `https://www.googleapis.com/auth/admin.datatransfer.readonly` | Data-transfer information. |
+| Group settings | `https://www.googleapis.com/auth/apps.groups.settings` | Group access, posting, conversation history, and joining settings. |
+| Licenses | `https://www.googleapis.com/auth/apps.licensing` | Assigned Google licenses and information used to identify your edition. |
+| Your email address | `https://www.googleapis.com/auth/userinfo.email` | The email address of the account connecting to Google. |
+| Your profile | `https://www.googleapis.com/auth/userinfo.profile` | The identity and profile of the account connecting to Google. |
+
+### Why some permissions include edit rights
+
+Google offers the **Group settings** and **Licenses** permissions only with edit rights. Workspace Audit uses these permissions to read settings and license information for its checks. This does not mean that every permission you approve is technically read-only.
+
+**ShiftControl changes a group only when you ask it to apply a fix.** Review the proposed change before confirming it.
+
+### Extra permission for group membership fixes
+
+Fixing group membership needs an additional permission:
+
+| Permission | Google scope URL | Why it is needed |
+| --- | --- | --- |
+| View and manage groups | `https://www.googleapis.com/auth/admin.directory.group` | Apply supported group membership changes when you request a fix. |
+
+If this access is missing, the fix flow asks for it before proceeding. A Google Workspace super admin must approve. The flow also offers installing the ShiftControl Marketplace app. Group settings fixes use the group settings permission already listed above.
+
+## Common Scenarios
+
+### Scenario: Reviewing consent before connecting
+
+Ask your Google Workspace super admin to review the table. Pay particular attention to group settings and licensing: Google bundles edit rights with the access needed to read them.
+
+### Scenario: A fix needs more access
+
+You can read a finding but cannot yet apply its membership fix. Review the permission request with your super admin. Existing audit access does not necessarily include permission to change group members.
+
+## Step-by-Step Guide
+
+1. Open the access request shown by Workspace Audit.
+2. Have a Google Workspace super admin review the requested permissions.
+3. Approve the access in Google, or follow the offered Marketplace installation option.
+4. Return to Workspace Audit to review the findings available with that access.
+5. When applying a group fix, review any additional permission request before confirming the change.
+
+## Things to Know
+
+- A permission allows access; it does not mean every setting covered by that permission can be checked automatically.
+- Missing access is not a passing result or proof that a feature is outside your Google edition.
+- If permission approval does not let an audit-only connection continue a fix, do not assume the fix ran. Review the connection or use the finding's manual instructions.
+
+## Related Features
+
+- [Workspace Audit overview](/using-shiftcontrol/Workspace-audit/Workspace-audit-overview)
+- [Fixing findings](/using-shiftcontrol/Workspace-audit/Fixing-findings)
+- [Manual checks](/using-shiftcontrol/Workspace-audit/Manual-checks)

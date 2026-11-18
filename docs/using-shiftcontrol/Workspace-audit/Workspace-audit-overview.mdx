@@ -1,0 +1,92 @@
+---
+title: 'Workspace Audit overview'
+description: 'Review Google Workspace security findings, understand your score, and compare Workspace Audit plans.'
+keywords: ['ShiftControl', 'Workspace Audit', 'Google Workspace', 'security']
+icon: 'google'
+---
+
+import Admonition from '@theme/Admonition';
+
+Workspace Audit helps you find Google Workspace settings worth reviewing and decide what to fix first.
+
+## Overview
+
+Use Workspace Audit to review access, sharing, account security, and other settings in one place. Findings explain what a setting means and what people may notice if you change it.
+
+## How It Works
+
+Workspace Audit checks the information Google makes available with the permissions you approve. Some settings need a manual review in the Google Admin console. Your plan controls how much detail you can see and which features you can use.
+
+### Areas covered
+
+| Area | Examples of what to review |
+| --- | --- |
+| Groups | Public conversations, who can join, and outside owners or managers |
+| Email | Missing or faulty SPF records, missing DMARC records, and unpublished Google DKIM keys |
+| Admins | Admins without 2-Step Verification and suspended or archived users who still hold admin rights |
+| Licenses and accounts | Paid licenses for suspended users and shared mailboxes that could use groups |
+| Sign-in and passwords | Whether 2-Step Verification is required and whether users have set it up |
+| Files and sharing | Public file links, outside sharing, and Google Forms sharing limits |
+| Apps and AI | Access to extra Google services and Gemini conversation sharing |
+| Meetings, chat and calendar | Outside calendar sharing and warnings before inviting outside guests |
+
+These are areas of review, not a promise that Google exposes every setting for automatic checking. See [Manual checks](/using-shiftcontrol/Workspace-audit/Manual-checks) for settings that need your review.
+
+### Plans and timing
+
+| Feature | Workspace Audit Free | Workspace Audit Standard | Workspace Audit Premium |
+| --- | --- | --- | --- |
+| Scheduled checks | Every three months | Every hour | Every hour |
+| Email alerts | Not included | Included | Included |
+| Changes history | Not included | 90 days | Full history |
+| Accepted risks | Not included | Not included | Included |
+| Compliance view | Not included | Not included | Included |
+
+**ShiftControl Starter** includes Workspace Audit Standard. **ShiftControl Core** and **Enterprise** include Workspace Audit Premium. The details and fix guidance available for an individual finding also depend on your plan.
+
+### Understanding your score
+
+The progress summary shows **checks passed**, a progress bar, and a percentage rounded to a whole number. It shows **Not scored** when no checks count toward the score.
+
+Your score is the share of counted checks that pass:
+
+- Each check counts equally, regardless of severity or how many people or groups it affects.
+- Accepted risks leave the score calculation; they do not become passing checks.
+- **Manual**, unavailable, and **not in your Google edition** results do not count.
+- Severity helps you decide what to fix first. It does not give a check more weight in the score.
+
+### Checks outside your Google edition
+
+Some Google features are available only in particular editions. A finding marked as not in your Google edition is not a failure and does not lower your score.
+
+Missing licensing information is different: Workspace Audit cannot assume that a feature is unavailable just because it cannot read your licenses.
+
+## Common Scenarios
+
+### Scenario: Prioritizing a first review
+
+Start with high-risk findings, open each explanation, and decide whether to fix the setting or review it with the person responsible. Use the score to follow progress, not as a substitute for reading the findings.
+
+### Scenario: Reviewing a setting your edition does not include
+
+Before planning a change, check its edition status. If it is not in your Google edition, it does not count against you. If the result is unavailable instead, review the permissions or access problem.
+
+## Step-by-Step Guide
+
+1. Open **Workspace Audit** and choose **Findings**.
+2. Review the progress summary to understand which checks pass.
+3. Open a finding to read what it means and who or what it affects, where that detail is available on your plan.
+4. Use [Fixing findings](/using-shiftcontrol/Workspace-audit/Fixing-findings) to choose between a ShiftControl fix and the Google Admin instructions.
+5. Review **Needs a look** for settings that need a manual review or could not be checked.
+
+## Things to Know
+
+- A higher score does not certify your organization against a security framework.
+- A finding may need more Google permissions before Workspace Audit can check it.
+- Scheduled check frequency is separate from email alert frequency.
+
+## Related Features
+
+- [Google permissions](/using-shiftcontrol/Workspace-audit/Google-permissions)
+- [Fixing findings](/using-shiftcontrol/Workspace-audit/Fixing-findings)
+- [Accepted risks, alerts, and compliance](/using-shiftcontrol/Workspace-audit/Accepted-risks-alerts-and-compliance)

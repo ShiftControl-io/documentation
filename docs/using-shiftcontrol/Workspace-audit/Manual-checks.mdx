@@ -1,0 +1,70 @@
+---
+title: 'Manual checks in Workspace Audit'
+description: 'Review settings Google does not expose to apps and distinguish manual review from unavailable results.'
+keywords: ['ShiftControl', 'Workspace Audit', 'Google Workspace', 'security']
+icon: 'google'
+---
+
+import Admonition from '@theme/Admonition';
+
+Some Google Workspace settings need a person to review them in the Google Admin console. Workspace Audit keeps these separate from checks that passed or failed.
+
+## Overview
+
+Google does not expose every setting to apps. **Manual** means a check needs your review; it does not mean the setting is safe or unsafe.
+
+## How It Works
+
+Use **Needs a look** to review findings that are **Manual** or unavailable.
+
+| Result | What it means | What to do |
+| --- | --- | --- |
+| Manual | A person needs to review the setting. | Follow the finding's Google Admin instructions. |
+| Unavailable | Workspace Audit could not evaluate the setting, for example because of missing access or a fetch problem. | Review the access or checking problem. Do not treat it as a pass. |
+
+Neither result counts toward your score. An automatically detected failure can also have manual fix instructions: manual remediation is not the same thing as a **Manual** check.
+
+## Common Scenarios
+
+### Scenario: Checking a Calendar connection to Microsoft Exchange
+
+Your organization may need people in Google Calendar to see Exchange availability. Review whether that link is needed and how it connects:
+
+1. Open **Your Google Calendar is linked to Microsoft Exchange**.
+2. Sign in with the **Calendar admin** privilege and go to **Apps → Google Workspace → Calendar → Calendar Interop management**.
+3. Next to **Exchange availability in Calendar**, open the edit option to see whether the link is on.
+4. If nobody needs it, clear **Allow Google Calendar to display Exchange users' availability** and save.
+5. If you use Microsoft 365 and need the link, ask your Microsoft 365 admin to configure a **Microsoft 365 (Graph API)** endpoint using the full instructions on the finding.
+
+### Scenario: Reviewing Google Forms sharing limits
+
+You have restricted outside file sharing, but want to check whether Forms follows the same boundary:
+
+1. Open **Google Forms are not covered by your outside sharing limits**.
+2. Sign in with the **Drive & Docs admin** privilege.
+3. Go to **Apps → Google Workspace → Drive and Docs → Sharing settings** and edit **Form responses**.
+4. Select the organizational unit or group to change.
+5. Clear the options that allow forms to accept outside responses, or users to submit responses to outside forms, despite your sharing limits.
+6. Save. These changes can take up to **24 hours** to apply.
+
+## Step-by-Step Guide
+
+1. In **Workspace Audit → Findings**, choose **Needs a look**.
+2. Open a finding and check whether its result is **Manual** or unavailable. This tells you whether to review a setting or investigate missing information.
+3. Read **How to fix it yourself**, including the required Google admin privilege.
+4. Choose **Open in Google Admin** and sign in with an account that has that privilege.
+5. Review the current setting and the people it affects before changing it.
+6. Follow the finding's steps and save any change you choose to make.
+
+## Things to Know
+
+- A ShiftControl Admin or Fixer role does not itself grant privileges in the Google Admin console.
+- Some changes, including the Forms sharing changes above, can take up to 24 hours. Follow the timing stated on the finding rather than expecting every change to be immediate.
+- Missing licensing information is not the same as a check being outside your Google edition.
+- A manual result is not evidence of a failure, and an unavailable result is not evidence of a pass.
+
+## Related Features
+
+- [Workspace Audit overview](/using-shiftcontrol/Workspace-audit/Workspace-audit-overview)
+- [Google permissions](/using-shiftcontrol/Workspace-audit/Google-permissions)
+- [Fixing findings](/using-shiftcontrol/Workspace-audit/Fixing-findings)

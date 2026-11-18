@@ -1,0 +1,156 @@
+---
+title: 'Accepted risks, alerts, and compliance'
+description: 'Record risk decisions, manage email alerts, export findings, and understand framework coverage.'
+keywords: ['ShiftControl', 'Workspace Audit', 'Google Workspace', 'security']
+icon: 'google'
+---
+
+import Admonition from '@theme/Admonition';
+
+Use Workspace Audit to keep a record of security decisions and share progress with the people responsible for your Google Workspace.
+
+## Overview
+
+A finding may need a fix, a recorded decision to accept the risk, or a review with another admin. Alerts and Changes help your team follow what happens next. Exports and the Compliance view help you prepare a review without treating the score as certification.
+
+## How It Works
+
+### Accepted risks
+
+**Workspace Audit Premium** includes accepted risks. ShiftControl Core and Enterprise include Premium.
+
+Accepting a risk keeps your decision on record instead of treating the finding as a pass. The accepted risk leaves the score calculation. Choose the scope offered on the finding, such as the whole organization, an organizational unit, selected groups, or selected users. Other findings may offer a domain, app, address, mailbox, or rule. Not every scope applies to every finding.
+
+Choose a reason:
+
+- **Handled another way**
+- **Does not apply to us**
+- **Needed for our business**
+- **Another reason**
+
+Enter **Reason on record (required)** and, if needed, an optional future **End date**. The recorded reason can contain up to 4000 UTF-8 bytes. The acceptance shows who accepted it, the reason, and the end date, or that it has no end date.
+
+Only an admin can accept or undo risks. **Undo** makes the risk count again; the acceptance stays in history.
+
+### Alerts and recipients
+
+Alerts are included in **Standard** and **Premium**. In Workspace Audit settings:
+
+- **Email every admin** includes members with Workspace Audit access and organization administrators.
+- Add up to **20 additional email addresses**. They do not need a Workspace Audit login and are included whether or not **Email every admin** is selected.
+- Each admin can turn their own emails off in **Personal → Notifications**.
+
+Change alerts are sent after a successful check finds a relevant change:
+
+| Setting | When it alerts |
+| --- | --- |
+| Something gets worse | A new problem, a fixed problem coming back, or a growing accepted risk |
+| Something gets fixed | A confirmed fix, including a fix made with ShiftControl |
+
+Set **Minimum risk for change alerts** to **Only high risk**, **High and medium risk**, or **Every risk level**.
+
+**A summary every Monday morning** covers the previous week's changes and what still needs fixing, at every risk level. It is sent after 08:00 in your organization's time zone.
+
+### Exporting findings
+
+Choose **PDF** for a report to read and share, with the worst findings first. Choose **CSV** for a spreadsheet or an AI tool.
+
+The export form lets you choose risk levels and areas, include or exclude accepted risks, and name users and groups or show counts only. Choose download or email where available; email options include recipients and a note.
+
+### Changes history
+
+**Changes** shows what changed in your Workspace security, who made the change when known, and when ShiftControl detected it.
+
+- **Standard:** 90 days of history.
+- **Premium:** full history.
+- **Free:** Changes history is not included.
+
+Filter by area, change type, or date. Types include **New finding**, **Got worse**, **Got better**, **Fixed**, **Risk accepted**, **Reopened**, and **Exception grew**.
+
+The chart shows the last recorded daily total of findings to fix across all areas. Days without a check carry the last recorded total; they do not represent a new check. Table filters do not change this all-area chart.
+
+### Compliance view
+
+The Compliance view is included in **Premium**. Use it to arrange findings by framework and search for checks or recommendation numbers.
+
+<Admonition type="caution" title="Mappings are guidance, not certification">
+Framework mappings are guidance, not an audit or certification. They cover mapped Workspace Audit checks, not every requirement in a framework. A passing check does not establish that your organization meets an entire recommendation or framework.
+</Admonition>
+
+The Compliance view groups Workspace Audit findings by framework. The counts show **Workspace Audit checks**, not the number of framework requirements you meet. One check can inform several recommendations, and a passing check may cover only part of a recommendation. Use the official framework alongside this view when preparing for an audit.
+
+| Framework in Compliance | Version used for mappings |
+| --- | --- |
+| [CIS Google Workspace Foundations Benchmark](https://www.cisecurity.org/benchmark/google_workspace) | 1.3.0. Recommendation numbers can mean something different in newer versions. |
+| [CIS Controls](https://www.cisecurity.org/controls/v8) | v8 |
+| [NIST SP 800-53](https://csrc.nist.gov/pubs/sp/800/53/r5/upd1/final) | Revision 5 |
+| [CISA SCuBA Google Workspace](https://github.com/cisagov/ScubaGoggles/tree/c72fe56) | Baselines from ScubaGoggles revision `c72fe56` |
+
+SOC 2 Trust Services Criteria (2017) and ISO/IEC 27001 Annex A (2022) are not included in the Compliance view.
+
+#### CIS Google Workspace recommendations to review separately
+
+Workspace Audit has no mapped finding for the following **26 of 89** recommendations in version 1.3.0. Review them separately against the benchmark. These are short descriptions, not the benchmark's instructions.
+
+| Recommendation | What to review |
+| --- | --- |
+| 1.2.1.1 | External access to directory data |
+| 3.1.1.1.2 | Internal sharing for primary calendars |
+| 3.1.1.2.2 | Internal sharing for secondary calendars |
+| 3.1.1.3.1 | Offline access to Calendar on the web |
+| 3.1.2.1.2.1 | Who can create shared drives |
+| 3.1.2.1.2.3 | Whether shared drive files are restricted to drive members |
+| 3.1.2.1.2.4 | Download, print, and copy permissions for viewers and commenters |
+| 3.1.2.2.1 | Offline access to documents |
+| 3.1.2.2.3 | Installation of Docs add-ons |
+| 3.1.3.1.2 | Offline access to Gmail |
+| 3.1.3.3.1 | Admin notifications for Gmail quarantine |
+| 3.1.3.7.2 | Requirements for sending email over TLS |
+| 3.1.4.1.2 | Internal file sharing in Chat |
+| 3.1.4.3.1 | External spaces in Chat |
+| 3.1.4.4.1 | Whether users can install Chat apps |
+| 3.1.4.4.2 | Whether users can add and use incoming Chat webhooks |
+| 3.1.8.1 | Whether users can access external Google Groups |
+| 4.1.1.2 | Hardware security key policy for admins and other high-value accounts |
+| 4.2.1.3 | API access for internal, domain-owned apps |
+| 4.2.1.4 | Periodic review of apps with domain-wide delegation |
+| 4.2.2.1 | Geographic access restrictions |
+| 4.2.5.1 | Google Cloud session duration and reauthentication |
+| 4.3.1 | Regular review of the security dashboard |
+| 4.3.2 | Regular review of security health |
+| 5.1.1.1 | Regular review of the app usage report |
+| 5.1.1.2 | Regular review of the security report |
+
+## Common Scenarios
+
+### Scenario: Keeping a business exception visible
+
+A group needs a setting that your security team has reviewed. On Premium, accept the risk for the appropriate scope, record why it is needed, and choose an end date if the decision is temporary. The risk leaves the score without being presented as a passing check.
+
+### Scenario: Preparing a security review
+
+Review **Changes**, export findings as a PDF or CSV, and use **Compliance** to organize the discussion. Review unmapped recommendations separately and use the official framework rather than treating the export as an audit opinion.
+
+## Step-by-Step Guide
+
+1. Open a finding and read the guidance on when accepting its risk may be appropriate.
+2. If your plan and role allow it, choose the acceptance scope, select a reason, and enter the explanation you want on record.
+3. Optionally choose an end date, then select **Accept this risk**.
+4. In Workspace Audit settings, choose recipients, change alerts, minimum risk, and the Monday summary to match your team's review process. Select **Save changes**.
+5. Review **Changes** to follow detected changes. Use the export form to choose a format, content, and delivery option for the people reviewing them.
+6. On Premium, open **Compliance** and select a framework to review mapped findings alongside the official framework.
+
+## Things to Know
+
+- Accepting a risk does not change the Google setting or fix the underlying issue.
+- **Undo accepted risk?** confirms that the risk will count again and the acceptance will stay in history.
+- The settings email preview shows recent changes, not a delivery receipt or the last email sent.
+- Change-alert minimum risk does not limit the Monday summary, which covers every risk level.
+- An actor is shown in Changes only when known.
+
+## Related Features
+
+- [Workspace Audit overview](/using-shiftcontrol/Workspace-audit/Workspace-audit-overview)
+- [Google permissions](/using-shiftcontrol/Workspace-audit/Google-permissions)
+- [Fixing findings](/using-shiftcontrol/Workspace-audit/Fixing-findings)
+- [Manual checks](/using-shiftcontrol/Workspace-audit/Manual-checks)

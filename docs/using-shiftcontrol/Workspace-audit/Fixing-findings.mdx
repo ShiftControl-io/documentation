@@ -1,0 +1,92 @@
+---
+title: 'Fixing Workspace Audit findings'
+description: 'Review supported group fixes, confirm their effects, and follow Google Admin instructions for other findings.'
+keywords: ['ShiftControl', 'Workspace Audit', 'Google Workspace', 'security']
+icon: 'google'
+---
+
+import Admonition from '@theme/Admonition';
+
+A finding explains both the risk and what a change may mean for people. Review that explanation before applying a fix.
+
+## Overview
+
+Use **Fix with ShiftControl** for the supported group findings listed below. For findings without an available ShiftControl fix, use **How to fix it yourself** and follow the instructions in the Google Admin console.
+
+## How It Works
+
+A ShiftControl fix changes the selected groups in Google Workspace. The preview shows **Now**, **After**, and **What your users will notice:** so you can decide whether the change suits your organization.
+
+You need a ShiftControl role that permits the action, the required Google access, and a plan that provides the fix for that finding. The **Workspace Audit Fixer** role can apply supported group settings and membership fixes. It cannot manage ShiftControl access or fix user security settings.
+
+### Findings ShiftControl can fix
+
+| Finding | What the fix changes |
+| --- | --- |
+| People outside your company can read the messages in some of your groups | Limit conversation access to group members. |
+| Some groups are set to let anyone on the internet join them | Require an invitation to join. |
+| Mail sent to some of your groups reaches nobody and is not kept | Turn on message history so mail is kept. |
+| Some groups are archived, so they reject all new mail | Allow new mail again and let all group members post. |
+| Any user in your company can read the history of some groups they are not in | Limit conversation history to group members. |
+| Any user can add themselves to some groups | Require an invitation to join. |
+| People outside your company can ask to join some groups | Require an invitation instead of allowing join requests. |
+| Only group owners and group managers can email some groups | Let all group members post. |
+| Group owners and group managers can add people outside your company to some groups | Allow only admins to add outside members. |
+| Members of some groups can send email as the group address | Stop members from sending email as the group address. |
+| Some groups let non-members read them, though history is turned off | Limit conversation access to group members. |
+| Some groups keep no message history | Turn on message history. |
+| Some groups cannot receive email from people outside your company | Allow anyone to email the group, including people outside your company. |
+| Some groups hold or reject mail that Google marks as spam | Allow mail that Google marks as spam rather than holding or rejecting it. |
+| Some groups let members remove themselves | Stop members from leaving the group themselves. |
+| Some groups show their page to anyone outside your company who has the link | Limit group discovery to people in your company. |
+| Some groups are owned or managed by someone outside your company | Remove outside owners and managers from the group. |
+| Some personal email addresses are members of your company groups | Remove personal email addresses from group membership. |
+| Some groups have outside members even though they forbid them | Remove outside members that conflict with the group setting. |
+
+<Admonition type="caution">
+Some fixes remove group members or change who can send mail. Others allow outside mail or mail marked as spam. Review the proposed result and side effects; do not apply a change just to make a finding disappear.
+</Admonition>
+
+### Group findings that need your decision
+
+- **Some groups have no members** — choose who should belong, or explicitly decide to delete the group. ShiftControl does not make that decision for you.
+- **Some groups have no description of what they are for** — write a description that explains the group's purpose. ShiftControl cannot supply your explanation.
+
+## Common Scenarios
+
+### Scenario: Restricting a public group
+
+Open the finding about people outside your company reading group messages. Review which groups are affected, select the groups that should be private, and confirm that the preview limits access to members.
+
+### Scenario: Removing an outside group manager
+
+An outside owner or manager may still need ordinary access for a business reason. Review the proposed removal before confirming: this fix removes the person from the group, rather than just removing their management role.
+
+## Step-by-Step Guide
+
+1. Open a finding and read its explanation so you understand why the change is suggested.
+2. Choose **Fix with ShiftControl**, where available.
+3. Select the groups to change. All selectable groups are selected initially; clear any that need a separate decision.
+4. Review **Now**, **After**, and **What your users will notice:** for the selected groups.
+5. If Google access is missing, review the permission request with a Google Workspace super admin. See [Google permissions](/using-shiftcontrol/Workspace-audit/Google-permissions).
+6. Confirm the change. ShiftControl applies it to the selected groups.
+7. Read each group's result and the recheck status. Some groups may succeed while others fail.
+8. Choose **Back to findings** to continue your review.
+
+### Fixing it yourself
+
+For other findings, open **How to fix it yourself**. Read the numbered steps and any instructions about which organizational unit or group to select. Use **Open in Google Admin** to reach the setting, and sign in with the Google admin privileges listed on the finding.
+
+## Things to Know
+
+- A successful group change and a successful recheck are separate results. Read both.
+- Do not assume a failed group means the other groups were unchanged.
+- Google's permissions and your ShiftControl role are separate requirements.
+- The manual instructions remain the right route for findings that do not have an available ShiftControl fix.
+
+## Related Features
+
+- [Workspace Audit overview](/using-shiftcontrol/Workspace-audit/Workspace-audit-overview)
+- [Google permissions](/using-shiftcontrol/Workspace-audit/Google-permissions)
+- [Manual checks](/using-shiftcontrol/Workspace-audit/Manual-checks)
+- [Accepted risks, alerts, and compliance](/using-shiftcontrol/Workspace-audit/Accepted-risks-alerts-and-compliance)
