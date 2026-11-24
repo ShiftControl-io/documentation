@@ -52,7 +52,7 @@ The permissions you'll see are:
 | Permission as Google shows it | What ShiftControl uses it for |
 |-------------------------------|-------------------------------|
 | View customer related information | Reading your customer record from Google Workspace |
-| View audit reports for your Google Workspace domain | Surfacing OAuth access, login activity, and security events in ShiftControl dashboards |
+| View audit reports for your Google Workspace domain | Track third-party app authorizations and help identify who made a change that Workspace Audit detected |
 | View and manage the provisioning of user schemas on your domain | Writing the **Teams** attribute into a custom Google user-profile schema so it's visible across directory systems |
 | View domains related to your customers | Listing the Google Workspace domains in your org for the Directories page |
 | View and manage group subscriptions on your domain | Adding and removing members from Google Groups, including nested groups |
@@ -142,46 +142,48 @@ Re-auth is non-destructive:
 
 The [ShiftControl Marketplace listing](https://workspace.google.com/marketplace/app/shiftcontrol/227648260921) lists the scopes in both tables below. The standard OAuth connection requests the scopes in the first table. If an OAuth connection is missing scopes for Workspace Audit, ShiftControl can ask a Super Admin to approve the additional permissions through Google.
 
+<div style={{overflowWrap: 'anywhere'}}>
+
 ### Standard OAuth connection
 
-| Scope | Consent screen label | API surface |
-|-------|----------------------|-------------|
-| `https://www.googleapis.com/auth/appsmarketplace.license` | View your installed application's licensing information | Marketplace API — checks if the ShiftControl app is installed, not which users have Workspace seats |
-| `https://www.googleapis.com/auth/userinfo.email` | (Shown on Sign in screen, not the permissions list) | Links the authorizing Google user to a ShiftControl account |
-| `https://www.googleapis.com/auth/userinfo.profile` | (Shown on Sign in screen, not the permissions list) | Reads the authorizing user's display name and avatar |
-| `https://www.googleapis.com/auth/admin.reports.audit.readonly` | View audit reports for your Google Workspace domain | Reports API — audit logs |
-| `https://www.googleapis.com/auth/admin.directory.domain.readonly` | View domains related to your customers | Directory API — domains (read-only) |
-| `https://www.googleapis.com/auth/admin.directory.group` | View and manage the provisioning of groups on your domain | Directory API — groups |
-| `https://www.googleapis.com/auth/admin.directory.group.member` | View and manage group subscriptions on your domain | Directory API — group memberships |
-| `https://www.googleapis.com/auth/admin.directory.orgunit` | View and manage organization units on your domain | Directory API — organization units |
-| `https://www.googleapis.com/auth/admin.directory.rolemanagement` | Manage delegated admin roles for your domain | Directory API — delegated admin roles |
-| `https://www.googleapis.com/auth/admin.directory.user` | View and manage the provisioning of users on your domain | Directory API — users |
-| `https://www.googleapis.com/auth/admin.directory.user.alias` | View and manage user aliases on your domain | Directory API — user email aliases |
-| `https://www.googleapis.com/auth/admin.directory.user.security` | Manage data access permissions for users on your domain | Directory API — lists users' authorized third-party apps for app discovery |
-| `https://www.googleapis.com/auth/admin.directory.userschema` | View and manage the provisioning of user schemas on your domain | Directory API — custom user-profile schemas |
-| `https://www.googleapis.com/auth/admin.directory.customer.readonly` | View customer related information | Directory API — customer record (read-only) |
-| `https://www.googleapis.com/auth/apps.groups.settings` | View and manage the settings of a Google Workspace group | Groups Settings API — group settings |
-| `https://www.googleapis.com/auth/apps.licensing` | View and manage Google Workspace licenses for your domain | Enterprise License Manager API — seat licenses |
-| `https://www.googleapis.com/auth/admin.datatransfer` | View and manage data transfers between users in your organization | Data Transfer API — offboarding user-to-user data transfers |
+| Scope | Consent screen label | What ShiftControl uses it for |
+|-------|----------------------|-------------------------------|
+| `https://www.googleapis.com/auth/appsmarketplace.license` | View your installed application's licensing information | Confirm that your organization installed the ShiftControl Marketplace app. This does not check users' Workspace seats. |
+| `https://www.googleapis.com/auth/userinfo.email` | (Shown on Sign in screen, not the permissions list) | Identify the Google account that authorized the connection. |
+| `https://www.googleapis.com/auth/userinfo.profile` | (Shown on Sign in screen, not the permissions list) | Read the name and profile picture of the admin who authorizes the connection. |
+| `https://www.googleapis.com/auth/admin.reports.audit.readonly` | View audit reports for your Google Workspace domain | Track third-party app authorizations and help identify who made a change that Workspace Audit detected. |
+| `https://www.googleapis.com/auth/admin.directory.domain.readonly` | View domains related to your customers | Show your Workspace domains in Directories and distinguish members of your organization from external addresses in Workspace Audit. |
+| `https://www.googleapis.com/auth/admin.directory.group` | View and manage the provisioning of groups on your domain | Create, update, or delete Google Groups. Workspace Audit also uses it if you approve a fix that removes group members. |
+| `https://www.googleapis.com/auth/admin.directory.group.member` | View and manage group subscriptions on your domain | See who belongs to Google Groups and add or remove users or nested groups. |
+| `https://www.googleapis.com/auth/admin.directory.orgunit` | View and manage organization units on your domain | Show and manage the organizational units you use to organize users in Google Workspace. |
+| `https://www.googleapis.com/auth/admin.directory.rolemanagement` | Manage delegated admin roles for your domain | Show which users hold Google Workspace admin roles and let you update those assignments. |
+| `https://www.googleapis.com/auth/admin.directory.user` | View and manage the provisioning of users on your domain | Create accounts during onboarding and update, suspend, or delete them as needed. |
+| `https://www.googleapis.com/auth/admin.directory.user.alias` | View and manage user aliases on your domain | Show, add, or remove alternate email addresses for users. |
+| `https://www.googleapis.com/auth/admin.directory.user.security` | Manage data access permissions for users on your domain | Discover which third-party apps users have authorized. |
+| `https://www.googleapis.com/auth/admin.directory.userschema` | View and manage the provisioning of user schemas on your domain | Set up custom fields in Google user profiles, such as the field ShiftControl uses to sync team assignments. |
+| `https://www.googleapis.com/auth/admin.directory.customer.readonly` | View customer related information | Read the customer record that identifies your Google Workspace organization. |
+| `https://www.googleapis.com/auth/apps.groups.settings` | View and manage the settings of a Google Workspace group | Check and change who can find, join, or post to a group. Workspace Audit checks these settings and changes them only if you approve a supported fix. |
+| `https://www.googleapis.com/auth/apps.licensing` | View and manage Google Workspace licenses for your domain | Assign or remove Workspace seats and flag suspended accounts that still have a seat. |
+| `https://www.googleapis.com/auth/admin.datatransfer` | View and manage data transfers between users in your organization | Ask Google to transfer a departing user's data to another user when you offboard them. |
 
 ### Additional scopes for Workspace Audit
 
 Workspace Audit uses read-only access to check policies and directory settings. It also uses the domain, Groups Settings, and Google Workspace seat licensing permissions listed above. The Groups Settings permission and the group-management permission can write changes when an authorized admin explicitly applies a supported fix to group settings or removes members. Running checks does not apply fixes.
 
-| Scope | What it permits |
-|-------|-----------------|
-| `https://www.googleapis.com/auth/cloud-identity.policies.readonly` | Read Cloud Identity policies configured by your administrators |
-| `https://www.googleapis.com/auth/cloud-identity.inboundsso.readonly` | Read inbound single sign-on (SSO) profiles and their assignments to organizational units and groups |
-| `https://www.googleapis.com/auth/admin.directory.user.readonly` | Read directory user details, including account status and 2-step verification enrollment |
-| `https://www.googleapis.com/auth/admin.directory.group.readonly` | Read directory groups |
-| `https://www.googleapis.com/auth/admin.directory.group.member.readonly` | Read group memberships and member roles |
-| `https://www.googleapis.com/auth/admin.directory.orgunit.readonly` | Read the organizational unit hierarchy |
-| `https://www.googleapis.com/auth/admin.directory.rolemanagement.readonly` | Read delegated admin roles and role assignments |
-| `https://www.googleapis.com/auth/admin.directory.user.alias.readonly` | Read user email aliases |
-| `https://www.googleapis.com/auth/admin.directory.userschema.readonly` | Read custom user-profile schemas |
-| `https://www.googleapis.com/auth/admin.datatransfer.readonly` | Read data transfer records without initiating transfers |
+| Scope | What ShiftControl uses it for |
+|-------|-------------------------------|
+| `https://www.googleapis.com/auth/cloud-identity.policies.readonly` | Check how your organization applies security policies, such as 2-step verification. |
+| `https://www.googleapis.com/auth/cloud-identity.inboundsso.readonly` | Check which single sign-on (SSO) profiles apply to your admins. |
+| `https://www.googleapis.com/auth/admin.directory.user.readonly` | Find dormant accounts, suspended admins, and users who haven't enrolled in 2-step verification. |
+| `https://www.googleapis.com/auth/admin.directory.group.readonly` | Identify which groups to check for risky settings or external members. |
+| `https://www.googleapis.com/auth/admin.directory.group.member.readonly` | Check for external members and determine which admins inherit SSO settings through group membership. |
+| `https://www.googleapis.com/auth/admin.directory.orgunit.readonly` | Work out which security and sign-in rules apply to each part of your organization. |
+| `https://www.googleapis.com/auth/admin.directory.rolemanagement.readonly` | Identify which users hold delegated admin roles so their sign-in settings can be checked. |
+| `https://www.googleapis.com/auth/admin.directory.user.alias.readonly` | Included in the Workspace Audit permission set. Current checks do not read user aliases. |
+| `https://www.googleapis.com/auth/admin.directory.userschema.readonly` | Included in the Workspace Audit permission set. Current checks do not read custom profile schemas. |
+| `https://www.googleapis.com/auth/admin.datatransfer.readonly` | Included in the Workspace Audit permission set. Current checks do not read data transfer records. |
 
-The last three scopes are part of the Audit permission set; the policy and admin SSO checks do not use them.
+</div>
 
 ## Related Features
 
