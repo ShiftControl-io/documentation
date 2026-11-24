@@ -224,7 +224,7 @@ index cf19eeb..7b2e7c3 100644
        // Override algolia's default selection event, allowing us to do client-side
        // navigation and avoiding a full page refresh.
 diff --git a/node_modules/docusaurus-lunr-search/src/theme/SearchBar/lunar-search.js b/node_modules/docusaurus-lunr-search/src/theme/SearchBar/lunar-search.js
-index 2419309..d6e9288 100644
+index 2419309..99e7c4a 100644
 --- a/node_modules/docusaurus-lunr-search/src/theme/SearchBar/lunar-search.js
 +++ b/node_modules/docusaurus-lunr-search/src/theme/SearchBar/lunar-search.js
 @@ -9,11 +9,12 @@ import lunr from "@generated/lunr.client";
@@ -241,16 +241,56 @@ index 2419309..d6e9288 100644
      }
 
      getLunrResult(input) {
-@@ -122,7 +123,11 @@ class LunrSearchAdapter {
+@@ -122,32 +123,29 @@ class LunrSearchAdapter {
      }
      search(input) {
          return new Promise((resolve, rej) => {
 -            const results = this.getLunrResult(input);
 +            const mode = this.getMode();
-+            const results = this.getLunrResult(input).filter(({ ref }) => {
-+                const { modes } = this.searchDocs[ref];
-+                return !modes || modes.includes(mode);
-+            });
              const hits = [];
-             results.length > this.maxHits && (results.length = this.maxHits);
-             this.titleHitsRes = []
+-            results.length > this.maxHits && (results.length = this.maxHits);
+-            this.titleHitsRes = []
+-            this.contentHitsRes = []
+-            results.forEach(result => {
++            const seenUrls = new Set();
++            for (const result of this.getLunrResult(input)) {
++                if (hits.length >= this.maxHits) break;
+                 const doc = this.searchDocs[result.ref];
+-                const { metadata } = result.matchData;
+-                for (let i in metadata) {
+-                    if (metadata[i].title) {
+-                        if (!this.titleHitsRes.includes(result.ref)) {
+-                            const position = metadata[i].title.position[0]
+-                            hits.push(this.getTitleHit(doc, position, input.length));
+-                            this.titleHitsRes.push(result.ref);
+-                        }
+-                    } else if (metadata[i].content) {
+-                        const position = metadata[i].content.position[0]
+-                        hits.push(this.getContentHit(doc, position))
+-                    } else if (metadata[i].keywords) {
+-                        const position = metadata[i].keywords.position[0]
+-                        hits.push(this.getKeywordHit(doc, position, input.length));
+-                        this.titleHitsRes.push(result.ref);
+-                    }
++                if ((doc.modes && !doc.modes.includes(mode)) || seenUrls.has(doc.url)) continue;
++
++                const matches = Object.values(result.matchData.metadata);
++                const title = matches.find(match => match.title)?.title;
++                const content = matches.find(match => match.content)?.content;
++                const keywords = matches.find(match => match.keywords)?.keywords;
++                if (title) {
++                    hits.push(this.getTitleHit(doc, title.position[0], input.length));
++                } else if (content) {
++                    hits.push(this.getContentHit(doc, content.position[0]));
++                } else if (keywords) {
++                    hits.push(this.getKeywordHit(doc, keywords.position[0], input.length));
++                } else {
++                    continue;
+                 }
+-            });
+-            hits.length > this.maxHits && (hits.length = this.maxHits);
++                seenUrls.add(doc.url);
++            }
+             resolve(hits);
+         });
+     }
