@@ -17,7 +17,7 @@ ShiftControl manages your Google Workspace with permissions that Google grants a
 - **The Google Workspace Marketplace app (recommended).** A Super Admin installs the ShiftControl app from the Google Workspace Marketplace for everyone in your organization. Google grants the app's permissions as part of the install. The connection belongs to your organization: ShiftControl connects as one of your Super Admins and switches to another Super Admin if that admin leaves. See [Google Workspace: Marketplace App or OAuth](/using-shiftcontrol/Settings/directories/#google-workspace-marketplace-app-or-oauth).
 - **OAuth.** One admin signs in and approves ShiftControl through Google's standard authorization flow. Every API call ShiftControl makes uses tokens issued through the screens described below, and every token is scoped to what you explicitly approved. The connection depends on that admin's authorization.
 
-The rest of this page describes the OAuth flow.
+The screens below show the OAuth flow. The [scope reference](#technical-reference) also covers the Marketplace app and the permissions for Workspace Audit.
 
 Understanding the authorization flow matters because:
 
@@ -52,7 +52,7 @@ The permissions you'll see are:
 | Permission as Google shows it | What ShiftControl uses it for |
 |-------------------------------|-------------------------------|
 | View customer related information | Reading your customer record from Google Workspace |
-| View audit reports for your Google Workspace domain | Surfacing OAuth access, login activity, and security events in ShiftControl dashboards |
+| View audit reports for your Google Workspace domain | Track third-party app authorizations and help identify who made a change that Workspace Audit detected |
 | View and manage the provisioning of user schemas on your domain | Writing the **Teams** attribute into a custom Google user-profile schema so it's visible across directory systems |
 | View domains related to your customers | Listing the Google Workspace domains in your org for the Directories page |
 | View and manage group subscriptions on your domain | Adding and removing members from Google Groups, including nested groups |
@@ -62,12 +62,13 @@ The permissions you'll see are:
 | View and manage the provisioning of groups on your domain | Creating, updating, and deleting Google Groups |
 | View and manage the provisioning of users on your domain | Creating, updating, suspending, and deleting users |
 | Manage delegated admin roles for your domain | Reading and updating which users hold which Google Workspace admin roles |
-| Manage data access permissions for users on your domain | Reading and updating user security state — 2-step verification status, app passwords, sign-in info |
+| Manage data access permissions for users on your domain | Listing authorized third-party apps and revoking their access when you block them |
 | View and manage the settings of a Google Workspace group | Configuring group-level settings — visibility, who can post, and so on |
 | View and manage data transfers between users in your organization | Initiating data transfers when offboarding (move Drive, Calendar, etc. from a departing user to their replacement) |
+| View your installed application's licensing information | Checking whether your organization has installed the ShiftControl Marketplace app |
 
-<Admonition type="note" title="One permission may not be visible in the screenshot above">
-    The **View and manage data transfers between users in your organization** permission was added to the ShiftControl OAuth client after the screenshot above was captured. The real consent screen will show this row at the bottom of the list — that's the one ShiftControl uses for offboarding-time data transfers. The screenshot will be refreshed in a future docs update.
+<Admonition type="note" title="The screenshot shows an earlier consent screen">
+    The current screen can also show permissions to manage data transfers and view the Marketplace app's installation status.
 </Admonition>
 
 Click **Continue** to approve. ShiftControl receives the tokens and the integration starts working immediately.
@@ -86,7 +87,7 @@ Click **Continue** to refresh your tokens. Your existing ShiftControl data (user
 
 ## What ShiftControl Never Asks For
 
-ShiftControl never requests access to message bodies, file contents, calendar event details, or any other user content. The scopes you'll see are all administrative — they let ShiftControl manage *identity and access*, not read user data.
+ShiftControl does not request access to message bodies, file contents, or calendar event details. The scopes on this page cover the authorizing admin's sign-in profile and Workspace administration, not the contents of users' mail, files, or calendars.
 
 Scopes ShiftControl will never request include `https://mail.google.com/`, `https://www.googleapis.com/auth/drive`, `https://www.googleapis.com/auth/calendar.events`, or anything else that touches the contents of mail, files, or calendars.
 
@@ -133,39 +134,60 @@ Re-auth is non-destructive:
 
 ## Things to Know
 
-- **Permissions can change between releases.** When ShiftControl adds a feature that needs a new permission, that permission appears on the consent screen the next time you authorize. Existing tokens that don't include the new permission keep working for the features they were granted for — re-auth is what picks up the additional permission.
-- **The "Manage data access permissions" item was added recently.** This is the permission ShiftControl uses to initiate user-to-user data transfers when offboarding. If you authorized before it was added, you may be prompted to re-authorize to grant it.
+- **Permissions can change between releases.** When ShiftControl adds a feature that needs a new permission, Google may ask your admin to authorize again. Features that depend on the new permission need that approval.
 - **You can audit and revoke at Google.** [myaccount.google.com/permissions](https://myaccount.google.com/permissions) shows every third-party app that has access, including ShiftControl. Revoking there is one of two ways to disconnect — the other is **Settings → Directories → Disable** in ShiftControl.
 - **Authorization links are single-use.** If you abandon a flow and come back later, you need to start a new one. The original link is no longer valid. This is by design — it prevents replay attacks.
 
 ## Technical Reference
 
-The user-visible permissions above map to specific OAuth scopes under the hood. If you're integrating with ShiftControl programmatically or auditing for compliance, the scope identifiers are:
+The [ShiftControl Marketplace listing](https://workspace.google.com/marketplace/app/shiftcontrol/227648260921) lists the scopes in both tables below. The standard OAuth connection requests the scopes in the first table. If an OAuth connection is missing scopes for Workspace Audit, ShiftControl can ask a Super Admin to approve the additional permissions through Google.
 
-| Scope | API surface |
-|-------|-------------|
-The full scope list ShiftControl requests, in the order it appears in the OAuth authorization URL:
+### Standard OAuth connection
 
-| Scope | Consent screen label | API surface |
-|-------|----------------------|-------------|
-| `https://www.googleapis.com/auth/userinfo.email` | (Shown on Sign in screen, not the permissions list) | Links the authorizing Google user to a ShiftControl account |
-| `https://www.googleapis.com/auth/userinfo.profile` | (Shown on Sign in screen, not the permissions list) | Reads the authorizing user's display name and avatar |
-| `https://www.googleapis.com/auth/admin.reports.audit.readonly` | View audit reports for your Google Workspace domain | Reports API — audit logs |
-| `https://www.googleapis.com/auth/admin.directory.domain.readonly` | View domains related to your customers | Directory API — domains (read-only) |
-| `https://www.googleapis.com/auth/admin.directory.group` | View and manage the provisioning of groups on your domain | Directory API — groups |
-| `https://www.googleapis.com/auth/admin.directory.group.member` | View and manage group subscriptions on your domain | Directory API — group memberships |
-| `https://www.googleapis.com/auth/admin.directory.orgunit` | View and manage organization units on your domain | Directory API — organization units |
-| `https://www.googleapis.com/auth/admin.directory.rolemanagement` | Manage delegated admin roles for your domain | Directory API — delegated admin roles |
-| `https://www.googleapis.com/auth/admin.directory.user` | View and manage the provisioning of users on your domain | Directory API — users |
-| `https://www.googleapis.com/auth/admin.directory.user.alias` | View and manage user aliases on your domain | Directory API — user email aliases |
-| `https://www.googleapis.com/auth/admin.directory.user.security` | Manage data access permissions for users on your domain | Directory API — user security state (2-step verification, app passwords, sign-in info) |
-| `https://www.googleapis.com/auth/admin.directory.userschema` | View and manage the provisioning of user schemas on your domain | Directory API — custom user-profile schemas |
-| `https://www.googleapis.com/auth/admin.directory.customer.readonly` | View customer related information | Directory API — customer record (read-only) |
-| `https://www.googleapis.com/auth/apps.groups.settings` | View and manage the settings of a Google Workspace group | Groups Settings API — group settings |
-| `https://www.googleapis.com/auth/apps.licensing` | View and manage Google Workspace licenses for your domain | Enterprise License Manager API — seat licenses |
-| `https://www.googleapis.com/auth/admin.datatransfer` | View and manage data transfers between users in your organization | Data Transfer API — offboarding user-to-user data transfers |
+<div style={{overflowWrap: 'anywhere'}}>
 
-The OAuth authorization request uses a standard OAuth 2.0 authorization-code flow with a single-use `state` value and per-integration `nonce`. ShiftControl validates `state` on callback before exchanging the code for tokens. The request also passes `include_granted_scopes=true` so previously-approved scopes carry forward on re-authorization.
+| Scope | Consent screen label | What ShiftControl uses it for |
+|-------|----------------------|-------------------------------|
+| `https://www.googleapis.com/auth/appsmarketplace.license` | View your installed application's licensing information | Confirm that your organization installed the ShiftControl Marketplace app. This does not check users' Workspace seats. |
+| `https://www.googleapis.com/auth/userinfo.email` | (Shown on Sign in screen, not the permissions list) | Identify the Google account that authorized the connection. |
+| `https://www.googleapis.com/auth/userinfo.profile` | (Shown on Sign in screen, not the permissions list) | Read the name and profile picture of the admin who authorizes the connection. |
+| `https://www.googleapis.com/auth/admin.reports.audit.readonly` | View audit reports for your Google Workspace domain | Track third-party app authorizations and help identify who made a change that Workspace Audit detected. |
+| `https://www.googleapis.com/auth/admin.directory.domain.readonly` | View domains related to your customers | Show your Workspace domains in Directories and distinguish members of your organization from external addresses in Workspace Audit. |
+| `https://www.googleapis.com/auth/admin.directory.group` | View and manage the provisioning of groups on your domain | Create, update, or delete Google Groups. Workspace Audit also uses it if you approve a fix that removes group members. |
+| `https://www.googleapis.com/auth/admin.directory.group.member` | View and manage group subscriptions on your domain | See who belongs to Google Groups and add or remove users or nested groups. |
+| `https://www.googleapis.com/auth/admin.directory.orgunit` | View and manage organization units on your domain | Show and manage the organizational units you use to organize users in Google Workspace. |
+| `https://www.googleapis.com/auth/admin.directory.rolemanagement` | Manage delegated admin roles for your domain | Show which users hold Google Workspace admin roles and let you update those assignments. |
+| `https://www.googleapis.com/auth/admin.directory.user` | View and manage the provisioning of users on your domain | Create accounts during onboarding and update, suspend, or delete them as needed. |
+| `https://www.googleapis.com/auth/admin.directory.user.alias` | View and manage user aliases on your domain | Show, add, or remove alternate email addresses for users. |
+| `https://www.googleapis.com/auth/admin.directory.user.security` | Manage data access permissions for users on your domain | Discover which third-party apps users have authorized. [App Blocking](/using-shiftcontrol/Apps/Blocking-apps/) also needs this permission to revoke a blocked app's access. |
+| `https://www.googleapis.com/auth/admin.directory.userschema` | View and manage the provisioning of user schemas on your domain | Set up custom fields in Google user profiles, such as the field ShiftControl uses to sync team assignments. |
+| `https://www.googleapis.com/auth/admin.directory.customer.readonly` | View customer related information | Read the customer record that identifies your Google Workspace organization. |
+| `https://www.googleapis.com/auth/apps.groups.settings` | View and manage the settings of a Google Workspace group | Check and change who can find, join, or post to a group. Workspace Audit checks these settings and changes them only if you approve a supported fix. |
+| `https://www.googleapis.com/auth/apps.licensing` | View and manage Google Workspace licenses for your domain | Assign or remove Workspace seats and flag suspended accounts that still have a seat. |
+| `https://www.googleapis.com/auth/admin.datatransfer` | View and manage data transfers between users in your organization | Ask Google to transfer a departing user's data to another user when you offboard them. |
+
+</div>
+
+### Additional scopes for Workspace Audit
+
+Workspace Audit uses read-only access to check policies and directory settings. It also uses the domain, Groups Settings, and Google Workspace seat licensing permissions listed above. The Groups Settings permission and the group-management permission can write changes when an authorized admin explicitly applies a supported fix to group settings or removes members. Running checks does not apply fixes.
+
+<div style={{overflowWrap: 'anywhere'}}>
+
+| Scope | What ShiftControl uses it for |
+|-------|-------------------------------|
+| `https://www.googleapis.com/auth/cloud-identity.policies.readonly` | Check how your organization applies security policies, such as 2-step verification. |
+| `https://www.googleapis.com/auth/cloud-identity.inboundsso.readonly` | Check which single sign-on (SSO) profiles apply to your admins. |
+| `https://www.googleapis.com/auth/admin.directory.user.readonly` | Find dormant accounts, suspended admins, and users who haven't enrolled in 2-step verification. |
+| `https://www.googleapis.com/auth/admin.directory.group.readonly` | Identify which groups to check for risky settings or external members. |
+| `https://www.googleapis.com/auth/admin.directory.group.member.readonly` | Check for external members and determine which admins inherit SSO settings through group membership. |
+| `https://www.googleapis.com/auth/admin.directory.orgunit.readonly` | Work out which security and sign-in rules apply to each part of your organization. |
+| `https://www.googleapis.com/auth/admin.directory.rolemanagement.readonly` | Identify which users hold delegated admin roles so their sign-in settings can be checked. |
+| `https://www.googleapis.com/auth/admin.directory.user.alias.readonly` | Included in the Workspace Audit permission set. Current checks do not read user aliases. |
+| `https://www.googleapis.com/auth/admin.directory.userschema.readonly` | Included in the Workspace Audit permission set. Current checks do not read custom profile schemas. |
+| `https://www.googleapis.com/auth/admin.datatransfer.readonly` | Included in the Workspace Audit permission set. Current checks do not read data transfer records. |
+
+</div>
 
 ## Related Features
 

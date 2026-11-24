@@ -143,6 +143,13 @@ const config: Config = {
                 customCss: './src/css/custom.css',
             },
         ],
+        [
+            require.resolve('docusaurus-lunr-search'),
+            {
+                indexBaseUrl: true,
+                maxHits: 5,
+            },
+        ],
     ],
 
     themeConfig: {
@@ -262,12 +269,6 @@ const config: Config = {
               ] satisfies PluginConfig]
             : ['@docusaurus/plugin-debug']),
         'docusaurus-plugin-image-zoom',
-        [
-            require.resolve('docusaurus-lunr-search'), {
-            indexBaseUrl: true,
-            maxHits: 5,
-        }
-        ],
         [
             '@docusaurus/plugin-client-redirects',
             {
