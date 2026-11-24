@@ -142,9 +142,9 @@ Re-auth is non-destructive:
 
 The [ShiftControl Marketplace listing](https://workspace.google.com/marketplace/app/shiftcontrol/227648260921) lists the scopes in both tables below. The standard OAuth connection requests the scopes in the first table. If an OAuth connection is missing scopes for Workspace Audit, ShiftControl can ask a Super Admin to approve the additional permissions through Google.
 
-<div style={{overflowWrap: 'anywhere'}}>
-
 ### Standard OAuth connection
+
+<div style={{overflowWrap: 'anywhere'}}>
 
 | Scope | Consent screen label | What ShiftControl uses it for |
 |-------|----------------------|-------------------------------|
@@ -166,9 +166,13 @@ The [ShiftControl Marketplace listing](https://workspace.google.com/marketplace/
 | `https://www.googleapis.com/auth/apps.licensing` | View and manage Google Workspace licenses for your domain | Assign or remove Workspace seats and flag suspended accounts that still have a seat. |
 | `https://www.googleapis.com/auth/admin.datatransfer` | View and manage data transfers between users in your organization | Ask Google to transfer a departing user's data to another user when you offboard them. |
 
+</div>
+
 ### Additional scopes for Workspace Audit
 
 Workspace Audit uses read-only access to check policies and directory settings. It also uses the domain, Groups Settings, and Google Workspace seat licensing permissions listed above. The Groups Settings permission and the group-management permission can write changes when an authorized admin explicitly applies a supported fix to group settings or removes members. Running checks does not apply fixes.
+
+<div style={{overflowWrap: 'anywhere'}}>
 
 | Scope | What ShiftControl uses it for |
 |-------|-------------------------------|
