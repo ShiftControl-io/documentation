@@ -1,0 +1,296 @@
+diff --git a/node_modules/docusaurus-lunr-search/src/html-to-doc.js b/node_modules/docusaurus-lunr-search/src/html-to-doc.js
+index 7f6bef1..7920c55 100644
+--- a/node_modules/docusaurus-lunr-search/src/html-to-doc.js
++++ b/node_modules/docusaurus-lunr-search/src/html-to-doc.js
+@@ -49,7 +49,7 @@ function* scanDocuments({ path, url }) {
+     return
+   }
+   const pageTitle = toText(pageTitleElement)
+-  const sectionHeaders = getSectionHeaders(markdown)
++  const { page, sections } = getSearchRecords(markdown)
+
+   const keywords = selectAll('meta[name="keywords"]', hast)
+     .reduce((acc, metaNode) => {
+@@ -77,22 +77,21 @@ function* scanDocuments({ path, url }) {
+     type: 0,
+     sectionRef: '#',
+     url,
+-    // If there is no sections then push the complete content under page title
+-    content: sectionHeaders.length === 0 ? getContent(markdown) : '',
++    content: sections.some(section => !section.modes) ? '' : page.content,
+     keywords,
+     version
+   }
+
+-  for (const sectionDesc of sectionHeaders) {
+-    const { title, content, ref, tagName } = sectionDesc
+-    yield {
+-      title,
+-      type: 1,
+-      pageTitle,
+-      url: `${url}#${ref}`,
+-      content,
+-      version,
+-      tagName
++  for (const record of [page, ...sections]) {
++    const { title, content, ref, tagName, modes, fragments } = record
++    const target = ref === undefined
++      ? { title: pageTitle, type: 0, url, version }
++      : { title, type: 1, pageTitle, url: `${url}#${ref}`, version, tagName }
++    if (ref !== undefined) {
++      yield { ...target, content, modes }
++    }
++    for (const fragment of fragments.values()) {
++      yield { ...target, ...fragment, indexTitle: false }
+     }
+   }
+ }
+@@ -107,48 +106,62 @@ function getContent(element) {
+     .replace(/"/g, '&quot;')
+ }
+
+-function getSectionHeaders(element) {
++function getSearchRecords(element) {
+   const isHeadingNodeTest = ({ tagName }) => ['h2', 'h3'].includes(tagName)
+   const shouldIndexChildrenTest = ({ properties }) =>
+     properties && properties.dataSearchChildren
+
+-  const headerDocs = []
++  const page = { content: '', fragments: new Map() }
++  const sections = []
+
+-  const trackHeadingNode = (node) => {
++  const trackHeadingNode = (node, modes) => {
+     const ref = select('.anchor', node)
+     const searchDoc = {
+       title: toText(node).replace(/^#+/, '').replace(/#$/, ''),
+       ref: ref ? ref.properties.id : '#',
+       tagName: node.tagName || '#',
+-      content: ''
++      modes,
++      content: '',
++      fragments: new Map()
+     }
+-    headerDocs.push(searchDoc)
++    sections.push(searchDoc)
+     return searchDoc;
+   }
+
+-  function traverseNodeAndIndex(
+-    element,
+-    isIndexingChildren = false,
+-    searchDoc = null
+-  ) {
+-
+-
++  function traverseNodeAndIndex(element, isIndexingChildren, searchDoc, modes) {
+     for (const node of element.children) {
+-      if (is(node, isHeadingNodeTest)) {
+-        searchDoc = trackHeadingNode(node)
+-      } else if (is(node, shouldIndexChildrenTest)) {
+-        traverseNodeAndIndex(node, true, searchDoc)
+-      } else if (isIndexingChildren && node.children && node.tagName !== 'p') {
+-        traverseNodeAndIndex(node, true, searchDoc)
+-      } else if (searchDoc) {
+-        searchDoc.content +=  `${getContent(node)} `
++      const modeList = node.properties?.dataModes
++      if (modeList !== undefined) {
++        const allowed = [...new Set(modeList.split(',').filter(mode => mode && (!modes || modes.includes(mode))))].sort()
++        if (allowed.length) {
++          traverseNodeAndIndex(node, true, searchDoc, allowed)
++        }
++      } else if (is(node, isHeadingNodeTest)) {
++        searchDoc = trackHeadingNode(node, modes)
++      } else if (is(node, shouldIndexChildrenTest) || (isIndexingChildren && node.children && node.tagName !== 'p')) {
++        traverseNodeAndIndex(node, true, searchDoc, modes)
++      } else if (node.children && select('[data-modes]', node)) {
++        traverseNodeAndIndex(node, false, searchDoc, modes)
++      } else {
++        const content = getContent(node)
++        if (!content.trim()) {
++          continue
++        }
++        const modeKey = modes?.join(',')
++        if (modeKey === searchDoc.modes?.join(',')) {
++          searchDoc.content += `${content} `
++        } else {
++          const fragment = searchDoc.fragments.get(modeKey) || { modes, content: '' }
++          fragment.content += `${content} `
++          searchDoc.fragments.set(modeKey, fragment)
++        }
+       }
+     }
+   }
+
+-  traverseNodeAndIndex(element)
++  traverseNodeAndIndex(element, false, page)
+
+-  return headerDocs;
++  return { page, sections }
+ }
+
+ function processFile(file) {
+diff --git a/node_modules/docusaurus-lunr-search/src/index.js b/node_modules/docusaurus-lunr-search/src/index.js
+index aaf5520..dc240bd 100644
+--- a/node_modules/docusaurus-lunr-search/src/index.js
++++ b/node_modules/docusaurus-lunr-search/src/index.js
+@@ -1,4 +1,5 @@
+ const fs = require('fs')
++const { createHash } = require('crypto')
+ const os = require('os')
+ const path = require('path')
+ const lunr = require('lunr')
+@@ -31,7 +32,10 @@ module.exports = function (context, options) {
+         const generatedFilesDir = config.resolve.alias['@generated']
+         languages = utils.generateLunrClientJS(generatedFilesDir, options.languages);
+       }
+-      return {};
++      if (config.cache?.type !== 'filesystem') return {};
++      const patch = path.join(context.siteDir, 'patches/docusaurus-lunr-search+3.6.0.patch');
++      const hash = createHash('sha256').update(fs.readFileSync(patch)).digest('hex');
++      return { cache: { version: `${config.cache.version}:${hash}` } };
+     },
+     async contentLoaded({ actions }) {
+       actions.setGlobalData({ "fileNames": fileNames })
+@@ -90,7 +94,7 @@ module.exports = function (context, options) {
+         }
+         lunrBuilder.add({
+           id: searchDocuments.length,
+-          title: d.title,
++          title: d.indexTitle === false ? '' : d.title,
+           content: d.content,
+           keywords: d.keywords
+         });
+diff --git a/node_modules/docusaurus-lunr-search/src/theme/SearchBar/DocSearch.js b/node_modules/docusaurus-lunr-search/src/theme/SearchBar/DocSearch.js
+index 77a53de..0672e39 100644
+--- a/node_modules/docusaurus-lunr-search/src/theme/SearchBar/DocSearch.js
++++ b/node_modules/docusaurus-lunr-search/src/theme/SearchBar/DocSearch.js
+@@ -23,7 +23,8 @@ class DocSearch {
+         handleSelected = false,
+         enhancedSearchInput = false,
+         layout = "column",
+-        maxHits = 5
++        maxHits = 5,
++        getMode
+     }) {
+         this.input = DocSearch.getInputFromSelector(inputSelector);
+         this.queryDataCallback = queryDataCallback || null;
+@@ -47,7 +48,7 @@ class DocSearch {
+
+         this.isSimpleLayout = layout === "simple";
+
+-        this.client = new LunrSearchAdapter(searchDocs, searchIndex, baseUrl, maxHits);
++        this.client = new LunrSearchAdapter(searchDocs, searchIndex, baseUrl, maxHits, getMode);
+
+         if (enhancedSearchInput) {
+             this.input = DocSearch.injectSearchBox(this.input);
+@@ -55,6 +56,7 @@ class DocSearch {
+         this.autocomplete = autocomplete(this.input, autocompleteOptions, [
+             {
+                 source: this.getAutocompleteSource(transformData, queryHook),
++                cache: false,
+                 templates: {
+                     suggestion: DocSearch.getSuggestionTemplate(this.isSimpleLayout),
+                     footer: templates.footer,
+diff --git a/node_modules/docusaurus-lunr-search/src/theme/SearchBar/index.jsx b/node_modules/docusaurus-lunr-search/src/theme/SearchBar/index.jsx
+index cf19eeb..7b2e7c3 100644
+--- a/node_modules/docusaurus-lunr-search/src/theme/SearchBar/index.jsx
++++ b/node_modules/docusaurus-lunr-search/src/theme/SearchBar/index.jsx
+@@ -4,12 +4,18 @@ import { useHistory } from "@docusaurus/router";
+ import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
+ import { usePluginData } from '@docusaurus/useGlobalData';
+ import useIsBrowser from "@docusaurus/useIsBrowser";
++import { useConfigMode } from "@site/src/components/ConfigModeContext";
+ import { HighlightSearchResults } from "./HighlightSearchResults";
+ const Search = props => {
+   const initialized = useRef(false);
+   const searchBarRef = useRef(null);
+   const [indexReady, setIndexReady] = useState(false);
+   const history = useHistory();
++  const { mode } = useConfigMode();
++  const modeRef = useRef(mode);
++  useEffect(() => {
++    modeRef.current = mode;
++  }, [mode]);
+   const { siteConfig = {} } = useDocusaurusContext();
+   const pluginConfig = (siteConfig.plugins || []).find(plugin => Array.isArray(plugin) && typeof plugin[0] === "string" && plugin[0].includes("docusaurus-lunr-search"))
+   const isBrowser = useIsBrowser();
+@@ -20,6 +26,7 @@ const Search = props => {
+       searchDocs,
+       searchIndex,
+       baseUrl,
++      getMode: () => modeRef.current,
+       inputSelector: "#search_input_react",
+       // Override algolia's default selection event, allowing us to do client-side
+       // navigation and avoiding a full page refresh.
+diff --git a/node_modules/docusaurus-lunr-search/src/theme/SearchBar/lunar-search.js b/node_modules/docusaurus-lunr-search/src/theme/SearchBar/lunar-search.js
+index 2419309..99e7c4a 100644
+--- a/node_modules/docusaurus-lunr-search/src/theme/SearchBar/lunar-search.js
++++ b/node_modules/docusaurus-lunr-search/src/theme/SearchBar/lunar-search.js
+@@ -9,11 +9,12 @@ import lunr from "@generated/lunr.client";
+ lunr.tokenizer.separator = /[\s\-/]+/;
+
+ class LunrSearchAdapter {
+-    constructor(searchDocs, searchIndex, baseUrl = '/', maxHits) {
++    constructor(searchDocs, searchIndex, baseUrl = '/', maxHits, getMode) {
+         this.searchDocs = searchDocs;
+         this.lunrIndex = lunr.Index.load(searchIndex);
+         this.baseUrl = baseUrl;
+         this.maxHits = maxHits;
++        this.getMode = getMode;
+     }
+
+     getLunrResult(input) {
+@@ -122,32 +123,29 @@ class LunrSearchAdapter {
+     }
+     search(input) {
+         return new Promise((resolve, rej) => {
+-            const results = this.getLunrResult(input);
++            const mode = this.getMode();
+             const hits = [];
+-            results.length > this.maxHits && (results.length = this.maxHits);
+-            this.titleHitsRes = []
+-            this.contentHitsRes = []
+-            results.forEach(result => {
++            const seenUrls = new Set();
++            for (const result of this.getLunrResult(input)) {
++                if (hits.length >= this.maxHits) break;
+                 const doc = this.searchDocs[result.ref];
+-                const { metadata } = result.matchData;
+-                for (let i in metadata) {
+-                    if (metadata[i].title) {
+-                        if (!this.titleHitsRes.includes(result.ref)) {
+-                            const position = metadata[i].title.position[0]
+-                            hits.push(this.getTitleHit(doc, position, input.length));
+-                            this.titleHitsRes.push(result.ref);
+-                        }
+-                    } else if (metadata[i].content) {
+-                        const position = metadata[i].content.position[0]
+-                        hits.push(this.getContentHit(doc, position))
+-                    } else if (metadata[i].keywords) {
+-                        const position = metadata[i].keywords.position[0]
+-                        hits.push(this.getKeywordHit(doc, position, input.length));
+-                        this.titleHitsRes.push(result.ref);
+-                    }
++                if ((doc.modes && !doc.modes.includes(mode)) || seenUrls.has(doc.url)) continue;
++
++                const matches = Object.values(result.matchData.metadata);
++                const title = matches.find(match => match.title)?.title;
++                const content = matches.find(match => match.content)?.content;
++                const keywords = matches.find(match => match.keywords)?.keywords;
++                if (title) {
++                    hits.push(this.getTitleHit(doc, title.position[0], input.length));
++                } else if (content) {
++                    hits.push(this.getContentHit(doc, content.position[0]));
++                } else if (keywords) {
++                    hits.push(this.getKeywordHit(doc, keywords.position[0], input.length));
++                } else {
++                    continue;
+                 }
+-            });
+-            hits.length > this.maxHits && (hits.length = this.maxHits);
++                seenUrls.add(doc.url);
++            }
+             resolve(hits);
+         });
+     }
