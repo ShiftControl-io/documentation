@@ -1,7 +1,7 @@
 ---
 title: 'What your AI can do'
 description: 'The day-to-day ShiftControl admin work your AI assistant can do through the MCP server: people, groups, apps and access, requests, and org structure, across Google Workspace and JumpCloud.'
-keywords: ['ShiftControl', 'MCP', 'AI assistant', 'Claude', 'Cursor', 'onboarding', 'offboarding', 'groups', 'app access', 'work items', 'automation']
+keywords: ['ShiftControl', 'MCP', 'AI assistant', 'Claude', 'Cursor', 'onboarding', 'offboarding', 'groups', 'app access', 'work items', 'automation', 'app permissions', 'OAuth']
 icon: 'list-check'
 ---
 
@@ -20,6 +20,12 @@ Once your AI tool is [connected](/ai-assistants/Connect-your-ai-tool/), you can 
 - *"Make the finance group invitation-only."*
 - *"Approve the pending access requests for Notion."*
 - *"Dana is locked out of JumpCloud. Unlock her and send a fresh sign-in email."*
+
+<ConditionalContent modes={["google-only", "jc-google", "google-jc"]}>
+
+- *"Which apps have access to my work Google account?"*
+
+</ConditionalContent>
 
 You don't need to know which tool does what. Ask for the result, and your AI picks the tools.
 
@@ -125,6 +131,12 @@ These need Work Items to be turned on for your organization. Read [Work Items Ov
 ### For everyone, not just admins
 
 Because your AI has your permissions, employees can use it too. They can ask which apps they have, and request access to an app through your organization's usual approval flow. Requests need Work Items and app access requests to be turned on. Employees can also use the [Directory](/employee-guide/employee-portal/directory/) and [My Work Items](/employee-guide/employee-portal/my-work-items/) in the portal.
+
+<ConditionalContent modes={["google-only", "jc-google", "google-jc"]}>
+
+**Google app access, for your own account:** anyone, with or without an admin role, can ask their AI which third-party apps they have allowed into their work Google account and what each app can access. Your AI can also look up when you granted or removed access to apps, narrowed to a date range if you like, and remove an app's access when you no longer need it. It asks you to confirm before it removes anything. Removing access only affects your own account: it doesn't block the app for anyone else and doesn't change the work apps your company assigns you. If you need the app again later, sign in to it and allow access again. This is the same list you see on [App Permissions](/employee-guide/employee-portal/app-permissions/) in the portal. To block an app for the whole organization, an admin uses [Blocking Apps](/using-shiftcontrol/Apps/Blocking-apps/) instead.
+
+</ConditionalContent>
 
 ## Things to Know
 
